@@ -14,8 +14,13 @@ class User
 
         $currentDir = getcwd();
         $userId = $_POST['userId'];
-        $uploadDirectory = "\\sm-files\\{$userId}\\";
 
+        if (DIRECTORY_SEPARATOR == '\\') {
+            $uploadDirectory = "\\sm-files\\{$userId}\\";
+        } else {
+            $uploadDirectory = "/sm-files/{$userId}/";
+        }
+        
         echo $currentDir . $uploadDirectory . "\n";
         if (!is_dir($currentDir . $uploadDirectory)) {
             echo 'xxxxxxxxxxxxxxxxx';

@@ -5,7 +5,11 @@ angular.module('smApp')
     $filter
 ) {
     var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
-    
+
+    console.log('ggggggggggggg');
+    console.log(CURRENT_USER);
+    $scope.currentUser = CURRENT_USER;
+
     $scope.upload = function(formJson) {
 
         // var formData = new FormData();
