@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class User
 {
 
@@ -20,7 +22,7 @@ class User
         } else {
             $uploadDirectory = "/sm-files/{$userId}/";
         }
-        
+
         echo $currentDir . $uploadDirectory . "\n";
         if (!is_dir($currentDir . $uploadDirectory)) {
             echo 'xxxxxxxxxxxxxxxxx';
@@ -61,7 +63,8 @@ class User
                     array(
                         'file'   => $newFileName,
                         'type' => 'image',
-                        'user_id' => (int) $this->id
+                        'user_id' => (int) $this->id,
+                        'uploaded_at' => Carbon::now()
                     )
                 );
                 echo "The file " . basename($fileName) . " has been uploaded";

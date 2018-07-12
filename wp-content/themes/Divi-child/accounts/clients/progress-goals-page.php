@@ -287,7 +287,7 @@
 							
 							<li ng-repeat="photo in currentUser.photos">
 								<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
-								<span>1/12/2017</span>
+								<span>{{ photo.uploaded_at }}</span>
 							</li>
 							<li>
 								<div class="browser-upload-image" data-toggle="modal" data-target="#myModal">
@@ -495,6 +495,7 @@
 			video.src = "";
 			console.log(localStream)
 			localStream.getTracks()[0].stop();
+			CAMERA_DATA_URL = '';
 			console.log("Vid off");
 		});
 
