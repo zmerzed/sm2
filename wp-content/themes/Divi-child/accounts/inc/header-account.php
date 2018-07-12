@@ -26,8 +26,8 @@
   <?php } ?>
 
   <link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/responsive-calendar.css'; ?>' rel='stylesheet' />
-  <link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/fullcalendar.min.css'; ?>' rel='stylesheet' />
-  <?php /*<link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/fullcalendar.print.min.css'; ?>' rel='stylesheet' media='print' />*/ ?>
+  <?php /* <link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/fullcalendar.min.css'; ?>' rel='stylesheet' />
+  <link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/fullcalendar.print.min.css'; ?>' rel='stylesheet' media='print' />*/ ?>
   
   <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
   <title>My Account - <?php echo $userdata->user_login; ?></title>
@@ -40,11 +40,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-6">
+			<a href="<?php echo home_url(); ?>">
 			<?php if($pm_lvl == "Gym"): ?>
-				<a href="#"><img id="logo" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/gym-plus-logo.png"></a>
+				<img id="logo" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/gym-plus-logo.png">
 			<?php else: ?>
-				<a href="#"><img id="logo" src="<?php echo home_url(); ?>/wp-content/uploads/2018/02/sm-logov2-wht.svg"></a>
+				<img id="logo" src="<?php echo home_url(); ?>/wp-content/uploads/2018/02/sm-logov2-wht.svg">
 			<?php endif; ?>
+			</a>
         </div>
         <div class="col-lg-6 col-md-6">
           <a id="logout_btn" href="<?php echo wp_logout_url(); ?>">Logout</a>

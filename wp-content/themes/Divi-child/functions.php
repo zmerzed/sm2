@@ -78,6 +78,7 @@ function wpcodex_set_capabilities() {
 	$role = get_role( 'trainer' );
 	$role2 = get_role( 'gym' );
 	$role3 = get_role( 'client' );
+	$role4 = get_role( 'subscriber' );
 
 	$caps = array('create_users');
 	$caps2 = array('upload_files');
@@ -86,7 +87,7 @@ function wpcodex_set_capabilities() {
 	foreach($caps as $cap){
 		$role->add_cap( $cap );
 		$role2->add_cap( $cap );
-
+		$role4->add_cap( $cap );
 	}
 
 	foreach($caps2 as $cap){
@@ -97,6 +98,7 @@ function wpcodex_set_capabilities() {
 		$role->remove_cap( $removeCap );
 		$role2->remove_cap( $removeCap );
 		$role3->remove_cap( $removeCap );
+		$role4->remove_cap( $removeCap );
 	}
 }
 add_action( 'init', 'wpcodex_set_capabilities' );
@@ -336,11 +338,10 @@ function getWOutArr($results_w_day, $results_w)
 	return $woutArray;
 }
 
-function jabs($u)
+function jabs($u)	
 {
 
-	$parent_id = get_user_meta($u->ID, 'parent_trainer', true);
-	echo $parent_id;
+	/* print_r( get_role($u->roles[0])->capabilities); */
 }
 
 function getSchedData($u)

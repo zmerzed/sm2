@@ -1,7 +1,7 @@
 <?php					
 	$udata = wp_get_current_user();		
 	$scheData = getSchedData($udata);
-	/* jabs($udata) */
+	jabs($udata);
 ?>
 <div class="modal fade" id="workoutModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
