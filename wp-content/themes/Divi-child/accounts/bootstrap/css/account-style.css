@@ -1624,3 +1624,6 @@ div#ui-datepicker-div {
     border-color: #ae1f23;
     background: white;
 }
+
+/*progress photos*/
+.progress-slider-photos li > img{width:100%;}

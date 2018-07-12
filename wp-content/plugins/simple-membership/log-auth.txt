@@ -566,3 +566,12 @@
 [07/12/2018 10:07 AM] - SUCCESS: wp_authenticate action. Handling login for username: client002
 [07/12/2018 10:07 AM] - SUCCESS: SwpmAuth::login()
 [07/12/2018 10:07 AM] - SUCCESS: Authentication request - Username: client002
+[07/12/2018 11:10 AM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/12/2018 11:10 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 11:10 AM] - SUCCESS: Authentication request - Username: client001
+[07/12/2018 11:16 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer001
+[07/12/2018 11:16 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 11:16 AM] - SUCCESS: Authentication request - Username: trainer001
+[07/12/2018 11:16 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/12/2018 11:16 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 11:16 AM] - SUCCESS: Authentication request - Username: jabsgym
