@@ -13,9 +13,14 @@
 	    <tbody>
 			<?php 
 				$trainers = get_user_meta(wp_get_current_user()->ID, 'trainers_of_gym', true);
-				$clientsArr = array();
+				if(empty($trainers))
+					$trainers = array();
+				$clientsArr = array();				
 				foreach($trainers as $trainer){
 					$clients = get_user_meta($trainer, 'clients_of_trainer', true);
+					if(empty($clients))
+						$clients = array();
+					
 					$tempArr = array();
 					foreach($clients as $client){
 						$tempArr[] = $client;						

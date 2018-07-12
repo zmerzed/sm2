@@ -16,90 +16,16 @@ if( is_user_logged_in() ){
 	if( in_array( 'client', $uinfo->roles ) ){
 
 		require_once( get_stylesheet_directory() . '/accounts/inc/header-account.php' );
+		require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' );
 		?>
 
-		<div class="title-welcome-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-md-6">
-						<h2>
-
-							<?php
-							$data_request = $_GET['data'];
-							switch ($data_request) {
-								case 'schedule':
-									echo 'Schedule';
-									break;
-
-								case 'profile':
-									echo 'Profile';
-									break;
-
-								case 'message':
-									echo 'Message';
-									break;
-
-								case 'notes':
-									echo 'Notes';
-									break;
-
-								case 'logs':
-									echo 'Logs';
-									break;
-
-								case 'workout':
-									echo 'Start Workout';
-									break;
-
-								default:
-									echo 'dashboard';
-									break;
-							}
-
-							?>
-
-						</h2>
-					</div>
-					<div class="col-lg-6 col-md-6">
-						<h4>Welcome back, <?php echo $uinfo->user_login; ?></h4>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 
 		<div class="main-section">
 			<div class="container">
-				<div class="row">
-
-					<div class="col-lg-2 col-md-2">
-						<div class="main-navigation matchHeight">
-
-							<h3>Menu</h3>
-
-							<ul>
-								<li><a href="/client" menu-item="dashboard">Dashboard</a></li>
-								<li>
-									<a href="<?php echo home_url(); ?>/client/?data=schedule" menu-item="schedule">Schedule</a>
-									<ul>
-										<li><a href="<?php echo home_url(); ?>/client/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
-										<li><a href="<?php echo home_url(); ?>/client/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="<?php echo home_url(); ?>/client/?data=profile" menu-item="profile">Profile</a>
-									<ul>
-										<li><a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
-										<li><a href="<?php echo home_url(); ?>/client/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
-									</ul>
-								</li>
-								<li><a href="<?php echo home_url(); ?>/client/?data=message" menu-item="message">Messages</a></li>
-								<li><a href="<?php echo home_url(); ?>/client/?data=notes" menu-item="notes">Notes</a></li>
-								<li><a href="<?php echo home_url(); ?>/client/?data=logs" menu-item="logs">Logs</a></li>
-							</ul>
-
-						</div>
-					</div>
-
+				<div class="row">					
+				
+					<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
 
 					<div class="col-lg-10 col-md-10">
 
