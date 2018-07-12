@@ -1,0 +1,456 @@
+[06/27/2018 2:07 PM] - SUCCESS: Member registration complete email sent to: john@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/27/2018 2:09 PM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/27/2018 2:30 PM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/27/2018 2:35 PM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/27/2018 2:40 PM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/28/2018 6:30 AM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[06/28/2018 7:00 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 5:56 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/02/2018 5:56 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/02/2018 5:56 AM] - SUCCESS: Stripe Subscription successful.
+[07/02/2018 5:56 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_D9eKWjUILCaLog
+[07/02/2018 5:56 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_D9eKWjUILCaLog
+[07/02/2018 5:56 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/02/2018 5:56 AM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/02/2018 5:56 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=10&code=81fe7f7277256f89d9e1b603874a0b25
+[07/02/2018 5:56 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/02/2018 5:56 AM] - SUCCESS: Transaction data saved.
+[07/02/2018 5:56 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com
+[07/02/2018 5:56 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/02/2018 6:12 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 6:21 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 6:21 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 6:21 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9eK4ejQ40LyV9
+[07/02/2018 6:21 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/02/2018 6:21 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/02/2018 6:21 AM] - SUCCESS: Updating the account status value of member (10) to: inactive
+[07/02/2018 6:21 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 10
+[07/02/2018 6:36 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 6:36 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 6:36 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9ev1ma5JQk97o
+[07/02/2018 6:36 AM] - FAILURE: No associated active member record found for this notification.
+[07/02/2018 7:28 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/02/2018 7:28 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/02/2018 7:28 AM] - SUCCESS: Stripe Subscription successful.
+[07/02/2018 7:28 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_D9fozwferuS4zx
+[07/02/2018 7:28 AM] - SUCCESS: Could not find any record using the given email address (leejee@ilfusion.com). Attempting to query database using the unique reference: cus_D9fozwferuS4zx
+[07/02/2018 7:28 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/02/2018 7:28 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/02/2018 7:28 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=11&code=c143a21bc9a212a066c3a0177dd4b3df
+[07/02/2018 7:28 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/02/2018 7:28 AM] - SUCCESS: Transaction data saved.
+[07/02/2018 7:28 AM] - SUCCESS: Redirecting customer to: /thank-you
+[07/02/2018 7:28 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/02/2018 8:04 AM] - SUCCESS: Prompt to complete registration email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 8:08 AM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 9:35 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 9:35 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 9:35 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9foiBKTvgfh9B
+[07/02/2018 9:35 AM] - SUCCESS: Membership level ID of the member is: 4
+[07/02/2018 9:35 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/02/2018 9:35 AM] - SUCCESS: Updating the account status value of member (11) to: inactive
+[07/02/2018 9:35 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 11
+[07/02/2018 11:03 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 12:06 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/02/2018 12:06 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/02/2018 12:06 PM] - SUCCESS: Stripe Subscription successful.
+[07/02/2018 12:06 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_D9kIQx7JfTVWTR
+[07/02/2018 12:06 PM] - SUCCESS: Could not find any record using the given email address (leejee@ilfusion.com). Attempting to query database using the unique reference: cus_D9kIQx7JfTVWTR
+[07/02/2018 12:06 PM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/02/2018 12:06 PM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/02/2018 12:06 PM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=13&code=115e9d7104da5e05d3708cca152f91ba
+[07/02/2018 12:06 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/02/2018 12:06 PM] - SUCCESS: Transaction data saved.
+[07/02/2018 12:06 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/02/2018 12:06 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/02/2018 12:08 PM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 12:12 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 12:12 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 12:12 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9kIExJFh5PQR9
+[07/02/2018 12:12 PM] - SUCCESS: Membership level ID of the member is: 2
+[07/02/2018 12:12 PM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/02/2018 12:12 PM] - SUCCESS: Updating the account status value of member (13) to: inactive
+[07/02/2018 12:12 PM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 13
+[07/02/2018 12:17 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/02/2018 12:17 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/02/2018 12:17 PM] - SUCCESS: Stripe Subscription successful.
+[07/02/2018 12:17 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_D9kTeNPVzZt2fU
+[07/02/2018 12:17 PM] - SUCCESS: Could not find any record using the given email address (leejee@ilfusion.com). Attempting to query database using the unique reference: cus_D9kTeNPVzZt2fU
+[07/02/2018 12:17 PM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/02/2018 12:17 PM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/02/2018 12:17 PM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=14&code=becf4a918a29a35044df404803aea30e
+[07/02/2018 12:17 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/02/2018 12:17 PM] - SUCCESS: Transaction data saved.
+[07/02/2018 12:17 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/02/2018 12:17 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/02/2018 12:19 PM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/02/2018 12:23 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/02/2018 12:23 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/02/2018 12:24 PM] - SUCCESS: Stripe Subscription successful.
+[07/02/2018 12:24 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_D9kZ4ulFU6n56R
+[07/02/2018 12:24 PM] - SUCCESS: Found a match in the member database. Member ID: 14
+[07/02/2018 12:24 PM] - SUCCESS: Modifying the existing membership profile... Member ID: 14
+[07/02/2018 12:24 PM] - SUCCESS: Setting access starts date value to: 2018-07-02
+[07/02/2018 12:24 PM] - SUCCESS: Updating the current membership level (2) of this member to the newly paid level (4)
+[07/02/2018 12:24 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/02/2018 12:24 PM] - SUCCESS: Transaction data saved.
+[07/02/2018 12:24 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/02/2018 12:24 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/02/2018 12:31 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 12:31 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 12:31 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9kTpcCOlPUfyn
+[07/02/2018 12:31 PM] - FAILURE: No associated active member record found for this notification.
+[07/02/2018 12:34 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/02/2018 12:34 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/02/2018 12:34 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_D9kZL0jPAnOMSz
+[07/02/2018 12:34 PM] - SUCCESS: Membership level ID of the member is: 4
+[07/02/2018 12:34 PM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/02/2018 12:34 PM] - SUCCESS: Updating the account status value of member (14) to: inactive
+[07/02/2018 12:34 PM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 14
+[07/03/2018 6:25 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 6:25 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 6:25 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 6:25 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DA216P0PbthZKP
+[07/03/2018 6:25 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_DA216P0PbthZKP
+[07/03/2018 6:25 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 6:25 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/03/2018 6:25 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=15&code=a3e6e19bca729830835dec68cead2d48
+[07/03/2018 6:25 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/03/2018 6:25 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 6:25 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 6:25 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 6:32 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/03/2018 6:32 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/03/2018 6:32 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA21IzuN8a7Fqd
+[07/03/2018 6:32 AM] - FAILURE: No associated active member record found for this notification.
+[07/03/2018 6:35 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 6:35 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 6:35 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 6:35 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DA2ByYNZ5ng8D5
+[07/03/2018 6:35 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_DA2ByYNZ5ng8D5
+[07/03/2018 6:35 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 6:35 AM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/03/2018 6:35 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=16&code=0c554c87f8c035062c11e11b75f5a058
+[07/03/2018 6:35 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/03/2018 6:35 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 6:35 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 6:35 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 7:29 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/03/2018 7:30 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/03/2018 7:30 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/03/2018 7:30 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA2BPoLPDji0SB
+[07/03/2018 7:30 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/03/2018 7:30 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/03/2018 7:30 AM] - SUCCESS: Updating the account status value of member (16) to: inactive
+[07/03/2018 7:30 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 16
+[07/03/2018 7:35 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/03/2018 7:35 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/03/2018 7:35 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA35vhpDCiSlul
+[07/03/2018 7:35 AM] - FAILURE: No associated active member record found for this notification.
+[07/03/2018 7:48 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 7:48 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 7:48 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 7:48 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DA3LzzPGfgNGW2
+[07/03/2018 7:48 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_DA3LzzPGfgNGW2
+[07/03/2018 7:48 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 7:48 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/03/2018 7:48 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=17&code=f3f997f46d1afba3cc99fdc727bf6f0b
+[07/03/2018 7:48 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/03/2018 7:48 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 7:48 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 7:48 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 7:48 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/03/2018 7:51 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 7:51 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 7:51 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 7:51 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DA3Oyj1yjlK67w
+[07/03/2018 7:51 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_DA3Oyj1yjlK67w
+[07/03/2018 7:51 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 7:51 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/03/2018 7:51 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=18&code=866b9bb792a90660bd4ffbbe1c478073
+[07/03/2018 7:51 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/03/2018 7:51 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 7:51 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 7:51 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 7:51 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/03/2018 7:59 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/03/2018 7:59 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/03/2018 7:59 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA3OsvGPFhoM16
+[07/03/2018 7:59 AM] - SUCCESS: Membership level ID of the member is: 4
+[07/03/2018 7:59 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/03/2018 7:59 AM] - SUCCESS: Updating the account status value of member (18) to: inactive
+[07/03/2018 7:59 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 18
+[07/03/2018 7:59 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/03/2018 7:59 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/03/2018 7:59 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA3LsjgWzvbyiu
+[07/03/2018 7:59 AM] - FAILURE: No associated active member record found for this notification.
+[07/03/2018 8:10 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 8:10 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 8:10 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 8:10 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DA3hbYn3j3GIWt
+[07/03/2018 8:10 AM] - SUCCESS: Could not find any record using the given email address (jabs@ilfusion.com). Attempting to query database using the unique reference: cus_DA3hbYn3j3GIWt
+[07/03/2018 8:10 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 8:10 AM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/03/2018 8:10 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=19&code=fde92919ae1ae3335b89acef14768d07
+[07/03/2018 8:10 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/03/2018 8:10 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 8:10 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 8:10 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 8:10 AM] - SUCCESS: Member registration complete email sent to: jabs@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/03/2018 8:30 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 8:30 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 8:30 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 8:30 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DA427fSCZYocHx
+[07/03/2018 8:30 AM] - SUCCESS: Could not find any record using the given email address (leejee@ilfusion.com). Attempting to query database using the unique reference: cus_DA427fSCZYocHx
+[07/03/2018 8:30 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 8:30 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/03/2018 8:30 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=20&code=67c6b2fef7d23be4baf5169b5bbf71df
+[07/03/2018 8:30 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/03/2018 8:30 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 8:30 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 8:30 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 9:15 AM] - SUCCESS: Member registration complete email sent to: leejee@ilfusion.com. From email address value used: hosting@amplusagency.com
+[07/03/2018 9:23 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 9:23 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 9:23 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 9:23 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DA4sFs7tYSpY0D
+[07/03/2018 9:23 AM] - SUCCESS: Could not find any record using the given email address (jessie@ilfusion.com). Attempting to query database using the unique reference: cus_DA4sFs7tYSpY0D
+[07/03/2018 9:23 AM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/03/2018 9:23 AM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/03/2018 9:23 AM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=21&code=176875cd6357f35d0133e2cd62dd1f76
+[07/03/2018 9:23 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jessie@ilfusion.com
+[07/03/2018 9:23 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 9:23 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 9:23 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 9:24 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 9:24 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 9:24 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 9:24 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DA4t1LSVsyUuxI
+[07/03/2018 9:24 AM] - SUCCESS: Found a match in the member database. Member ID: 21
+[07/03/2018 9:24 AM] - SUCCESS: Modifying the existing membership profile... Member ID: 21
+[07/03/2018 9:24 AM] - SUCCESS: Setting access starts date value to: 2018-07-03
+[07/03/2018 9:24 AM] - SUCCESS: Updating the current membership level (4) of this member to the newly paid level (2)
+[07/03/2018 9:24 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jessie@ilfusion.com
+[07/03/2018 9:24 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 9:24 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 9:24 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/03/2018 10:20 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/03/2018 10:20 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/03/2018 10:20 AM] - SUCCESS: Stripe Subscription successful.
+[07/03/2018 10:20 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238&swpm_id=20, Unique reference: cus_DA5o6D9rWgiHqt
+[07/03/2018 10:20 AM] - SUCCESS: Modifying the existing membership profile... Member ID: 20
+[07/03/2018 10:20 AM] - SUCCESS: Setting access starts date value to: 2018-07-03
+[07/03/2018 10:20 AM] - SUCCESS: Updating the current membership level (4) of this member to the newly paid level (4)
+[07/03/2018 10:20 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: leejee@ilfusion.com
+[07/03/2018 10:20 AM] - SUCCESS: Transaction data saved.
+[07/03/2018 10:20 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/03/2018 10:20 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/05/2018 5:51 AM] - SUCCESS: Member registration complete email sent to: trainerfree@amplus.com. From email address value used: hosting@amplusagency.com
+[07/05/2018 8:21 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 8:21 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 8:21 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA4sTGUiqcfCri
+[07/05/2018 8:21 AM] - FAILURE: No associated active member record found for this notification.
+[07/05/2018 8:21 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 8:21 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 8:21 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA4tXil4mHSIHq
+[07/05/2018 8:21 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/05/2018 8:21 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/05/2018 8:21 AM] - SUCCESS: Updating the account status value of member (21) to: inactive
+[07/05/2018 8:21 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 21
+[07/05/2018 8:22 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 8:22 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 8:22 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA42Qo7ynu2wAB
+[07/05/2018 8:22 AM] - FAILURE: No associated active member record found for this notification.
+[07/05/2018 8:25 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/05/2018 8:25 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/05/2018 8:25 AM] - SUCCESS: Stripe Subscription successful.
+[07/05/2018 8:25 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DAoOhpWr4nSkYB
+[07/05/2018 8:25 AM] - SUCCESS: Found a match in the member database. Member ID: 22
+[07/05/2018 8:25 AM] - SUCCESS: Modifying the existing membership profile... Member ID: 22
+[07/05/2018 8:25 AM] - SUCCESS: Setting access starts date value to: 2018-07-05
+[07/05/2018 8:25 AM] - SUCCESS: Updating the current membership level (3) of this member to the newly paid level (2)
+[07/05/2018 8:25 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: trainerfree@amplus.com
+[07/05/2018 8:25 AM] - SUCCESS: Transaction data saved.
+[07/05/2018 8:25 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/05/2018 8:25 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/05/2018 8:40 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 8:40 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 8:40 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DAoOXlUIU9xAcD
+[07/05/2018 8:40 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/05/2018 8:40 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/05/2018 8:40 AM] - SUCCESS: Updating the account status value of member (22) to: inactive
+[07/05/2018 8:40 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 22
+[07/05/2018 8:55 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 8:55 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 8:55 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA5oucKXgYiMVc
+[07/05/2018 8:55 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/05/2018 8:55 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/05/2018 8:55 AM] - SUCCESS: Updating the account status value of member (20) to: inactive
+[07/05/2018 8:55 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 20
+[07/05/2018 9:00 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 9:00 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 9:00 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DAow4zn1EuIeSn
+[07/05/2018 9:00 AM] - FAILURE: No associated active member record found for this notification.
+[07/05/2018 9:03 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 9:03 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 9:03 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DAoztrafqUWCBc
+[07/05/2018 9:03 AM] - FAILURE: No associated active member record found for this notification.
+[07/05/2018 9:05 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/05/2018 9:05 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/05/2018 9:05 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DA3h4x6765CMXc
+[07/05/2018 9:05 AM] - SUCCESS: Membership level ID of the member is: 2
+[07/05/2018 9:05 AM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/05/2018 9:05 AM] - SUCCESS: Updating the account status value of member (19) to: inactive
+[07/05/2018 9:05 AM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 19
+[07/05/2018 9:06 AM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/05/2018 9:06 AM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/05/2018 9:06 AM] - SUCCESS: Stripe Subscription successful.
+[07/05/2018 9:06 AM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DAp3YZwmYfthz8
+[07/05/2018 9:06 AM] - SUCCESS: Found a match in the member database. Member ID: 19
+[07/05/2018 9:06 AM] - SUCCESS: Modifying the existing membership profile... Member ID: 19
+[07/05/2018 9:06 AM] - SUCCESS: Setting access starts date value to: 2018-07-05
+[07/05/2018 9:06 AM] - SUCCESS: Updating the current membership level (2) of this member to the newly paid level (4)
+[07/05/2018 9:06 AM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/05/2018 9:06 AM] - SUCCESS: Transaction data saved.
+[07/05/2018 9:06 AM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/05/2018 9:06 AM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/10/2018 12:32 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/10/2018 12:32 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/10/2018 12:32 PM] - SUCCESS: Stripe Subscription successful.
+[07/10/2018 12:32 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DCkWQTXE1RigJi
+[07/10/2018 12:32 PM] - SUCCESS: Could not find any record using the given email address (imjusthuman1990@gmail.com). Attempting to query database using the unique reference: cus_DCkWQTXE1RigJi
+[07/10/2018 12:32 PM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/10/2018 12:32 PM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/10/2018 12:32 PM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=23&code=da815fba340a010039e4daf2e25c91bb
+[07/10/2018 12:32 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: imjusthuman1990@gmail.com
+[07/10/2018 12:32 PM] - SUCCESS: Transaction data saved.
+[07/10/2018 12:32 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/10/2018 12:32 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/10/2018 12:34 PM] - SUCCESS: Member registration complete email sent to: imjusthuman1990@gmail.com. From email address value used: hosting@amplusagency.com
+[07/10/2018 12:37 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/10/2018 12:37 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/10/2018 12:37 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DCkWayxgxt7PEJ
+[07/10/2018 12:37 PM] - SUCCESS: Membership level ID of the member is: 2
+[07/10/2018 12:37 PM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/10/2018 12:37 PM] - SUCCESS: Updating the account status value of member (23) to: inactive
+[07/10/2018 12:37 PM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 23
+[07/10/2018 12:42 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/10/2018 12:42 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/10/2018 12:42 PM] - SUCCESS: Stripe Subscription successful.
+[07/10/2018 12:42 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DCkgDWnNJt8sz2
+[07/10/2018 12:42 PM] - SUCCESS: Found a match in the member database. Member ID: 19
+[07/10/2018 12:42 PM] - SUCCESS: Modifying the existing membership profile... Member ID: 19
+[07/10/2018 12:42 PM] - SUCCESS: Setting access starts date value to: 2018-07-10
+[07/10/2018 12:42 PM] - SUCCESS: Updating the current membership level (2) of this member to the newly paid level (2)
+[07/10/2018 12:42 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: jabs@ilfusion.com
+[07/10/2018 12:42 PM] - SUCCESS: Transaction data saved.
+[07/10/2018 12:42 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/10/2018 12:42 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/10/2018 12:43 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/10/2018 12:43 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/10/2018 12:43 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DAp3xCd8fYxHaZ
+[07/10/2018 12:43 PM] - FAILURE: No associated active member record found for this notification.
+[07/10/2018 12:49 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/10/2018 12:49 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/10/2018 12:50 PM] - SUCCESS: Stripe Subscription successful.
+[07/10/2018 12:50 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=4&user_ip=124.106.167.238, Unique reference: cus_DCknim1FPnaU4K
+[07/10/2018 12:50 PM] - SUCCESS: Could not find any record using the given email address (imjusthuman1990@gmail.com). Attempting to query database using the unique reference: cus_DCknim1FPnaU4K
+[07/10/2018 12:50 PM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/10/2018 12:50 PM] - SUCCESS: Creating new member account. Membership level ID: 4
+[07/10/2018 12:50 PM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=24&code=79acafbb6da25c115a8bfb0ee1735d27
+[07/10/2018 12:50 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: imjusthuman1990@gmail.com
+[07/10/2018 12:50 PM] - SUCCESS: Transaction data saved.
+[07/10/2018 12:50 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/10/2018 12:50 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/10/2018 12:51 PM] - SUCCESS: Member registration complete email sent to: imjusthuman1990@gmail.com. From email address value used: hosting@amplusagency.com
+[07/10/2018 12:54 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/10/2018 12:54 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/10/2018 12:54 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DCknWwvdV5Wab0
+[07/10/2018 12:54 PM] - SUCCESS: Membership level ID of the member is: 4
+[07/10/2018 12:54 PM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/10/2018 12:54 PM] - SUCCESS: Updating the account status value of member (24) to: inactive
+[07/10/2018 12:54 PM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 24
+[07/10/2018 2:05 PM] - SUCCESS: Stripe Subscription IPN received. Processing request...
+[07/10/2018 2:05 PM] - SUCCESS: Sandbox payment mode is enabled. Using test API key details.
+[07/10/2018 2:05 PM] - SUCCESS: Stripe Subscription successful.
+[07/10/2018 2:05 PM] - SUCCESS: swpm_handle_subsc_signup_stand_alone(). Custom value: subsc_ref=2&user_ip=124.106.167.238, Unique reference: cus_DCm16MiVzpomB9
+[07/10/2018 2:05 PM] - SUCCESS: Could not find any record using the given email address (imjusthuman1990@gmail.com). Attempting to query database using the unique reference: cus_DCm16MiVzpomB9
+[07/10/2018 2:05 PM] - SUCCESS: Did not find a match for an existing member profile for the given reference. This must me a new payment from a new member.
+[07/10/2018 2:05 PM] - SUCCESS: Creating new member account. Membership level ID: 2
+[07/10/2018 2:05 PM] - SUCCESS: Member signup URL: http://sm.ampluswebsites.com/membership-join/membership-registration/?member_id=25&code=7a7548a03e605f4d09b7bbe5207e8b43
+[07/10/2018 2:05 PM] - SUCCESS: Member signup/upgrade completion email successfully sent to: imjusthuman1990@gmail.com
+[07/10/2018 2:05 PM] - SUCCESS: Transaction data saved.
+[07/10/2018 2:05 PM] - SUCCESS: Redirecting customer to: http://sm.ampluswebsites.com/thank-you
+[07/10/2018 2:05 PM] - SUCCESS: End of Stripe Subscription IPN processing.
+
+------------------------------------------------------------------
+
+[07/10/2018 2:07 PM] - SUCCESS: Member registration complete email sent to: imjusthuman1990@gmail.com. From email address value used: hosting@amplusagency.com
+[07/10/2018 2:09 PM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/10/2018 2:09 PM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/10/2018 2:09 PM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DCm1vo2nbMn5XF
+[07/10/2018 2:09 PM] - SUCCESS: Membership level ID of the member is: 2
+[07/10/2018 2:09 PM] - SUCCESS: This is a level with "no expiry" or "until cancelled" duration
+[07/10/2018 2:09 PM] - SUCCESS: Updating the account status value of member (25) to: inactive
+[07/10/2018 2:09 PM] - SUCCESS: Subscription cancellation or end of term received! Member account deactivated. Member ID: 25
+[07/11/2018 6:14 AM] - SUCCESS: Stripe Subscription Webhook received. Processing request...
+[07/11/2018 6:14 AM] - SUCCESS: Refund/Cancellation check - lets see if a member account needs to be deactivated.
+[07/11/2018 6:14 AM] - SUCCESS: Subscriber ID is present. Retrieving member account from the database. Subscr_id: sub_DCkgvL65aatzMu
+[07/11/2018 6:14 AM] - FAILURE: No associated active member record found for this notification.
