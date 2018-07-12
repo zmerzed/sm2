@@ -18,106 +18,15 @@ if( is_user_logged_in() ){
 	if( $pm_lvl == "Trainer"  || in_array( 'trainer', $uinfo->roles )){
 
 	require_once( get_stylesheet_directory() . '/accounts/inc/header-account.php' );
+	require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' );
 ?>
 
-<div class="title-welcome-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6">
-				<h2>
-
-					<?php
-					$data_request = $_GET['data'];
-					switch ($data_request) {
-						case 'schedule':
-							echo 'Schedule';
-							break;
-
-						case 'profile':
-							echo 'Profile';
-							break;
-						
-						case 'message':
-							echo 'Message';
-							break;
-
-						case 'notes':
-							echo 'Notes';
-							break;
-						
-						case 'logs':
-							echo 'Logs';
-							break;
-
-						case 'workouts':
-							echo 'Workouts';
-							break;
-
-						case 'add-workouts':
-							
-							if(isset($_GET['workout'])) {
-								$workout = workOutGet($_GET['workout']);
-								echo 'Edit ' . $workout['workout_name'];
-							} else {
-								echo 'New/edit workout';
-							}
-
-							break;
-
-						case 'exercises':
-							echo 'Exercises';
-							break;
-
-						default:
-							echo 'dashboard';
-							break;
-					}
-
-				?>
-
-				</h2>
-			</div>
-			<div class="col-lg-6 col-md-6">
-				<h4>Welcome back, <?php echo $uinfo->user_login; ?></h4>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="main-section trainers-dashboard">
 	<div class="container">
 		<div class="row">
 
-			<div class="col-lg-2 col-md-2">
-				<div class="main-navigation matchHeight">
-
-					<h3>Menu</h3>
-
-					<ul>
-						<li><a href="/trainer" menu-item="dashboard">Dashboard</a></li>
-						<li>
-							<a href="<?php echo home_url(); ?>/trainer/?data=schedule" menu-item="schedule">Schedule</a>
-							<ul>
-								<li><a href="<?php echo home_url(); ?>/trainer/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
-								<li><a href="<?php echo home_url(); ?>/trainer/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
-							</ul>
-						</li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=profile" menu-item="profile">Profile</a></li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=message" menu-item="message">Messages</a></li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=notes" menu-item="notes">Notes</a></li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=logs" menu-item="logs">Logs</a></li>
-					</ul>
-
-					<div class="menu-divider"></div>
-
-					<ul>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=workouts" menu-item="workouts">Workouts</a></li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=exercises" menu-item="exercises">Exercises</a></li>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=clients" menu-item="clients">Clients</a></li>
-					</ul>
-
-				</div>
-			</div>
+			<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
 
 			<div class="col-lg-10 col-md-10">
 				<?php							

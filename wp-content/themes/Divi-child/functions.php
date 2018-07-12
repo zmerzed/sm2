@@ -187,19 +187,16 @@ function assignClientToTrainer($client, $trainer) {
 function assignTrainerToGym($trainer, $gym) {
 	$pm_lvl_gym = pmpro_getMembershipLevelForUser($gym->ID)->name;
 	$pm_lvl_train = pmpro_getMembershipLevelForUser($trainer->ID)->name;
-	if ( ! in_array('gym', $gym->roles, true) && $pm_lvl_gym != "Gym" ) {
-		echo "option1";
+	if ( ! in_array('gym', $gym->roles, true) && $pm_lvl_gym != "Gym" ) {		
 		return false;
 	}
 
-	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {
-		echo "option2";
+	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {		
 		return false;
 	}
 
 	$trainers = get_user_meta($gym->ID, 'trainers_of_gym', true);
 	if(empty($trainers)){
-		echo "option3";
 		$trainers = array();
 	}
 

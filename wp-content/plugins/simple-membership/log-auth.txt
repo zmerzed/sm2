@@ -1,0 +1,568 @@
+[06/27/2018 2:07 PM] - SUCCESS: Authentication request - Username: freetrialgym
+[06/27/2018 2:07 PM] - SUCCESS: Authentication successful for username: freetrialgym. Executing swpm_login action hook.
+[06/27/2018 2:07 PM] - SUCCESS: Trying wp_signon() with username: freetrialgym
+[06/27/2018 2:07 PM] - SUCCESS: wp_authenticate action. User with username: freetrialgymis already logged in.
+[06/27/2018 2:07 PM] - SUCCESS: Setting current WP user to: freetrialgym
+[06/27/2018 2:07 PM] - SUCCESS: Triggering swpm_after_login hook.
+[06/27/2018 2:10 PM] - SUCCESS: wp_authenticate action. Handling login for username: freetrialtrainer
+[06/27/2018 2:10 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 2:10 PM] - SUCCESS: Authentication request - Username: freetrialtrainer
+[06/27/2018 2:10 PM] - SUCCESS: Authentication successful for username: freetrialtrainer. Executing swpm_login action hook.
+[06/27/2018 2:10 PM] - SUCCESS: Trying wp_signon() with username: freetrialtrainer
+[06/27/2018 2:10 PM] - SUCCESS: wp_authenticate action. User with username: freetrialtraineris already logged in.
+[06/27/2018 2:10 PM] - SUCCESS: Setting current WP user to: freetrialtrainer
+[06/27/2018 2:10 PM] - SUCCESS: Triggering swpm_after_login hook.
+[06/27/2018 2:34 PM] - SUCCESS: wp_authenticate action. Handling login for username: amplus817
+[06/27/2018 2:34 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 2:34 PM] - SUCCESS: Authentication request - Username: amplus817
+[06/27/2018 2:35 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/27/2018 2:35 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 2:35 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 2:35 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/27/2018 2:35 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 2:35 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 8:10 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 8:10 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 8:11 PM] - SUCCESS: Authentication request - Username: trainer 
+[06/27/2018 8:11 PM] - SUCCESS: Authentication request - Username: gym
+[06/27/2018 8:12 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/27/2018 8:12 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 8:12 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 8:20 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/27/2018 8:20 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 8:20 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 8:52 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/27/2018 8:52 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 8:52 PM] - SUCCESS: Authentication request - Username: trainer
+[06/27/2018 9:21 PM] - SUCCESS: wp_authenticate action. Handling login for username: amplus817
+[06/27/2018 9:21 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 9:21 PM] - SUCCESS: Authentication request - Username: amplus817
+[06/27/2018 9:29 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/27/2018 9:29 PM] - SUCCESS: SwpmAuth::login()
+[06/27/2018 9:29 PM] - SUCCESS: Authentication request - Username: erickminor
+[06/28/2018 12:50 AM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/28/2018 12:50 AM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 12:50 AM] - SUCCESS: Authentication request - Username: erickminor
+[06/28/2018 12:53 AM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/28/2018 12:53 AM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 12:53 AM] - SUCCESS: Authentication request - Username: erickminor
+[06/28/2018 4:24 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[06/28/2018 4:24 AM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 6:01 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[06/28/2018 6:01 AM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 6:01 AM] - SUCCESS: Authentication request - Username: amplusll
+[06/28/2018 6:30 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[06/28/2018 6:30 AM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[06/28/2018 6:30 AM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[06/28/2018 6:30 AM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[06/28/2018 6:30 AM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[06/28/2018 6:30 AM] - SUCCESS: Triggering swpm_after_login hook.
+[06/28/2018 6:50 AM] - SUCCESS: Authentication request - Username: church
+[06/28/2018 6:50 AM] - SUCCESS: Authentication successful for username: church. Executing swpm_login action hook.
+[06/28/2018 6:50 AM] - SUCCESS: Trying wp_signon() with username: church
+[06/28/2018 6:50 AM] - SUCCESS: wp_authenticate action. User with username: churchis already logged in.
+[06/28/2018 6:50 AM] - SUCCESS: Setting current WP user to: church
+[06/28/2018 6:50 AM] - SUCCESS: Triggering swpm_after_login hook.
+[06/28/2018 6:53 AM] - SUCCESS: wp_authenticate action. Handling login for username: gym
+[06/28/2018 6:53 AM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 6:53 AM] - SUCCESS: Authentication request - Username: gym
+[06/28/2018 7:01 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[06/28/2018 7:01 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[06/28/2018 7:01 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[06/28/2018 7:01 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[06/28/2018 7:01 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[06/28/2018 7:01 AM] - SUCCESS: Triggering swpm_after_login hook.
+[06/28/2018 7:02 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[06/28/2018 7:02 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[06/28/2018 7:02 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[06/28/2018 7:02 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[06/28/2018 7:02 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[06/28/2018 7:02 AM] - SUCCESS: Triggering swpm_after_login hook.
+[06/28/2018 12:03 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/28/2018 12:03 PM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 12:03 PM] - SUCCESS: Authentication request - Username: erickminor
+[06/28/2018 12:59 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/28/2018 12:59 PM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 12:59 PM] - SUCCESS: Authentication request - Username: erickminor
+[06/28/2018 12:59 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/28/2018 12:59 PM] - SUCCESS: SwpmAuth::login()
+[06/28/2018 12:59 PM] - SUCCESS: Authentication request - Username: erickminor
+[06/29/2018 6:36 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[06/29/2018 6:36 AM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 6:36 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[06/29/2018 6:36 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[06/29/2018 6:36 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[06/29/2018 6:36 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[06/29/2018 6:36 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[06/29/2018 6:36 AM] - SUCCESS: Triggering swpm_after_login hook.
+[06/29/2018 6:36 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/29/2018 6:36 AM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 6:36 AM] - SUCCESS: Authentication request - Username: trainer
+[06/29/2018 6:37 AM] - SUCCESS: wp_authenticate action. Handling login for username: client7
+[06/29/2018 6:37 AM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 6:37 AM] - SUCCESS: Authentication request - Username: client7
+[06/29/2018 7:01 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[06/29/2018 7:01 AM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 7:01 AM] - SUCCESS: Authentication request - Username: trainer
+[06/29/2018 7:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[06/29/2018 7:59 AM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 7:59 AM] - SUCCESS: Authentication request - Username: amplusll
+[06/29/2018 2:08 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/29/2018 2:08 PM] - SUCCESS: SwpmAuth::login()
+[06/29/2018 2:08 PM] - SUCCESS: Authentication request - Username: erickminor
+[06/30/2018 11:27 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[06/30/2018 11:27 PM] - SUCCESS: SwpmAuth::login()
+[06/30/2018 11:27 PM] - SUCCESS: Authentication request - Username: erickminor
+[07/01/2018 12:24 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/01/2018 12:24 AM] - SUCCESS: SwpmAuth::login()
+[07/01/2018 12:24 AM] - SUCCESS: Authentication request - Username: trainer
+[07/01/2018 5:27 PM] - SUCCESS: wp_authenticate action. Handling login for username: erickminor
+[07/01/2018 5:27 PM] - SUCCESS: SwpmAuth::login()
+[07/01/2018 5:27 PM] - SUCCESS: Authentication request - Username: erickminor
+[07/02/2018 4:50 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/02/2018 4:50 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 4:50 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/02/2018 6:12 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 6:12 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[07/02/2018 6:12 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[07/02/2018 6:12 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[07/02/2018 6:12 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[07/02/2018 6:12 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 6:21 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 6:22 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[07/02/2018 6:22 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 6:22 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 6:22 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[07/02/2018 6:22 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 6:22 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 6:34 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[07/02/2018 6:34 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 6:34 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 8:09 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 8:09 AM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[07/02/2018 8:09 AM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[07/02/2018 8:09 AM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[07/02/2018 8:09 AM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[07/02/2018 8:09 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 9:33 AM] - SUCCESS: Authentication request using email address: leejee@ilfusion.com, Found a user record with username: leejeeilfusion
+[07/02/2018 9:33 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 9:33 AM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[07/02/2018 9:33 AM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[07/02/2018 9:33 AM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[07/02/2018 9:33 AM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[07/02/2018 9:33 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 9:55 AM] - SUCCESS: Authentication request - Username: gym
+[07/02/2018 9:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/02/2018 9:59 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 9:59 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 9:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/02/2018 9:59 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 9:59 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 9:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/02/2018 9:59 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 9:59 AM] - SUCCESS: Authentication request - Username: trainer
+[07/02/2018 11:00 AM] - SUCCESS: wp_authenticate action. Handling login for username: client7
+[07/02/2018 11:00 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:00 AM] - SUCCESS: Authentication request - Username: client7
+[07/02/2018 11:04 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 11:04 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[07/02/2018 11:04 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[07/02/2018 11:04 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[07/02/2018 11:04 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[07/02/2018 11:04 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 11:05 AM] - SUCCESS: wp_authenticate action. Handling login for username: jessieilfusion
+[07/02/2018 11:05 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:05 AM] - SUCCESS: Authentication request - Username: jessieilfusion
+[07/02/2018 11:06 AM] - SUCCESS: wp_authenticate action. Handling login for username: jessieilfusion
+[07/02/2018 11:06 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:06 AM] - SUCCESS: Authentication request - Username: jessieilfusion
+[07/02/2018 11:06 AM] - SUCCESS: wp_authenticate action. Handling login for username: johnilfusion
+[07/02/2018 11:06 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:06 AM] - SUCCESS: Authentication request - Username: johnilfusion
+[07/02/2018 11:08 AM] - SUCCESS: wp_authenticate action. Handling login for username: johnilfusion
+[07/02/2018 11:08 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:08 AM] - SUCCESS: Authentication request - Username: johnilfusion
+[07/02/2018 11:57 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[07/02/2018 11:57 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:57 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/02/2018 11:57 AM] - SUCCESS: Authentication successful for username: jabsilfusion. Executing swpm_login action hook.
+[07/02/2018 11:57 AM] - SUCCESS: Trying wp_signon() with username: jabsilfusion
+[07/02/2018 11:57 AM] - SUCCESS: wp_authenticate action. User with username: jabsilfusionis already logged in.
+[07/02/2018 11:57 AM] - SUCCESS: Setting current WP user to: jabsilfusion
+[07/02/2018 11:57 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 11:58 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/02/2018 11:58 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:58 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 11:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: client
+[07/02/2018 11:59 AM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:59 AM] - SUCCESS: Authentication request - Username: client
+[07/02/2018 12:00 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/02/2018 12:00 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:00 PM] - SUCCESS: Authentication request - Username: trainer
+[07/02/2018 12:08 PM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 12:08 PM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[07/02/2018 12:08 PM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[07/02/2018 12:08 PM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[07/02/2018 12:08 PM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[07/02/2018 12:08 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 12:13 PM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/02/2018 12:13 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:13 PM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 12:19 PM] - SUCCESS: validate() - Bad Hash
+[07/02/2018 12:19 PM] - SUCCESS: validate() - Bad Hash
+[07/02/2018 12:19 PM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 12:19 PM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[07/02/2018 12:19 PM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[07/02/2018 12:19 PM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[07/02/2018 12:19 PM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[07/02/2018 12:19 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 12:22 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer001
+[07/02/2018 12:22 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:22 PM] - SUCCESS: Authentication request - Username: trainer001
+[07/02/2018 12:29 PM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/02/2018 12:29 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:29 PM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/02/2018 12:29 PM] - SUCCESS: Authentication successful for username: leejeeilfusion. Executing swpm_login action hook.
+[07/02/2018 12:29 PM] - SUCCESS: Trying wp_signon() with username: leejeeilfusion
+[07/02/2018 12:29 PM] - SUCCESS: wp_authenticate action. User with username: leejeeilfusionis already logged in.
+[07/02/2018 12:29 PM] - SUCCESS: Setting current WP user to: leejeeilfusion
+[07/02/2018 12:29 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/02/2018 12:29 PM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/02/2018 12:29 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:29 PM] - SUCCESS: Authentication request - Username: client001
+[07/02/2018 12:34 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer001
+[07/02/2018 12:34 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 12:34 PM] - SUCCESS: Authentication request - Username: trainer001
+[07/02/2018 12:49 PM] - SUCCESS: validate() - Bad Hash
+[07/02/2018 11:22 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/02/2018 11:22 PM] - SUCCESS: SwpmAuth::login()
+[07/02/2018 11:22 PM] - SUCCESS: Authentication request - Username: trainer
+[07/03/2018 6:16 AM] - SUCCESS: validate() - Bad Hash
+[07/03/2018 6:16 AM] - SUCCESS: validate() - Bad Hash
+[07/03/2018 6:16 AM] - SUCCESS: validate() - Bad Hash
+[07/03/2018 6:16 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/03/2018 6:16 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 6:16 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/03/2018 7:30 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabs
+[07/03/2018 7:30 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 7:30 AM] - SUCCESS: Authentication request - Username: jabs
+[07/03/2018 7:30 AM] - SUCCESS: Authentication successful for username: jabs. Executing swpm_login action hook.
+[07/03/2018 7:30 AM] - SUCCESS: Trying wp_signon() with username: jabs
+[07/03/2018 7:30 AM] - SUCCESS: wp_authenticate action. User with username: jabsis already logged in.
+[07/03/2018 7:30 AM] - SUCCESS: Setting current WP user to: jabs
+[07/03/2018 7:30 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 7:48 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/03/2018 7:48 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/03/2018 7:48 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/03/2018 7:48 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/03/2018 7:48 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/03/2018 7:48 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 7:51 AM] - SUCCESS: Authentication request - Username: jabstrainer
+[07/03/2018 7:51 AM] - SUCCESS: Authentication successful for username: jabstrainer. Executing swpm_login action hook.
+[07/03/2018 7:51 AM] - SUCCESS: Trying wp_signon() with username: jabstrainer
+[07/03/2018 7:51 AM] - SUCCESS: wp_authenticate action. User with username: jabstraineris already logged in.
+[07/03/2018 7:51 AM] - SUCCESS: Setting current WP user to: jabstrainer
+[07/03/2018 7:51 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 8:10 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/03/2018 8:10 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/03/2018 8:10 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/03/2018 8:10 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/03/2018 8:10 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/03/2018 8:10 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 9:15 AM] - SUCCESS: Authentication request - Username: leejee
+[07/03/2018 9:15 AM] - SUCCESS: Authentication successful for username: leejee. Executing swpm_login action hook.
+[07/03/2018 9:15 AM] - SUCCESS: Trying wp_signon() with username: leejee
+[07/03/2018 9:15 AM] - SUCCESS: wp_authenticate action. User with username: leejeeis already logged in.
+[07/03/2018 9:15 AM] - SUCCESS: Setting current WP user to: leejee
+[07/03/2018 9:15 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 9:29 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer001
+[07/03/2018 9:29 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:29 AM] - SUCCESS: Authentication request - Username: trainer001
+[07/03/2018 9:29 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/03/2018 9:29 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:29 AM] - SUCCESS: Authentication request - Username: trainer
+[07/03/2018 9:29 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/03/2018 9:29 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:29 AM] - SUCCESS: Authentication request - Username: trainer
+[07/03/2018 9:29 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejeeilfusion
+[07/03/2018 9:29 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:29 AM] - SUCCESS: Authentication request - Username: leejeeilfusion
+[07/03/2018 9:30 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejee@ilfusion.com
+[07/03/2018 9:30 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:30 AM] - SUCCESS: Authentication request using email address: leejee@ilfusion.com, Found a user record with username: leejee
+[07/03/2018 9:30 AM] - SUCCESS: Authentication request - Username: leejee
+[07/03/2018 9:30 AM] - SUCCESS: Authentication successful for username: leejee. Executing swpm_login action hook.
+[07/03/2018 9:30 AM] - SUCCESS: Trying wp_signon() with username: leejee
+[07/03/2018 9:30 AM] - SUCCESS: wp_authenticate action. User with username: leejeeis already logged in.
+[07/03/2018 9:30 AM] - SUCCESS: Setting current WP user to: leejee
+[07/03/2018 9:30 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 9:46 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer20
+[07/03/2018 9:46 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:46 AM] - SUCCESS: Authentication request - Username: trainer20
+[07/03/2018 9:46 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejee
+[07/03/2018 9:46 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 9:46 AM] - SUCCESS: Authentication request - Username: leejee
+[07/03/2018 9:46 AM] - SUCCESS: Authentication successful for username: leejee. Executing swpm_login action hook.
+[07/03/2018 9:46 AM] - SUCCESS: Trying wp_signon() with username: leejee
+[07/03/2018 9:46 AM] - SUCCESS: wp_authenticate action. User with username: leejeeis already logged in.
+[07/03/2018 9:46 AM] - SUCCESS: Setting current WP user to: leejee
+[07/03/2018 9:46 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/03/2018 10:07 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/03/2018 10:07 AM] - SUCCESS: SwpmAuth::login()
+[07/03/2018 10:07 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/05/2018 5:45 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/05/2018 5:45 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:45 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/05/2018 5:49 AM] - SUCCESS: wp_authenticate action. Handling login for username: client20
+[07/05/2018 5:49 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:49 AM] - SUCCESS: Authentication request - Username: client20
+[07/05/2018 5:49 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainerfree
+[07/05/2018 5:49 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:49 AM] - SUCCESS: Authentication request - Username: trainerfree
+[07/05/2018 5:49 AM] - SUCCESS: wp_authenticate action. Handling login for username: gymfree
+[07/05/2018 5:49 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:49 AM] - SUCCESS: Authentication request - Username: gymfree
+[07/05/2018 5:50 AM] - SUCCESS: wp_authenticate action. Handling login for username: gym
+[07/05/2018 5:50 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:50 AM] - SUCCESS: Authentication request - Username: gym
+[07/05/2018 5:52 AM] - SUCCESS: Authentication request - Username: trainerfree
+[07/05/2018 5:52 AM] - SUCCESS: Authentication successful for username: trainerfree. Executing swpm_login action hook.
+[07/05/2018 5:52 AM] - SUCCESS: Trying wp_signon() with username: trainerfree
+[07/05/2018 5:52 AM] - SUCCESS: wp_authenticate action. User with username: trainerfreeis already logged in.
+[07/05/2018 5:52 AM] - SUCCESS: Setting current WP user to: trainerfree
+[07/05/2018 5:52 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/05/2018 5:53 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainerj
+[07/05/2018 5:53 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:53 AM] - SUCCESS: Authentication request - Username: trainerj
+[07/05/2018 5:54 AM] - SUCCESS: wp_authenticate action. Handling login for username: clientj
+[07/05/2018 5:54 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 5:54 AM] - SUCCESS: Authentication request - Username: clientj
+[07/05/2018 7:48 AM] - SUCCESS: wp_authenticate action. Handling login for username: clientj
+[07/05/2018 7:48 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 7:48 AM] - SUCCESS: Authentication request - Username: clientj
+[07/05/2018 8:02 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/05/2018 8:02 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:02 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/05/2018 8:02 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/05/2018 8:02 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:02 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/05/2018 8:03 AM] - SUCCESS: wp_authenticate action. Handling login for username: clientj
+[07/05/2018 8:03 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:03 AM] - SUCCESS: Authentication request - Username: clientj
+[07/05/2018 8:18 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabs
+[07/05/2018 8:18 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:18 AM] - SUCCESS: Authentication request - Username: jabs
+[07/05/2018 8:19 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/05/2018 8:19 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:19 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/05/2018 8:19 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/05/2018 8:19 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/05/2018 8:19 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/05/2018 8:19 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/05/2018 8:19 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/05/2018 8:25 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainerfree
+[07/05/2018 8:25 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:25 AM] - SUCCESS: Authentication request - Username: trainerfree
+[07/05/2018 8:25 AM] - SUCCESS: Authentication successful for username: trainerfree. Executing swpm_login action hook.
+[07/05/2018 8:25 AM] - SUCCESS: Trying wp_signon() with username: trainerfree
+[07/05/2018 8:25 AM] - SUCCESS: wp_authenticate action. User with username: trainerfreeis already logged in.
+[07/05/2018 8:25 AM] - SUCCESS: Setting current WP user to: trainerfree
+[07/05/2018 8:25 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/05/2018 8:57 AM] - SUCCESS: wp_authenticate action. Handling login for username: leejee
+[07/05/2018 8:57 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 8:57 AM] - SUCCESS: Authentication request - Username: leejee
+[07/05/2018 9:04 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/05/2018 9:04 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 9:04 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/05/2018 9:04 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/05/2018 9:04 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/05/2018 9:04 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/05/2018 9:04 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/05/2018 9:04 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/05/2018 9:05 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/05/2018 9:05 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 9:05 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/05/2018 9:07 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/05/2018 9:07 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 9:07 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/05/2018 9:07 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/05/2018 9:07 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/05/2018 9:07 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/05/2018 9:07 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/05/2018 9:07 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/05/2018 10:30 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabstrainer1
+[07/05/2018 10:30 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 10:30 AM] - SUCCESS: Authentication request - Username: jabstrainer1
+[07/05/2018 10:31 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/05/2018 10:31 AM] - SUCCESS: SwpmAuth::login()
+[07/05/2018 10:31 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/09/2018 10:11 AM] - SUCCESS: wp_authenticate action. Handling login for username: client20
+[07/09/2018 10:11 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:11 AM] - SUCCESS: Authentication request - Username: client20
+[07/09/2018 10:12 AM] - SUCCESS: wp_authenticate action. Handling login for username: client20
+[07/09/2018 10:12 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:12 AM] - SUCCESS: Authentication request - Username: client20
+[07/09/2018 10:12 AM] - SUCCESS: wp_authenticate action. Handling login for username: client20
+[07/09/2018 10:12 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:12 AM] - SUCCESS: Authentication request - Username: client20
+[07/09/2018 10:12 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsilfusion
+[07/09/2018 10:12 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:12 AM] - SUCCESS: Authentication request - Username: jabsilfusion
+[07/09/2018 10:12 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabs@ilfusion.com
+[07/09/2018 10:12 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:12 AM] - SUCCESS: Authentication request using email address: jabs@ilfusion.com, Found a user record with username: jabsgym
+[07/09/2018 10:12 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/09/2018 10:13 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/09/2018 10:13 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:13 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/09/2018 10:14 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/09/2018 10:14 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:14 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/09/2018 10:14 AM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/09/2018 10:14 AM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/09/2018 10:14 AM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/09/2018 10:14 AM] - SUCCESS: Setting current WP user to: jabsgym
+[07/09/2018 10:14 AM] - SUCCESS: Triggering swpm_after_login hook.
+[07/09/2018 10:14 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/09/2018 10:14 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:14 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/09/2018 10:15 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/09/2018 10:15 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:15 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/09/2018 10:15 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabstrainer1
+[07/09/2018 10:15 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:15 AM] - SUCCESS: Authentication request - Username: jabstrainer1
+[07/09/2018 10:16 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/09/2018 10:16 AM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 10:16 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/09/2018 7:52 PM] - SUCCESS: wp_authenticate action. Handling login for username: trainer
+[07/09/2018 7:52 PM] - SUCCESS: SwpmAuth::login()
+[07/09/2018 7:52 PM] - SUCCESS: Authentication request - Username: trainer
+[07/10/2018 5:58 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 5:58 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 5:58 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 5:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 5:59 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 5:59 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:01 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:01 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:01 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:14 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:14 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:14 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:28 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:28 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:28 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:33 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:33 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:33 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:40 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:40 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:40 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:53 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:53 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:53 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:55 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:55 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:55 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:58 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:58 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:58 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 6:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 6:59 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 6:59 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 7:19 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 7:19 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 7:19 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 7:41 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsclient1
+[07/10/2018 7:41 AM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 7:41 AM] - SUCCESS: Authentication request - Username: jabsclient1
+[07/10/2018 12:24 PM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/10/2018 12:24 PM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 12:24 PM] - SUCCESS: Authentication request - Username: amplusll
+[07/10/2018 12:52 PM] - SUCCESS: Authentication request - Username: imhumantrainer
+[07/10/2018 12:52 PM] - SUCCESS: Authentication request - Username: iamhuman1990@gmail.com
+[07/10/2018 12:53 PM] - SUCCESS: Authentication request - Username: imjusthumantrainer
+[07/10/2018 12:53 PM] - SUCCESS: Authentication request - Username: imjusthumantrainer
+[07/10/2018 12:53 PM] - SUCCESS: Authentication successful for username: imjusthumantrainer. Executing swpm_login action hook.
+[07/10/2018 12:53 PM] - SUCCESS: Trying wp_signon() with username: imjusthumantrainer
+[07/10/2018 12:53 PM] - SUCCESS: wp_authenticate action. User with username: imjusthumantraineris already logged in.
+[07/10/2018 12:53 PM] - SUCCESS: Setting current WP user to: imjusthumantrainer
+[07/10/2018 12:53 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/10/2018 2:07 PM] - SUCCESS: Authentication request - Username: imjusthumangym
+[07/10/2018 2:07 PM] - SUCCESS: Authentication successful for username: imjusthumangym. Executing swpm_login action hook.
+[07/10/2018 2:07 PM] - SUCCESS: Trying wp_signon() with username: imjusthumangym
+[07/10/2018 2:07 PM] - SUCCESS: wp_authenticate action. User with username: imjusthumangymis already logged in.
+[07/10/2018 2:07 PM] - SUCCESS: Setting current WP user to: imjusthumangym
+[07/10/2018 2:07 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/10/2018 2:18 PM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/10/2018 2:18 PM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 2:18 PM] - SUCCESS: Authentication request - Username: jabsgym
+[07/10/2018 2:18 PM] - SUCCESS: Authentication successful for username: jabsgym. Executing swpm_login action hook.
+[07/10/2018 2:18 PM] - SUCCESS: Trying wp_signon() with username: jabsgym
+[07/10/2018 2:18 PM] - SUCCESS: wp_authenticate action. User with username: jabsgymis already logged in.
+[07/10/2018 2:18 PM] - SUCCESS: Setting current WP user to: jabsgym
+[07/10/2018 2:18 PM] - SUCCESS: Triggering swpm_after_login hook.
+[07/10/2018 2:22 PM] - SUCCESS: wp_authenticate action. Handling login for username: newtrainer
+[07/10/2018 2:22 PM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 2:22 PM] - SUCCESS: Authentication request - Username: newtrainer
+[07/10/2018 2:36 PM] - SUCCESS: wp_authenticate action. Handling login for username: newclient
+[07/10/2018 2:36 PM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 2:36 PM] - SUCCESS: Authentication request - Username: newclient
+[07/10/2018 2:36 PM] - SUCCESS: wp_authenticate action. Handling login for username: newclient
+[07/10/2018 2:36 PM] - SUCCESS: SwpmAuth::login()
+[07/10/2018 2:36 PM] - SUCCESS: Authentication request - Username: newclient
+[07/11/2018 5:24 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/11/2018 5:24 AM] - SUCCESS: SwpmAuth::login()
+[07/11/2018 5:24 AM] - SUCCESS: Authentication request - Username: amplusll
+[07/11/2018 6:12 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/11/2018 6:12 AM] - SUCCESS: SwpmAuth::login()
+[07/11/2018 6:12 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/12/2018 6:06 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabstrainer
+[07/12/2018 6:06 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 6:06 AM] - SUCCESS: Authentication request - Username: jabstrainer
+[07/12/2018 6:06 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/12/2018 6:06 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 6:06 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/12/2018 6:06 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer008
+[07/12/2018 6:06 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 6:06 AM] - SUCCESS: Authentication request - Username: trainer008
+[07/12/2018 6:09 AM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/12/2018 6:09 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 6:09 AM] - SUCCESS: Authentication request - Username: client001
+[07/12/2018 6:55 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer008
+[07/12/2018 6:55 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 6:55 AM] - SUCCESS: Authentication request - Username: trainer008
+[07/12/2018 7:08 AM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/12/2018 7:08 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 7:08 AM] - SUCCESS: Authentication request - Username: client001
+[07/12/2018 8:40 AM] - SUCCESS: wp_authenticate action. Handling login for username: client01
+[07/12/2018 8:40 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 8:40 AM] - SUCCESS: Authentication request - Username: client01
+[07/12/2018 8:40 AM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/12/2018 8:40 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 8:40 AM] - SUCCESS: Authentication request - Username: client001
+[07/12/2018 8:54 AM] - SUCCESS: wp_authenticate action. Handling login for username: client001
+[07/12/2018 8:54 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 8:54 AM] - SUCCESS: Authentication request - Username: client001
+[07/12/2018 8:59 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer008
+[07/12/2018 8:59 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 8:59 AM] - SUCCESS: Authentication request - Username: trainer008
+[07/12/2018 9:01 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/12/2018 9:01 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 9:01 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/12/2018 9:07 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer008
+[07/12/2018 9:07 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 9:07 AM] - SUCCESS: Authentication request - Username: trainer008
+[07/12/2018 9:15 AM] - SUCCESS: wp_authenticate action. Handling login for username: jabsgym
+[07/12/2018 9:15 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 9:15 AM] - SUCCESS: Authentication request - Username: jabsgym
+[07/12/2018 9:54 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer009
+[07/12/2018 9:54 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 9:54 AM] - SUCCESS: Authentication request - Username: trainer009
+[07/12/2018 10:00 AM] - SUCCESS: wp_authenticate action. Handling login for username: trainer009
+[07/12/2018 10:00 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 10:00 AM] - SUCCESS: Authentication request - Username: trainer009
+[07/12/2018 10:07 AM] - SUCCESS: wp_authenticate action. Handling login for username: client002
+[07/12/2018 10:07 AM] - SUCCESS: SwpmAuth::login()
+[07/12/2018 10:07 AM] - SUCCESS: Authentication request - Username: client002
