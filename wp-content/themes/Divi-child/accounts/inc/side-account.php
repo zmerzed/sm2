@@ -27,12 +27,11 @@
 				</ul>
 			</li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a></li>
-			<?php if(in_array( 'client', $uinfo->roles )): ?>
+			<?php if($op_client): ?>
 			<li>
-				<a href="<?php echo home_url(); ?>/client/?data=profile" menu-item="profile">Profile</a>
 				<ul>
-					<li><a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
-					<li><a href="<?php echo home_url(); ?>/client/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
+					<li><a href="<?php echo home_url(); ?>//<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
+					<li><a href="<?php echo home_url(); ?>//<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
 				</ul>
 			</li>
 			<?php endif; ?>

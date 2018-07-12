@@ -27,6 +27,7 @@
 			if(!empty($trainers)):
 				foreach($trainers as $trainer):
 					$user_info = get_user_by('id', $trainer);
+					$number_of_clients = get_user_meta($trainer, 'clients_of_trainer',true);
 					$user_ava = get_avatar( $user_info->ID );
 					if($user_info):
 		?>
@@ -37,7 +38,7 @@
 	            <td><?php echo $user_info->first_name . ' ' . $user_info->last_name;  ?></td>
 	            <td>-:-- --</td>
 	            <td>-- Days Ago</td>
-	            <td>-- Clients</td>
+	            <td><?php echo count($number_of_clients);?> Client(s)</td>
 	        </tr>
 		<?php
 					endif;
