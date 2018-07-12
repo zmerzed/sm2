@@ -284,20 +284,9 @@
 						<h3>progress photos</h3>
 
 						<ul class="progress-slider-photos">
-							<li>
-								<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-01.png'; ?>">
-								<span>1/12/2017</span>
-							</li>
-							<li>
-								<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-02.png'; ?>">
-								<span>1/12/2017</span>
-							</li>
-							<li>
-								<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-03.png'; ?>">
-								<span>1/12/2017</span>
-							</li>
-							<li>
-								<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-04.png'; ?>">
+							
+							<li ng-repeat="photo in currentUser.photos">
+								<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
 								<span>1/12/2017</span>
 							</li>
 							<li>
@@ -357,6 +346,16 @@
 		</div>
 	</div>
 </div>
+
+<?php
+	require_once getcwd() . '/wp-customs/User.php';
+	$user = User::find(get_current_user_id());
+
+	$currentUser = [
+		'id' => $user->id,
+		'photos' => $user->getPhotos()
+	]
+?>
 <script>
     // References to all the element we will need.
     var video = document.querySelector('#camera-stream'),
@@ -368,7 +367,8 @@
         download_photo_btn = document.querySelector('#download-photo'),
         error_message = document.querySelector('#error-message'),
 		CAMERA_DATA_URL = '',
-        USER_ID = '<?php echo get_current_user_id(); ?>';
+        USER_ID = '<?php echo get_current_user_id(); ?>',
+		CURRENT_USER = JSON.parse('<?php echo json_encode($currentUser); ?>');
     // The getUserMedia interface is used for handling camera input.
     // Some browsers need a prefix so here we're covering all the options
     navigator.getMedia = ( navigator.getUserMedia ||
@@ -380,12 +380,7 @@
     if(!navigator.getMedia){
         displayErrorMessage("Your browser doesn't have support for the navigator.getUserMedia interface.");
     }
-    else{
-
-
-
-    }
-
+	
     // Mobile browsers cannot play video without user input,
     // so here we're using a button to start it manually.
     start_camera.addEventListener("click", function(e){
