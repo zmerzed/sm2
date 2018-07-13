@@ -3,56 +3,38 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6">
 				<h2>
-
 					<?php
-					$data_request = $_GET['data'];
-					switch ($data_request) {
-						case 'schedule':
+						$dr = $_GET['data']; //data_request
+						
+						if($dr == "schedule"){
 							echo 'Schedule';
-							break;
-
-						case 'profile':
-							echo 'Profile';
-							break;
-						
-						case 'message':
+						}elseif($dr == "profile"){
+							echo 'Profile';					
+						}elseif($dr == "profile"){
+							echo 'Profile';					
+						}elseif($dr == "message"){
 							echo 'Message';
-							break;
-
-						case 'notes':
-							echo 'Notes';
-							break;
-						
-						case 'logs':
-							echo 'Logs';
-							break;
-
-						case 'workouts':
-							echo 'Workouts';
-							break;
-
-						case 'add-workouts':
-							
+						}elseif($dr == "notes"){
+							echo 'Notes';					
+						}elseif($dr == "logs"){
+							echo 'Logs';					
+						}elseif($dr == "workouts"){
+							echo 'Workouts';					
+						}elseif($temp_slug == "page-member-templates.php"){
+							echo 'Member Subscription';
+						}elseif($dr == "exercises"){
+							echo 'Exercises';
+						}elseif($dr == "add-workouts"){
 							if(isset($_GET['workout'])) {
 								$workout = workOutGet($_GET['workout']);
 								echo 'Edit ' . $workout['workout_name'];
 							} else {
 								echo 'New/edit workout';
 							}
-
-							break;
-
-						case 'exercises':
-							echo 'Exercises';
-							break;
-
-						default:
-							echo 'dashboard';
-							break;
-					}
-
-				?>
-
+						}else{
+							echo 'Dashboard';
+						}	
+					?>
 				</h2>
 			</div>
 			<div class="col-lg-6 col-md-6">

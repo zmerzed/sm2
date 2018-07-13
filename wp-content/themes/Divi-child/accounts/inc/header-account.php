@@ -1,6 +1,9 @@
 <?php
   global $current_user;
   $userdata = wp_get_current_user();
+  
+	global $post;
+	$temp_slug = get_page_template_slug($post->ID);
 ?>
 <!doctype html>
 <html lang="en">

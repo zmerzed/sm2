@@ -29,7 +29,7 @@
 					$clientsArr[$trainer] = $tempArr;
 				}
 				
-				foreach($clientsArr as $client_ => $value):					
+				foreach($clientsArr as $client_ => $value):							
 					$trainerInfo = get_user_by('id', $client_);					
 					foreach($value as $client__):
 						$user_info = get_user_by('id', $client__);
@@ -40,7 +40,7 @@
 					<td><?php echo $user_ava; ?></td>
 					<td><?php echo $user_info->first_name . ' ' . $user_info->last_name; ?></td>
 					<td> -- </td>
-					<td><?php echo $trainerInfo->first_name; ?></td>
+					<td><?php echo $trainerInfo->first_name . ' ' . $trainerInfo->last_name; ?></td>
 					<td>-- Days Ago</td>
 					<td>
 						<div class="progress client-goals-percentage">

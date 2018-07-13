@@ -10,13 +10,31 @@
 		$urole = "gym";
 	}elseif($op_client){
 		$urole = "client";
-	}
-	
+	}	
 ?>
 <div class="col-lg-2 col-md-2">
 	<div class="main-navigation matchHeight">
 		<h3>Menu</h3>
-
+		
+		<?php if($temp_slug == "page-member-templates.php"): ?>
+			<ul>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
+			</ul>
+			<div class="menu-divider"></div>
+			<ul class="member-links">
+				<li>				
+					<ul  class="children">
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-account/">Member Account</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-billing/">Member Billing</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-cancel/">Member Cancel</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-checkout/">Member Checkout</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-confirmation/">Member Confirmation</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-invoice/">Member Invoice</a></li>
+						<li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li>
+					</ul>
+				</li>
+			</ul>			
+		<?php else: ?>
 		<ul>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
 			<li>
@@ -28,29 +46,34 @@
 			</li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a></li>
 			<?php if($op_client): ?>
-			<li>
-				<ul>
-					<li><a href="<?php echo home_url(); ?>//<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
-					<li><a href="<?php echo home_url(); ?>//<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
-				</ul>
-			</li>
+				<li>
+					<ul>
+						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
+						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
+					</ul>
+				</li>
 			<?php endif; ?>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
+			<?php if($pm_lvl != ""): ?>
+				<li><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="logs">Member Subscription</a></li>
+			<?php endif; ?>
 		</ul>
 		
-		<?php if($op_train || $op_gym): ?>
-		<div class="menu-divider"></div>
+			<?php if($op_train || $op_gym): ?>
+			<div class="menu-divider"></div>
 
-		<ul>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Workouts</a></li>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
-			<?php if($op_gym): ?>
-				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
-			<?php endif; ?>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
-		</ul>		
-		<?php endif; ?>
+			<ul>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Workouts</a></li>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
+				<?php if($op_gym): ?>
+					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
+				<?php endif; ?>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
+			</ul>		
+			<?php
+				endif; 
+			endif; ?>
 	</div>
 </div>

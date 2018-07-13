@@ -1627,3 +1627,6 @@ div#ui-datepicker-div {
 
 /*progress photos*/
 .progress-slider-photos li > img{width:100%;}
+
+/*Member Page*/
+.member-page .member-links .children li a{color:#fff;}
