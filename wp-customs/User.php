@@ -13,7 +13,7 @@ class User
     public function uploadFile($file)
     {
         global $wpdb;
-
+        
         $currentDir = getcwd();
         $userId = $_POST['userId'];
 
@@ -23,38 +23,29 @@ class User
             $uploadDirectory = "/sm-files/{$userId}/";
         }
 
-        echo $currentDir . $uploadDirectory . "\n";
+      //  echo $currentDir . $uploadDirectory . "\n";
         if (!is_dir($currentDir . $uploadDirectory)) {
-            echo 'xxxxxxxxxxxxxxxxx';
+           // echo 'xxxxxxxxxxxxxxxxx';
             mkdir($currentDir . $uploadDirectory, 0777, true);
         }
 
         $errors = []; // Store all foreseen and unforseen errors here
 
         $fileImageExtensions = ['jpeg','jpg','png']; // Get all the file extensions
-
+        $fileExtensions = ['pdf','doc','xls', 'csv'];
+        
         $fileName = $file['name'];
         $fileSize = $file['size'];
         $fileTmpName  = $file['tmp_name'];
         $fileType = $file['type'];
         $fileExtension = strtolower(end(explode('.',$fileName)));
 
-        if (!in_array($fileExtension, $fileImageExtensions)) {
-            $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
-        }
-
-        if ($fileSize > 2000000) {
-            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
-        }
-
-        if (empty($errors)) {
-
+        if (in_array($fileExtension, $fileImageExtensions)) 
+        {
+        //    echo 'xXXXXXXXXXXXXXXXXX';
             $newFileName =  basename('photo_'.time()) . '.jpg';
             $uploadPath = $currentDir . $uploadDirectory . $newFileName;
-
-            echo $uploadPath;
-            echo "\n";
-
+            
             // insert the filename
             $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
@@ -67,13 +58,46 @@ class User
                         'uploaded_at' => Carbon::now()
                     )
                 );
-                echo "The file " . basename($fileName) . " has been uploaded";
+                return true;
+                //echo "The file " . basename($fileName) . " has been uploaded";
             } else {
-                echo "An error occurred somewhere. Try again or contact the admin";
+                //  echo "An error occurred somewhere. Try again or contact the admin";
             }
+        } else if(in_array($fileExtension, $fileExtensions)) {
+          //  echo 'non image file...';
+          //  echo $fileExtension;
+            $newFileName =  basename($fileName);
+            $uploadPath = $currentDir . $uploadDirectory . $newFileName;
+
+            // insert the filename
+            $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+
+            if ($didUpload) {
+                $wpdb->insert('workout_user_files',
+                    array(
+                        'file'   => $newFileName,
+                        'type' => 'file',
+                        'user_id' => (int) $this->id,
+                        'uploaded_at' => Carbon::now()
+                    )
+                );
+                return true;
+                //echo "The file " . basename($fileName) . " has been uploaded";
+            } else {
+                //  echo "An error occurred somewhere. Try again or contact the admin";
+            }
+        }
+
+        if ($fileSize > 2000000) {
+            $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
+        }
+
+        if (empty($errors)) {
+
+           
         } else {
             foreach ($errors as $error) {
-                echo $error . "These are the errors" . "\n";
+               // echo $error . "These are the errors" . "\n";
             }
         }
     }
@@ -81,6 +105,12 @@ class User
     public function getPhotos() {
         global $wpdb;
         $results = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$this->id} AND type='image'", ARRAY_A);
+        return $results;
+    }
+
+    public function getFiles() {
+        global $wpdb;
+        $results = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$this->id} AND type='file'", ARRAY_A);
         return $results;
     }
 

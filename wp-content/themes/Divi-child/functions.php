@@ -1428,9 +1428,8 @@ function wpc_register_wp_api_endpoints() {
 
 function smUpload()
 {
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-customs/User.php';
-	var_dump($_FILES);
+
 	/* $u = wp_get_current_user();
 
 	$upload_file = wp_handle_upload($_FILES["myFile"], array('test_form' => false), date('Y/m'));
@@ -1463,13 +1462,13 @@ function smUpload()
 	if (isset($_POST['userId']))
 	{
 		$user = User::find($_POST['userId']);
-		
+		//var_dump($_FILES);
 		if ($user) {
 			$user->uploadFile($_FILES['myFile']);
-
-			print_r($user->getPhotos());
 		}
 	}
+
+	return ['result' => true];
 }
 
 function workoutClientExerciseLogs() {

@@ -1,5 +1,5 @@
 <div class="main-content matchHeight">
-	
+
 	<div class="container-title">
         <h3>Current Status</h3>
     </div>

@@ -5,7 +5,17 @@ angular.module('smApp')
     $filter
 ) {
     var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
+   // var fileTypes = ['xls', 'pdf',  'doc'];
     $scope.currentUser = CURRENT_USER;
+
+    console.log($scope.currentUser);
+
+    function init()
+    {
+        // $scope.currentUser.files.forEach(function(file) {
+        //
+        // })
+    }
 
     $scope.upload = function() {
         console.log($filter('dataURLtoBlob')(CAMERA_DATA_URL));
@@ -21,18 +31,16 @@ angular.module('smApp')
         });
     };
 
-    $scope.takePicture = function()
+    $scope.uploadFile = function()
     {
-
-    };
-
-    $scope.hasTaken = function()
-    {
-        if (CAMERA_DATA_URL.length > 0)
-        {
-            return false;
-        }
-
-        return true;
-    };
+        var file = $scope.myFile;
+        var fd = new FormData();
+        fd.append('myFile', file);
+        fd.append('userId', USER_ID);
+        $http.post(
+            apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+        ).then(function() {
+            location.reload();
+        });
+    }
 });
