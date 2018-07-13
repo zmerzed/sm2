@@ -116,6 +116,7 @@ div:after{
 
 .main-content{
 	width: 100%;
+	min-height:300px;
 	float: left;
 	background-color: #d5d5d5;
 	padding: 30px 60px;
@@ -1629,4 +1630,4 @@ div#ui-datepicker-div {
 .progress-slider-photos li > img{width:100%;}
 
 /*Member Page*/
-.member-page .member-links .children li a{color:#fff;}
+body .member-page .member-links .children li a{color:#fff;}

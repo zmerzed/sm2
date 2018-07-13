@@ -27,10 +27,10 @@
 						<li><a href="<?php echo home_url();  ?>/membership-account/membership-account/">Member Account</a></li>
 						<li><a href="<?php echo home_url();  ?>/membership-account/membership-billing/">Member Billing</a></li>
 						<li><a href="<?php echo home_url();  ?>/membership-account/membership-cancel/">Member Cancel</a></li>
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-checkout/">Member Checkout</a></li>
+						<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-checkout/">Member Checkout</a></li> -->
 						<li><a href="<?php echo home_url();  ?>/membership-account/membership-confirmation/">Member Confirmation</a></li>
 						<li><a href="<?php echo home_url();  ?>/membership-account/membership-invoice/">Member Invoice</a></li>
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li>
+						<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li> -->
 					</ul>
 				</li>
 			</ul>			

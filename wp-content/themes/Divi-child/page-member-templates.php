@@ -14,16 +14,14 @@ if( is_user_logged_in() ){
 		<div class="container">
 			<div class="row">
 			<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
-		  <!-- .et_pb_column -->
-		  <div class="col-lg-8	col-md-8>
-			<div class="entry-content">
-				<?php while ( have_posts() ) : the_post(); ?>
-					<?php
-						the_content();
-					?>
-				<?php endwhile; ?>
+			<!-- .et_pb_column -->
+			<div class="col-lg-8 col-md-8">
+				<div class="entry-content">
+					<?php while ( have_posts() ) : the_post(); ?>
+						<?php the_content(); ?>
+					<?php endwhile; ?>
+				</div>
 			</div>
-		  </div>
 		  <!-- .et_pb_column -->
 		   </div>
 		</div>
@@ -31,7 +29,7 @@ if( is_user_logged_in() ){
 <?php
 		require_once( get_stylesheet_directory() . '/accounts/inc/footer-account.php' );
 	
-}elseif(get_the_ID() == 321){
+}elseif(get_the_ID() == 321 || get_the_ID() == 318){
 	get_header();
 ?>
 	<div class="et_pb_section et_pb_section_1 et_pb_with_background et_section_regular">
