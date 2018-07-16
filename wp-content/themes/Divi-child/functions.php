@@ -127,7 +127,8 @@ add_role(
 
 /*Return array of Clients*/
 function getClientsOfTrainer($user) {
-	if ( ! in_array('trainer', $user->roles, true) ) {
+	/* if ( ! in_array('trainer', $user->roles, true) ) { */
+	if ( getMembershipLevel($user) != 'trainer' ) {
 		return array();
 	}
 	$meta = get_user_meta($user->ID, 'clients_of_trainer', true);
@@ -144,7 +145,8 @@ function getClientsOfTrainer($user) {
 }
 /*Return array of trainers*/
 function getTrainersOfGym($user) {
-	if ( ! in_array('gym', $user->roles, true) ) {
+	/* if ( ! in_array('gym', $user->roles, true) ) { */
+	if ( getMembershipLevel($user) != 'gym' ) {
 		return array();
 	}
 	$meta = get_user_meta($user->ID, 'trainers_of_gym', true);
@@ -337,8 +339,9 @@ function getWOutArr($results_w_day, $results_w)
 
 function jabs($u)	
 {
-
-	/* print_r( get_role($u->roles[0])->capabilities); */
+	/* echo "<pre>";
+	 print_r( getClientsOfTrainer(wp_get_current_user()));
+	 echo "</pre>"; */
 }
 
 function getSchedData($u)
@@ -1660,6 +1663,7 @@ function workoutGenerateHash()
 	$m=microtime(true);
 	return ['hash' => sprintf("%8x%05x",floor($m),($m-floor($m))*1000000)];
 }
+
 //Triggered when first visit in dashboard page
 function triggerFirstLogin($uinfo){
 	$first_login = get_user_meta($uinfo->ID, 'prefix_first_login', true);
@@ -1669,6 +1673,22 @@ function triggerFirstLogin($uinfo){
     }else{
 		return false;
 	}
+}
+//Get Membership Level
+function getMembershipLevel($u){
+	$p_lvl = strtolower(pmpro_getMembershipLevelForUser($u->ID)->name);
+	$u_lvl = "";
+	if($p_lvl == ""){
+		if(in_array('trainer', $u->roles)){
+			$p_lvl = "trainer";
+		}elseif(in_array('client', $u->roles)){
+			$p_lvl = "client";
+		}elseif(in_array('gym', $u->roles)){
+			$p_lvl = "gym";
+		}
+	}
+	
+	return $p_lvl;	
 }
 //Add user_meta after registration
 add_action( 'user_register', 'first__login_registration', 10, 1 );

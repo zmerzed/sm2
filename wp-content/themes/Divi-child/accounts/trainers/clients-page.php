@@ -1,7 +1,11 @@
 <div class="main-content matchHeight">
-	<?php 
-	if($_GET['edit']):		
-		get_template_part( 'accounts/inc/edit-progress', 'page' );
+	<?php if($_GET['edit']):?>
+		<div class="current-status">
+			<div class="row">
+				<?php get_template_part( 'accounts/inc/edit-progress', 'page' ); ?>
+			</div>
+		</div>
+	<?php
 	elseif($_GET['add']):
 		get_template_part( 'accounts/trainers/add-clients', 'page' );
 	else: ?>
