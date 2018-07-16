@@ -1,7 +1,7 @@
 <?php					
-	$udata = wp_get_current_user();		
-	$scheData = getSchedData($udata);
-	jabs($udata);
+	$uinfo = wp_get_current_user();		
+	$scheData = getSchedData($uinfo);
+	jabs($uinfo);
 ?>
 <div class="modal fade" id="workoutModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -153,6 +153,29 @@
 			});  		  
 		}       
 	});
+	
+	<?php 
+	$jpage = $GLOBALS['jpage'];
+	$jclient = ($jpage == "client");
+	$jgym = ($jpage == "gym");
+	$jtrain = ($jpage == "trainer");
+	
+	if(triggerFirstLogin($uinfo) &&  $jpage != ""):?>
+		var jcontent = '<h3 style="text-align:center;margin-bottom:1em;">Welcome to your Dashboard!</h3>',
+		curPage = window.location.href;
+		jcontent += '<p>To edit profile click <a href="'+curPage+'?data=profile" class="red-btn">Profile</a></p>';
+		<?php if ($jgym || $jtrain): ?>
+			jcontent += '<p>To add workout click <a href="'+curPage+'?data=add-workouts" class="red-btn">New workout</a> in <strong>Workouts</strong> page.</p>';			
+			<?php if($jgym): ?>
+				jcontent += '<p>To add client click <a href="'+curPage+'?data=trainers&add=1" class="red-btn">Add Trainer</a> in <strong>Trainers</strong> page.</p>';			
+			<?php endif; ?>
+			jcontent += '<p>To add client click <a href="'+curPage+'?data=clients&add=1" class="red-btn">Add Client</a> in <strong>Clients</strong> page.</p>';	
+		<?php endif; ?>		
+		
+		$('#workoutModal .modal-title').html('');
+		$('#workoutModal .modal-body').html(jcontent);
+		$('#workoutModal').modal();		
+	<?php endif; ?>
 	</script>	
   </body>
 </html>

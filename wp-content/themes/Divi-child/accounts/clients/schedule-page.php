@@ -11,6 +11,7 @@
 			$weekSched = getWeeklySchedule($userdata);
 			$today = date('Y-m-d');
 			
+			if(!empty($weekSched)):
 			foreach($daysOfWeek as $dow):
 				if(in_array_r($dow,$weekSched)):
 		?>
@@ -35,7 +36,12 @@
 					endforeach;
 				?>
 			</li>
-		<?php endif; endforeach; ?>
+		<?php 	endif;
+			endforeach;
+		else:
+		?>
+			No Workouts
+		<?php endif; ?>		
 		<!-- <li>
 			<h4 class="workout-day">Monday</h4>
 			<div class="workout-wrapper">

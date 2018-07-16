@@ -110,8 +110,10 @@ div:after{
 	margin-bottom: 10px;
 }
 
+.main-navigation ul li ul{margin-top:0;}
+.main-navigation ul li ul li{margin-bottom:0;}
 .main-navigation ul li ul li a{
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .main-content{
@@ -853,6 +855,8 @@ table.dataTable thead .sorting_asc:after{
 	text-align: center;
 }
 
+.modal{background-color:rgba(0,0,0,0.5);}
+#workoutModal .modal-dialog{margin-top:15%;}
 #workoutModal .workout-wrapper a{float:right;margin-left:5px;}
 #workoutModal .wdname{
 	padding:10px;
@@ -1236,6 +1240,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
 /*---------------*/
 /*------GYM------*/
 /*---------------*/
+.gym-page .red-btn{background-color:#6db6e5}
 .workout-wrapper:after{
 	content:"";
 	display:block;

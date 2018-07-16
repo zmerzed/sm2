@@ -39,20 +39,21 @@
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
 			<li>
 				<a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule" menu-item="schedule">Schedule</a>
-				<ul>
-					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
-					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
-				</ul>
-			</li>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a></li>
-			<?php if($op_client): ?>
-				<li>
+				<?php if($_GET['data'] == "schedule"): ?>
 					<ul>
-						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
-						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
+						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
+						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
 					</ul>
-				</li>
-			<?php endif; ?>
+				<?php endif; ?>
+			</li>
+			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>
+			<?php if($op_client && $_GET['data'] == "profile"): ?>			
+				<ul>
+					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
+					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
+				</ul>				
+			<?php endif; ?>			
+			</li>			
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>

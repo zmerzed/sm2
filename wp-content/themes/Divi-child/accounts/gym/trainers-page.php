@@ -28,6 +28,7 @@
 				foreach($trainers as $trainer):
 					$user_info = get_user_by('id', $trainer);
 					$number_of_clients = get_user_meta($trainer, 'clients_of_trainer',true);
+					if(empty($number_of_clients)){$number_of_clients = array();}
 					$user_ava = get_avatar( $user_info->ID );
 					if($user_info):
 		?>
