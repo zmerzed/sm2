@@ -167,7 +167,6 @@
 						<h3>progress photos</h3>
 
 						<ul class="progress-slider-photos">
-							
 							<li ng-repeat="photo in currentUser.photos">
 								<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
 								<span>{{ photo.uploaded_at }}</span>
@@ -181,9 +180,9 @@
 								<span>Take New</span>
 							</li>
 						</ul>
-						<div style="text-align:center;padding:10px 0;">
-							<button class="red-btn">Update</button>
-						</div>
+                        <div ng-show="false">
+                            <input id="file" type="file" accept="image/*" />
+                        </div>
 					</div>
 
 					<div class="progress-notes">
