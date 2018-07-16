@@ -1661,8 +1661,14 @@ function workoutGenerateHash()
 	return ['hash' => sprintf("%8x%05x",floor($m),($m-floor($m))*1000000)];
 }
 //Triggered when first visit in dashboard page
-function triggerFirstLogin(){
-	
+function triggerFirstLogin($uinfo){
+	$first_login = get_user_meta($uinfo->ID, 'prefix_first_login', true);
+	if( $first_login == '1' ) {
+		update_user_meta($uinfo->ID, 'prefix_first_login', '0'); 
+		return true;
+    }else{
+		return false;
+	}
 }
 //Add user_meta after registration
 add_action( 'user_register', 'first__login_registration', 10, 1 );

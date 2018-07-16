@@ -1,8 +1,5 @@
+<?php $GLOBALS['jpage'] = "gym"; ?>
 <div class="main-content matchHeight">
-	<?php
-		print_r($uinfo);
-		triggerFirstLogin();
-	?>
     <div class="container-title">
         <h3>Today's Schedule</h3>
     </div>
