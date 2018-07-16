@@ -735,3 +735,12 @@
 [07/16/2018 9:04 AM] - SUCCESS: wp_authenticate action. Handling login for username: client010
 [07/16/2018 9:04 AM] - SUCCESS: SwpmAuth::login()
 [07/16/2018 9:04 AM] - SUCCESS: Authentication request - Username: client010
+[07/16/2018 9:41 AM] - SUCCESS: wp_authenticate action. Handling login for username: client010
+[07/16/2018 9:41 AM] - SUCCESS: SwpmAuth::login()
+[07/16/2018 9:41 AM] - SUCCESS: Authentication request - Username: client010
+[07/16/2018 9:42 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll\\
+[07/16/2018 9:42 AM] - SUCCESS: SwpmAuth::login()
+[07/16/2018 9:42 AM] - SUCCESS: Authentication request - Username: amplusll\\
+[07/16/2018 9:42 AM] - SUCCESS: wp_authenticate action. Handling login for username: amplusll
+[07/16/2018 9:42 AM] - SUCCESS: SwpmAuth::login()
+[07/16/2018 9:42 AM] - SUCCESS: Authentication request - Username: amplusll

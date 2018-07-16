@@ -167,7 +167,7 @@
 		<?php if ($jgym || $jtrain): ?>
 			jcontent += '<p>To add workout click <a href="'+curPage+'?data=add-workouts" class="red-btn">New workout</a> in <strong>Workouts</strong> page.</p>';			
 			<?php if($jgym): ?>
-				jcontent += '<p>To add client click <a href="'+curPage+'?data=trainers&add=1" class="red-btn">Add Trainer</a> in <strong>Trainers</strong> page.</p>';			
+				jcontent += '<p>To add Trainer click <a href="'+curPage+'?data=trainers&add=1" class="red-btn">Add Trainer</a> in <strong>Trainers</strong> page.</p>';			
 			<?php endif; ?>
 			jcontent += '<p>To add client click <a href="'+curPage+'?data=clients&add=1" class="red-btn">Add Client</a> in <strong>Clients</strong> page.</p>';	
 		<?php endif; ?>		

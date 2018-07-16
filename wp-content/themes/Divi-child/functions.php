@@ -1664,7 +1664,7 @@ function workoutGenerateHash()
 function triggerFirstLogin($uinfo){
 	$first_login = get_user_meta($uinfo->ID, 'prefix_first_login', true);
 	if( $first_login == '1' ) {
-		update_user_meta($user_id, 'prefix_first_login', '0'); 
+		update_user_meta($uinfo->ID, 'prefix_first_login', '0'); 
 		return true;
     }else{
 		return false;
