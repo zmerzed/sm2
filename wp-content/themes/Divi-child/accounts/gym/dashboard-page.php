@@ -1,8 +1,8 @@
 <div class="main-content matchHeight">
 	<?php
-	$hasWorkout = true;
-	if($hasWorkout): ?>
-	<?php endif; ?>
+		print_r($uinfo);
+		triggerFirstLogin();
+	?>
     <div class="container-title">
         <h3>Today's Schedule</h3>
     </div>

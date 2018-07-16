@@ -1660,3 +1660,10 @@ function workoutGenerateHash()
 	$m=microtime(true);
 	return ['hash' => sprintf("%8x%05x",floor($m),($m-floor($m))*1000000)];
 }
+//Triggered when first visit in dashboard page
+function triggerFirstLogin(){
+	
+}
+//Add user_meta after registration
+add_action( 'user_register', 'first__login_registration', 10, 1 );
+function first__login_registration( $user_id ) {  update_user_meta($user_id, 'prefix_first_login', '1'); }

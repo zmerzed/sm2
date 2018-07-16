@@ -1,5 +1,8 @@
 <div class="main-content matchHeight">
-	<?php if($_GET['add']):
+	<?php 
+	if($_GET['edit']):		
+		get_template_part( 'accounts/inc/edit-progress', 'page' );
+	elseif($_GET['add']):
 		get_template_part( 'accounts/trainers/add-clients', 'page' );
 	else: ?>
 	<div class="trainer-add-workout">
@@ -13,6 +16,7 @@
 	            <th>Purpose</th>
 	            <th>Last Activity</th>
 	            <th>Goal</th>
+	            <th></th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -49,6 +53,9 @@
 								<span class="indicator"><small>0%</small></span>
 							</div>
 						</div>
+					</td>
+					<td>
+						<a href="<?php echo home_url(); ?>/trainer/?data=clients&edit=<?php echo $user_info->ID; ?>">Edit Progress</a>
 					</td>
 				</tr>
 			<?php					
