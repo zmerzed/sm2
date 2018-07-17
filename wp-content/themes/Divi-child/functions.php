@@ -318,6 +318,20 @@ function getMonthlySchedule($u)
 			$coft = implode(", ", get_user_meta($uid,'clients_of_trainer',true));
 
 		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")", OBJECT );
+	}elseif($m_lvl == 'gym'){
+		$umeta2 = get_user_meta($uid,'trainers_of_gym',true);
+		$temp_arr = array();
+		
+		foreach($umeta2 as $v){
+			foreach(get_user_meta($v,'clients_of_trainer',true) as $k){
+				$temp_arr[] = $k;
+			}
+		}
+		
+		if(!empty($temp_arr))
+			$coft = implode(", ", $temp_arr);
+		
+		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")", OBJECT );
 	}
 
 	return getWOutArr($results_w_day, $results_w);

@@ -39,11 +39,16 @@ if( is_user_logged_in() ){
 						echo "Subscription ended, please contact admin.";					
 					}else{						
 						
-						$data_request = $_GET['data'];
+						$data_request = "";
+						if(isset($_GET['data']))
+							$data_request = $_GET['data'];
+						
 						switch ($data_request) {
 							case 'schedule':
 
-								$data_request_by = $_GET['by'];
+								$data_request_by = "";
+								if(isset($_GET['by']))
+									$data_request_by = $_GET['by'];
 
 								if( $data_request_by === 'monthly' ){
 									get_template_part( 'accounts/trainers/schedule-monthly', 'page' );
