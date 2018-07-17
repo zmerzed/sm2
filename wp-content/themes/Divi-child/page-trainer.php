@@ -11,7 +11,12 @@ $uinfo = wp_get_current_user();
 if( is_user_logged_in() ){
 
 	/* $member_type = bp_get_member_type($uinfo->ID); */
-	$pm_lvl = pmpro_getMembershipLevelForUser($uinfo->ID)->name;
+	/* $pm_lvl = pmpro_getMembershipLevelForUser($uinfo->ID)->name; */
+	$ppp = pmpro_getMembershipLevelForUser($uinfo->ID);
+	$pm_lvl = "";
+	
+	if(!empty($ppp))
+		$pm_lvl = $ppp->name;
 	
 	/** check if the user trying to access the page has a "client" member type **/
 	/* if( in_array( 'trainer', $uinfo->roles )){ */

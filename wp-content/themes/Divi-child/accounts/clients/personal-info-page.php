@@ -3,7 +3,8 @@
 	require_once getcwd() . '/wp-customs/User.php';
 	global $current_user;
 
-	$userdata = get_currentuserinfo();
+	/* $userdata = get_currentuserinfo(); */
+	$userdata = wp_get_current_user();
 	$user = User::find(get_current_user_id());
 	$currentUser = [
 		'id' => $user->id,
@@ -40,7 +41,7 @@
 						<div class="col-lg-7 col-md-7">
 							<p>
 								<label>EMAIL/LOGIN</label>
-								<strong><?php echo $userdata->data->user_email; ?></strong>
+								<strong><?php echo $userdata->user_email; ?></strong>
 							<p>
 							<p>
 								<label>DOB</label>

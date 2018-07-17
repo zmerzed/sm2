@@ -36,7 +36,11 @@ function sm_login_redirect( $redirect_to, $request, $user ) {
 	//is there a user to check?
 	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
 		
-		$pm_lvl = pmpro_getMembershipLevelForUser($user->ID)->name;		
+		$pm_lvl = "";	
+		$ppp = pmpro_getMembershipLevelForUser($user->ID);
+		if(!empty($ppp))
+			$pm_lvl = $ppp->name;
+		
 		/* $member_type = bp_get_member_type($user->data->ID); */
 
 		//check for admins
@@ -213,7 +217,12 @@ function assignTrainerToGym($trainer, $gym) {
 function checkUserOrParentStatus($user)
 {
 	global $wpdb;	
-	$pm_lvl = pmpro_getMembershipLevelForUser($user->ID)->name;	
+	$ppm = pmpro_getMembershipLevelForUser($user->ID);
+	$pm_lvl = "";
+	if(!empty($ppm)){
+		$pm_lvl = $ppm->name;
+	}
+		
 	$query = "";
 	$member = array();
 	$uopid = ""; //user_or_parent_id
@@ -291,15 +300,18 @@ function getWeeklySchedule($user)
 function getMonthlySchedule($u)
 {
 	global $wpdb;
-	$urole = $u->roles;
+	$m_lvl = getMembershipLevel($u);
+	/* $urole = $u->roles; */
 	$uid = $u->ID;
 	$wquery = "SELECT * FROM workout_day_clients_tbl WHERE workout_clientID";
 	$results_w = $wpdb->get_results( "SELECT * FROM workout_tbl", OBJECT );
+	$results_w_day = array();
 
-
-	if(in_array('client',$urole)){
+	/* if(in_array('client',$urole)){ */
+	if($m_lvl == 'client'){
 		$results_w_day = $wpdb->get_results( $wquery . "=" . $uid, OBJECT );
-	}elseif(in_array('trainer',$urole)){
+	/* }elseif(in_array('trainer',$urole)){ */
+	}elseif($m_lvl == 'trainer'){
 		$umeta = get_user_meta($uid,'clients_of_trainer',true);
 		$coft = array();
 		if($umeta)
@@ -324,6 +336,7 @@ function getWOutArr($results_w_day, $results_w)
 			if($wid == $rw->workout_ID){
 				$arrTemp = array();
 				$dayid = $rwd->workout_client_dayID;
+				$arrTemp['wname'] = $rw->workout_name;
 				$arrTemp['dayid'] = $dayid;
 				$arrTemp['workout_clientid'] = $rwd->workout_clientID;
 				$arrTemp['wid'] = $wid;
@@ -349,22 +362,16 @@ function getSchedData($u)
 	$woutArray = getMonthlySchedule($u);
 	$ctrTemp = 0;
 	$tempArr = array();
-	$caot = array(); //Client Array of Trainer
-	$urole = "";
-
-	if(in_array('client', $u->roles)){
-		$urole = "client";
-	}elseif(in_array('trainer',$u->roles)){
-		$urole = "trainer";
-		$caot = get_user_meta($u->ID,'clients_of_trainer', true);
-	}
+	$urole = getMembershipLevel($u);
 
 	if(!empty($woutArray)){
 		foreach($woutArray as $wa){
 			$tempArr2 = array();
 			$ctrTemp++;
-			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wa['wid']."&workout_client_id=".$wa['workout_clientid'];
-			$tempArr2[] = ['wdname' => $wa['wdname'], 'daylink' => $daylink];
+			$wclientid = $wa['workout_clientid'];
+			$wclient = get_user_by('id', $wclientid);
+			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wa['wid']."&workout_client_id=".$wclientid;
+			$tempArr2[] = ['wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
 			$tempArr[$wa['wsched']][$ctrTemp] = $tempArr2;
 		}
 	}
@@ -1676,7 +1683,12 @@ function triggerFirstLogin($uinfo){
 }
 //Get Membership Level
 function getMembershipLevel($u){
-	$p_lvl = strtolower(pmpro_getMembershipLevelForUser($u->ID)->name);
+	$pparr = pmpro_getMembershipLevelForUser($u->ID);
+	$p_lvl = "";
+	if(!empty($pparr)){
+		$p_lvl = strtolower($pparr->name);
+	}
+	
 	$u_lvl = "";
 	if($p_lvl == ""){
 		if(in_array('trainer', $u->roles)){

@@ -866,6 +866,7 @@ table.dataTable thead .sorting_asc:after{
 
 .responsive-calendar .day.active.today a{background-color:#ae1f23;}
 
+.responsive-calendar .day.today a{background-color:#c7c7c7;}
 .responsive-calendar .day.active.today a,
 .responsive-calendar .day.active a:hover{background-color:#d0262a;color:#fff;}
 .responsive-calendar .day.active a{background-color:#e0e0e0;color:#000;}

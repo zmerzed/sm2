@@ -39,7 +39,13 @@
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
 			<li>
 				<a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule" menu-item="schedule">Schedule</a>
-				<?php if($_GET['data'] == "schedule"): ?>
+				<?php
+				$data_request = "";	
+				if(isset($_GET['data']))
+					$data_request = $_GET['data'];
+			
+				if($data_request == "schedule"):				
+				?>
 					<ul>
 						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
 						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
@@ -47,7 +53,7 @@
 				<?php endif; ?>
 			</li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>
-			<?php if($op_client && $_GET['data'] == "profile"): ?>			
+			<?php if($op_client && $data_request == "profile"): ?>			
 				<ul>
 					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
 					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>

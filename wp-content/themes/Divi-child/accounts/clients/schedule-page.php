@@ -23,7 +23,7 @@
 				?>
 					<div class="workout-wrapper">
 						<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
-						<label><?php echo $ws['wdname']; ?></label>
+						<label><?php echo $ws['wname']; ?></label>
 						<div class="workout-controls">
 							<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
 							<?php if($ws['wsched'] == $today): ?>

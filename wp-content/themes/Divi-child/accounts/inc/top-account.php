@@ -3,8 +3,10 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6">
 				<h2>
-					<?php
-						$dr = $_GET['data']; //data_request
+					<?php	
+						$dr = ""; //data_request	
+						if(isset($_GET['data']))
+							$dr = $_GET['data'];						
 						
 						if($dr == "schedule"){
 							echo 'Schedule';

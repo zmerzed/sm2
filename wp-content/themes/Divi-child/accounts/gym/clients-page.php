@@ -1,5 +1,6 @@
 <div class="main-content matchHeight gym-trainer-page">
-	<?php if($_GET['add']):
+	<?php	
+	if(isset($_GET['add'])):
 		get_template_part( 'accounts/gym/add-clients', 'page' );
 	else: ?>
 	<div class="trainer-add-workout">

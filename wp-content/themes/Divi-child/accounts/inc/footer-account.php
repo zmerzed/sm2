@@ -43,11 +43,12 @@
    dateToday = "<?php echo date('Y-m-d'); ?>";
    function pullWorkout(date){
 		var thisWork = workoutDates[date];
+		/* console.log(thisWork); */
 		$('#workoutModal').modal();
 		$('#workoutModal .modal-title').html('Workout(s) for ' + date);
 		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
 		$.each(thisWork, function(i, v){
-			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span><img src="'+themedir+'/accounts/images/workout.png"></span><span class="wdname">' + v[0]['wdname'] + '</span>';
+			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span><img src="'+themedir+'/accounts/images/workout.png"></span><span class="wdname">' + v[0]['wname'] + ' - '+v[0]['wcnname']+'</span>';
 			if(dateToday == date){
 				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><img src="'+themedir+'/accounts/images/workout-play.png" /></a>';
 			}			
@@ -154,8 +155,11 @@
 		}       
 	});
 	
-	<?php 
-	$jpage = $GLOBALS['jpage'];
+	<?php
+	$jpage  = "";
+	if($GLOBALS['jpage'])
+		$jpage = $GLOBALS['jpage'];
+	
 	$jclient = ($jpage == "client");
 	$jgym = ($jpage == "gym");
 	$jtrain = ($jpage == "trainer");

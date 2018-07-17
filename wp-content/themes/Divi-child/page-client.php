@@ -30,14 +30,20 @@ if( is_user_logged_in() ){
 					<div class="col-lg-10 col-md-10">
 
 						<?php
+						$data_request_by = "";									
+						if(isset($_GET['by']))
+							$data_request_by = $_GET['by'];
+						
 						if(!checkUserOrParentStatus($uinfo)){
 							echo "Subscription ended, please contact admin.";
 						}else{
-							$data_request = $_GET['data'];
+							
+							$data_request = "";									
+							if(isset($_GET['data']))
+								$data_request = $_GET['data'];
+							
 							switch ($data_request) {
 								case 'schedule':
-
-									$data_request_by = $_GET['by'];
 
 									if( $data_request_by === 'monthly' ){
 										get_template_part( 'accounts/clients/schedule-monthly', 'page' );
@@ -47,9 +53,7 @@ if( is_user_logged_in() ){
 
 									break;
 
-								case 'profile':
-
-									$data_request_by = $_GET['by'];
+								case 'profile':									
 
 									if( $data_request_by === 'personal-info' ){
 										get_template_part( 'accounts/clients/personal-info', 'page' );

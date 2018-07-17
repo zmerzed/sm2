@@ -1,6 +1,6 @@
 <?php
 	global $current_user;
-	$userdata = get_currentuserinfo();
+	/* $userdata = get_currentuserinfo(); */
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workoutForm'])) {
 		workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $current_user->ID]));
