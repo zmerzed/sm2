@@ -320,13 +320,21 @@ function getMonthlySchedule($u)
 		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")", OBJECT );
 	}elseif($m_lvl == 'gym'){
 		$umeta2 = get_user_meta($uid,'trainers_of_gym',true);
+		if(empty($umeta2))
+			$umeta2 = array();
 		$temp_arr = array();
 		
 		foreach($umeta2 as $v){
-			foreach(get_user_meta($v,'clients_of_trainer',true) as $k){
+			$vv = get_user_meta($v,'clients_of_trainer',true);
+			if(empty($vv))
+				$vv = array();
+			
+			foreach($vv as $k){
 				$temp_arr[] = $k;
 			}
 		}
+		
+		$coft = "";
 		
 		if(!empty($temp_arr))
 			$coft = implode(", ", $temp_arr);

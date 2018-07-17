@@ -157,14 +157,16 @@
 	
 	<?php
 	$jpage  = "";
-	if($GLOBALS['jpage'])
-		$jpage = $GLOBALS['jpage'];
+	global $wp;
+	$jpage = home_url( $wp->request );
 	
-	$jclient = ($jpage == "client");
-	$jgym = ($jpage == "gym");
-	$jtrain = ($jpage == "trainer");
+	$jclient = strpos($jpage, 'client');
+	$jgym = strpos($jpage, 'gym');
+	$jtrain = strpos($jpage, 'train');
 	
-	if(triggerFirstLogin($uinfo) &&  $jpage != ""):?>
+	$jbool = ($jclient || $jgym || $jtrain);
+	
+	if(triggerFirstLogin($uinfo) &&  $jbool ):?>
 		var jcontent = '<h3 style="text-align:center;margin-bottom:1em;">Welcome to your Dashboard!</h3>',
 		curPage = window.location.href;
 		jcontent += '<p>To edit profile click <a href="'+curPage+'?data=profile" class="red-btn">Profile</a></p>';

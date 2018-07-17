@@ -1,4 +1,3 @@
-<?php $GLOBALS['jpage'] = "trainer"; ?>
 <div class="main-content matchHeight">
     <div class="container-title">
         <h3>Today's Schedule</h3>
