@@ -64,19 +64,19 @@
 			
 			
    
-            /* $new_user_id = wp_create_user( $username, $password, $email );
+            $new_user_id = wp_create_user( $username, $password, $email );
 			$user_id_role = new WP_User($new_user_id);
 			$user_id_role->set_role('client');
 			
 			update_user_meta($user_id_role->ID, 'first_name', $fname);
 			update_user_meta($user_id_role->ID, 'last_name', $lname);
 			
-			assignClientToTrainer($user_id_role, ); */
+			assignClientToTrainer($user_id_role, $selected_trainer);
             $success = 1;
 			echo "Successfully added new Client.";
 			
 ?>
-		<!-- <script>window.location =  "<?php echo home_url() . "/trainer/?data=clients"; ?>";</script> -->
+		<script>window.location =  "<?php echo home_url() . "/gym/?data=clients"; ?>";</script>
 <?php
         }   
     }	
@@ -87,8 +87,15 @@
 		<li><?php echo $error; ?></li>
 	<?php endforeach; ?>	
 </ul>
-  
-<form id="wp_signup_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post"> 
+	<?php
+		$uinfo = wp_get_current_user();
+		$tg = getTrainersOfGym($uinfo);		
+		if(empty($tg)){$tg=array();}
+	?>
+	<?php if(empty($tg)): ?>
+		Please add new trainer. <a href="<?php echo home_url(); ?>/gym/?data=trainers&add=1" class="red-btn">Add Trainer</a>
+	<?php else: ?>
+	<form id="wp_signup_form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post"> 
 		<div class="row">
 			<div class="col-lg-6">
 				 <label for="username">Username</label><br>  
@@ -125,12 +132,8 @@
 		
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
-				<label>Trainer</label><br>			
-				<?php
-					$uinfo = wp_get_current_user();
-					$tg = getTrainersOfGym($uinfo);		
-					if(empty($tg)){$tg=array();}
-				?>			
+				<label>Trainer</label><br>
+							
 				<select name="trainer_id">
 					<option value="0">-- select a trainer --</option>
 					<?php
@@ -141,7 +144,8 @@
 				</select>
 			</div>
 		</div>
-		<br><br>
-        <input type="submit" id="submitbtn" name="submit" value="Add Client" />  
-		<a href="<?php echo home_url().'/trainer/?data=clients'; ?>">See all Clients</a>
-</form> 
+		<br><br>		
+		<input type="submit" id="submitbtn" name="submit" value="Add Client" class="red-btn" />  
+		<!-- <a href="<?php echo home_url().'/trainer/?data=clients'; ?>">See all Clients</a> -->		       
+	</form> 
+<?php endif; ?> 

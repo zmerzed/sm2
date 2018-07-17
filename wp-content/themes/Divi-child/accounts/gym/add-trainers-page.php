@@ -112,7 +112,6 @@
 		</div>          
 		<br><br>
   
-        <input type="submit" id="submitbtn" name="submit" value="Add Trainer" /> 
-		<a href="<?php echo home_url().'/gym/?data=trainers'; ?>">See all Trainers</a>
-  
+        <input type="submit" id="submitbtn" name="submit" value="Add Trainer" class="red-btn" /> 
+		<!-- <a href="<?php echo home_url().'/gym/?data=trainers'; ?>">See all Trainers</a> -->  
 </form> 
