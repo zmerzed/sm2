@@ -148,7 +148,19 @@
     }
 
 </style>
+<script>
+    function encodeImageFileAsURL(cb) {
+        return function(){
+            var file = this.files[0];
+            var reader  = new FileReader();
+            reader.onloadend = function () {
+                cb(reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
 
+</script>
 <div ng-app="smApp" ng-controller="profileController">
 	<div class="main-content matchHeight">
 		<div class="container-title">
@@ -172,7 +184,7 @@
 								<span>{{ photo.uploaded_at }}</span>
 							</li>
 							<li>
-								<div class="browser-upload-image" data-toggle="modal" data-target="#myModal">
+								<div class="browser-upload-image" ng-click="takeNew()">
 									<label class="btn btn-default btn-file">
 										<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">
 									</label>
@@ -180,8 +192,13 @@
 								<span>Take New</span>
 							</li>
 						</ul>
-                        <div ng-show="false">
-                            <input id="file" type="file" accept="image/*" />
+
+                        <div class="row">
+                            <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
+                            <div class="output">
+                                <img>
+                            </div>
+                            <button class="btn btn-default" ng-click="upload()">UPLOAD</button>
                         </div>
 					</div>
 
@@ -221,7 +238,6 @@
 						</div>
 						<button class="btn btn-default">CANCEL</button>
 						<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
-
 					</div>
 				</div>
 			</div>
