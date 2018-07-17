@@ -40,7 +40,7 @@
 			endforeach;
 		else:
 		?>
-			No Workouts
+			<p class="text-center">No scheduled workout</p>
 		<?php endif; ?>		
 		<!-- <li>
 			<h4 class="workout-day">Monday</h4>
