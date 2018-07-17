@@ -148,19 +148,7 @@
     }
 
 </style>
-<script>
-    function encodeImageFileAsURL(cb) {
-        return function(){
-            var file = this.files[0];
-            var reader  = new FileReader();
-            reader.onloadend = function () {
-                cb(reader.result);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
 
-</script>
 <div ng-app="smApp" ng-controller="profileController">
 	<div class="main-content matchHeight">
 		<div class="container-title">
@@ -196,7 +184,7 @@
                         <div class="row">
                             <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
                             <div class="output">
-                                <img>
+                                <img style="max-width:100%; height: 120px;">
                             </div>
                             <button class="btn btn-default" ng-click="upload()">UPLOAD</button>
                         </div>
@@ -329,6 +317,18 @@
         video.play();
 
     });
+
+    function encodeImageFileAsURL(cb)
+    {
+        return function(){
+            var file = this.files[0];
+            var reader  = new FileReader();
+            reader.onloadend = function () {
+                cb(reader.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
 
     function showVideo(){
         // Display the video stream and the controls.
