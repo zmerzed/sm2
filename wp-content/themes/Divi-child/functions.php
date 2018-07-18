@@ -168,7 +168,11 @@ function getTrainersOfGym($user) {
 
 /*Assign a Client to a Trainer*/
 function assignClientToTrainer($client, $trainer) {
-	$pm_lvl_train = pmpro_getMembershipLevelForUser($trainer->ID)->name;
+	$pm_lvl_train = "";
+	$ppp = pmpro_getMembershipLevelForUser($trainer->ID);
+	if(!empty($ppp))
+		$pm_lvl_train = $ppp->name;
+	
 	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {
 		return false;
 	}
@@ -191,8 +195,16 @@ function assignClientToTrainer($client, $trainer) {
 
 /*Assign a Trainer to a Gym*/
 function assignTrainerToGym($trainer, $gym) {
-	$pm_lvl_gym = pmpro_getMembershipLevelForUser($gym->ID)->name;
-	$pm_lvl_train = pmpro_getMembershipLevelForUser($trainer->ID)->name;
+	$pm_lvl_gym = "";
+	$ppp = pmpro_getMembershipLevelForUser($gym->ID);
+	if(!empty($ppp))
+		$pm_lvl_gym = $ppp->name;
+
+	$pm_lvl_train = "";
+	$ppp2 = pmpro_getMembershipLevelForUser($trainer->ID);
+	if(!empty($ppp2))
+		$pm_lvl_train = $ppp2->name;
+	
 	if ( ! in_array('gym', $gym->roles, true) && $pm_lvl_gym != "Gym" ) {		
 		return false;
 	}
@@ -313,7 +325,7 @@ function getMonthlySchedule($u)
 	/* }elseif(in_array('trainer',$urole)){ */
 	}elseif($m_lvl == 'trainer'){
 		$umeta = get_user_meta($uid,'clients_of_trainer',true);
-		$coft = array();
+		$coft = "";
 		if($umeta)
 			$coft = implode(", ", get_user_meta($uid,'clients_of_trainer',true));
 
@@ -1696,8 +1708,7 @@ function workoutGenerateHash()
 //Triggered when first visit in dashboard page
 function triggerFirstLogin($uinfo){
 	$first_login = get_user_meta($uinfo->ID, 'prefix_first_login', true);
-	if( $first_login == '1' ) {
-		update_user_meta($uinfo->ID, 'prefix_first_login', '0'); 
+	if( $first_login == '1' ) {		 
 		return true;
     }else{
 		return false;
@@ -1727,3 +1738,11 @@ function getMembershipLevel($u){
 //Add user_meta after registration
 add_action( 'user_register', 'first__login_registration', 10, 1 );
 function first__login_registration( $user_id ) {  update_user_meta($user_id, 'prefix_first_login', '1'); }
+//Disallow users to access administrator
+function wpse23007_redirect(){
+  if( is_admin() && !defined('DOING_AJAX') && ( current_user_can('subscriber') || current_user_can('trainer') || current_user_can('gym') || current_user_can('client') ) ){
+    wp_redirect(home_url());
+    exit;
+  }
+}
+add_action('init','wpse23007_redirect');

@@ -7,7 +7,7 @@
       {  
    
         // Check username is present and not already in use  
-        $username = $wpdb->escape($_REQUEST['username']);  
+        $username = esc_sql($_REQUEST['username']);  
         if ( strpos($username, ' ') !== false )
         {   
             $errors['username'] = "Sorry, no spaces allowed in usernames";  
@@ -21,7 +21,7 @@
         }  
    
         // Check email address is present and valid  
-        $email = $wpdb->escape($_REQUEST['email']);  
+        $email = esc_sql($_REQUEST['email']);  
         if( !is_email( $email ) ) 
         {   
             $errors['email'] = "Please enter a valid email";  

@@ -166,7 +166,9 @@
 	
 	$jbool = ($jclient || $jgym || $jtrain);
 	
-	if(triggerFirstLogin($uinfo) &&  $jbool ):?>
+	if(triggerFirstLogin($uinfo) && $jbool):
+	update_user_meta($uinfo->ID, 'prefix_first_login', '0');
+	?>
 		var jcontent = '<h3 style="text-align:center;margin-bottom:1em;">Welcome to your Dashboard!</h3>',
 		curPage = window.location.href;
 		jcontent += '<p>To edit profile click <a href="'+curPage+'?data=profile" class="red-btn">Profile</a></p>';
