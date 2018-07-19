@@ -5,18 +5,22 @@ angular.module('smApp')
     $filter
 ) {
     var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
-   // var fileTypes = ['xls', 'pdf',  'doc'];
+
     $scope.currentUser = CURRENT_USER;
 
     console.log($scope.currentUser);
 
+    init();
+    
     function init()
     {
-        // $scope.currentUser.files.forEach(function(file) {
-        //
-        // })
+        console.log('profile controller.js');
+        console.log($scope.currentUser);
+        $scope.stats = angular.copy($scope.currentUser.stats);
     }
-    function encodeImageFileAsURL(cb) {
+
+    function encodeImageFileAsURL(cb)
+    {
         return function(){
             var file = this.files[0];
             var reader  = new FileReader();
@@ -27,7 +31,8 @@ angular.module('smApp')
         }
     }
 
-    function detectmob() {
+    function detectmob()
+    {
         if( navigator.userAgent.match(/Android/i)
             || navigator.userAgent.match(/webOS/i)
             || navigator.userAgent.match(/iPhone/i)
@@ -41,23 +46,6 @@ angular.module('smApp')
         else {
             return false;
         }
-    }
-
-    function imageToDataUri(img, width, height) {
-
-        // create an off-screen canvas
-        var canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d');
-
-        // set its dimension to target size
-        canvas.width = width;
-        canvas.height = height;
-
-        // draw source image into the off-screen canvas:
-        ctx.drawImage(img, 0, 0, width, height);
-
-        // encode image to data-uri with base64 version of compressed image
-        return canvas.toDataURL();
     }
 
     $('#inputFileToLoad').change(encodeImageFileAsURL(function(base64Img){
@@ -109,4 +97,14 @@ angular.module('smApp')
         });
     };
 
+    $("#idStatsForm").submit(function (e) {
+
+        console.log(JSON.stringify($scope.stats));
+
+        $scope.stats.client_id = $scope.currentUser.id;
+        delete $scope.stats.result;
+        $('#idStatsFormData').val(JSON.stringify($scope.stats));
+        return true;
+
+    });
 });
