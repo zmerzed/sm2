@@ -32,7 +32,7 @@ class User
         $errors = []; // Store all foreseen and unforseen errors here
 
         $fileImageExtensions = ['jpeg','jpg','png']; // Get all the file extensions
-        $fileExtensions = ['pdf','doc','xls', 'csv'];
+        $fileExtensions = ['pdf','doc','xls', 'csv', 'docx', 'xlsx'];
         
         $fileName = $file['name'];
         $fileSize = $file['size'];
