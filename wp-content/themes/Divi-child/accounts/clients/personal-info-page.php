@@ -71,7 +71,7 @@
 							<p>
 						</div>
 						<?php else:
-							get_template_part( 'accounts/client/edit-info', 'page' );
+							get_template_part( 'accounts/clients/edit-info', 'page' );
 						endif; ?>
 					</div>
 				</div>
