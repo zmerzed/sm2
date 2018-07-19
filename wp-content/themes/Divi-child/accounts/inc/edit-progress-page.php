@@ -11,6 +11,9 @@
 	if (isset($_GET['edit'])) {
 		$client = User::find((int) $_GET['edit']);
 		$client->stats = $client->getStats();
+	} else {
+		$client = User::find(get_current_user_id());
+		$client->stats = $client->getStats();
 	}
 
 	if( $_SERVER['REQUEST_METHOD'] == 'POST' )
@@ -28,7 +31,7 @@
 	}
 ?>
 
-<div ng-app="smApp" ng-controller="profileController">
+<div ng-app="smApp" ng-controller="trainerStatsController">
 	<div class="col-lg-8 col-md-8">
 		<form id="idStatsForm" action="?data=clients&edit=<?php echo $_GET['edit']; ?>" method="POST">
 		<div class="current-goal">
@@ -101,9 +104,6 @@
 						<td><input type="text" ng-model="stats.goal.height"></td>
 					</tr>
 					</tbody></table>
-		</div>
-		<div style="width:200px">
-			{{ stats }}
 		</div>
 	</div>
 	<?php if(getMembershipLevel($uinfo) != "client"): ?>
