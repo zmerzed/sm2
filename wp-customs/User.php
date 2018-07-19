@@ -102,6 +102,137 @@ class User
         }
     }
 
+    public function modifyStat($data, $modifier)
+    {
+
+//        id
+//        type
+//        client_id
+//        weight
+//        body_fat
+//        waist
+//        chest
+//        arms
+//        forearms
+//        shoulders
+//        hips
+//        thighs
+//        calves
+//        neck
+//        height
+//        created_at
+//        target_date
+//        updated_by
+//        created_by
+
+        global $wpdb;
+
+        if (!isset($data['client_id'])) {
+            return false;
+        }
+
+        $clientId = (int) $data['client_id'];
+        $modifier = (int) $modifier;
+      //  dd($data);
+        if ($data['start'])
+        {
+            
+            // check if its exist by using client id and trainer id
+
+            $result = $wpdb->get_results("SELECT * FROM workout_client_stats WHERE client_id={$clientId} AND created_by={$modifier} AND type='start' LIMIT 1", ARRAY_A);
+
+            if (count($result) > 0) { // update record
+
+                $stat = $data['start'];
+                $statId = $result[0]['id'];
+                $stat['updated_by'] = $modifier;
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+
+                $x = $wpdb->update(
+                    'workout_client_stats',
+                    $stat,
+                    array('id' => $statId)
+                );
+               // dd($x);
+            }
+            else { // insert new record
+                $stat = $data['start'];
+                $stat['client_id'] = (int) $data['client_id'];
+                $stat['created_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['created_by'] = $modifier;
+                $stat['updated_by'] = $modifier;
+                $stat['type'] = "start";
+
+                $wpdb->insert('workout_client_stats', $stat);
+            }
+        }
+
+        if ($data['goal'])
+        {
+
+            $result = $wpdb->get_results("SELECT * FROM workout_client_stats WHERE client_id={$clientId} AND created_by={$modifier} AND type='goal' LIMIT 1", ARRAY_A);
+
+            if (count($result) > 0) { // update record
+                $stat = $data['goal'];
+                $statId = $result[0]['id'];
+                $stat['updated_by'] = $modifier;
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+
+                $wpdb->update(
+                    'workout_client_stats',
+                    $stat,
+                    array('id' => $statId)
+                );
+            }
+            else { // insert new record
+                $stat = $data['goal'];
+                $stat['client_id'] = (int) $data['client_id'];
+                $stat['created_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['created_by'] = $modifier;
+                $stat['updated_by'] = $modifier;
+                $stat['type'] = "goal";
+
+                $wpdb->insert('workout_client_stats', $stat);
+            }
+        }
+
+        if ($data['result'])
+        {
+
+            $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
+
+            if (count($result) > 0) { // update record
+
+                $stat = $data['result'];
+                $statId = $result[0]['id'];
+                $stat['updated_by'] = $modifier;
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+
+                $wpdb->update(
+                    'workout_client_stats',
+                    $stat,
+                    array('id' => $statId)
+                );
+            }
+            else { // insert new record
+                $stat = $data['result'];
+                $stat['client_id'] = (int) $data['client_id'];
+                $stat['created_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['target_date'] = Carbon::now()->format('Y-m-d H:m:s');
+                $stat['created_by'] = $modifier;
+                $stat['updated_by'] = $modifier;
+                $stat['type'] = "result";
+
+                $wpdb->insert('workout_client_stats', $stat);
+            }
+        }
+
+        return $this->getStats();
+    }
+    
     public function getPhotos() {
         global $wpdb;
         $results = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$this->id} AND type='image'", ARRAY_A);
@@ -114,10 +245,67 @@ class User
         return $results;
     }
 
+    public function getStats() {
+
+        /* stats type
+         *
+         * START
+         * GOAL
+         * RESULT
+         *
+         */
+
+        global $wpdb;
+
+        $start = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE client_id = {$this->id} AND type='START'", ARRAY_A);
+        $goal = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE client_id = {$this->id} AND type='GOAL'", ARRAY_A);
+        $result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE DATE(`target_date`)=DATE(NOW()) AND client_id = {$this->id} AND type='RESULT'", ARRAY_A);
+
+        return $output = [
+            'start' => $start[0],
+            'goal' => $goal[0],
+            'result' => $result[0]
+        ];
+    }
+
+    public static function getDefaultStat()
+    {
+        return [
+            'weight' => '',
+			'body_fat' => '',
+			'waist' => '',
+            'chest' => '',
+			'arms' => '',
+			'forearms' => '',
+            'shoulders' => '',
+            'hips'  => '',
+			'thighs' => '',
+			'calves' => '',
+			'neck' => '',
+			'height' => ''
+		];
+    }
+
     public static function find($userId)
     {
+        global $wpdb;
         $user = new self();
         $user->id = $userId;
+        $userArr = $wpdb->get_results( "SELECT * FROM wp_users WHERE ID = {$userId} LIMIT 1", ARRAY_A);
+
+        if ($userArr)
+        {
+
+            $mUser = $userArr[0];
+            $keys = array_keys($userArr[0]);
+
+            foreach ($keys as $key)
+            {
+                $user->{$key} = $mUser[$key];
+            }
+
+            return $user;
+        }
         return $user;
     }
 }
