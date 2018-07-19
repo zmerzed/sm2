@@ -1,4 +1,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<?php
+
+	require_once getcwd() . '/wp-customs/User.php';
+	$user = User::find(get_current_user_id());
+
+	$currentUser = [
+		'id' => $user->id,
+		'photos' => $user->getPhotos(),
+		'stats' => $user->getStats()
+	];
+	if( $_SERVER['REQUEST_METHOD'] == 'POST' )
+	{
+
+		if ($user && isset($_POST['statsFormData']))
+		{
+			$stats = htmlspecialchars_decode($_POST['statsFormData'], ENT_NOQUOTES);
+			$stats = preg_replace('/\\\"/',"\"", $stats);
+			$stats = stripslashes($stats);
+			$stats = json_decode($stats, true);
+
+			$result = $user->modifyStat($stats, $stats['start']['created_by']);
+
+			wp_redirect( get_site_url() . '/client/?data=profile&by=progress-goals'. $_GET['edit']);
+		}
+	}
+?>
+
 <div ng-app="smApp" ng-controller="profileController">
 	<div class="main-content matchHeight">
 		<div class="container-title">
@@ -6,234 +33,299 @@
 		</div>
 		<div class="current-status">
 			<div class="row">
-				<?php get_template_part( 'accounts/inc/edit-progress', 'page' ); ?>
-				<div class="col-lg-12 col-md-12">
-					<div style="text-align:center;padding:10px 0;">
-						<button class="red-btn">Update</button>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-12">
-					<div class="progress-photos">
-						<h3>progress photos</h3>
+				<div class="col-lg-8 col-md-8">
+					<div class="current-goal">
+						<h3>Goal</h3>
+						<form id="idStatsForm" action="/client/?data=profile&by=progress-goals" method="POST">
+							<table style="width: 100%;">
+								<tbody><tr>
+									<th></th>
+									<th>Start #s</th>
+									<th>Goal #s</th>
+								</tr>
 
-						<ul class="progress-slider-photos">
-							<li ng-repeat="photo in currentUser.photos">
-								<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
-								<span>{{ photo.uploaded_at }}</span>
-							</li>
-							<li>
-								<div class="browser-upload-image" ng-click="takeNew()">
-									<label class="btn btn-default btn-file">
-										<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">
-									</label>
+								<tr>
+									<td><label>Weight</label></td>
+									<td><input type="text" ng-model="stats.start.weight"></td>
+									<td><input type="text" ng-model="stats.goal.weight"></td>
+								</tr>
+								<tr>
+									<td><label>Body Fat (%)</label></td>
+									<td><input type="text" ng-model="stats.start.body_fat"></td>
+									<td><input type="text" ng-model="stats.goal.body_fat"></td>
+								</tr>
+								<tr>
+									<td><label>Waist</label></td>
+									<td><input type="text" ng-model="stats.start.waist"></td>
+									<td><input type="text" ng-model="stats.goal.waist"></td>
+								</tr>
+								<tr>
+									<td><label>chest</label></td>
+									<td><input type="text" ng-model="stats.start.chest"></td>
+									<td><input type="text" ng-model="stats.goal.chest"></td>
+								</tr>
+								<tr>
+									<td><label>arms</label></td>
+									<td><input type="text"ng-model="stats.start.arms"></td>
+									<td><input type="text"ng-model="stats.goal.arms"></td>
+								</tr>
+								<tr>
+									<td><label>forearms</label></td>
+									<td><input type="text" ng-model="stats.start.forearms"></td>
+									<td><input type="text" ng-model="stats.goal.forearms"></td>
+								</tr>
+								<tr>
+									<td><label>shoulders</label></td>
+									<td><input type="text" ng-model="stats.start.shoulders"></td>
+									<td><input type="text" ng-model="stats.goal.shoulders"></td>
+								</tr>
+								<tr>
+									<td><label>hips</label></td>
+									<td><input type="text" ng-model="stats.start.hips"></td>
+									<td><input type="text" ng-model="stats.goal.hips"></td>
+								</tr>
+								<tr>
+									<td><label>thighs</label></td>
+									<td><input type="text" ng-model="stats.start.thighs"></td>
+									<td><input type="text" ng-model="stats.goal.thighs"></td>
+								</tr>
+								<tr>
+									<td><label>calves</label></td>
+									<td><input type="text" ng-model="stats.start.calves"></td>
+									<td><input type="text" ng-model="stats.goal.calves"></td>
+								</tr>
+								<tr>
+									<td><label>neck</label></td>
+									<td><input type="text" ng-model="stats.start.neck"></td>
+									<td><input type="text" ng-model="stats.goal.neck"></td>
+								</tr>
+								<tr>
+									<td><label>height</label></td>
+									<td><input type="text" ng-model="stats.start.height"></td>
+									<td><input type="text" ng-model="stats.goal.height"></td>
+								</tr>
+								</tbody></table>
+					</div>
+					<div class="col-lg-12 col-md-12">
+						<div style="text-align:center;padding:10px 0;">
+							<input type="hidden" name="statsFormData" id="idStatsFormData"/>
+							<button type="submit" class="red-btn">Update</button>
+						</div>
+					</div>
+					</form>
+					<div class="col-lg-12 col-md-12">
+						<div class="progress-photos">
+							<h3>progress photos</h3>
+
+							<ul class="progress-slider-photos">
+								<li ng-repeat="photo in currentUser.photos">
+									<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
+									<span>{{ photo.uploaded_at }}</span>
+								</li>
+								<li>
+									<div class="browser-upload-image" ng-click="takeNew()">
+										<label class="btn btn-default btn-file">
+											<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">
+										</label>
+									</div>
+									<span>Take New</span>
+								</li>
+							</ul>
+
+							<div class="row">
+								<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
+								<div class="output">
+									<img style="max-width:100%; height: 120px;">
 								</div>
-								<span>Take New</span>
-							</li>
-						</ul>
+								<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
+							</div>
+						</div>
 
-                        <div class="row">
-                            <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
-                            <div class="output">
-                                <img style="max-width:100%; height: 120px;">
-                            </div>
-                            <button class="btn btn-default" ng-click="upload()">UPLOAD</button>
-                        </div>
-					</div>
-
-					<div class="progress-notes">
-						<p class="label">In details, explain what are your trying to accomplish</p>
-						<textarea class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"></textarea>
-					</div>
-					<div style="text-align:center;padding:10px 0;">
-						<button class="red-btn">Update</button>
+						<div class="progress-notes">
+							<p class="label">In details, explain what are your trying to accomplish</p>
+							<textarea class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"></textarea>
+						</div>
+						<div style="text-align:center;padding:10px 0;">
+							<button class="red-btn">Update</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				</div>
-				<div class="modal-body">
-					<div class="container">
-						<div class="app">
-							<a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
-							<video id="camera-stream"></video>
-							<img id="snap">
-
-							<p id="error-message"></p>
-
-							<div class="controls">
-								<a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
-								<a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
-								<a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a>
-							</div>
-							<!-- Hidden canvas element. Used for taking snapshot of video. -->
-							<canvas></canvas>
+			<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
-						<button class="btn btn-default">CANCEL</button>
-						<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
+						<div class="modal-body">
+							<div class="container">
+								<div class="app">
+									<a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
+									<video id="camera-stream"></video>
+									<img id="snap">
+
+									<p id="error-message"></p>
+
+									<div class="controls">
+										<a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
+										<a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
+										<a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a>
+									</div>
+									<!-- Hidden canvas element. Used for taking snapshot of video. -->
+									<canvas></canvas>
+								</div>
+								<button class="btn btn-default">CANCEL</button>
+								<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<?php
-	require_once getcwd() . '/wp-customs/User.php';
-	$user = User::find(get_current_user_id());
-
-	$currentUser = [
-		'id' => $user->id,
-		'photos' => $user->getPhotos()
-	]
-?>
 <script>
-    // References to all the element we will need.
-    var video = document.querySelector('#camera-stream'),
-        image = document.querySelector('#snap'),
-        start_camera = document.querySelector('#start-camera'),
-        controls = document.querySelector('.controls'),
-        take_photo_btn = document.querySelector('#take-photo'),
-        delete_photo_btn = document.querySelector('#delete-photo'),
-        download_photo_btn = document.querySelector('#download-photo'),
-        error_message = document.querySelector('#error-message'),
+	// References to all the element we will need.
+	var video = document.querySelector('#camera-stream'),
+		image = document.querySelector('#snap'),
+		start_camera = document.querySelector('#start-camera'),
+		controls = document.querySelector('.controls'),
+		take_photo_btn = document.querySelector('#take-photo'),
+		delete_photo_btn = document.querySelector('#delete-photo'),
+		download_photo_btn = document.querySelector('#download-photo'),
+		error_message = document.querySelector('#error-message'),
 		CAMERA_DATA_URL = '',
-        USER_ID = '<?php echo get_current_user_id(); ?>',
+		USER_ID = '<?php echo get_current_user_id(); ?>',
 		CURRENT_USER = JSON.parse('<?php echo json_encode($currentUser); ?>');
-    // The getUserMedia interface is used for handling camera input.
-    // Some browsers need a prefix so here we're covering all the options
-    navigator.getMedia = ( navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia);
+	// The getUserMedia interface is used for handling camera input.
+	// Some browsers need a prefix so here we're covering all the options
+	navigator.getMedia = ( navigator.getUserMedia ||
+	navigator.webkitGetUserMedia ||
+	navigator.mozGetUserMedia ||
+	navigator.msGetUserMedia);
 
 
-    if(!navigator.getMedia){
-        displayErrorMessage("Your browser doesn't have support for the navigator.getUserMedia interface.");
-    }
-	
-    // Mobile browsers cannot play video without user input,
-    // so here we're using a button to start it manually.
-    start_camera.addEventListener("click", function(e){
+	if(!navigator.getMedia){
+		displayErrorMessage("Your browser doesn't have support for the navigator.getUserMedia interface.");
+	}
 
-        e.preventDefault();
+	// Mobile browsers cannot play video without user input,
+	// so here we're using a button to start it manually.
+	start_camera.addEventListener("click", function(e){
 
-        // Start video playback manually.
-        video.play();
-        showVideo();
+		e.preventDefault();
 
-    });
+		// Start video playback manually.
+		video.play();
+		showVideo();
 
-    take_photo_btn.addEventListener("click", function(e){
+	});
 
-        e.preventDefault();
+	take_photo_btn.addEventListener("click", function(e){
 
-        var snap = takeSnapshot();
+		e.preventDefault();
 
-        // Show image.
-        image.setAttribute('src', snap);
-        image.classList.add("visible");
+		var snap = takeSnapshot();
 
-        // Enable delete and save buttons
-        delete_photo_btn.classList.remove("disabled");
-        download_photo_btn.classList.remove("disabled");
+		// Show image.
+		image.setAttribute('src', snap);
+		image.classList.add("visible");
 
-        // Set the href attribute of the download button to the snap url.
-        download_photo_btn.href = snap;
+		// Enable delete and save buttons
+		delete_photo_btn.classList.remove("disabled");
+		download_photo_btn.classList.remove("disabled");
 
-        // Pause video playback of stream.
-        video.pause();
+		// Set the href attribute of the download button to the snap url.
+		download_photo_btn.href = snap;
 
-    });
+		// Pause video playback of stream.
+		video.pause();
 
-    delete_photo_btn.addEventListener("click", function(e){
+	});
 
-        e.preventDefault();
+	delete_photo_btn.addEventListener("click", function(e){
 
-        // Hide image.
-        image.setAttribute('src', "");
-        image.classList.remove("visible");
+		e.preventDefault();
 
-        // Disable delete and save buttons
-        delete_photo_btn.classList.add("disabled");
-        download_photo_btn.classList.add("disabled");
+		// Hide image.
+		image.setAttribute('src', "");
+		image.classList.remove("visible");
 
-        // Resume playback of stream.
-        video.play();
+		// Disable delete and save buttons
+		delete_photo_btn.classList.add("disabled");
+		download_photo_btn.classList.add("disabled");
 
-    });
+		// Resume playback of stream.
+		video.play();
 
-    function encodeImageFileAsURL(cb)
-    {
-        return function(){
-            var file = this.files[0];
-            var reader  = new FileReader();
-            reader.onloadend = function () {
-                cb(reader.result);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
+	});
 
-    function showVideo(){
-        // Display the video stream and the controls.
+	function encodeImageFileAsURL(cb)
+	{
+		return function(){
+			var file = this.files[0];
+			var reader  = new FileReader();
+			reader.onloadend = function () {
+				cb(reader.result);
+			}
+			reader.readAsDataURL(file);
+		}
+	}
 
-        hideUI();
-        video.classList.add("visible");
-        controls.classList.add("visible");
-    }
+	function showVideo(){
+		// Display the video stream and the controls.
 
-    function takeSnapshot(){
-        // Here we're using a trick that involves a hidden canvas element.
+		hideUI();
+		video.classList.add("visible");
+		controls.classList.add("visible");
+	}
 
-        var hidden_canvas = document.querySelector('canvas'),
-            context = hidden_canvas.getContext('2d');
+	function takeSnapshot(){
+		// Here we're using a trick that involves a hidden canvas element.
 
-        var width = video.videoWidth,
-            height = video.videoHeight;
+		var hidden_canvas = document.querySelector('canvas'),
+			context = hidden_canvas.getContext('2d');
 
-        if (width && height) {
+		var width = video.videoWidth,
+			height = video.videoHeight;
 
-            // Setup a canvas with the same dimensions as the video.
-            hidden_canvas.width = width;
-            hidden_canvas.height = height;
+		if (width && height) {
 
-            // Make a copy of the current frame in the video on the canvas.
-            context.drawImage(video, 0, 0, width, height);
+			// Setup a canvas with the same dimensions as the video.
+			hidden_canvas.width = width;
+			hidden_canvas.height = height;
 
-            // Turn the canvas image into a dataURL that can be used as a src for our photo.
+			// Make a copy of the current frame in the video on the canvas.
+			context.drawImage(video, 0, 0, width, height);
+
+			// Turn the canvas image into a dataURL that can be used as a src for our photo.
 
 			CAMERA_DATA_URL = hidden_canvas.toDataURL('image/png');
-            return hidden_canvas.toDataURL('image/png');
-        }
-    }
+			return hidden_canvas.toDataURL('image/png');
+		}
+	}
 
-    function displayErrorMessage(error_msg, error){
+	function displayErrorMessage(error_msg, error){
 		error = error || "";
-        if(error){
-            console.log(error);
-        }
+		if(error){
+			console.log(error);
+		}
 
-        error_message.innerText = error_msg;
+		error_message.innerText = error_msg;
 
-        hideUI();
-        error_message.classList.add("visible");
-    }
+		hideUI();
+		error_message.classList.add("visible");
+	}
 
-    function hideUI(){
-        // Helper function for clearing the app UI.
+	function hideUI(){
+		// Helper function for clearing the app UI.
 
-        controls.classList.remove("visible");
-        start_camera.classList.remove("visible");
-        video.classList.remove("visible");
-        snap.classList.remove("visible");
-        error_message.classList.remove("visible");
-    }
+		controls.classList.remove("visible");
+		start_camera.classList.remove("visible");
+		video.classList.remove("visible");
+		snap.classList.remove("visible");
+		error_message.classList.remove("visible");
+	}
 	var localStream;
 
 	setTimeout(function(){

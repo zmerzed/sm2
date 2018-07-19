@@ -133,10 +133,10 @@ class User
 
         $clientId = (int) $data['client_id'];
         $modifier = (int) $modifier;
-      //  dd($data);
-        if ($data['start'])
+
+        if (isset($data['start']))
         {
-            
+           // dd($data);
             // check if its exist by using client id and trainer id
 
             $result = $wpdb->get_results("SELECT * FROM workout_client_stats WHERE client_id={$clientId} AND created_by={$modifier} AND type='start' LIMIT 1", ARRAY_A);
@@ -168,7 +168,7 @@ class User
             }
         }
 
-        if ($data['goal'])
+        if (isset($data['goal']))
         {
 
             $result = $wpdb->get_results("SELECT * FROM workout_client_stats WHERE client_id={$clientId} AND created_by={$modifier} AND type='goal' LIMIT 1", ARRAY_A);
@@ -198,7 +198,7 @@ class User
             }
         }
 
-        if ($data['result'])
+        if (isset($data['result']))
         {
 
             $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);

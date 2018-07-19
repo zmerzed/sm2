@@ -1,5 +1,5 @@
 angular.module('smApp')
-.controller('profileController', function(
+.controller('trainerStatsController', function(
     $scope,
     $http,
     $filter
