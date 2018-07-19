@@ -30,8 +30,22 @@
 			<div class="col-lg-8 col-md-8">
 				<div class="personal-data-information matchHeight">
 					<div class="row">
+						<?php
+							$edit_req = "";	
+							if(!isset($_GET['edit'])):								
+						?>
 						<div class="col-lg-12">
-							<h2>Steven Johnson</h2>
+						<?php
+							$ufname = $userdata->first_name;
+							$ulname = $userdata->last_name;
+							$displayname = "";
+							if($ufname != ""){
+								$displayname = $ufname.' '.$ulname;
+							}else{
+								$displayname = $userdata->user_nicename;
+							}
+						?>
+							<h2><?php echo $displayname; ?></h2>
 						</div>
 						<div class="col-lg-5 col-md-5">
 							<div class="featured-image">
@@ -45,7 +59,7 @@
 							<p>
 							<p>
 								<label>DOB</label>
-								<strong>january 24, 1978</strong>
+								<strong><?php ?></strong>
 							<p>
 							<p>
 								<label>GENDER</label>
@@ -56,6 +70,9 @@
 								<strong>555-555-5555</strong>
 							<p>
 						</div>
+						<?php else:
+							get_template_part( 'accounts/client/edit-info', 'page' );
+						endif; ?>
 					</div>
 				</div>
 			</div>
@@ -66,7 +83,7 @@
 <!--						<li><a href="#"><span><img src="--><?php //echo get_stylesheet_directory_uri() .'/accounts/images/pdf.png'; ?><!--"></span>health-records.pdf</a></li>-->
 <!--						<li><a href="#"><span><img src="--><?php //echo get_stylesheet_directory_uri() .'/accounts/images/doc.png'; ?><!--"></span>nutrition_plan.doc</a></li>-->
 <!--						<li><a href="#"><span><img src="--><?php //echo get_stylesheet_directory_uri() .'/accounts/images/xls.png'; ?><!--"></span>past_progress.xls</a></li>-->
-						<li ng-repeat="file in currentUser.files"><a href="#"><span><img ng-src=""></span>{{ file.file }}</a></li>
+						<li ng-repeat="file in currentUser.files"><a href="<?php echo home_url(); ?>/sm-files/{{ file.user_id +'/'+ file.file }}" download><span><img ng-src="{{ file.file.indexOf('doc') != 0 && '<?php echo get_stylesheet_directory_uri() .'/accounts/images/doc.png'; ?>' }}"></span>{{ file.file }}</a></li>
 					</ul>
 					<input type="file" file-model="myFile"/>
 					<button ng-click="uploadFile()">upload me</button>
