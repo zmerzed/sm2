@@ -1,13 +1,26 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<?php
+require_once getcwd() . '/wp-customs/User.php';		
+$user = User::find(get_current_user_id());
+$currentUser = [
+	'id' => $user->id,
+	'files' => $user->getPhotos(),
+	'stats' => $user->getStats()
+];
+
+
+?>
+
 <div class="main-content matchHeight">
 
 	<div class="container-title">
         <h3>Current Status</h3>
     </div>
 	
-	<?php
+	<?php		
 		$status_arr = array(
 			"weight" => array('gw'=>180,'sw'=>167, 'cw'=>168),
-			"body fat" => array('gw'=>26,'sw'=>20, 'cw'=>26),
+			"body_fat" => array('gw'=>26,'sw'=>20, 'cw'=>26),
 			"waist" => array('gw'=>34,'sw'=>32, 'cw'=>34),
 			"chest" => array('gw'=>36,'sw'=>40, 'cw'=>39),
 			"arms" => array('gw'=>34,'sw'=>32, 'cw'=>34),
@@ -18,7 +31,21 @@
 			"calves" => array('gw'=>16,'sw'=>18, 'cw'=>16),
 			"neck" => array('gw'=>12,'sw'=>14, 'cw'=>12),
 			"height" => array('gw'=>177.8,'sw'=>177.8, 'cw'=>177.8)
-		);		
+		);
+		$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date', 'created_at', 'updated_at'];		
+		foreach($currentUser['stats'] as $k2 => $v2){			
+			foreach($v2 as $k => $v){
+				if(!in_array($k, $not_inc)){
+					if($k2 == "start"){
+						$status_arr[$k]['sw'] = $v;				
+					}elseif($k2 == "goal"){
+						$status_arr[$k]['gw'] = $v;
+					}else{
+						$status_arr[$k]['cw'] = $v;
+					}
+				}
+			}			
+		}		
 	?>
 
 	<div class="current-status">
@@ -37,7 +64,10 @@
 								if($gw > $sw){//Gain
 									
 									if($cw > $sw){
-										$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
+										if($cw >= $gw)
+											$pp = 0;
+										else
+											$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
 									}elseif($cw < $sw){
 										$pp = 0;
 									}else{
@@ -46,7 +76,10 @@
 									
 								}elseif($gw < $sw){//Loss
 									if($cw < $sw){
-										$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
+										if($cw <= $gw)
+											$pp = 0;
+										else
+											$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
 									}elseif($cw > $sw){
 										$pp = 0;
 									}else{
@@ -98,21 +131,7 @@
 	</div>
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script>
-	<?php
-		require_once getcwd() . '/wp-customs/User.php';		
-		$user = User::find(get_current_user_id());
-		$currentUser = [
-			'id' => $user->id,
-			'files' => $user->getPhotos()
-		];
-		
-		/* echo "<pre>";
-		print_r($currentUser);
-		echo "</pre>"; */
-	?>
-	
+<script>	
 	var curUser = <?php echo json_encode($currentUser); ?>,
 	homeUrl = "<?php echo home_url(); ?>",
 	bodyPhotosHTML = "";

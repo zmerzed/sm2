@@ -4,7 +4,7 @@
 	global $current_user;
 
 	/* $userdata = get_currentuserinfo(); */
-	$userdata = wp_get_current_user();
+	$uinfo = wp_get_current_user();
 	$user = User::find(get_current_user_id());
 	$currentUser = [
 		'id' => $user->id,
@@ -36,16 +36,17 @@
 						?>
 						<div class="col-lg-12">
 						<?php
-							$ufname = $userdata->first_name;
-							$ulname = $userdata->last_name;
+							$ufname = $uinfo->first_name;
+							$ulname = $uinfo->last_name;
 							$displayname = "";
 							if($ufname != ""){
 								$displayname = $ufname.' '.$ulname;
 							}else{
-								$displayname = $userdata->user_nicename;
+								$displayname = $uinfo->user_nicename;
 							}
 						?>
-							<h2><?php echo $displayname; ?></h2>
+							<a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info&edit=1" style="float:right">edit</a>
+							<h2><?php echo $displayname; ?></h2>							
 						</div>
 						<div class="col-lg-5 col-md-5">
 							<div class="featured-image">
@@ -55,19 +56,19 @@
 						<div class="col-lg-7 col-md-7">
 							<p>
 								<label>EMAIL/LOGIN</label>
-								<strong><?php echo $userdata->user_email; ?></strong>
+								<strong><?php echo $uinfo->user_email; ?></strong>
 							<p>
 							<p>
 								<label>DOB</label>
-								<strong><?php ?></strong>
+								<strong><?php echo $uinfo->sm_dob; ?></strong>
 							<p>
 							<p>
 								<label>GENDER</label>
-								<strong>MALE</strong>
+								<strong><?php echo $uinfo->sm_gender; ?></strong>
 							<p>
 							<p>
 								<label>PHONE #</label>
-								<strong>555-555-5555</strong>
+								<strong><?php echo $uinfo->sm_phone; ?></strong>
 							<p>
 						</div>
 						<?php else:

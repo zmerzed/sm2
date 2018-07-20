@@ -259,7 +259,15 @@ class User
 
         $start = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE client_id = {$this->id} AND type='START'", ARRAY_A);
         $goal = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE client_id = {$this->id} AND type='GOAL'", ARRAY_A);
-        $result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE DATE(`target_date`)=DATE(NOW()) AND client_id = {$this->id} AND type='RESULT'", ARRAY_A);
+        /* $result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE DATE(`target_date`)=DATE(NOW()) AND client_id = {$this->id} AND type='RESULT'", ARRAY_A); */
+		$result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE target_date=(SELECT MAX(target_date) FROM workout_client_stats WHERE client_id = {$this->id}) AND type='result'", ARRAY_A);
+		
+		if(empty($result))
+			$result = array(array());
+		if(empty($goal))
+			$goal = array(array());
+		if(empty($start))
+			$start = array(array());
 
         return $output = [
             'start' => $start[0],
