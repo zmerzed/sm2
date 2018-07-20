@@ -9,8 +9,19 @@
 		'photos' => $user->getPhotos(),
 		'stats' => $user->getStats()
 	];
+	
+	$umeta = get_user_meta($user->id);
+	$accomtext = "";
+	if(isset($umeta['sm_accomtext']))
+		$accomtext = $umeta['sm_accomtext'][0];
+	
 	if( $_SERVER['REQUEST_METHOD'] == 'POST' )
 	{
+		$atext = $_POST['accomtext'];
+		if($atext != ""){
+			update_user_meta($user->id, 'sm_accomtext', $atext);
+			echo '<script>window.location.href="'.$_SERVER['REQUEST_URI'].'";</script>';		
+		}
 
 		if ($user && isset($_POST['statsFormData']))
 		{
@@ -140,14 +151,15 @@
 								<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
 							</div>
 						</div>
-
-						<div class="progress-notes">
-							<p class="label">In details, explain what are your trying to accomplish</p>
-							<textarea class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"></textarea>
-						</div>
-						<div style="text-align:center;padding:10px 0;">
-							<button class="red-btn">Update</button>
-						</div>
+						<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+							<div class="progress-notes">
+								<p class="label">In details, explain what are your trying to accomplish</p>
+								<textarea name="accomtext" class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"><?php echo $accomtext; ?></textarea>
+							</div>
+							<div style="text-align:center;padding:10px 0;">
+								<button type="submit" class="red-btn">Update</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
