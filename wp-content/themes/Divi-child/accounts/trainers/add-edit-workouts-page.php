@@ -455,13 +455,13 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<span class="workout-day-name">
-						<label>Workout Name: </label>
+						<label>Program Name: </label>
 						<input type="text" ng-model="workout.name">
 					</span>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<div class="btn-add-workout">
-						<button type="button" ng-click="newWorkOutDay()">+ new workout day</button>
+						<button type="button" ng-click="newWorkOutDay()">+ new workout</button>
 					</div>
 				</div>
 			</div>
@@ -479,7 +479,7 @@
 				   ng-repeat="day in workout.days"
 				   ng-click="onSelectDay(day)"
 				   ng-class="{active: isActive(day)}"
-				>Day {{day.seq}} - {{day.name}}</a>
+				>Workout {{day.seq}} - {{day.name}}</a>
 			</div>
 		</nav>
 
@@ -492,7 +492,7 @@
 							<div class="row">
 								<div class="col-lg-6 col-md-6">
 							<span class="workout-day-name">
-								<label>Day Name: </label>
+								<label>Workout Name: </label>
 								<input type="text" ng-model="workout.selectedDay.name" ng-change="onChangeDayName()">
 								<!-- <a ng-click="testWorkout()">test</a> -->
 							</span>

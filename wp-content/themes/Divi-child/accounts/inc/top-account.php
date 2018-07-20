@@ -21,7 +21,7 @@
 						}elseif($dr == "logs"){
 							echo 'Logs';					
 						}elseif($dr == "workouts"){
-							echo 'Workouts';					
+							echo 'Programs';					
 						}elseif($temp_slug == "page-member-templates.php"){
 							echo 'Member Subscription';
 						}elseif($dr == "exercises"){
@@ -31,7 +31,7 @@
 								$workout = workOutGet($_GET['workout']);
 								echo 'Edit ' . $workout['workout_name'];
 							} else {
-								echo 'New/edit workout';
+								echo 'New Program';
 							}
 						}else{
 							echo 'Dashboard';
