@@ -72,7 +72,7 @@
 			<div class="menu-divider"></div>
 
 			<ul>
-				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Workouts</a></li>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
 				<?php if($op_gym): ?>
 					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>

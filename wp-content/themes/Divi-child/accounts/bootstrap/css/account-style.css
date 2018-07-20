@@ -1638,6 +1638,9 @@ div#ui-datepicker-div {
 /*Member Page*/
 body .member-page .member-links .children li a{color:#fff;}
 
+.trainer-edit-info label{font-weight:700;}
+.trainer-edit-info textarea{width:100%;}
+
 /*App Camera*/
 .app{
 	width: 100%;

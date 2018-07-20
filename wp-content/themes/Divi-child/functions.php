@@ -1729,3 +1729,22 @@ function wpse23007_redirect(){
   }
 }
 add_action('init','wpse23007_redirect');
+
+/*Trainer Edit Profile*/
+function getTrainerInfo($u){
+	$umeta = get_user_meta($u->ID);		
+	$tinfo = array();
+	
+	if(isset($umeta['sm_bio']))
+		$tinfo['ubio'] = $umeta['sm_bio'][0];
+	if(isset($umeta['sm_education']))
+		$tinfo['uedu'] = $umeta['sm_education'][0];
+	if(isset($umeta['sm_specialties']))
+		$tinfo['uspe'] = $umeta['sm_specialties'][0];
+	if(isset($umeta['sm_availability']))
+		$tinfo['uava'] = $umeta['sm_availability'][0];
+	if(isset($umeta['sm_experience']))
+		$tinfo['uexp'] = $umeta['sm_experience'][0];
+	
+	return $tinfo;
+}

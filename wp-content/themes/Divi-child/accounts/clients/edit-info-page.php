@@ -31,11 +31,10 @@
 		//Check Phone
 		$nuphone = $_POST['uphone'];
 		if($nuphone != ""){
-			update_user_meta($uid, 'sm_phone', $nuphone);
+			update_user_meta($uid, 'sm_phone', $nuphone);			
 		}
-		
-		echo '<div class="col-lg-12 col-md-12"><p style="width:100%;" class="alert alert-success">Information Updated!<a href="'.home_url().'/client/?data=profile&by=personal-info" style="float:right">view info</a></p></div>
-		<style>#editinfo{display:none;}</style>';
+		echo '<div class="col-lg-12 col-md-12"><p style="width:100%;" class="alert alert-success">Information Updated!</p></div>';
+		echo '<script>window.location.href="'.home_url().'/client/?data=profile&by=personal-info"</script>';
 	}
 ?>
 <div class="col-lg-12 col-md-12" id="editinfo">	

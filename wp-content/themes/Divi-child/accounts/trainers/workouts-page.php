@@ -15,7 +15,7 @@
 <div class="main-content matchHeight">
 
 	<div class="trainer-add-workout">
-		<a href="<?php echo home_url(); ?>/trainer/?data=add-workouts">+ New Workout</a>
+		<a href="<?php echo home_url(); ?>/trainer/?data=add-workouts">+ New Program</a>
 	</div>
 
 	<ul class="workout-lists trainer-workouts-lists">
@@ -26,7 +26,7 @@
 				<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
 				<label><?php echo $workout->workout_name ?></label>
 				<div class="workout-controls">
-					<span><a href="javacsript:void(0);" onclick="toggleMembers(this)"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon.png'; ?>"></a></span>
+					<span><a href="javascript:void(0);" onclick="toggleMembers(this)"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon.png'; ?>"></a></span>
 					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon.png'; ?>"></a></span>
 					<span><a href="<?php echo $url ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon.png'; ?>"></a></span>
 					<span><a href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon.png'; ?>"></a></span>
