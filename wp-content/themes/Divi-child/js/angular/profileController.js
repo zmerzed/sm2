@@ -4,36 +4,10 @@ angular.module('smApp')
     $http,
     $filter
 ) {
-    var apiUrl = ROOTURL + '/wp-json/v1/client/upload',
-	tempObj = {},
-	maxDate = "";
-	maxID = "";
+    var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
 	$scope.fileUrl = ROOTURL + '/sm-files/';
     $scope.currentUser = CURRENT_USER;
-    console.log($scope.currentUser);
-	
-	$scope.currentUser.photos.forEach(function(e){		
-		tempObj[e.id] = e.uploaded_at;
-		if(maxID == "")
-			maxID = e.id;
-		else{
-			if(maxID < e.id){
-				maxID = e.id;
-			}
-		}
-	});
-	for(var k in tempObj){
-		if(maxDate == "")
-			maxDate = tempObj[k];
-		else{
-			if(maxDate < tempObj[k]){
-				maxDate = tempObj[k];
-			}
-		}	
-	}
-
-    $scope.photoMaxID = maxID;
-    $scope.photoMaxDate = maxDate;
+    console.log($scope.currentUser);	
 
     init();
     

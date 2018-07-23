@@ -50,8 +50,8 @@
 							<h2><?php echo $displayname; ?></h2>							
 						</div>
 						<div class="col-lg-5 col-md-5">						
-							<div class="featured-image">							
-								<img class="img-responsive" ng-repeat="photo in currentUser.photos" ng-if="photo.id == photoMaxID && photo.uploaded_at == photoMaxDate" ng-src="{{fileUrl + photo.user_id +'/'+ photo.file }}">
+							<div class="featured-image" ng-repeat="photo in currentUser.photos track by $index">							
+								<img class="img-responsive"  ng-show="$last"  ng-src="{{fileUrl + photo.user_id +'/'+ photo.file }}">
 							</div>
 						</div>
 						<div class="col-lg-7 col-md-7">
