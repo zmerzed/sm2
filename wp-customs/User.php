@@ -201,7 +201,8 @@ class User
         if (isset($data['result']))
         {
 
-            $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
+           // $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
+            $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE target_date IS NOT NULL AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
 
             if (count($result) > 0) { // update record
 
