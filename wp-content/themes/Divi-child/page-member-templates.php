@@ -5,7 +5,10 @@
 
 if( is_user_logged_in() ){
 	$uinfo = wp_get_current_user();
-	$pm_lvl = pmpro_getMembershipLevelForUser($uinfo->ID)->name;
+	$ppp = pmpro_getMembershipLevelForUser($uinfo->ID);
+	$pm_lvl = "";
+	if(!empty($ppp))
+		$pm_lvl = $ppp->name;
 	require_once( get_stylesheet_directory() . '/accounts/inc/header-account.php' );
 	require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' );
 ?>

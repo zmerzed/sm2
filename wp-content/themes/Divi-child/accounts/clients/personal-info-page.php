@@ -8,17 +8,18 @@
 	$user = User::find(get_current_user_id());
 	$currentUser = [
 		'id' => $user->id,
-		'files' => $user->getFiles()
+		'files' => $user->getFiles(),
+		'photos' => $user->getPhotos()
 	];
 ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <script>
+	var ROOTURL = '<?php echo get_site_url(); ?>',
 	USER_ID = '<?php echo get_current_user_id(); ?>',
-	CURRENT_USER = JSON.parse('<?php echo json_encode($currentUser); ?>');
+	CURRENT_USER = JSON.parse('<?php echo json_encode($currentUser); ?>');		
 </script>
-
 <div class="main-content matchHeight" ng-app="smApp" ng-controller="profileController">
 
 	<div class="container-title">
@@ -48,9 +49,9 @@
 							<a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info&edit=1" style="float:right">edit</a>
 							<h2><?php echo $displayname; ?></h2>							
 						</div>
-						<div class="col-lg-5 col-md-5">
-							<div class="featured-image">
-								<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/personal-featured-image.jpg'; ?>">
+						<div class="col-lg-5 col-md-5">						
+							<div class="featured-image">							
+								<img class="img-responsive" ng-repeat="photo in currentUser.photos" ng-if="photo.id == photoMaxID && photo.uploaded_at == photoMaxDate" ng-src="{{fileUrl + photo.user_id +'/'+ photo.file }}">
 							</div>
 						</div>
 						<div class="col-lg-7 col-md-7">
@@ -94,7 +95,5 @@
 	</div>
 
 </div>
-
-<script>var ROOTURL = '<?php echo get_site_url(); ?>';</script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/app.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/profileController.js'; ?>"></script>

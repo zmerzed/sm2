@@ -7,7 +7,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Your workout(s)</h5>
+        <h5 class="modal-title">Your program(s)</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -45,7 +45,7 @@
 		var thisWork = workoutDates[date];
 		/* console.log(thisWork); */
 		$('#workoutModal').modal();
-		$('#workoutModal .modal-title').html('Workout(s) for ' + date);
+		$('#workoutModal .modal-title').html('Program(s) for ' + date);
 		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
 		$.each(thisWork, function(i, v){
 			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span><img src="'+themedir+'/accounts/images/workout.png"></span><span class="wdname">' + v[0]['wname'] + ' - '+v[0]['wcnname']+'</span>';

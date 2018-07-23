@@ -33,7 +33,7 @@
 		echo '<script>window.location.href="'.home_url().'/trainer/?data=profile"</script>';
 	}	
 ?>
-	<div class="col-lg-12 col-md-12">
+	<div class="col-lg-12 col-md-12 trainer-edit-info">
 		<form action="<?php echo $_SERVER['REQUEST_URI'];  ?>" method="post" name="my_form" enctype="multipart/form-data">
 			<p>
 				<label for="uploadfile">Photo:</label><br>

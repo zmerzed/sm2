@@ -48,7 +48,7 @@
 			endforeach;
 		else:
 		?>
-			<p class="text-center">No scheduled workout</p>
+			<p class="text-center">No scheduled program</p>
 		<?php endif; ?>	
 	</div>
 </div>
