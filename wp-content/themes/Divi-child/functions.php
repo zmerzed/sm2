@@ -69,7 +69,7 @@ function wpcodex_set_capabilities() {
 
 	$caps = array('create_users');
 	$caps2 = array('upload_files');
-	$removeCaps = array('edit_posts', 'edit_users', 'list_users', 'remove_users', 'delete_users');
+	$removeCaps = array('edit_posts', 'edit_users', 'list_users', 'remove_users', 'delete_users', 'upload_files');
 
 	foreach($caps as $cap){
 		$role->add_cap( $cap );

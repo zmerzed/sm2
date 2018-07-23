@@ -10,7 +10,8 @@
 		$unname = $ufname . ' ' .$ulname;
 	}
 	
-	$trainerInfo = getTrainerInfo($uinfo);		
+	$trainerInfo = getTrainerInfo($uinfo);
+	$edit_txt = '<a href="'.$_SERVER['REQUEST_URI'].'&edit=1">edit</a>';
 ?>
 <div class="main-content matchHeight">
 	<?php if(!isset($_GET['edit'])): ?>
@@ -25,8 +26,12 @@
 			</div>
 			<div class="col-lg-10 col-md-10">
 				<h3>trainer bio</h3>
-				<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> -->
-				<p><?php echo $trainerInfo['ubio']; ?></p>
+				<?php if($trainerInfo['ubio'] != ""): ?>
+					<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> -->
+					<p><?php echo $trainerInfo['ubio']; ?></p>
+				<?php else: ?>
+					<a href="<?php echo $_SERVER['REQUEST_URI'];  ?>&edit=1">edit</a>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
@@ -35,29 +40,44 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-3">
 				<h3>education/certs.</h3>
-				<!-- <p> Lorem ipsum dolor sit Consectetur adipiscing Sed do eiusmod tempo</p> -->
-				<p><?php echo $trainerInfo['uedu']; ?></p>
+				<?php if($trainerInfo['uedu'] != ""): ?>
+					<!-- <p> Lorem ipsum dolor sit Consectetur adipiscing Sed do eiusmod tempo</p> -->
+					<p><?php echo $trainerInfo['uedu']; ?></p>
+				<?php else:
+					echo $edit_txt;
+				endif; ?>
 			</div>
 
 			<div class="col-lg-3 col-md-3">
 				<h3>specialties</h3>
-				<!-- <p>Sport-Specific Training <br/>Conditioning <br/>Functional Training <br/>Core Strength <br/>Proprioception</p> -->
-				<p><?php echo $trainerInfo['uspe']; ?></p>
+				<?php if($trainerInfo['uspe'] != ""): ?>
+					<!-- <p>Sport-Specific Training <br/>Conditioning <br/>Functional Training <br/>Core Strength <br/>Proprioception</p> -->
+					<p><?php echo $trainerInfo['uspe']; ?></p>
+				<?php else:
+					echo $edit_txt;
+				endif; ?>
 			</div>
 
 			<div class="col-lg-3 col-md-3">
 				<h3>availability</h3>
-				<!-- <p>Monday/Wednesday/Friday <br/>12:00 (Noon) – 8:00 p.m.</p>
-				<p>Tuesday/Thursday <br/>7:00 a.m. – 8:00 p.m.</p> -->
-				<p><?php echo $trainerInfo['uava']; ?></p>
+				<?php if($trainerInfo['uava'] != ""): ?>
+					<!-- <p>Monday/Wednesday/Friday <br/>12:00 (Noon) – 8:00 p.m.</p>
+					<p>Tuesday/Thursday <br/>7:00 a.m. – 8:00 p.m.</p> -->
+					<p><?php echo $trainerInfo['uava']; ?></p>
+				<?php else:
+					echo $edit_txt;
+				endif; ?>
 			</div>
 
 			<div class="col-lg-3 col-md-3">
 				<h3>experience</h3>
-				<!-- <p>18 Years - Personal Trainer <br/>3 Years - Bodybuilder</p> -->
-				<p><?php echo $trainerInfo['uexp']; ?></p>
+				<?php if($trainerInfo['uexp'] != ""): ?>
+					<!-- <p>18 Years - Personal Trainer <br/>3 Years - Bodybuilder</p> -->
+					<p><?php echo $trainerInfo['uexp']; ?></p>
+				<?php else:
+					echo $edit_txt;
+				endif; ?>
 			</div>
-
 		</div>
 	</div>
 	
