@@ -290,6 +290,64 @@ class User
         ];
     }
 
+    /* It will return a list of trainers
+     * as if the user is a gym
+     * @return array
+     */
+    public function getTrainers()
+    {
+        return getTrainersOfGym($this);
+    }
+
+    /* It will return a list of trainers by id fields
+     * as if the user is a gym
+     * @return array
+     */
+    public function getTrainersById()
+    {
+        $trainers = $this->getTrainers();
+        $ids = [];
+
+        foreach ($trainers as $trainer)
+        {
+            $ids[] = $trainer->ID;
+        }
+        
+        return $ids;
+    }
+
+    public function getPrograms()
+    {
+        
+        global $wpdb;
+
+        $ids = $this->getTrainersById();
+        $ids[] = $this->id;
+
+        $ids = implode(",", $ids);
+        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN({$ids}) ORDER BY workout_ID desc";
+        $workouts = $wpdb->get_results($querystr, OBJECT);
+        return $workouts;
+    }
+
+    public function getExercises()
+    {
+        global $wpdb;
+
+        $programs = $this->getPrograms();
+        $programsAsId = [];
+        
+        foreach ($programs as $program) {
+            $programsAsId[] = $program->workout_ID;
+        }
+
+        $ids = implode(",", $programsAsId);
+        $querystr = "SELECT * FROM workout_exercises_tbl WHERE exer_workout_ID IN({$ids}) ORDER BY exer_ID desc";
+        $exercises = $wpdb->get_results($querystr, OBJECT);
+
+        return $exercises;
+    }
+    
     public static function getDefaultStat()
     {
         return [
