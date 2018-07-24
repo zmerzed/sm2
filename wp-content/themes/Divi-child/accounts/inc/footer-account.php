@@ -71,7 +71,7 @@
 		$.each(thisWork, function(i, v){
 			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v[0]['wname'] + ' - '+v[0]['wcnname']+'</span>';
 			if(dateToday == date){
-				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><img src="'+themedir+'/accounts/images/workout-play.png" /></a>';
+				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
 			htmlContent += '<a href="#"><img src="'+themedir+'/accounts/images/workout-note.png"></a></div></li>';
 		});

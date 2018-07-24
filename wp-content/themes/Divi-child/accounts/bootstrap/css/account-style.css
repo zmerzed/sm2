@@ -222,7 +222,8 @@ ul.workout-lists li .workout-wrapper{
 
 /*** Calendar Style ***/
 .responsive-calendar .btn{
-	background-color:#ae1f23
+	background-color:#ae1f23;
+	border:0;
 }
 
 .fc-head{
@@ -860,6 +861,7 @@ table.dataTable thead .sorting_asc:after{
 
 .modal{background-color:rgba(0,0,0,0.5);}
 #workoutModal .modal-dialog{margin-top:15%;}
+.gym-page #workoutModal .workout-wrapper a span{display:none;}
 #workoutModal .workout-wrapper a{float:right;margin-left:5px;}
 #workoutModal .wdname{
 	padding:10px;
@@ -1667,6 +1669,7 @@ body .member-page .member-links .children li a{color:#fff;}
 .gym-page .workout-wrapper label,
 .gym-page .workout-wrapper a{display:inline-block;line-height:normal;float:left;}
 .sm-workout-icon{background-image:url(../../images/sm-workout-icon.png);}
+.sm-play-icon{background-image:url(../../images/sm-play-icon.png);}
 .sm-delete-icon{background-image:url(../../images/sm-delete-icon.png);}
 .sm-edit-icon{background-image:url(../../images/sm-edit-icon.png);}
 .sm-record-icon{background-image:url(../../images/sm-record-icon.png);}
