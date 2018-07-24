@@ -192,7 +192,7 @@
 		curPage = window.location.href;
 		jcontent += '<p>To edit profile click <a href="'+curPage+'?data=profile" class="red-btn">Profile</a></p>';
 		<?php if ($jgym || $jtrain): ?>
-			jcontent += '<p>To add workout click <a href="'+curPage+'?data=add-workouts" class="red-btn">New workout</a> in <strong>Workouts</strong> page.</p>';			
+			jcontent += '<p>To add program click <a href="'+curPage+'?data=add-workouts" class="red-btn">New program</a> in <strong>Programs</strong> page.</p>';			
 			<?php if($jgym): ?>
 				jcontent += '<p>To add Trainer click <a href="'+curPage+'?data=trainers&add=1" class="red-btn">Add Trainer</a> in <strong>Trainers</strong> page.</p>';			
 			<?php endif; ?>

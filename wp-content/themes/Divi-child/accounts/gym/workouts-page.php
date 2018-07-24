@@ -5,7 +5,7 @@
 <div class="main-content matchHeight">
 
 	<div class="trainer-add-workout">
-		<a href="/gym/?data=add-workouts">+ New Workout</a>
+		<a href="/gym/?data=add-workouts">+ New Program</a>
 	</div>
 
 	<ul class="workout-lists trainer-workouts-lists">

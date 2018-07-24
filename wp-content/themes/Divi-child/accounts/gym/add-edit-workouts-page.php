@@ -4,13 +4,13 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6">
 				<span class="workout-day-name">
-					<label>Workout Name: </label>
+					<label>Program Name: </label>
 					<input type="text" value="Workout Name #1">
 				</span>
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<div class="btn-add-workout">
-					<button>+ new workout day</button>
+					<button>+ new workout</button>
 				</div>
 			</div>
 		</div>
@@ -18,8 +18,8 @@
 
 	<nav>
 	  <div class="nav nav-tabs" id="message-nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true">Day 1 - Name #1</a>
-	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#workout-2" role="tab" aria-controls="nav-profile" aria-selected="false">Day 2 - Name #2</a>
+	    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true">Workout 1 - Name #1</a>
+	    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#workout-2" role="tab" aria-controls="nav-profile" aria-selected="false">Workout 2 - Name #2</a>
 	  </div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent">
