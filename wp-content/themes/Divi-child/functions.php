@@ -1748,3 +1748,15 @@ function getTrainerInfo($u){
 	
 	return $tinfo;
 }
+/*Gym Edit Profile*/
+function getGymInfo($u){
+	$umeta = get_user_meta($u->ID);		
+	$tinfo = array();
+	
+	if(isset($umeta['sm_gym_about']))
+		$tinfo['sm_gym_about'] = $umeta['sm_gym_about'][0];
+	if(isset($umeta['sm_gym_color']))
+		$tinfo['sm_gym_color'] = $umeta['sm_gym_color'][0];
+	
+	return $tinfo;
+}
