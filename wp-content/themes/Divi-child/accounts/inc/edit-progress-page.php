@@ -26,7 +26,8 @@
 			$states = json_decode($states, true);
 			$result = $client->modifyStat($states, get_current_user_id());
 
-			wp_redirect( get_site_url() . '/trainer/?data=clients&edit='. $_GET['edit']);
+			/* wp_redirect( get_site_url() . '/trainer/?data=clients&edit='. $_GET['edit']); */
+			echo '<script>window.location.href="'.get_site_url() . '/trainer/?data=clients&edit='. $_GET['edit'].'";</script>';
 		}
 	}
 ?>
