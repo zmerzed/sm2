@@ -7,7 +7,7 @@ angular.module('smApp')
     var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
 	$scope.fileUrl = ROOTURL + '/sm-files/';
     $scope.currentUser = CURRENT_USER;
-    $scope.loadingTemplate = 'http://localhost:8000/wp-content/themes/Divi-child/partials/loading.html';
+    $scope.loadingTemplate = ROOTURL + '/wp-content/themes/Divi-child/partials/loading.html';
     console.log($scope.currentUser);	
 
     init();
