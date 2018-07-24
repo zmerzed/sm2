@@ -23,6 +23,9 @@
 	$ppp = pmpro_getMembershipLevelForUser($userdata->ID);
 	$pm_lvl = "";
 	$gcolor = "";
+	$gymInfo = getGymInfo($userdata);
+	if(isset($gymInfo['sm_gym_color']))
+		$gcolor = $gymInfo['sm_gym_color'];
 	if(!empty($ppp))
 		$pm_lvl = $ppp->name;	
 
@@ -42,14 +45,9 @@
   
   <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
   
-	 <?php
-		$gymInfo = getGymInfo($userdata);
-		$gcolor = $gymInfo['sm_gym_color'];
-		if($pm_lvl == "Gym" && $gcolor != ""):
-			
-	?>
+	 <?php if($pm_lvl == "Gym" && $gcolor != ""): ?>
 		<style>
-			<?php echo '.gym-page .red-btn,.gym-page .progress-bar,.gym-page .exercise-number,.gym-page .workout-tab-pane-wrapper,.gym-page .wi-blu,.gym-page .compose-message button, .gym-page .btn-add-workout button,.gym-page .message-wrapper,.gym-page .trainer-add-workout a,.gym-page .workoutclass,.gym-page #table-sorter_wrapper, .gym-page #table-sorter-logs_wrapper{background-color:#'.$gcolor.';}.gym-page #message-nav-tab .nav-item.active{background-color:#'.$gcolor.';border-color:#'.$gcolor.';}.gym-page .trainer-profile-name,.gym-page .trainer-day-label,.gym-page .main-navigation ul li a.active,.gym-page .main-navigation h3{color:#'.$gcolor.';}.gym-page .container-title h3,.gym-page .title-welcome-section .container,.gym-page .trainer-dashboard tr td:nth-child(1){border-color:#'.$gcolor.'!important;}'; ?>
+			<?php echo '.gym-page .responsive-calendar .day .badge,.gym-page .responsive-calendar .day.active.today a,.gym-page .responsive-calendar .day.active a:hover,.gym-page .responsive-calendar .btn,.gym-page .red-btn,.gym-page .progress-bar,.gym-page .exercise-number,.gym-page .workout-tab-pane-wrapper,.gym-page .wi-blu,.gym-page .compose-message button, .gym-page .btn-add-workout button,.gym-page .message-wrapper,.gym-page .trainer-add-workout a,.gym-page .workoutclass,.gym-page #table-sorter_wrapper, .gym-page #table-sorter-logs_wrapper,.gym-page .sm-icons{background-color:#'.$gcolor.';}.gym-page #message-nav-tab .nav-item.active{background-color:#'.$gcolor.';border-color:#'.$gcolor.';}.gym-page .trainer-profile-name,.gym-page .trainer-day-label,.gym-page .main-navigation ul li a.active,.gym-page .main-navigation h3{color:#'.$gcolor.';}.gym-page .container-title h3,.gym-page .title-welcome-section .container,.gym-page .trainer-dashboard tr td:nth-child(1){border-color:#'.$gcolor.'!important;}'; ?>
 		</style>
 	<?php endif; ?>
   

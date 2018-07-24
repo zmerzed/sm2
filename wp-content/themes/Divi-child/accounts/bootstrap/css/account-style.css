@@ -221,6 +221,9 @@ ul.workout-lists li .workout-wrapper{
 
 
 /*** Calendar Style ***/
+.responsive-calendar .btn{
+	background-color:#ae1f23
+}
 
 .fc-head{
 	background-color: #595a5a;
@@ -862,13 +865,14 @@ table.dataTable thead .sorting_asc:after{
 	padding:10px;
 	color:#fff;
 	font-weight:bold;
+	display:inline-block;
 }
 
 .responsive-calendar .day.active.today a{background-color:#ae1f23;}
-
+.responsive-calendar .day .badge{background-color:#ae1f23}
 .responsive-calendar .day.today a{background-color:#c7c7c7;}
 .responsive-calendar .day.active.today a,
-.responsive-calendar .day.active a:hover{background-color:#d0262a;color:#fff;}
+.responsive-calendar .day.active a:hover{background-color:#d0262a;color:#fff;opacity:0.7;}
 .responsive-calendar .day.active a{background-color:#e0e0e0;color:#000;}
 
 
@@ -1252,6 +1256,10 @@ ul.workout-exercise-lists li.workout-exercise-item{
 .gym-page #message-nav-tab .nav-item.active{background-color:#6db6e5;border-color:#6db6e5;}
 .gym-page .trainer-additional-box-info a,
 .gym-page .trainer-profile a{color:#595a5a;font-size:14px;text-transform:uppercase;text-decoration:underline;}
+.gym-page .responsive-calendar .day .badge,
+.gym-page .responsive-calendar .day.active.today a,
+.gym-page .responsive-calendar .day.active a:hover,
+.gym-page .responsive-calendar .btn,
 .gym-page .progress-bar,
 .gym-page .exercise-number,
 .gym-page .workout-tab-pane-wrapper,
@@ -1640,6 +1648,30 @@ body .member-page .member-links .children li a{color:#fff;}
 
 .trainer-edit-info label{font-weight:700;}
 .trainer-edit-info textarea{width:100%;}
+
+/*Programs Icons*/
+.sm-icons{
+	display:inline-block;
+	width:45px;
+	height:45px;
+	background-color:#ae1f23;
+	border-radius:50%;
+	line-height:45px;
+	float:left;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:45px auto;
+}
+
+.gym-page .workout-wrapper label{padding-top:8px;}
+.gym-page .workout-wrapper label,
+.gym-page .workout-wrapper a{display:inline-block;line-height:normal;float:left;}
+.sm-workout-icon{background-image:url(../../images/sm-workout-icon.png);}
+.sm-delete-icon{background-image:url(../../images/sm-delete-icon.png);}
+.sm-edit-icon{background-image:url(../../images/sm-edit-icon.png);}
+.sm-record-icon{background-image:url(../../images/sm-record-icon.png);}
+.sm-members-icon{background-image:url(../../images/sm-member-icon.png);}
+
 
 /*App Camera*/
 .app{

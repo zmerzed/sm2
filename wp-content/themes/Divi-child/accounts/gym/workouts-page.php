@@ -12,14 +12,14 @@
 		<?php foreach ($currentUser->getPrograms() as $program) { ?>
 		<li>
 			<div class="workout-wrapper">
-				<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"></span>
+				<span class="sm-workout-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"> --></span>
 				<!-- <span class="workout-ico wi-red wi-lifeter"></span> -->
 				<label><?php echo $program->workout_name ?></label>
 				<div class="workout-controls">
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon-blu.png'; ?>"></a></span>
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"></a></span>
-					<span><a href="/gym/?data=add-workouts&workout=<?php echo $program->workout_ID; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon-blu.png'; ?>"></a></span>
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon-blu.png'; ?>"></a></span>
+					<a href="#"><span class="sm-members-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon-blu.png'; ?>"> --></span></a>
+					<a href="#"><span class="sm-record-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"> --></span></a>
+					<a href="/gym/?data=add-workouts&workout=<?php echo $program->workout_ID; ?>"><span class="sm-edit-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon-blu.png'; ?>"> --></span></a>
+					<a href="#"><span class="sm-delete-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon-blu.png'; ?>"> --></span></a>
 				</div>
 			</div>
 		</li>
