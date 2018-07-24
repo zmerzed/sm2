@@ -22,6 +22,8 @@
   </div>
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-busy/4.1.4/angular-busy.min.js" type="text/javascript"></script>
 <!-- Optional JavaScript -->
   <script src='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/js/moment.min.js';?>'></script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

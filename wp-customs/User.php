@@ -316,6 +316,10 @@ class User
         return $ids;
     }
 
+    /*
+     * It will get all workouts depends if its trainer, client or gym
+     * @return list
+     */
     public function getPrograms()
     {
         
@@ -347,7 +351,15 @@ class User
 
         return $exercises;
     }
-    
+
+    public function getGymLogos() {
+
+        return [
+            'landscape' => '',
+            'portrait' => ''
+        ];
+    }
+
     public static function getDefaultStat()
     {
         return [

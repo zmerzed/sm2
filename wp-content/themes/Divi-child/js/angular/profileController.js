@@ -7,6 +7,7 @@ angular.module('smApp')
     var apiUrl = ROOTURL + '/wp-json/v1/client/upload';
 	$scope.fileUrl = ROOTURL + '/sm-files/';
     $scope.currentUser = CURRENT_USER;
+    $scope.loadingTemplate = 'http://localhost:8000/wp-content/themes/Divi-child/partials/loading.html';
     console.log($scope.currentUser);	
 
     init();
@@ -76,6 +77,7 @@ angular.module('smApp')
         var formData = new FormData();
         formData.append("myFile", blob, "thumb.jpg");
         formData.append("userId", USER_ID);
+
         $http.post(
             apiUrl, formData, {headers: {'Content-Type': undefined, 'Process-Data':false}}
         ).then(function() {
@@ -95,6 +97,56 @@ angular.module('smApp')
             location.reload();
         });
     };
+
+
+    /* trigger the input file for selecting an image */
+    $('#idGymLandscape').change(encodeImageFileAsURL(function(base64Img){
+
+        $('#idGymPhotoLandscapeResult').attr('src', base64Img);
+
+         var file = $scope.myFile;
+         var fd = new FormData();
+         fd.append('myFile', file);
+        // fd.append('userId', USER_ID);
+         $scope.promise = $http.post(
+             apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+         ).then(function() {
+             location.reload();
+         });
+    }));
+
+    $('#idGymPortrait').change(encodeImageFileAsURL(function(base64Img){
+
+        $('#idGymPhotoPortraitResult').attr('src', base64Img);
+
+         var file = $scope.myFile;
+         var fd = new FormData();
+         fd.append('myFile', file);
+        // fd.append('userId', USER_ID);
+         $scope.promise = $http.post(
+             apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+         ).then(function() {
+             location.reload();
+         });
+    }));
+    
+    $scope.gymRemoveLogo = function()
+    {
+
+
+    };
+    
+    $scope.gymUploadLogo = function(type)
+    {
+        if (type == 'landscape') {
+            console.log('landscape');
+            $("#idGymLandscape").click();
+        } else {
+            console.log('portrait');
+            $("#idGymPortrait").click();
+        }
+    };
+
 
     $("#idStatsForm").submit(function (e) {
 

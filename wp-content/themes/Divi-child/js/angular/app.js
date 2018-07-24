@@ -1,7 +1,7 @@
 /**
  * Created by remz on 7/10/2018.
  */
-var app = angular.module("smApp", []);
+var app = angular.module("smApp", ['cgBusy']);
 app.run(function() {
    console.log('sm app run....')
 });
