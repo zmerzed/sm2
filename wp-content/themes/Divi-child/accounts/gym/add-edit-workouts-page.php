@@ -30,7 +30,7 @@
 	  			<div class="row">
 	  				<div class="col-lg-6 col-md-6">
 	  					<span class="workout-day-name">
-	  						<label>Day Name: </label>
+	  						<label>Workout Name: </label>
 	  						<input type="text" value="Name #1">
 	  					</span>
 	  				</div>
