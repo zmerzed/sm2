@@ -356,10 +356,10 @@ function getWOutArr($results_w_day, $results_w)
 				$arrTemp['wname'] = $rw->workout_name;
 				$arrTemp['dayid'] = $dayid;
 				$arrTemp['workout_clientid'] = $rwd->workout_clientID;
+				$arrTemp['workout_isdone'] = $rwd->workout_isDone;
 				$arrTemp['wid'] = $wid;
 				$arrTemp['wsched'] = date_format(date_create($rwd->workout_client_schedule), 'Y-m-d');
-				$rday = $wpdb->get_results( "SELECT * FROM workout_days_tbl WHERE wday_ID = ". $dayid, OBJECT );
-				$arrTemp['wdname'] = $rday[0]->wday_name;
+				$arrTemp['wdname'] = getWorkoutDayName($dayid);
 				$woutArray[] = $arrTemp;
 			}
 		}
@@ -388,7 +388,7 @@ function getSchedData($u)
 			$wclientid = $wa['workout_clientid'];
 			$wclient = get_user_by('id', $wclientid);
 			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wa['wid']."&workout_client_id=".$wclientid;
-			$tempArr2[] = ['wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
+			$tempArr2[] = ['wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
 			$tempArr[$wa['wsched']][$ctrTemp] = $tempArr2;
 		}
 	}
@@ -1759,4 +1759,17 @@ function getGymInfo($u){
 		$tinfo['sm_gym_color'] = $umeta['sm_gym_color'][0];
 	
 	return $tinfo;
+}
+/*get Workout Day Name / Workout Name*/
+function getWorkoutDayName($wdid){
+	global $wpdb;
+	$wdayQ = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_ID = ' .$wdid, OBJECT);
+	
+	return $wdayQ[0]->wday_name;
+}
+/*Check user id exists*/
+function user_id_exists($user){
+    global $wpdb;
+    $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE ID = %d", $user));
+    if($count == 1){ return true; }else{ return false; }
 }

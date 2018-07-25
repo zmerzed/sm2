@@ -63,14 +63,26 @@
    themedir = "<?php echo get_stylesheet_directory_uri(); ?>";
    dateToday = "<?php echo date('Y-m-d'); ?>";
    function pullWorkout(date){
-		var thisWork = workoutDates[date];
-		/* console.log(thisWork); */
+		var thisWork = workoutDates[date];		
+		/* console.log(thisWork);  */
+		
 		$('#workoutModal').modal();
 		$('#workoutModal .modal-title').html('Program(s) for ' + date);
 		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
-		$.each(thisWork, function(i, v){
-			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v[0]['wname'] + ' - '+v[0]['wcnname']+'</span>';
-			if(dateToday == date){
+		$.each(thisWork, function(i, v){			
+			var wisDone = v[0]['wisdone'],
+			vstatus = "";
+			if(wisDone != 0){
+				vstatus = "(Completed)";
+			}				
+			if(dateToday > date && wisDone == 0){
+				vstatus = "(Not Completed)";
+			}								
+			if(dateToday < date && wisDone == 0){
+				vstatus = "(Pending)";
+			}				
+			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v[0]['wdname'] + ' - '+v[0]['wcnname']+' '+vstatus+'</span>';			
+			if(dateToday == date && wisDone == 0){
 				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
 			htmlContent += '<a href="#"><img src="'+themedir+'/accounts/images/workout-note.png"></a></div></li>';

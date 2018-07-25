@@ -19,7 +19,7 @@
 	</div>
 
 	<ul class="workout-lists trainer-workouts-lists">
-		<?php foreach(workOutUserList($current_user->ID) as $workout) {?>
+		<?php foreach(workOutUserList($current_user->ID) as $workout): ?>
 		<li class="workout-list-item">
 			<?php $url = "/trainer/?data=add-workouts&workout=" . $workout->workout_ID ?>
 			<div class="workout-wrapper">
@@ -33,24 +33,59 @@
 				</div>
 			</div>
 			<div class="list-of-clients-in-this-workout" style="display:none;">
-				<ul>
+				<table class="table-bordered" style="width:100%;">
+					<tr>
+					<th>Client</th>
+					<th>Workout Name</th>
+					<th>Status</th>
+					<th>Date</th>
+					</tr>
 					<?php
 					$workoutClientListArr = workoutClientsList($workout->workout_ID);
-					if(!empty($workoutClientListArr)):
-						foreach($workoutClientListArr as $workout_client):
-							$client_info = get_userdata($workout_client->workout_clientID);
+					
+					if(!empty($workoutClientListArr)):						
+						foreach($workoutClientListArr as $wc):						
+							$clientID = $wc->workout_clientID;
+							$clientIn = get_userdata($clientID);
+							$dateToday = date('Y-m-d');
+							
+							$workoutSched = getSchedData($clientIn);
+							$wsched = date('Y-m-d', strtotime($wc->workout_client_schedule));
+							$todaySched = array();
+							if(!empty($workoutSched[$dateToday]))
+								$todaySched = $workoutSched[$dateToday];	
+							
+								foreach($todaySched as $wc2):								
+									$wc3 = $wc2[0];
+									if($wc3['wname'] == $workout->workout_name):
+									
+										$client_info = get_userdata($clientID);
+										$wdone = $wc3['wisdone'];
+										$wdayName = $wc3['wdname'];	
+										$wlink = '<a href="'.$wc3['daylink'].'"><img src="'.get_stylesheet_directory_uri().'/accounts/images/workout-play.png" /></a> Start Now';
+										if($wdone == 1){
+											$wlink="Completed";
+										}
 					?>
-						<li><a href="<?php echo home_url(); ?>/trainer/?data=workout&dayId=<?php echo $workout_client->workout_client_dayID; ?>&workoutId=<?php echo $workout->workout_ID; ?>&workout_client_id=<?php echo $workout_client->workout_clientID;  ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>" /></a> <span><?php echo $client_info->user_nicename; ?></span></li>
+						<tr>
+							<td><span><?php echo $client_info->user_nicename; ?></span></td>
+							<td><?php echo $wdayName; ?></td>
+							<td><?php echo $wlink; ?></td>
+							<td><?php echo $dateToday; ?></td>
+						</tr>
 
-					<?php endforeach;
+					<?php
+									endif;
+								endforeach;
+							endforeach;
 						else:
 					?>
 						<li>No Client</li>
 					<?php endif; ?>
-				</ul>
+				</table>
 			</div>
 		</li>
-		<?php } ?>
+		<?php endforeach; ?>
 	</ul>
 </div>
 <!-- <script src='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/js/jquery-3.3.1.min.js';?>'></script> -->
