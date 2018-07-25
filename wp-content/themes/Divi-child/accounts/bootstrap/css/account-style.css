@@ -811,6 +811,14 @@ table.dataTable thead .sorting_asc:after{
 	text-transform: uppercase;
 }
 
+.trainer-per-day-schedule-box.today li.comp{
+	background-color:rgba(48,48,48,0.8);
+}
+.trainer-per-day-schedule-box li:hover{opacity:0.9;transition:0.2s ease}
+.trainer-per-day-schedule-box.today li a:hover{text-decoration:none;}
+.trainer-per-day-schedule-box.today li{
+	background-color:rgba(174,31,35,0.8);
+}
 .trainer-per-day-schedule-box{
 	margin: 0;
 	padding: 0px 2px;
@@ -1662,13 +1670,15 @@ body .member-page .member-links .children li a{color:#fff;}
 	float:left;
 	background-repeat:no-repeat;
 	background-position:center center;
-	background-size:45px auto;
+	/* background-size:45px auto; */
+	background-size:38px auto;
 }
 
 .gym-page .workout-wrapper label{padding-top:8px;}
 .gym-page .workout-wrapper label,
 .gym-page .workout-wrapper a{display:inline-block;line-height:normal;float:left;}
-.sm-workout-icon{background-image:url(../../images/sm-workout-icon.png);}
+/* .sm-workout-icon{background-image:url(../../images/sm-workout-icon.png);} */
+.sm-workout-icon{background-image:url(../../images/weight-lift.svg);}
 .sm-play-icon{background-image:url(../../images/sm-play-icon.png);}
 .sm-delete-icon{background-image:url(../../images/sm-delete-icon.png);}
 .sm-edit-icon{background-image:url(../../images/sm-edit-icon.png);}

@@ -20,20 +20,38 @@
 				foreach($daysOfWeek as $dow):	
 					$day = date_format(date_create($dow), 'l');
 		?>
-		<?php if(!empty($memScheds[$dow])): ?>
+		<?php if(!empty($memScheds[$dow])): ?>			
 			<div class="trainer-per-day-schedule">
 				<div class="per-day-schedule-box-wrapper">
 					<h3 class="trainer-day-label"><?php echo $day; ?></h3>				
-					<ul class="trainer-per-day-schedule-box trainer-schedule-wrapper">
-						<?php foreach($memScheds[$dow] as $ms): ?>							
-							<li>
-								<a href="<?php echo $ms[0]['daylink']; ?>">
+					<ul class="trainer-per-day-schedule-box trainer-schedule-wrapper <?php echo ($dow == $today) ? "today":""; ?>">
+						<?php foreach($memScheds[$dow] as $ms):
+							$wsta = "";
+							$wsta2 = "";
+							$wisdone = $ms[0]['wisdone'];
+							
+							if($wisdone == 0 && $dow < $today)
+								$wsta = "[Not Completed]";
+							elseif($wisdone == 0 && $dow > $today)
+								$wsta = "[Pending]";
+							elseif($wisdone == 0 && $dow == $today)
+								$wsta = '[Ready to Start]';
+							else{
+								$wsta = "[Completed]";							
+								$wsta2 = "comp";
+							}
+								
+						?>							
+							<li class="<?php echo $wsta2; ?>">
+								<a href="<?php echo ($ms[0]['wisdone'] == 0 && $dow == $today) ? $ms[0]['daylink'] : "javascript:void(0)"; ?>">
 									<span>
 										<img src="<?php echo get_stylesheet_directory_uri().'/accounts/images/gym-schedule-icon.png';?>">
-										<label>--:-- <small>--</small></label>
+										<!-- <label>--:-- <small>--</small></label> -->
+										<label><small><?php echo $dow; ?></small></label>
 									</span>
 									<h4><?php echo $ms[0]['wcnname']; //Workout Client Name ?></h4>
-									<h4><?php echo $ms[0]['wname']; //Workout name - Day Name ?></h4>
+									<h4><?php echo $ms[0]['wdname']; //Workout name - Day Name ?></h4>
+									<h4><?php echo $wsta; //Status ?></h4>
 								</a>
 							</li>
 						<?php endforeach; ?>						
