@@ -10,8 +10,8 @@
 	            <th>Video</th>
 	            <th>Exercise</th>
 	            <th>Body Part</th>
-	            <th>Categories</th>
-	            <th>Equipment</th>
+	            <!-- <th>Categories</th>
+	            <th>Equipment</th> -->
 	        </tr>
 	    </thead>
 	    <tbody>

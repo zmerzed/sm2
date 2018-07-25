@@ -8,7 +8,7 @@
             <tr>
             	<th>Time</th>
                 <th>Client</th>
-                <th>Workout</th>
+                <th>Program</th>
             </tr>
         </thead>
         <tbody>

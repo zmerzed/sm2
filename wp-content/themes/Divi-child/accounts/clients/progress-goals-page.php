@@ -46,9 +46,9 @@
 		<div class="container-title">
 			<h3>Progress / Goals</h3>
 		</div>
-		<div class="current-status">
+		<div class="current-status" style="max-width:80%;margin:0 auto;">
 			<div class="row">
-				<div class="col-lg-8 col-md-8">
+				<div class="col-lg-12 col-md-12">
 					<div class="current-goal">
 						<h3>Goal</h3>
 						<form id="idStatsForm" action="/client/?data=profile&by=progress-goals" method="POST">
