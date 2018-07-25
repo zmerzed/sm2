@@ -205,7 +205,7 @@ class User
             // $result = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE target_date IS NOT NULL AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
 
             // get the today record
-            $todayStat = $wpdb->get_results("SELECT * FROM workout_client_stats  WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
+            $todayStat = $wpdb->get_results("SELECT * FROM workout_client_stats WHERE DATE(`target_date`)=DATE(NOW()) AND client_id={$clientId} AND created_by={$modifier} AND type='result' LIMIT 1", ARRAY_A);
 
             if (count($todayStat) <= 0)
             {
@@ -215,6 +215,7 @@ class User
 
                 if (count($lastStat) > 0)
                 {
+                    //dd('llf');
                     // insert a new record
                     $stat = $data['result'];
                     $stat['client_id'] = (int) $data['client_id'];
@@ -226,6 +227,19 @@ class User
                     $stat['type'] = "result";
 
                     unset($stat['id']);
+
+                    $wpdb->insert('workout_client_stats', $stat);
+                } else {
+                    $stat = $data['result'];
+                    $stat['client_id'] = (int) $data['client_id'];
+                    $stat['created_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                    $stat['updated_at'] = Carbon::now()->format('Y-m-d H:m:s');
+                    $stat['target_date'] = Carbon::now()->format('Y-m-d H:m:s');
+                    $stat['created_by'] = $modifier;
+                    $stat['updated_by'] = $modifier;
+                    $stat['type'] = "result";
+
+                  //  unset($stat['id']);
 
                     $wpdb->insert('workout_client_stats', $stat);
                 }
@@ -276,17 +290,29 @@ class User
         /* $result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE DATE(`target_date`)=DATE(NOW()) AND client_id = {$this->id} AND type='RESULT'", ARRAY_A); */
 		$result = $wpdb->get_results( "SELECT * FROM workout_client_stats WHERE target_date=(SELECT MAX(target_date) FROM workout_client_stats WHERE client_id = {$this->id}) AND type='result'", ARRAY_A);
 		
-		if(empty($result))
-			$result = array(array());
-		if(empty($goal))
-			$goal = array(array());
-		if(empty($start))
-			$start = array(array());
+		if(empty($result)) {
+            $result = self::getDefaultStat();
+        } else {
+            $result = $result[0];
+        }
+
+		if(empty($goal)) {
+            $goal = self::getDefaultStat();
+        } else {
+            $goal = $goal[0];
+        }
+
+		if(empty($start)) {
+            $start = self::getDefaultStat();
+        } else {
+            $start = $start[0];
+        }
+
 
         return $output = [
-            'start' => $start[0],
-            'goal' => $goal[0],
-            'result' => $result[0]
+            'start' => $start,
+            'goal' => $goal,
+            'result' => $result
         ];
     }
 
