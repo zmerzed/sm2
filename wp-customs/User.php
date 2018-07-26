@@ -4,7 +4,8 @@ use Carbon\Carbon;
 
 class User
 {
-
+    public $forGymVal = NULL;
+    
     public function __construct()
     {
 
@@ -13,7 +14,10 @@ class User
     public function uploadFile($file)
     {
         global $wpdb;
-        
+        ini_set('display_errors','Off');
+        ini_set('error_reporting', E_ALL );
+        define('WP_DEBUG', false);
+        define('WP_DEBUG_DISPLAY', false);
         $currentDir = getcwd();
         $userId = $_POST['userId'];
 
@@ -23,9 +27,8 @@ class User
             $uploadDirectory = "/sm-files/{$userId}/";
         }
 
-      //  echo $currentDir . $uploadDirectory . "\n";
         if (!is_dir($currentDir . $uploadDirectory)) {
-           // echo 'xxxxxxxxxxxxxxxxx';
+
             mkdir($currentDir . $uploadDirectory, 0777, true);
         }
 
@@ -38,11 +41,15 @@ class User
         $fileSize = $file['size'];
         $fileTmpName  = $file['tmp_name'];
         $fileType = $file['type'];
-        $fileExtension = strtolower(end(explode('.',$fileName)));
+       // $fileExtension = strtolower(end(explode('.',$fileName)));
+
+        $mFileExtns = explode('.',$fileName);
+        $fileExtension = strtolower($mFileExtns[1]);
 
         if (in_array($fileExtension, $fileImageExtensions)) 
         {
         //    echo 'xXXXXXXXXXXXXXXXXX';
+
             $newFileName =  basename('photo_'.time()) . '.jpg';
             $uploadPath = $currentDir . $uploadDirectory . $newFileName;
             
@@ -50,22 +57,34 @@ class User
             $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
             if ($didUpload) {
+
+                $imageType = 'image';
+
+                if ($this->forGymVal) {
+                    
+                    if (isset($this->forGymVal['gym_profile_portrait'])) {
+                        $imageType = 'image_gym_portrait';
+                    }
+
+                    if (isset($this->forGymVal['gym_profile_landscape'])) {
+                        $imageType = 'image_gym_landscape';
+                    }
+                }
+
                 $wpdb->insert('workout_user_files',
                     array(
                         'file'   => $newFileName,
-                        'type' => 'image',
+                        'type' => $imageType,
                         'user_id' => (int) $this->id,
                         'uploaded_at' => Carbon::now()
                     )
                 );
-                return true;
-                //echo "The file " . basename($fileName) . " has been uploaded";
+
             } else {
-                //  echo "An error occurred somewhere. Try again or contact the admin";
+                $errors[] = "An error occurred somewhere. Try again or contact the admin";
             }
         } else if(in_array($fileExtension, $fileExtensions)) {
-          //  echo 'non image file...';
-          //  echo $fileExtension;
+
             $newFileName =  basename($fileName);
             $uploadPath = $currentDir . $uploadDirectory . $newFileName;
 
@@ -81,10 +100,9 @@ class User
                         'uploaded_at' => Carbon::now()
                     )
                 );
-                return true;
-                //echo "The file " . basename($fileName) . " has been uploaded";
+
             } else {
-                //  echo "An error occurred somewhere. Try again or contact the admin";
+                $errors[] = "An error occurred somewhere. Try again or contact the admin";
             }
         }
 
@@ -92,14 +110,10 @@ class User
             $errors[] = "This file is more than 2MB. Sorry, it has to be less than or equal to 2MB";
         }
 
-        if (empty($errors)) {
-
-           
-        } else {
-            foreach ($errors as $error) {
-               // echo $error . "These are the errors" . "\n";
-            }
-        }
+        return [
+            'errors' => $errors,
+            'gymPhotos' => $this->getGymLogos()
+        ];
     }
 
     public function modifyStat($data, $modifier)
@@ -380,9 +394,25 @@ class User
 
     public function getGymLogos() {
 
+        global $wpdb;
+
+        $portraitFile = '';
+        $portraits = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id={$this->id} AND type='image_gym_portrait' ORDER BY id desc", ARRAY_A);
+
+        $landscapeFile = '';
+        $landscapes = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id={$this->id} AND type='image_gym_landscape' ORDER BY id desc", ARRAY_A);
+
+        if (count($portraits) > 0) {
+            $portraitFile = get_site_url() . "/sm-files/{$this->id}/" . $portraits[0]['file'];
+        }
+
+        if (count($landscapes) > 0) {
+            $landscapeFile = get_site_url() . "/sm-files/{$this->id}/" . $landscapes[0]['file'];
+        }
+
         return [
-            'landscape' => '',
-            'portrait' => ''
+            'landscape' => $landscapeFile,
+            'portrait' => $portraitFile
         ];
     }
 
@@ -419,7 +449,9 @@ class User
 
             foreach ($keys as $key)
             {
-                $user->{$key} = $mUser[$key];
+                if ($key != 'user_pass') {
+                    $user->{$key} = $mUser[$key];
+                }
             }
 
             return $user;

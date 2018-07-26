@@ -1486,16 +1486,27 @@ function smUpload()
 
 	/* $image = New ImageMeta; */
 
+	$data = [];
+
 	if (isset($_POST['userId']))
 	{
 		$user = User::find($_POST['userId']);
 		//var_dump($_FILES);
-		if ($user) {
-			$user->uploadFile($_FILES['myFile']);
+		if ($user)
+		{
+			if (isset($_POST['gym_profile_portrait'])) {
+				$user->forGymVal = ['gym_profile_portrait' => true];
+			}
+
+			if (isset($_POST['gym_profile_landscape'])) {
+				$user->forGymVal = ['gym_profile_landscape' => true];
+			}
+
+			$data = $user->uploadFile($_FILES['myFile']);
 		}
 	}
 
-	return ['result' => true];
+	return ['result' => true, 'data' => $data];
 }
 
 function workoutClientExerciseLogs() {

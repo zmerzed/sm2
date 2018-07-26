@@ -56,7 +56,8 @@ else:
 					<h3>GYM Logos:</h3>
 					<small>Landscape</small>
 					<input id="idGymLandscape" type="file" onchange="encodeImageFileAsURL();" accept="image/x-png,image/gif,image/jpeg" style="display:none"/>
-					<img style="max-width:100%; height: 120px;" id="idGymPhotoLandscapeResult">
+					<img style="max-width:100%; height: 120px;" ng-if="currentUser.gymPhotos.landscape.length > 0" ng-src="{{ currentUser.gymPhotos.landscape }}">
+					<img style="max-width:100%; height: 120px;" ng-if="currentUser.gymPhotos.landscape.length <= 0"  id="idGymPhotoLandscapeResult">
 					<a href="javascript:void(0)" ng-click="gymUploadLogo('landscape')">Upload</a>
 				</div>
 
@@ -64,7 +65,8 @@ else:
 					<div style="width:150px;margin:0 auto;">
 						<small>Portrait</small>
 						<input id="idGymPortrait" type="file" onchange="encodeImageFileAsURL();" accept="image/x-png,image/gif,image/jpeg" style="display:none"/>
-						<img style="max-width:100%; height: 120px;" id="idGymPhotoPortraitResult">
+						<img style="max-width:100%; height: 120px;" ng-if="currentUser.gymPhotos.portrait.length > 0" ng-src="{{ currentUser.gymPhotos.portrait }}">
+						<img style="max-width:100%; height: 120px;" ng-if="currentUser.gymPhotos.portrait.length <= 0" id="idGymPhotoPortraitResult">
 						<a href="javascript:void(0)" ng-click="gymUploadLogo('portrait')">Upload</a>
 					</div>
 				</div>
