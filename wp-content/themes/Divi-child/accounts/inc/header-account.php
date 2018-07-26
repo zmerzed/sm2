@@ -1,9 +1,11 @@
 <?php
+require_once getcwd() . '/wp-customs/User.php';
+
   global $current_user;
   $userdata = wp_get_current_user();
   
 	global $post;
-	$temp_slug = get_page_template_slug($post->ID);
+	$temp_slug = get_page_template_slug($post->ID);	
 ?>
 <!doctype html>
 <html lang="en">
@@ -63,11 +65,20 @@
       <div class="row">
         <div class="col-lg-6 col-md-6">
 			<a href="<?php echo home_url(); ?>">
-			<?php if($pm_lvl == "Gym"): ?>
-				<img id="logo" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/gym-plus-logo.png">
-			<?php else: ?>
-				<img id="logo" src="<?php echo home_url(); ?>/wp-content/uploads/2018/02/sm-logov2-wht.svg">
-			<?php endif; ?>
+			<?php 
+				$logoSrc = home_url().'/wp-content/uploads/2018/02/sm-logov2-wht.svg';				
+				if($pm_lvl == "Gym"){
+					$gymLogos = User::find($userdata->ID)->getGymLogos();							
+					if(!empty($gymLogos['landscape'])){
+						$logoSrc = $gymLogos['landscape'];
+					}else{
+						$logoSrc = get_stylesheet_directory_uri().'/accounts/images/gym-plus-logo.png';
+					}
+				}else{
+					$logoSrc  = home_url().'/wp-content/uploads/2018/02/sm-logov2-wht.svg';
+				}
+			?>
+				<img id="logo" src="<?php echo $logoSrc; ?>">
 			</a>
         </div>
         <div class="col-lg-6 col-md-6">
