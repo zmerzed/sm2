@@ -28,7 +28,7 @@
 				<div class="workout-controls">
 					<span><a href="javascript:void(0);" onclick="toggleMembers(this)"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon.png'; ?>"></a></span>
 					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon.png'; ?>"></a></span>
-					<span><a href="<?php echo $url ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon.png'; ?>"></a></span>
+					<span><a href="<?php echo $url; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon.png'; ?>"></a></span>
 					<span><a href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon.png'; ?>"></a></span>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 										$client_info = get_userdata($clientID);
 										$wdone = $wc3['wisdone'];
 										$wdayName = $wc3['wdname'];	
-										$wlink = '<a href="'.$wc3['daylink'].'"><img src="'.get_stylesheet_directory_uri().'/accounts/images/workout-play.png" /></a> Start Now';
+										$wlink = '<a href="'.$wc3['daylink'].'" style="line-height:45px;"><span style="margin-right:5px;" class="sm-icons sm-play-icon"></span> Start Now</a>';
 										if($wdone == 1){
 											$wlink="Completed";
 										}

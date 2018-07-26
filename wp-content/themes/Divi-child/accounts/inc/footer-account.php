@@ -41,6 +41,9 @@
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.canvasjs.min.js"></script>  
 
   <script type="text/javascript">
+	function clickFile(a){
+		$('input[name="myFile"]').click();
+	}
 	if($('.basic').length != 0){
 		$(".basic").spectrum({
 			change: function(color) {

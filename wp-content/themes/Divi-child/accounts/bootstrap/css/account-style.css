@@ -526,6 +526,12 @@ table.dataTable thead .sorting_asc:after{
 
 
 /*** Personal Information ***/
+.upload-btn-wrapper input{
+	opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+.upload-btn-wrapper label{cursor:pointer;}
 
 .personal-data-information{
 	background-color: #303030;
@@ -1660,6 +1666,15 @@ body .member-page .member-links .children li a{color:#fff;}
 .trainer-edit-info textarea{width:100%;}
 
 /*Programs Icons*/
+.trainer-weekly-schedule-wrapper .sm-icon-small.sm-icons{
+	margin-left:5px;
+}
+.sm-icon-small.sm-icons{
+	width: 25px;
+	height: 25px;
+	background-size: 20px auto;
+	display:inline-block;
+}
 .sm-icons{
 	display:inline-block;
 	width:45px;

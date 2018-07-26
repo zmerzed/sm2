@@ -87,8 +87,12 @@
 <!--						<li><a href="#"><span><img src="--><?php //echo get_stylesheet_directory_uri() .'/accounts/images/xls.png'; ?><!--"></span>past_progress.xls</a></li>-->
 						<li ng-repeat="file in currentUser.files"><a href="<?php echo home_url(); ?>/sm-files/{{ file.user_id +'/'+ file.file }}" download><span><img ng-src="{{ file.file.indexOf('doc') != 0 && '<?php echo get_stylesheet_directory_uri() .'/accounts/images/doc.png'; ?>' }}"></span>{{ file.file }}</a></li>
 					</ul>
-					<input type="file" file-model="myFile"/>
-					<button ng-click="uploadFile()">upload me</button>
+					<div class="upload-btn-wrapper">
+						<label for="myFile" class="btn btn-primary" onclick="clickFile(this);">Browse...</label>
+						<input type="file" name="myFile" file-model="myFile" />
+						
+						<button ng-click="uploadFile()" class="btn">Upload a file</button>
+					</div>
 				</div>
 			</div>
 		</div>
