@@ -390,9 +390,19 @@ ul.workout-lists li .workout-wrapper{
 	padding: 0;
 }
 
+.progress-slider-photos li .snap-container{
+	display:table-cell;
+	height:120px;
+	vertical-align:middle;
+	background-color:#4e4e4e;
+}
+
 .progress-slider-photos li{
+	min-height:144px;
     display: inline-block;
     max-width: 80px;
+	float:left;
+	padding-right:2px;
 }
 
 .progress-slider-photos li span{
@@ -1705,6 +1715,7 @@ body .member-page .member-links .children li a{color:#fff;}
 .app{
 	width: 100%;
 	position: relative;
+	margin-bottom:1em;
 }
 
 .app #start-camera{
@@ -1744,60 +1755,14 @@ body .member-page .member-links .children li a{color:#fff;}
 	display: none;
 }
 
-.app .controls{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 20;
-
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	padding: 30px;
-	display: none;
-}
-
-.app .controls a{
-	border-radius: 50%;
-	color: #fff;
-	background-color: #111;
-	text-decoration: none;
-	padding: 15px;
-	line-height: 0;
-	opacity: 0.7;
-	outline: none;
-	-webkit-tap-highlight-color: transparent;
-}
 
 .app .controls a:hover{
 	opacity: 1;
 }
 
-.app .controls a.disabled{
-	background-color: #555;
-	opacity: 0.5;
-	cursor: default;
-	pointer-events: none;
-}
-
-.app .controls a.disabled:hover{
-	opacity: 0.5;
-}
-
-.app .controls a i{
-	font-size: 18px;
-}
-
-.app .controls #take-photo i{
-	font-size: 32px;
-}
-
 .app canvas{
 	display: none;
 }
-
 
 
 .app video#camera-stream.visible,
@@ -1808,7 +1773,8 @@ body .member-page .member-links .children li a{color:#fff;}
 }
 
 .app .controls.visible{
-	display: flex;
+	/* display: flex; */
+	display:inline-block;
 }
 
 

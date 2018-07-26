@@ -1,7 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <?php
-
-	require_once getcwd() . '/wp-customs/User.php';
 	$user = User::find(get_current_user_id());
 
 	$currentUser = [
@@ -134,7 +132,7 @@
 
 							<ul class="progress-slider-photos">
 								<li ng-repeat="photo in currentUser.photos">
-									<img ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}">
+									<div class="snap-container"><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
 									<span>{{ photo.uploaded_at }}</span>
 								</li>
 								<li>
@@ -147,12 +145,12 @@
 								</li>
 							</ul>
 
-							<div class="row">
+							<div class="row" style="display:none">
 								<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
 								<div class="output">
 									<img style="max-width:100%; height: 120px;">
 								</div>
-								<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
+								<!-- <button class="btn btn-default" ng-click="upload()">UPLOAD</button> -->
 							</div>
 						</div>
 						<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
@@ -180,18 +178,18 @@
 									<video id="camera-stream"></video>
 									<img id="snap">
 
-									<p id="error-message"></p>
-
-									<div class="controls">
-										<a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
-										<a href="#" id="take-photo" title="Take Photo"><i class="material-icons">camera_alt</i></a>
-										<a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a>
-									</div>
+									<p id="error-message"></p>									
 									<!-- Hidden canvas element. Used for taking snapshot of video. -->
 									<canvas></canvas>
 								</div>
-								<button class="btn btn-default">CANCEL</button>
-								<button class="btn btn-default" ng-click="upload()">UPLOAD</button>
+								<div class="controls">										
+									<a href="#" id="take-photo" title="Take Photo" class="btn btn-primary">Take Photo</a>
+									<a href="#" id="delete-photo" title="Delete Photo" class="disabled btn btn-danger">Retake</a>
+									<button class="btn btn-success" ng-click="upload()">Upload</button>
+									<!-- <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled"><i class="material-icons">file_download</i></a> -->
+								</div>
+								<!-- <button class="btn btn-default">CANCEL</button> -->
+								
 							</div>
 						</div>
 					</div>

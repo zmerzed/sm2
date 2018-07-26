@@ -91,7 +91,7 @@
 						<label for="myFile" class="btn btn-primary" onclick="clickFile(this);">Browse...</label>
 						<input type="file" name="myFile" file-model="myFile" />
 						
-						<button ng-click="uploadFile()" class="btn">Upload a file</button>
+						<button ng-click="uploadFile()" class="btn">Upload File</button>
 					</div>
 				</div>
 			</div>

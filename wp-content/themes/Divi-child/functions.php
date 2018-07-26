@@ -1718,11 +1718,15 @@ function getMembershipLevel($u){
 	
 	$u_lvl = "";
 	if($p_lvl == ""){
-		if(in_array('trainer', $u->roles)){
+		$uroles = array();
+		if(!empty($u->roles))
+			$uroles = $u->roles;
+		
+		if(in_array('trainer', $uroles)){
 			$p_lvl = "trainer";
-		}elseif(in_array('client', $u->roles)){
+		}elseif(in_array('client', $uroles)){
 			$p_lvl = "client";
-		}elseif(in_array('gym', $u->roles)){
+		}elseif(in_array('gym', $uroles)){
 			$p_lvl = "gym";
 		}
 	}
