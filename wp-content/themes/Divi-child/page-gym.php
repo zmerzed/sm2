@@ -85,6 +85,10 @@ if( is_user_logged_in() ){
 								get_template_part( 'accounts/gym/add-edit-workouts', 'page' );
 								break;
 
+							case 'edit-workout':
+								get_template_part( 'accounts/gym/edit-workout-page', 'page' );
+								break;
+
 							case 'exercises':
 								get_template_part( 'accounts/gym/exercises', 'page' );
 								break;
