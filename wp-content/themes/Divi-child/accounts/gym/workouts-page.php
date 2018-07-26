@@ -1,6 +1,10 @@
 <?php
 	require_once getcwd() . '/wp-customs/User.php';
 	$currentUser = User::find(get_current_user_id());
+
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workoutForm'])) {
+		workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $currentUser->ID]));
+	}
 ?>
 <div class="main-content matchHeight">
 

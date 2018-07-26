@@ -416,6 +416,32 @@ class User
         ];
     }
 
+    public function getClients() {
+
+
+        $clients = [];
+
+        if (getMembershipLevel($this) == 'gym')
+        {
+            $trainers = getTrainersOfGym($this);
+
+            if (count($trainers) > 0) {
+
+                foreach ($trainers as $trainer)
+                {
+                    $trainerClients = getClientsOfTrainer($trainer);
+
+                    foreach ($trainerClients as $client) {
+                        $clients[] = $client->data;
+                    }
+                }
+            }
+            
+        }
+
+        return $clients;
+    }
+
     public static function getDefaultStat()
     {
         return [

@@ -8,7 +8,6 @@ angular.module('smApp')
         $scope.fileUrl = ROOTURL + '/sm-files/';
         $scope.currentUser = CURRENT_USER;
         $scope.loadingTemplate = ROOTURL + '/wp-content/themes/Divi-child/partials/loading.html';
-        console.log($scope.currentUser);
 
         init();
 
@@ -151,8 +150,7 @@ angular.module('smApp')
                 $("#idGymPortrait").click();
             }
         };
-
-
+        
         $("#idStatsForm").submit(function (e) {
 
             console.log(JSON.stringify($scope.stats));

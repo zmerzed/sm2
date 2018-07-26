@@ -15,6 +15,15 @@ app.filter('dataURLtoBlob', function() {
         return new Blob([u8arr], {type:mime});
     }
 });
+app.filter("range", function() {
+    return function(input, total) {
+        total = parseInt(total);
+        for (var i = 0; i < total; i++) {
+            input.push(i);
+        }
+        return input;
+    };
+});
 app.directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
@@ -29,4 +38,28 @@ app.directive('fileModel', ['$parse', function ($parse) {
             });
         }
     };
+}]);
+app.directive("datepicker", function () {
+    return {
+        restrict: "A",
+        link: function (scope, el, attr) {
+            var dateToday = new Date();
+            el.datepicker({
+                minDate: dateToday,
+                dateFormat: 'yy-mm-dd'
+            });
+        }
+    };
+});
+app.directive("submit", [function () {
+    return {
+        scope: {
+            submit: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("submit", function (loadEvent) {
+                return scope.submit(loadEvent);
+            });
+        }
+    }
 }]);
