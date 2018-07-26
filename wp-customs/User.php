@@ -436,7 +436,7 @@ class User
                     }
                 }
             }
-            
+
         }
 
         return $clients;
@@ -464,12 +464,12 @@ class User
     {
         global $wpdb;
         $user = new self();
-        $user->id = $userId;
+
         $userArr = $wpdb->get_results( "SELECT * FROM wp_users WHERE ID = {$userId} LIMIT 1", ARRAY_A);
 
         if ($userArr)
         {
-
+            $user->id = $userId;
             $mUser = $userArr[0];
             $keys = array_keys($userArr[0]);
 
@@ -480,8 +480,14 @@ class User
                 }
             }
 
+            if (getMembershipLevel($user) == 'gym') {
+                $user->isGym = true;
+            }
+
             return $user;
         }
+
+
         return $user;
     }
 }

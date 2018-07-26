@@ -7,6 +7,7 @@ angular.module('smApp')
     $scope.exerciseOptions = EXERCISE_OPTIONS;
     $scope.exerciseSQoptions = EXERCISE_SQ_OPTIONS;
     $scope.clientExerciseSets = [];
+    $scope.currentUser = CURRENT_USER;
     $scope.workoutMaxSet = 0;
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/new_workout.html';
@@ -20,6 +21,8 @@ angular.module('smApp')
 
         console.log('CLIENTS');
         console.log($scope.clients);
+        console.log('CLIENTS');
+        console.log(CURRENT_USER);
         $http.get(urlApiClient + '/hash').then(function(res)
         {
             $scope.workout = {
@@ -188,7 +191,6 @@ angular.module('smApp')
     };
 
     $scope.sendForm = function() {
-        console.log('send form....');
 
         var toSend = angular.copy($scope.workout);
 
