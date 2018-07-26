@@ -470,7 +470,7 @@ function workOutAdd($data)
 				array(
 					'wday_workout_ID' => $workOutId,
 					'wday_name' => $d['name'],
-					'wday_order' => (int) $d['order']
+					'wday_order' => (int) $d['seq']
 				)
 			);
 
@@ -555,7 +555,7 @@ function workOutAdd($data)
 								'workout_client_dayID' => (int) $dayId,
 								'workout_client_workout_ID' => (int) $workOutId,
 								'workout_clientID' => (int) $client['ID'],
-								'workout_day_availability' => (int) $client['day_availability'],
+								'workout_day_availability' => $scheduleDate->dayOfWeek,
 								'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
 							)
 						);
