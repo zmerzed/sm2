@@ -379,7 +379,7 @@ function getSchedData($u)
 	$woutArray = getMonthlySchedule($u);
 	$ctrTemp = 0;
 	$tempArr = array();
-	$urole = getMembershipLevel($u);
+	$urole = getMembershipLevel(wp_get_current_user());
 
 	if(!empty($woutArray)){
 		foreach($woutArray as $wa){
