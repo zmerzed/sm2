@@ -39,20 +39,45 @@
 				foreach($clientsArr as $client_ => $value):							
 					$trainerInfo = get_user_by('id', $client_);					
 					foreach($value as $client__):
+						$user = User::find($client__);
+						$currentUser = [
+							'stats' => $user->getStats(),
+							'photos' => $user->getPhotos()
+						];
+						
+						$eachBPStats = getGoalPerc($currentUser['stats']); //Bodypart %s
+						$bppavg = getBPPercAvg($eachBPStats); //Bodypart %s Average
+						
 						$user_info = get_user_by('id', $client__);
-						$user_ava = get_avatar( $user_info->ID, 32 );
+						$purpose =  get_user_meta($client__, 'sm_accomtext', true);
+						
+						$uPho = array();
+						$userPhoto = "";
+						if(!empty($currentUser['photos'])){
+							$uPho = $currentUser['photos'];
+							$countPho = count($uPho) - 1;
+							$latestPho = $uPho[$countPho];
+							$userPhoto = home_url() . '/sm-files/' . $latestPho['user_id'] . '/' . $latestPho['file'];
+						}
 						if($user_info):
 			?>
 				<tr>
-					<td><?php echo $user_ava; ?></td>
+					<td>
+						<?php
+							if($userPhoto)
+								echo '<img src="'.$userPhoto.'"  class="img-responsive" style="max-width:50px;" />';
+							else
+								echo '<img src="'.get_stylesheet_directory_uri().'/accounts/images/client-1.png" />';
+						?>
+					</td>
 					<td><?php echo $user_info->first_name . ' ' . $user_info->last_name; ?></td>
-					<td> -- </td>
+					<td> <?php echo ($purpose) ? $purpose : "--"; ?> </td>
 					<td><?php echo $trainerInfo->first_name . ' ' . $trainerInfo->last_name; ?></td>
 					<td>-- Days Ago</td>
 					<td>
 						<div class="progress client-goals-percentage">
-							<div class="progress-bar" style="width: 0%;">
-								<span class="indicator"><small>0%</small></span>
+							<div class="progress-bar" style="width: <?php echo $bppavg; ?>%;">
+								<span class="indicator"><small><?php echo $bppavg; ?>%</small></span>
 							</div>
 						</div>
 					</td>
