@@ -365,7 +365,10 @@ class User
         
         global $wpdb;
 
+        /* get trainers if the user has trainer under your account */
         $ids = $this->getTrainersById();
+
+        /* current user id */
         $ids[] = $this->id;
 
         $ids = implode(",", $ids);

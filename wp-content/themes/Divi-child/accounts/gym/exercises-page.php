@@ -16,10 +16,11 @@
 	    </thead>
 	    <tbody>
 		<?php foreach ($currentUser->getExercises() as $exercise) { ?>
+			<?php if (!$exercise->exer_type) continue; ?>
 	        <tr>
 	            <td><img src="<?php echo get_stylesheet_directory_uri().'/accounts/images/video-exercise.png';?>"></td>
-	            <td><?php echo $exercise->exer_body_part; ?></td>
 	            <td><?php echo $exercise->exer_type; ?></td>
+	            <td><?php echo $exercise->exer_body_part; ?></td>
 	        </tr>
 		<?php } ?>
 	    </tbody>
