@@ -615,12 +615,11 @@ function workOutUpdate($data)
 	$mWorkoutId = (int) $workout['workout_ID'];
 	$weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
+	/* update workout */
 	$wpdb->update(
 		'workout_tbl',
-		array(
-			'workout_name' => $workout['workout_name']
-		),
-		array( 'workout_ID' => $workout['workout_ID'] )
+		array('workout_name' => $workout['workout_name']),
+		array('workout_ID' => $workout['workout_ID'])
 	);
 
 	if (isset($workout['days']))
@@ -630,7 +629,7 @@ function workOutUpdate($data)
 		foreach($workout['days'] as $d)
 		{
 
-			if (isset($d['wday_ID']) && $d['isDelete'])
+			if (isset($d['wday_ID']) && isset($d['isDelete']))
 			{
 
 				/* delete exercises and clients */

@@ -1,7 +1,6 @@
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateWorkoutForm'])) {
 		$id_ = workOutUpdate($_POST);
-		wp_redirect( get_site_url() . '/trainer/?data=add-workouts&workout='. $id_);
 	}
 
 	$currentUser = User::find(wp_get_current_user()->ID);
