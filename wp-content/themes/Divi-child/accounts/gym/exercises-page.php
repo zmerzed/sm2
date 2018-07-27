@@ -1,28 +1,19 @@
 <?php
 	require_once getcwd() . '/wp-customs/User.php';
 	$currentUser = User::find(get_current_user_id());
-
+	$exerciseTypes = Exercise::types();
 ?>
-<div class="main-content matchHeight">
-	<table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
-	    <thead>
-	        <tr>
-	            <th>Video</th>
-	            <th>Exercise</th>
-	            <th>Body Part</th>
-	            <!-- <th>Categories</th>
-	            <th>Equipment</th> -->
-	        </tr>
-	    </thead>
-	    <tbody>
-		<?php foreach ($currentUser->getExercises() as $exercise) { ?>
-			<?php if (!$exercise->exer_type) continue; ?>
-	        <tr>
-	            <td><img src="<?php echo get_stylesheet_directory_uri().'/accounts/images/video-exercise.png';?>"></td>
-	            <td><?php echo $exercise->exer_type; ?></td>
-	            <td><?php echo $exercise->exer_body_part; ?></td>
-	        </tr>
-		<?php } ?>
-	    </tbody>
-	</table>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+	var CURRENT_USER = <?php echo json_encode($currentUser); ?>;
+	var ROOT_URL = '<?php echo get_site_url(); ?>';
+	var EXERCISE_TYPES = <?php echo json_encode($exerciseTypes); ?>;
+</script>
+<div class="main-content matchHeight" ng-app="smApp" ng-controller="exercisesController">
+	<div ng-include src="workoutTemplate"></div>
 </div>
+
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/app.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/exercisesController.js'; ?>"></script>

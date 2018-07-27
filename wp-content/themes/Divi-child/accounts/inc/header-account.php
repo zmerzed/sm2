@@ -1,8 +1,9 @@
 <?php
-require_once getcwd() . '/wp-customs/User.php';
+	require_once getcwd() . '/wp-customs/User.php';
+	require_once getcwd() . '/wp-customs/Exercise.php';
 
-  global $current_user;
-  $userdata = wp_get_current_user();
+	global $current_user;
+  	$userdata = wp_get_current_user();
   
 	global $post;
 	$temp_slug = get_page_template_slug($post->ID);	

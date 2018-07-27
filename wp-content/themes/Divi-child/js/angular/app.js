@@ -1,7 +1,7 @@
 /**
  * Created by remz on 7/10/2018.
  */
-var app = angular.module("smApp", ['cgBusy']);
+var app = angular.module("smApp", ['cgBusy', 'ui.bootstrap']);
 app.run(function() {
    console.log('sm app run....')
 });
@@ -22,6 +22,13 @@ app.filter("range", function() {
             input.push(i);
         }
         return input;
+    };
+});
+app.filter('start', function () {
+    return function (input, start) {
+        if (!input || !input.length) { return; }
+        start = +start;
+        return input.slice(start);
     };
 });
 app.directive('fileModel', ['$parse', function ($parse) {
