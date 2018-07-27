@@ -1787,3 +1787,71 @@ function user_id_exists($user){
     $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE ID = %d", $user));
     if($count == 1){ return true; }else{ return false; }
 }
+/*Get Goal %*/
+function getGoalPerc($stats){
+	$sta = array();
+	$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date', 'created_at', 'updated_at'];
+	foreach($stats as $k2 => $v2){			
+		foreach($v2 as $k => $v){
+			if(!in_array($k, $not_inc)){
+				if($k2 == "start"){
+					$sta[$k]['sw'] = $v;				
+				}elseif($k2 == "goal"){
+					$sta[$k]['gw'] = $v;
+				}else{
+					$sta[$k]['cw'] = $v;
+				}
+			}
+		}			
+	}	
+	return $sta;
+}
+/*calculate Percentage per bodyparts*/
+function calcppbp($gw,$sw,$cw){
+	if($gw == "")
+		$gw = 0;
+	if($sw == "")
+		$sw = 0;
+	if($cw == "")
+		$cw =0;
+	if($gw > $sw){//Gain									
+		if($cw > $sw){
+			if($cw >= $gw)
+				$pp = 0;
+			else
+				$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
+		}elseif($cw < $sw){
+			$pp = 0;
+		}else{
+			$pp = 0;
+		}
+		
+	}elseif($gw < $sw){//Loss
+		if($cw < $sw){
+			if($cw <= $gw)
+				$pp = 0;
+			else
+				$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
+		}elseif($cw > $sw){
+			$pp = 0;
+		}else{
+			$pp = 0;
+		}
+	}elseif($gw == $sw && $gw != 0 && $sw != 0){
+		$pp = 100;
+	}else{
+		$pp = 0;
+	}	
+	return $pp;
+}
+function getBPPercAvg($eachBPStats){ //Get Average Percentage on each Body Part
+	$avgArr = array();
+	foreach($eachBPStats as $v=>$sa){
+		$gw = $sa['gw'];           
+		$sw = $sa['sw'];         
+		$cw = $sa['cw'];
+		$pp = round(abs(calcppbp($gw, $sw ,$cw)));
+		$avgArr[] = $pp;		
+	}
+	return round(abs(array_sum($avgArr)/count($avgArr)));
+}

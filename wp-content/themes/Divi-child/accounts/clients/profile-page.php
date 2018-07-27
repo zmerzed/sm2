@@ -1,14 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<?php
-require_once getcwd() . '/wp-customs/User.php';		
+<?php	
 $user = User::find(get_current_user_id());
 $currentUser = [
 	'id' => $user->id,
 	'files' => $user->getPhotos(),
 	'stats' => $user->getStats()
 ];
-
-
 ?>
 
 <div class="main-content matchHeight">
@@ -17,35 +14,8 @@ $currentUser = [
         <h3>Current Status</h3>
     </div>
 	
-	<?php		
-		$status_arr = array(
-			"weight" => array('gw'=>180,'sw'=>167, 'cw'=>168),
-			"body_fat" => array('gw'=>26,'sw'=>20, 'cw'=>26),
-			"waist" => array('gw'=>34,'sw'=>32, 'cw'=>34),
-			"chest" => array('gw'=>36,'sw'=>40, 'cw'=>39),
-			"arms" => array('gw'=>34,'sw'=>32, 'cw'=>34),
-			"forearms" => array('gw'=>34,'sw'=>32, 'cw'=>34),
-			"shoulders" => array('gw'=>34,'sw'=>32, 'cw'=>34),
-			"hips" => array('gw'=>34,'sw'=>32, 'cw'=>34),
-			"thighs" => array('gw'=>24,'sw'=>28, 'cw'=>24),
-			"calves" => array('gw'=>16,'sw'=>18, 'cw'=>16),
-			"neck" => array('gw'=>12,'sw'=>14, 'cw'=>12),
-			"height" => array('gw'=>177.8,'sw'=>177.8, 'cw'=>177.8)
-		);
-		$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date', 'created_at', 'updated_at'];		
-		foreach($currentUser['stats'] as $k2 => $v2){			
-			foreach($v2 as $k => $v){
-				if(!in_array($k, $not_inc)){
-					if($k2 == "start"){
-						$status_arr[$k]['sw'] = $v;				
-					}elseif($k2 == "goal"){
-						$status_arr[$k]['gw'] = $v;
-					}else{
-						$status_arr[$k]['cw'] = $v;
-					}
-				}
-			}			
-		}		
+	<?php	
+		$status_arr = getGoalPerc($currentUser['stats']);
 	?>
 
 	<div class="current-status">
@@ -55,48 +25,19 @@ $currentUser = [
 					<table>						
 						<?php						
 							foreach($status_arr as $v=>$sa):
-								$gw = $sa['gw'];//Goal Weight           
-								$sw = $sa['sw'];//Start Weight           
-								$cw = $sa['cw'];//Current Weight
-								$pp = 0;
-								$ea = 0;// Expected answer: 0 - negative; 1 - positive
+								$gw = $sa['gw'];//Goal           
+								$sw = $sa['sw'];//Start           
+								$cw = $sa['cw'];//Current								
 								
-								if($gw > $sw){//Gain
-									
-									if($cw > $sw){
-										if($cw >= $gw)
-											$pp = 0;
-										else
-											$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
-									}elseif($cw < $sw){
-										$pp = 0;
-									}else{
-										$pp = 0;
-									}
-									
-								}elseif($gw < $sw){//Loss
-									if($cw < $sw){
-										if($cw <= $gw)
-											$pp = 0;
-										else
-											$pp = ( ($sw - $cw) / ($gw - $sw) ) * 100;
-									}elseif($cw > $sw){
-										$pp = 0;
-									}else{
-										$pp = 0;
-									}
-								}else{
-									$pp = 0;
-								}
-								$pp = round(abs($pp));
+								$pp = round(abs(calcppbp($gw, $sw ,$cw)));//calculate Percentage per bodyparts
 						?>
 							<tr>
 								<!-- <td><?php echo "GW:" .$gw. ", SW:" .$sw .", CW:" .$cw . ", PP:". $pp; ?><hr></td> -->
 								<td class="progress-title"><label><?php echo $v; ?></label></td>
 								<td class="progress-status-bar">
 									<div class="progress">
-										<div class="progress-bar" style="width: <?php echo round(abs($pp)); ?>%;">
-											<span class="indicator"><small><?php echo round(abs($pp)); ?>%</small></span>
+										<div class="progress-bar" style="width: <?php echo $pp; ?>%;">
+											<span class="indicator"><small><?php echo $pp; ?>%</small></span>
 										</div>
 									</div>
 								</td>
