@@ -3,7 +3,13 @@
 	/* $userdata = get_currentuserinfo(); */
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workoutForm'])) {
-		workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $current_user->ID]));
+        $currentUser = User::find(get_current_user_id());
+		$newWorkout = workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $current_user->ID]));
+
+		Log::insert(
+			['type' => 'GYM_CREATE_PROGRAM', 'workout' => $newWorkout],
+			$currentUser
+		);
 	}
 
 	if (isset($_GET['delete'])) {

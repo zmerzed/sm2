@@ -1,9 +1,14 @@
 <?php
 	$currentUser = User::find(get_current_user_id());
 	$dateToday = date('Y-m-d');
-	
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workoutForm'])) {
-		workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $currentUser->ID]));
+		$newWorkout = workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $currentUser->ID]));
+
+		Log::insert(
+			['type' => 'GYM_CREATE_PROGRAM', 'workout' => $newWorkout],
+			$currentUser
+		);
 	}
 ?>
 <div class="main-content matchHeight">
@@ -13,8 +18,8 @@
 	</div>
 
 	<ul class="workout-lists trainer-workouts-lists">
-		<?php foreach ($currentUser->getPrograms() as $program) {	
-			$gymTrainers = getTrainersOfGym($currentUser);	
+		<?php foreach ($currentUser->getPrograms() as $program) {
+			$gymTrainers = getTrainersOfGym($currentUser);
 		?>
 		<li class="workout-list-item">
 			<div class="workout-wrapper">
@@ -39,19 +44,19 @@
 					<?php
 						if(!empty($gymTrainers)){
 							foreach($gymTrainers as $gymtrainer){
-								$clientsOfTrainer = getClientsOfTrainer($gymtrainer);								
+								$clientsOfTrainer = getClientsOfTrainer($gymtrainer);
 								foreach($clientsOfTrainer as $client){
 									$workoutSched = getSchedData($client);
 									$todayScheds = array();
 									if(!empty($workoutSched[$dateToday]))
 										$todayScheds = $workoutSched[$dateToday];
-									
+
 									foreach($todayScheds as $ts){
 										$ts2 = $ts[0];
 										if($ts2['wname'] == $program->workout_name){
 											$client_info = get_userdata($client->ID);
 											$wdone = $ts2['wisdone'];
-											$wdayName = $ts2['wdname'];	
+											$wdayName = $ts2['wdname'];
 											$wlink = 'Ready to start';
 											if($wdone == 1){
 												$wlink="Completed";
@@ -64,14 +69,14 @@
 							<td><?php echo $dateToday; ?></td>
 						</tr>
 					<?php
-											
+
 										}
 									}
-								}								
+								}
 							}
 						}else{
 								echo '<tr><td colspan="4">No Client</td></tr>';
-						}	
+						}
 					?>
 				</table>
 			</div>

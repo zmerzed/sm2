@@ -1,9 +1,15 @@
 <?php
+	$currentUser = User::find(wp_get_current_user()->ID);
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateWorkoutForm'])) {
-		$id_ = workOutUpdate($_POST);
+		$updatedWorkout = workOutUpdate($_POST);
+
+		Log::insert(
+			['type' => 'GYM_UPDATE_PROGRAM', 'workout' => $updatedWorkout],
+			$currentUser
+		);
 	}
 
-	$currentUser = User::find(wp_get_current_user()->ID);
 ?>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

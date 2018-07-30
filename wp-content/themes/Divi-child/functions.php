@@ -406,6 +406,16 @@ function in_array_r($needle, $haystack, $strict = false) {
 	return false;
 }
 
+function in_array_recursive($needle, $haystack)
+{
+	foreach($haystack as $item)
+	{
+		if ($needle = $item || is_array($item) && in_array_recursive($needle, $item)) {
+			return true;
+		}
+	}
+	return false;
+}
 
 function test()
 {
@@ -599,6 +609,9 @@ function workOutAdd($data)
 		}
 	}
 
+	$workout = workOutGet($workOutId);
+
+	return $workout;
 }
 
 function workOutUpdate($data)
@@ -1088,7 +1101,7 @@ function workOutUpdate($data)
 		}
 	}
 
-	return $workout['workout_ID'];
+	return $workout;
 }
 
 function workOutGetClients()

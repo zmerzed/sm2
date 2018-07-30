@@ -1,8 +1,13 @@
 <?php
+	$currentUser = User::find(get_current_user_id());
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateWorkoutForm'])) {
-		$id_ = workOutUpdate($_POST);
-		wp_redirect( get_site_url() . '/trainer/?data=add-workouts&workout='. $id_);
+		$updatedWorkout = workOutUpdate($_POST);
+
+		Log::insert(
+			['type' => 'GYM_UPDATE_PROGRAM', 'workout' => $updatedWorkout],
+			$currentUser
+		);
 	}
 ?>
 

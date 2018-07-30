@@ -1,4 +1,5 @@
 <?php
+	require_once getcwd() . '/wp-customs/Log.php';
 	require_once getcwd() . '/wp-customs/User.php';
 	require_once getcwd() . '/wp-customs/Exercise.php';
 

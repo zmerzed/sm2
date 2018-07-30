@@ -445,6 +445,13 @@ class User
         return $clients;
     }
 
+    public function getLogs() {
+
+        $logs = Log::user($this->id);
+
+        return $logs;
+    }
+
     public static function getDefaultStat()
     {
         return [
