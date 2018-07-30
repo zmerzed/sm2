@@ -10,7 +10,9 @@
 		$urole = "gym";
 	}elseif($op_client){
 		$urole = "client";
-	}	
+	}
+	
+	$r_uri = $_SERVER['REQUEST_URI'];
 ?>
 <div class="col-lg-2 col-md-2">
 	<div class="main-navigation matchHeight">
@@ -61,7 +63,7 @@
 			<?php endif; ?>			
 			</li>			
 			<!-- <li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>	 -->	
-			<li><a href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
+			<li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
 			<?php if($pm_lvl != ""): ?>
@@ -73,7 +75,7 @@
 			<div class="menu-divider"></div>
 
 			<ul>
-				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
+				<li><a class="<?php echo (strpos($r_uri, 'workouts')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
 				<?php if($op_gym): ?>
 					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>

@@ -62,9 +62,9 @@ body .swpm-button-wrapper button,
     box-shadow: none;
 }
 /*Messages Styles*/
-.fep-button:hover,
-.fep-button-active{background-color:#c5383d;color:#fff;border:0;}
-.fep-button{background-color:#b92025;color:#fff;border:0!important;}
+.page-template-page-messages .fep-button:hover,
+.page-template-page-messages .fep-button-active{background-color:#c5383d;color:#fff;border:0;}
+.page-template-page-messages .fep-button{background-color:#b92025;color:#fff;border:0!important;}
 input.fep-cb-check-uncheck-all{margin-right:10px;}
 body #fep-menu-announcements.fep-button,
 body #fep-menu-settings.fep-button,
@@ -72,6 +72,8 @@ body #fep-menu-settings.fep-button,
 .page-template-page-messages #wpadminbar,
 .page-template-page-messages #main-header,
 .page-template-page-messages #top-header,
+.fep-message-title:after,
+.fep-form-field-message_content .fep-label,
 #fep-message-top{display:none;}
 .fep-message-author{padding-top:10px;display:inline-block;font-weight:bold;}
 /* .fep-message-date, */
@@ -112,3 +114,8 @@ body .fep-message .fep-message-title-heading.participants{font-size:12px;}
 .title-welcome-section .col-lg-6 h4{text-align:right;}
 .fep-font-red{color:#fff;}
 .fep-column-title{position:relative;}
+.page-template-page-messages a:hover,
+.page-template-page-messages a{color:#b92025}
+.page-template-page-messages #main-footer{display:none!important}
+#fep-menu .fep-button:hover, .fep-button-active{font-size:13px}
+.fep-form-field-message_content{margin-top:1em;}
