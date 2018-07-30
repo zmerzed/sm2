@@ -14,8 +14,8 @@
 							echo 'Profile';					
 						}elseif($dr == "profile"){
 							echo 'Profile';					
-						}elseif($dr == "message"){
-							echo 'Message';
+						}elseif(isset($_GET['fepaction']) || strpos($_SERVER['REQUEST_URI'], 'messages')){
+							echo 'Messages';
 						}elseif($dr == "notes"){
 							echo 'Notes';					
 						}elseif($dr == "logs"){

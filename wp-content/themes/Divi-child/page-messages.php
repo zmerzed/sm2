@@ -14,17 +14,20 @@ $pm_lvl = getMembershipLevel($uinfo);
 $temp_slug = $post->post_name;
 ?>
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/bootstrap/css/account-style.css">
 <div class="message-body">
-	<?php	require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' );?>
-	<div class="container">
-		<div class="row">
-			<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
-			<div class="col-lg-10 col-md-10">
-				<?php
-					while ( have_posts() ) : the_post();		
-						the_content();		
-					endwhile;
-				?>
+	<?php require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' ); ?>
+	<div class="main-section">
+		<div class="container">
+			<div class="row">
+				<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
+				<div class="col-lg-10 col-md-10">
+					<?php
+						while ( have_posts() ) : the_post();		
+							the_content();		
+						endwhile;
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
