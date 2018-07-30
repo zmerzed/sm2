@@ -6,15 +6,19 @@
         $currentUser = User::find(get_current_user_id());
 		$newWorkout = workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $current_user->ID]));
 
-		Log::insert(
-			['type' => 'GYM_CREATE_PROGRAM', 'workout' => $newWorkout],
-			$currentUser
-		);
+		Log::insert(['type' => 'TRAINER_CREATE_PROGRAM', 'workout' => $newWorkout], $currentUser);
 	}
 
 	if (isset($_GET['delete'])) {
-		workOutDelete($_GET['delete']);
-		wp_redirect('/trainer/?data=workouts', 302);
+        $currentUser = User::find(get_current_user_id());
+	    $workout = workOutGet((int) $_GET['delete']);
+
+	    if ($workout) {
+	        Log::insert(['type' => 'TRAINER_DELETE_PROGRAM', 'workout' => $workout], $currentUser);
+		    workOutDelete($_GET['delete']);
+		    wp_redirect('/trainer/?data=workouts', 302);
+	    }
+
 	}
 ?>
 

@@ -31,6 +31,11 @@ class Log
             "GYM_ADD_CLIENT" => "{-gymName} adds a client - {-clientName}.",
             "GYM_CREATE_PROGRAM" => "{-gymName} created a program ({-programName}).",
             "GYM_UPDATE_PROGRAM" => "{-gymName} updated a program ({-programName}).",
+            "GYM_DELETE_PROGRAM" => "{-gymName} deleted a program ({-programName}).",
+
+            "TRAINER_CREATE_PROGRAM" => "{-trainerName} created a program ({-programName}).",
+            "TRAINER_UPDATE_PROGRAM" => "{-trainerName} updated a program ({-programName}).",
+            "TRAINER_DELETE_PROGRAM" => "{-trainerName} deleted a program ({-programName}).",
         ];
 
         if (in_array_recursive($logType, $types)) {
@@ -72,7 +77,51 @@ class Log
                     self::getContent($type['type'])
                 );
 
-            } break;
+                } break;
+
+            case 'GYM_DELETE_PROGRAM': {
+
+                $workout = $type['workout'];
+                $logDescription = str_replace(
+                    ["{-gymName}", "{-programName}"],
+                    [$user->user_nicename, $workout['workout_name']],
+                    self::getContent($type['type'])
+                );
+
+                } break;
+
+            case 'TRAINER_CREATE_PROGRAM': {
+
+                $workout = $type['workout'];
+                $logDescription = str_replace(
+                    ["{-trainerName}", "{-programName}"],
+                    [$user->user_nicename, $workout['workout_name']],
+                    self::getContent($type['type'])
+                );
+
+                } break;
+
+            case 'TRAINER_UPDATE_PROGRAM': {
+
+                $workout = $type['workout'];
+                $logDescription = str_replace(
+                    ["{-trainerName}", "{-programName}"],
+                    [$user->user_nicename, $workout['workout_name']],
+                    self::getContent($type['type'])
+                );
+
+                } break;
+
+            case 'TRAINER_DELETE_PROGRAM': {
+
+                $workout = $type['workout'];
+                $logDescription = str_replace(
+                    ["{-trainerName}", "{-programName}"],
+                    [$user->user_nicename, $workout['workout_name']],
+                    self::getContent($type['type'])
+                );
+
+                } break;
         }
 
         if (empty($logDescription)) return false;
