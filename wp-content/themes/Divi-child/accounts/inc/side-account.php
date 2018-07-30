@@ -60,7 +60,8 @@
 				</ul>				
 			<?php endif; ?>			
 			</li>			
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>
+			<!-- <li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>	 -->	
+			<li><a href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
 			<?php if($pm_lvl != ""): ?>
