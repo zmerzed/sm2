@@ -10,6 +10,18 @@
 			$currentUser
 		);
 	}
+
+
+	if (isset($_GET['delete'])) {
+		$currentUser = User::find(get_current_user_id());
+		$workout = workOutGet((int) $_GET['delete']);
+
+		if ($workout) {
+			Log::insert(['type' => 'GYM_DELETE_PROGRAM', 'workout' => $workout], $currentUser);
+			workOutDelete($_GET['delete']);
+		}
+
+	}
 ?>
 <div class="main-content matchHeight">
 
@@ -20,28 +32,28 @@
 	<ul class="workout-lists trainer-workouts-lists">
 		<?php foreach ($currentUser->getPrograms() as $program) {
 			$gymTrainers = getTrainersOfGym($currentUser);
-		?>
-		<li class="workout-list-item">
-			<div class="workout-wrapper">
-				<span class="sm-workout-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"> --></span>
-				<!-- <span class="workout-ico wi-red wi-lifeter"></span> -->
-				<label><?php echo $program->workout_name ?></label>
-				<div class="workout-controls">
-					<a href="javascript:void(0);" onclick="toggleMembers(this)"><span class="sm-members-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon-blu.png'; ?>"> --></span></a>
-					<a href="#"><span class="sm-record-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"> --></span></a>
-					<a href="/gym/?data=edit-workout&workout=<?php echo $program->workout_ID; ?>"><span class="sm-edit-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon-blu.png'; ?>"> --></span></a>
-					<a href="#"><span class="sm-delete-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon-blu.png'; ?>"> --></span></a>
+			?>
+			<li class="workout-list-item">
+				<div class="workout-wrapper">
+					<span class="sm-workout-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"> --></span>
+					<!-- <span class="workout-ico wi-red wi-lifeter"></span> -->
+					<label><?php echo $program->workout_name ?></label>
+					<div class="workout-controls">
+						<a href="javascript:void(0);" onclick="toggleMembers(this)"><span class="sm-members-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon-blu.png'; ?>"> --></span></a>
+						<a href="#"><span class="sm-record-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"> --></span></a>
+						<a href="/gym/?data=edit-workout&workout=<?php echo $program->workout_ID; ?>"><span class="sm-edit-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon-blu.png'; ?>"> --></span></a>
+						<a href="/gym/?data=workouts&delete=<?php echo $program->workout_ID; ?>"><span class="sm-delete-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon-blu.png'; ?>"> --></span></a>
+					</div>
 				</div>
-			</div>
-			<div class="list-of-clients-in-this-workout" style="display:none;">
-				<table class="table-bordered" style="width:100%;">
-					<tr>
-					<th>Client</th>
-					<th>Workout Name</th>
-					<th>Status</th>
-					<th>Date</th>
-					</tr>
-					<?php
+				<div class="list-of-clients-in-this-workout" style="display:none;">
+					<table class="table-bordered" style="width:100%;">
+						<tr>
+							<th>Client</th>
+							<th>Workout Name</th>
+							<th>Status</th>
+							<th>Date</th>
+						</tr>
+						<?php
 						if(!empty($gymTrainers)){
 							foreach($gymTrainers as $gymtrainer){
 								$clientsOfTrainer = getClientsOfTrainer($gymtrainer);
@@ -61,26 +73,26 @@
 											if($wdone == 1){
 												$wlink="Completed";
 											}
-					?>
-						<tr>
-							<td><span><?php echo $client_info->user_nicename; ?></span></td>
-							<td><?php echo $wdayName; ?></td>
-							<td><?php echo $wlink; ?></td>
-							<td><?php echo $dateToday; ?></td>
-						</tr>
-					<?php
+											?>
+											<tr>
+												<td><span><?php echo $client_info->user_nicename; ?></span></td>
+												<td><?php echo $wdayName; ?></td>
+												<td><?php echo $wlink; ?></td>
+												<td><?php echo $dateToday; ?></td>
+											</tr>
+											<?php
 
 										}
 									}
 								}
 							}
 						}else{
-								echo '<tr><td colspan="4">No Client</td></tr>';
+							echo '<tr><td colspan="4">No Client</td></tr>';
 						}
-					?>
-				</table>
-			</div>
-		</li>
+						?>
+					</table>
+				</div>
+			</li>
 		<?php } ?>
 	</ul>
 </div>
