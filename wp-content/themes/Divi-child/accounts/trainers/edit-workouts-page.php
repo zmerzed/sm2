@@ -5,7 +5,7 @@
 		$updatedWorkout = workOutUpdate($_POST);
 
 		Log::insert(
-			['type' => 'GYM_UPDATE_PROGRAM', 'workout' => $updatedWorkout],
+			['type' => 'TRAINER_UPDATE_PROGRAM', 'workout' => $updatedWorkout],
 			$currentUser
 		);
 	}
