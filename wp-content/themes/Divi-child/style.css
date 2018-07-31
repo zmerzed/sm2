@@ -62,6 +62,8 @@ body .swpm-button-wrapper button,
     box-shadow: none;
 }
 /*Messages Styles*/
+.page-template-page-messages #logo{height:53px!important;}
+.page-template-page-messages #page-container{padding-top:0!important}
 .page-template-page-messages .fep-button:hover,
 .page-template-page-messages .fep-button-active{background-color:#c5383d;color:#fff;border:0;}
 .page-template-page-messages .fep-button{background-color:#b92025;color:#fff;border:0!important;}
@@ -73,7 +75,7 @@ body #fep-menu-settings.fep-button,
 .page-template-page-messages #main-header,
 .page-template-page-messages #top-header,
 .fep-message-title:after,
-.fep-form-field-message_content .fep-label,
+/* .fep-form-field-message_content .fep-label, */
 #fep-message-top{display:none;}
 .fep-message-author{padding-top:10px;display:inline-block;font-weight:bold;}
 /* .fep-message-date, */

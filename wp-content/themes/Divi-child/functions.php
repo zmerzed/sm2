@@ -1808,14 +1808,24 @@ function getTrainerInfo($u){
 	
 	if(isset($umeta['sm_bio']))
 		$tinfo['ubio'] = $umeta['sm_bio'][0];
+	else
+		$tinfo['ubio'] = "";
 	if(isset($umeta['sm_education']))
 		$tinfo['uedu'] = $umeta['sm_education'][0];
+	else
+		$tinfo['uedu'] = "";
 	if(isset($umeta['sm_specialties']))
 		$tinfo['uspe'] = $umeta['sm_specialties'][0];
+	else
+		$tinfo['uspe'] = "";
 	if(isset($umeta['sm_availability']))
 		$tinfo['uava'] = $umeta['sm_availability'][0];
+	else
+		$tinfo['uava'] = "";
 	if(isset($umeta['sm_experience']))
 		$tinfo['uexp'] = $umeta['sm_experience'][0];
+	else
+		$tinfo['uexp'] = "";
 	
 	return $tinfo;
 }
@@ -1826,8 +1836,12 @@ function getGymInfo($u){
 	
 	if(isset($umeta['sm_gym_about']))
 		$tinfo['sm_gym_about'] = $umeta['sm_gym_about'][0];
+	else
+		$tinfo['sm_gym_about'] = "";
 	if(isset($umeta['sm_gym_color']))
 		$tinfo['sm_gym_color'] = $umeta['sm_gym_color'][0];
+	else
+		$tinfo['sm_gym_color'] = "";
 	
 	return $tinfo;
 }
@@ -1911,4 +1925,58 @@ function getBPPercAvg($eachBPStats){ //Get Average Percentage on each Body Part
 		$avgArr[] = $pp;		
 	}
 	return round(abs(array_sum($avgArr)/count($avgArr)));
+}
+/*Messaging Recipient Function*/
+function pushClientsToRecipient($u){
+	$clients = getClientsOfTrainer($u);
+	$r = array();
+	if(empty($clients))
+		$clients = array();
+	foreach($clients as $client){
+		$r[$client->user_login] = $client->roles[0];			
+	}
+	return $r;
+}
+function getRecipients($u){
+	$plvl = getMembershipLevel($u);
+	$r = array();
+	if($plvl == 'trainer'){
+		$pgym = checkPG($u->ID);
+		if($pgym != ""){ //Under a Gym
+			$gym = get_user_by('id',$pgym);
+			$r = pushClientsToRecipient($u);
+			$r[$gym->user_login] = getMembershipLevel($gym);			
+		}else{ //Not Under a Gym
+			$r = pushClientsToRecipient($u);
+		}
+	}elseif($plvl == 'gym'){
+		$tog = get_user_meta($u->ID, 'trainers_of_gym', true);		
+		foreach($tog as $t){
+			$trainer = get_user_by('id', $t);
+			$r[$trainer->user_login] = getMembershipLevel($trainer);
+			$temp = pushClientsToRecipient($trainer);
+			foreach($temp as $v=>$k)
+				$r[$v] = $k;
+		}
+	}elseif($plvl=="client"){
+		$pt = get_user_meta($u->ID, 'parent_trainer', true);
+		if($pt != ""){
+			$ptt = get_user_by('id',$pt);
+			$gpgym = checkPG($pt);
+			$r[$ptt->user_login] = getMembershipLevel($ptt);
+			if($gpgym != ""){
+				$gpt = get_user_by('id',$gpgym);
+				$r[$gpt->user_login] = getMembershipLevel($gpt);
+			}
+		}
+	}
+	return $r;
+}
+function checkPG($uid){	
+	return get_user_meta($uid, 'parent_gym', true);
+}
+add_filter( 'fep_form_fields', 'fep_cus_fep_form_fields' );
+function fep_cus_fep_form_fields( $fields ){
+    unset( $fields['message_content']['minlength'] );
+    return $fields;
 }

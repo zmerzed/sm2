@@ -1,7 +1,8 @@
-<?php 
+<?php
+	$pm_lvl = strtolower($pm_lvl);
 	$urole = "";
-	$op_train = (in_array( 'trainer', $uinfo->roles ) || $pm_lvl == "Trainer");
-	$op_gym = (in_array( 'gym', $uinfo->roles ) || $pm_lvl == "Gym");
+	$op_train = (in_array( 'trainer', $uinfo->roles ) || $pm_lvl == "trainer");
+	$op_gym = (in_array( 'gym', $uinfo->roles ) || $pm_lvl == "gym");
 	$op_client = (in_array( 'client', $uinfo->roles ));
 	
 	if($op_train){
