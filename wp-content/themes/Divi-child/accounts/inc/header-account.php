@@ -25,14 +25,15 @@
   <?php	
 	/* $member_type = bp_get_member_type($userdata->ID); */
 	/* $pm_lvl = pmpro_getMembershipLevelForUser($userdata->ID)->name; */
-	$ppp = pmpro_getMembershipLevelForUser($userdata->ID);
-	$pm_lvl = "";
+	/* $ppp = pmpro_getMembershipLevelForUser($userdata->ID); */
+	$pm_lvl = getMembershipLevel($userdata);
+	
 	$gcolor = "";
 	$gymInfo = getGymInfo($userdata);
 	if(isset($gymInfo['sm_gym_color']))
 		$gcolor = $gymInfo['sm_gym_color'];
-	if(!empty($ppp))
-		$pm_lvl = $ppp->name;	
+	/* if(!empty($ppp))
+		$pm_lvl = $ppp->name; */	
 
 	$data_request = "";	
 	if(isset($_GET['data']))
@@ -50,7 +51,7 @@
   
   <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
   
-	 <?php if($pm_lvl == "Gym" && $gcolor != ""):
+	 <?php if($pm_lvl == "gym" && $gcolor != ""):
 		$rgb = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';		
 	 ?>
 		<style>
@@ -65,6 +66,6 @@
 
   </head>
 
-  <body class="<?php echo ($pm_lvl == "Gym") ? 'gym-page' : ''; ?>">
+  <body class="<?php echo ($pm_lvl == "gym") ? 'gym-page' : ''; ?>">
 	
 <?php require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' ); ?>

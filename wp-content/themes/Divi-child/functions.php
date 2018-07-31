@@ -1980,3 +1980,9 @@ function fep_cus_fep_form_fields( $fields ){
     unset( $fields['message_content']['minlength'] );
     return $fields;
 }
+function checkSubscribed($u){
+	if(!empty(pmpro_getMembershipLevelForUser($u->ID)))
+		return true;
+	else
+		return false;
+}

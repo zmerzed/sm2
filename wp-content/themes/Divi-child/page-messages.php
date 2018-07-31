@@ -2,6 +2,11 @@
 /*
 * Template Name: Message Template
 */
+require_once getcwd() . '/wp-customs/Log.php';
+require_once getcwd() . '/wp-customs/User.php';
+require_once getcwd() . '/wp-customs/Program.php';
+require_once getcwd() . '/wp-customs/Exercise.php';
+
 if(!is_user_logged_in()):
 	wp_redirect(wp_login_url());
 	die();

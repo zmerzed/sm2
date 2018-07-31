@@ -67,7 +67,7 @@
 			<li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
-			<?php if($pm_lvl != ""): ?>
+			<?php if(checkSubscribed($uinfo)): ?>
 				<li><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a></li>
 			<?php endif; ?>
 		</ul>

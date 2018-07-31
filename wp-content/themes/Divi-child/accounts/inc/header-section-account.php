@@ -5,8 +5,9 @@
 			<a href="<?php echo home_url(); ?>">
 			<?php 
 				$logoSrc = home_url().'/wp-content/uploads/2018/02/sm-logov2-wht.svg';
+				
 				$pm_lvl = strtolower($pm_lvl);
-				if($pm_lvl == "Gym"){
+				if($pm_lvl == "gym"){
 					$gymLogos = User::find($userdata->ID)->getGymLogos();							
 					if(!empty($gymLogos['landscape'])){
 						$logoSrc = $gymLogos['landscape'];

@@ -62,7 +62,8 @@ body .swpm-button-wrapper button,
     box-shadow: none;
 }
 /*Messages Styles*/
-.page-template-page-messages #logo{height:53px!important;}
+/* .page-template-page-messages #logo{height:53px!important;width:auto;} */
+.page-template-page-messages .header-section a{display:inline-block;}
 .page-template-page-messages #page-container{padding-top:0!important}
 .page-template-page-messages .fep-button:hover,
 .page-template-page-messages .fep-button-active{background-color:#c5383d;color:#fff;border:0;}
