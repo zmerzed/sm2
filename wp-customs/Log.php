@@ -32,10 +32,12 @@ class Log
             "GYM_CREATE_PROGRAM" => "{-gymName} created a program ({-programName}).",
             "GYM_UPDATE_PROGRAM" => "{-gymName} updated a program ({-programName}).",
             "GYM_DELETE_PROGRAM" => "{-gymName} deleted a program ({-programName}).",
+            "GYM_UPDATE_NOTE"    => "{-gymName} updated the program ({-programName}) note -{-noteDetail}.",
 
             "TRAINER_CREATE_PROGRAM" => "{-trainerName} created a program ({-programName}).",
             "TRAINER_UPDATE_PROGRAM" => "{-trainerName} updated a program ({-programName}).",
             "TRAINER_DELETE_PROGRAM" => "{-trainerName} deleted a program ({-programName}).",
+            "TRAINER_UPDATE_NOTE"    => "{-trainerName} updated the program ({-programName}) note -{-noteDetail}.",
         ];
 
         if (in_array_recursive($logType, $types)) {
@@ -57,6 +59,17 @@ class Log
 
         switch ($type['type'])
         {
+            case 'GYM_ADD_CLIENT': {
+
+                $newClient = $type['client'];
+                $logDescription = str_replace(
+                    ["{-gymName}", "{-clientName}"],
+                    [$user->user_nicename, $newClient->user_nicename],
+                    self::getContent($type['type'])
+                );
+
+            } break;
+
             case 'GYM_CREATE_PROGRAM': {
 
                 $workout = $type['workout'];
@@ -89,6 +102,24 @@ class Log
                 );
 
                 } break;
+
+            case 'GYM_UPDATE_NOTE': {
+
+                $workout = $type['workout'];
+                $noteDetail = '';
+
+                if ($workout->getNote()) {
+                    $note = $workout->getNote();
+                    $noteDetail = $note['detail'];
+                }
+
+                $logDescription = str_replace(
+                    ["{-gymName}", "{-programName}", "{-noteDetail}"],
+                    [$user->user_nicename, $workout->workout_name, $noteDetail],
+                    self::getContent($type['type'])
+                );
+
+            } break;
 
             case 'TRAINER_CREATE_PROGRAM': {
 

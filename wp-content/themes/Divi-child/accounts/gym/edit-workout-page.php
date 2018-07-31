@@ -10,6 +10,10 @@
 		);
 	}
 
+	$program = Program::find((int) $_GET['workout']);
+
+	//dd($program);
+
 ?>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -20,6 +24,7 @@
 	var ROOT_URL = '<?php echo get_site_url(); ?>';
 	var CLIENTS = <?php echo json_encode(workOutGetClients()) ?>;
 	var WORKOUT = <?php echo json_encode(workOutGet($_GET['workout'])) ?>;
+	var PROGRAM_NOTE = <?php echo json_encode($program->getNote()) ?>;
 	var EXERCISE_OPTIONS = <?php echo json_encode(workOutExerciseOptions()) ?>;
 	var EXERCISE_SQ_OPTIONS = <?php echo json_encode(workOutExerciseStrengthQualitiesOptions()) ?>;
 

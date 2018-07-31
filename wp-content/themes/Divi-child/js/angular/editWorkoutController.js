@@ -12,12 +12,17 @@ app.controller('editWorkoutController', function($scope, $http) {
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
     var formUrl = ROOT_URL + '/gym/?data=edit-workout&workout=' + WORKOUT.workout_ID;
+
     init();
 
     function init()
     {
         console.log('______________CURRENT USER_____________');
         console.log($scope.currentUser);
+        console.log(EXERCISE_OPTIONS);
+
+        $scope.workout.note = PROGRAM_NOTE;
+
         for(var i in $scope.workout.days)
         {
             var day = $scope.workout.days[i];
@@ -426,6 +431,19 @@ app.controller('editWorkoutController', function($scope, $http) {
         $('#idWorkoutForm').val(JSON.stringify($scope.workout));
 
         return true;
+    };
+
+    $scope.updateNote = function()
+    {
+        var fd = new FormData();
+        fd.append('note', $scope.workout.note.detail);
+        fd.append('workout_id', $scope.workout.workout_ID);
+        fd.append('user_id', $scope.currentUser.id);
+        $scope.promise = $http.post(
+            urlApiClient + '/program-note', fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+        ).then(function(res) {
+            $scope.workout.note = res.data.data;
+        });
     };
 
     function optimizeSelectedClients()

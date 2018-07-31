@@ -1463,6 +1463,12 @@ function wpc_register_wp_api_endpoints() {
 		'methods' => 'POST',
 		'callback' => 'smUpload',
 	));
+
+	/* api used to update a note for a program */
+	register_rest_route( 'v1', 'program-note', array(
+		'methods' => 'POST',
+		'callback' => 'workoutUpdateNote',
+	));
 }
 
 function smUpload()
@@ -1519,6 +1525,44 @@ function smUpload()
 	}
 
 	return ['result' => true, 'data' => $data];
+}
+
+function workoutUpdateNote()
+{
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+	require_once getcwd() . '/wp-customs/Program.php';
+	require_once getcwd() . '/wp-customs/User.php';
+	require_once getcwd() . '/wp-customs/Log.php';
+
+	$program = Program::find($_POST['workout_id']);
+	$user = User::find($_POST['user_id']);
+
+	if ($program && $user)
+	{
+		$program->addNote($_POST);
+
+		switch (getMembershipLevel($user))
+		{
+			case 'gym': {
+				Log::insert(
+					['type' => 'GYM_UPDATE_NOTE', 'workout' => $program],
+					$user
+				);
+			} break;
+
+			case 'trainer': {
+				Log::insert(
+					['type' => 'GYM_UPDATE_NOTE', 'workout' => $program],
+					$user
+				);
+			} break;
+
+		}
+
+		return ['result' => true, 'data' => $program->getNote()];
+	}
+
+	return ['result' => false, 'data' => NULL];
 }
 
 function workoutClientExerciseLogs() {
