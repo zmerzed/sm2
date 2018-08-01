@@ -1686,7 +1686,7 @@ function workoutCreateClientSetLog()
 
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 	$data = json_decode( file_get_contents('php://input') , true);
-	dd($data);
+
 	$exerciseId = (int) $data['exer_ID'];
 	$userId = (int) $data['user_id'];
 
@@ -1751,6 +1751,20 @@ function workoutCreateClientSetLog()
 
 function workoutGenerateHash()
 {
+	if (isset($_GET['sets']))
+	{
+		$hashes = [];
+		$sets = (int) $_GET['sets'];
+
+		for ($i=0; $i<$sets; $i++)
+		{
+			$m=microtime(true);
+			$hashes[] = sprintf("%8x%05x",floor($m),($m-floor($m))*1000000);
+		}
+
+		return ['set_of_hash' => $hashes];
+	}
+
 	$m=microtime(true);
 	return ['hash' => sprintf("%8x%05x",floor($m),($m-floor($m))*1000000)];
 }
