@@ -440,6 +440,9 @@ class User
                 }
             }
 
+        } else {
+
+            $clients = workOutGetClients();
         }
 
         return $clients;

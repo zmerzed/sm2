@@ -8,7 +8,7 @@ if(!(isset($_GET['workout_client_id']) && user_id_exists($_GET['workout_client_i
 else:
 	$wclientID = $_GET['workout_client_id'];
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 <script>	
 	var clientWorkout = <?php echo json_encode(workoutClientWorkoutWithDay($_GET['dayId'], $_GET['workoutId'], $wclientID)); ?>;
 	var rootUrl = '<?php echo get_site_url(); ?>';
