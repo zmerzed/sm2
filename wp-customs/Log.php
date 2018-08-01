@@ -153,6 +153,24 @@ class Log
                 );
 
                 } break;
+
+            case 'TRAINER_UPDATE_NOTE': {
+
+                $workout = $type['workout'];
+                $noteDetail = '';
+
+                if ($workout->getNote()) {
+                    $note = $workout->getNote();
+                    $noteDetail = $note['detail'];
+                }
+
+                $logDescription = str_replace(
+                    ["{-trainerName}", "{-programName}", "{-noteDetail}"],
+                    [$user->user_nicename, $workout->workout_name, $noteDetail],
+                    self::getContent($type['type'])
+                );
+
+                } break;
         }
 
         if (empty($logDescription)) return false;

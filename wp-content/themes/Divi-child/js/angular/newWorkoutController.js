@@ -11,6 +11,7 @@ angular.module('smApp')
     $scope.workoutMaxSet = 0;
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/new_workout.html';
+
     var urlApiClient = ROOT_URL + '/wp-json/v1';
     
     init();
@@ -69,23 +70,51 @@ angular.module('smApp')
 
     $scope.onCopy = function()
     {
-        var newCopy = angular.copy($scope.workout.selectedDay);
-
-
-        $http.get(urlApiClient + '/hash').then(function(res)
+        $scope.onLeaveDay();
+        setTimeout(function()
         {
-            console.log(newCopy);
-            newCopy.exercises.forEach(function(ex) {
-                ex.hash = res.data.hash;
+            $scope.$apply(function() {
+                var newCopy = angular.copy($scope.workout.selectedDay);
+
+                console.log('copying workout day');
+                console.log($scope.workout.selectedDay);
+
+                var nOfExs = newCopy.exercises.length;
+                $http.get(urlApiClient + '/hash?sets=' + nOfExs).then(function(res)
+                {
+
+                    var setOfHashes = res.data.set_of_hash;
+
+                    newCopy.exercises.forEach(function(ex, i){
+                        ex.hash = setOfHashes[i];
+                    });
+
+                    newCopy.clients.forEach(function(client)
+                    {
+                        client.exercises.forEach(function(exercise, i)
+                        {
+                            exercise.hash = setOfHashes[i];
+                            exercise.assignment_sets.forEach(function(set)
+                            {
+                                set.weight = angular.copy("");
+                            });
+                            console.log(exercise);
+                        });
+                    });
+
+                    console.log('after copying workout day');
+                    console.log(newCopy);
+
+                    newCopy.name = '';
+                    $scope.workout.days.push(newCopy);
+
+                    var countDays = $scope.workout.days.length;
+                    optimizeDays();
+                    selectDay($scope.workout.days[countDays - 1])
+
+                });
             });
-
-            newCopy.name = '';
-            $scope.workout.days.push(newCopy);
-            var countDays = $scope.workout.days.length;
-            optimizeDays();
-            selectDay($scope.workout.days[countDays - 1])
-
-        });
+        }, 500)
 
     };
 
@@ -191,7 +220,16 @@ angular.module('smApp')
     };
 
     $scope.sendForm = function() {
+        
 
+        if ($scope.currentUser.forGymVal) {
+            var formUrl = '/gym/?data=workouts';
+        } else {
+            var formUrl = '/trainer/?data=workouts';
+        }
+
+        $('#idForm').attr('action', formUrl);
+        
         var toSend = angular.copy($scope.workout);
 
         delete toSend.selectedDay;
