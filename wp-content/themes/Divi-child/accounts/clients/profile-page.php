@@ -6,6 +6,8 @@ $currentUser = [
 	'files' => $user->getPhotos(),
 	'stats' => $user->getStats()
 ];
+$userGoalStart = $currentUser['stats']['start'];
+$userGoal = $currentUser['stats']['goal'];
 ?>
 
 <div class="main-content matchHeight">
@@ -66,12 +68,40 @@ $currentUser = [
 					</li> -->
 				</ul>
 
-				<div class="chartContainer"></div>
+				<div class="chartContainer" id="chartContainer"></div>
 			</div>
 		</div>
 	</div>
-
+	<pre>
+	<?php
+		$results = [];
+		$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date','created_at', 'updated_at'];
+		$gResults = getGoalResults($user);		
+		foreach($gResults as $v){
+			$ndate = date_create($v->created_at);
+			$ndate = date_format($ndate, 'M d,Y');
+			$temp = [];
+			foreach($v as $k=>$ki){
+				if(!in_array($k,$not_inc))
+				 $temp[$k] = $ki;				
+			}			
+			$results[$ndate] = $temp;				
+		}
+		$resPercs = [];
+		foreach($results as $resK => $resV){
+			$resPerc = [];
+			$resPerc['start'] = $userGoalStart;
+			$resPerc['goal'] = $userGoal;
+			$resPerc['result'] = $resV;
+			$resPercs[$resK] = getBPPercAvg(getGoalPerc($resPerc));
+		}
+		$resCount = count($resPercs);
+		$tctr = 0;
+	?>
+	</pre>
 </div>
+<!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.canvasjs.min.js"></script>  -->
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/canvasjs.min.js"></script> 
 <script>	
 	var curUser = <?php echo json_encode($currentUser); ?>,
 	homeUrl = "<?php echo home_url(); ?>",
@@ -90,5 +120,62 @@ $currentUser = [
 	}
 	
 	document.getElementById('bodypic').innerHTML = bodyPhotosHTML;
-	
+	window.onload = function() {
+		var chart = new CanvasJS.Chart("chartContainer", {		
+			title: {
+				text: ""
+			},
+			data: [{
+				lineColor: '#ae1f23',
+				markerColor: '#ae1f23',
+				lineThickness: 1,
+				markerBorderThickness: 3,
+				type: "line",
+				toolTipContent: "{label}:  <b>{y}%</b>",				
+				indexLabelFontSize: 12,
+				indexLabel: "{y}%",
+				dataPoints: [
+					<?php
+						if(!empty($resPercs)){
+							foreach($resPercs as $rpK=>$rpV){
+								$tctr++;
+								echo '{ label: "'.$rpK.'",  y: '.$rpV.' }';							
+								echo ($tctr == $resCount) ? "" : ",";
+							}
+						}						
+					?>						
+				]
+			}]
+		});
+		chart.render();
+	}
+	/* if(jQuery('.chartContainer').length != 0){
+		jQuery(".chartContainer").CanvasJSChart({
+			title: {
+				text: ""
+			},
+			axisY: {
+				title: "",
+				includeZero: false
+			},
+			axisX: {
+				interval: 10
+			},
+			data: [
+				{
+					type: "line", //try changing to column, area
+					toolTipContent: "({label}) {y}%",
+					dataPoints: [
+						<?php							
+							foreach($resPercs as $rpK=>$rpV){
+								$tctr++;
+								echo '{ label: "'.$rpK.'",  y: '.$rpV.' }';							
+								echo ($tctr == $resCount) ? "" : ",";
+							}
+						?>						
+					]
+				}
+			]
+		});  		  
+	}   */ 
 </script>

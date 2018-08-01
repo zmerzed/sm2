@@ -663,7 +663,24 @@ table.dataTable thead .sorting_asc:after{
 
 
 /*** Message ***/
-
+.counter-container .fep_unread_message_count{
+	position:absolute;
+	top:-5px;
+	right:0;
+	width:18px;
+	height:18px;
+	text-align:center;
+	line-height:18px;
+	color:#fff;
+	background-color:#a62024;
+	font-size:12px;
+	border-radius:50%;
+}
+.counter-container{position:relative;max-width:155px;}
+.fep_unread_message_count_hide_if_zero:first-child{padding-left:5px;}
+.fep_unread_message_count_hide_if_zero{display:none;}
+#fep-menu-message_box .fep_unread_message_count_hide_if_zero,
+.fep-font-red.fep_unread_message_count{display:inline-block;}
 .message-wrapper{
 	text-align: left;
 	background: #ae1f23;
@@ -901,6 +918,10 @@ table.dataTable thead .sorting_asc:after{
 .responsive-calendar .day.active a:hover{background-color:#d0262a;color:#fff;opacity:0.7;}
 .responsive-calendar .day.active a{background-color:#e0e0e0;color:#000;}
 
+/*** Client Profile ***/
+.canvasjs-chart-credit{display:none;}
+.canvasjs-chart-tooltip div b{font-size:16px;}
+.canvasjs-chart-tooltip div{border:0!important;font-style:normal!important}
 
 /*** Trainer Profile ***/
 

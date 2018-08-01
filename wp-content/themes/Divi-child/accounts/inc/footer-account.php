@@ -36,9 +36,14 @@
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/spectrum.js"></script>
 
   <!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/accounts/assets/js/fullcalendar.min.js';?>"></script> -->
-  <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.canvasjs.min.js"></script>  
+   
 
   <script type="text/javascript">
+	$('input[name="myFile"]').on('change', function(){
+		var fileP = this.value;
+		fileSplit = fileP.split('\\');
+		$('.upload-btn-wrapper small').show().html(fileSplit[fileSplit.length-1]);		
+	});
 	function clickFile(a){
 		$('input[name="myFile"]').click();
 	}
@@ -151,42 +156,8 @@
 				?>
 				}	
 			});		
-		}
-		
-		if(jQuery('.chartContainer').length != 0){
-			jQuery(".chartContainer").CanvasJSChart({
-				title: {
-					text: ""
-				},
-				axisY: {
-					title: "",
-					includeZero: false
-				},
-				axisX: {
-					interval: 10
-				},
-				data: [
-					{
-						type: "line", //try changing to column, area
-						toolTipContent: "{label}: {y} mm",
-						dataPoints: [
-							{ label: "Jan",  y: 5.28 },
-							{ label: "Feb",  y: 3.83 },
-							{ label: "March",y: 6.55 },
-							{ label: "April",y: 4.81 },
-							{ label: "May",  y: 2.37 },
-							{ label: "June", y: 2.33 },
-							{ label: "July", y: 3.06 },
-							{ label: "Aug",  y: 2.94 },
-							{ label: "Sep",  y: 5.41 },
-							{ label: "Oct",  y: 2.17 },
-							{ label: "Nov",  y: 2.17 },
-							{ label: "Dec",  y: 2.80 }
-						]
-					}
-				]
-			});  		  
-		}       
+		}	
+		    
 	});
 	
 	<?php

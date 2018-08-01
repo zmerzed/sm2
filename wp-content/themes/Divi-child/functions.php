@@ -1994,9 +1994,17 @@ function fep_cus_fep_form_fields( $fields ){
     unset( $fields['message_content']['minlength'] );
     return $fields;
 }
+/* Check user if subscribed */
 function checkSubscribed($u){
 	if(!empty(pmpro_getMembershipLevelForUser($u->ID)))
 		return true;
 	else
 		return false;
+}
+/*Get all Goal results*/
+function getGoalResults($u){	
+	global $wpdb;
+	$statQ = 'SELECT * FROM workout_client_stats WHERE type="result" AND client_id = '. $u->ID;
+	$stats = $wpdb->get_results($statQ, OBJECT);
+	return $stats;
 }
