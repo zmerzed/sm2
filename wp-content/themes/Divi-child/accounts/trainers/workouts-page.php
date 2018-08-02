@@ -37,9 +37,9 @@
 				<label><?php echo $workout->workout_name ?></label>
 				<div class="workout-controls">
 					<span><a href="javascript:void(0);" onclick="toggleMembers(this)"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon.png'; ?>"></a></span>
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon.png'; ?>"></a></span>
+					<span><a onClick="return confirm('Are you sure you want to duplicate this item?')" href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon.png'; ?>"></a></span>
 					<span><a href="<?php echo $url; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon.png'; ?>"></a></span>
-					<span><a href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon.png'; ?>"></a></span>
+					<span><a onClick="return confirm('Are you sure you want to delete this item?')" href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon.png'; ?>"></a></span>
 				</div>
 			</div>
 			<div class="list-of-clients-in-this-workout" style="display:none;">

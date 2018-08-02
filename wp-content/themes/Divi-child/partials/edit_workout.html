@@ -87,6 +87,7 @@
                                     </select>
                                 </td>
                                 <td>
+
                                     <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
                                         <option value="">Exercise 2</option>
                                     </select>
@@ -404,7 +405,7 @@
                         <div class="col-lg-2 col-md-2">
                             <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left assign-clients-workout" role="navigation">
                                 <li class="nav-item" ng-repeat="client in workout.selectedDay.clients">
-                                    <a href="#lorem"
+                                    <a href="javascript:void(0)"
                                        class="nav-link"
                                        data-toggle="tab" role="tab"
                                        ng-click="selectClient(client)"
@@ -413,7 +414,7 @@
                                 </li>
                             </ul>
                             <div class="browse-client-workout">
-                                <select ng-model="selectedClient">
+                                <select ng-model="reader.selectedClient">
                                     <option disabled selected>Add Client</option>
                                     <option ng-repeat="client in clients" ng-value="client.ID">{{ client.user_nicename}} </option>
                                 </select>

@@ -8,6 +8,7 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.exerciseOptions = EXERCISE_OPTIONS;
     $scope.exerciseSQoptions = EXERCISE_SQ_OPTIONS;
     $scope.clientExerciseSets = [];
+    $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
@@ -17,6 +18,7 @@ app.controller('editWorkoutController', function($scope, $http) {
     function init()
     {
         console.log('______________CURRENT USER_____________');
+        console.log($scope.workout);
         console.log($scope.currentUser);
         console.log(EXERCISE_OPTIONS);
 
@@ -258,44 +260,86 @@ app.controller('editWorkoutController', function($scope, $http) {
         optimizeClientExercises();
     };
 
-    $scope.$watch('selectedClient', function(val)
+    $scope.$watch('reader.selectedClient', function(val)
     {
-        var found = false;
-        for(var i in $scope.clients)
+        console.log('selectedClient');
+        console.log(val);
+
+        if (val)
         {
-            var client = $scope.clients[i];
-
-            if(client.ID == val)
+            var found = false;
+            for (var i in $scope.clients)
             {
-                for(var x in $scope.workout.selectedDay.clients)
+                var client = $scope.clients[i];
+
+                if (client.ID == val)
                 {
-                    var xClient = $scope.workout.selectedDay.clients[x];
 
-                    if(xClient.ID == val)
+                    for (var x in $scope.workout.selectedDay.clients)
                     {
-                        found = true;
+                        var xClient = $scope.workout.selectedDay.clients[x];
+
+                        if(xClient.ID == val)
+                        {
+                            found = true;
+                        }
                     }
-                }
 
-                if(!found) {
-                    $scope.workout.selectedDay.clients.push(client);
-                    $scope.selectClient(client);
-                }
+                    if (!found) {
+                        $scope.workout.selectedDay.clients.push(client);
+                        $scope.selectClient(client);
+                    }
 
-                break;
+                    break;
+                }
             }
+            optimizeClientExercises();
+            optimizeSelectedClients();
         }
 
+    }, true);
 
-        /* console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx=========');
-         console.log($scope.workout.selectedDay.clients);
-         console.log($scope.clients);
-         console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx========='); */
-
-        // match $scope.workout.selectedDay.clients to $scope.clients;
-        optimizeSelectedClients();
-        optimizeClientExercises();
-    });
+    // $scope.$watch('selectedClient', function(val)
+    // {
+    //
+    //     console.log('select client...........');
+    //     console.log(val);
+    //     var found = false;
+    //     for(var i in $scope.clients)
+    //     {
+    //         var client = $scope.clients[i];
+    //
+    //         if(client.ID == val)
+    //         {
+    //             for(var x in $scope.workout.selectedDay.clients)
+    //             {
+    //                 var xClient = $scope.workout.selectedDay.clients[x];
+    //
+    //                 if(xClient.ID == val)
+    //                 {
+    //                     found = true;
+    //                 }
+    //             }
+    //
+    //             if(!found) {
+    //                 $scope.workout.selectedDay.clients.push(client);
+    //                 $scope.selectClient(client);
+    //             }
+    //
+    //             break;
+    //         }
+    //     }
+    //
+    //
+    //     /* console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx=========');
+    //      console.log($scope.workout.selectedDay.clients);
+    //      console.log($scope.clients);
+    //      console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx========='); */
+    //
+    //     // match $scope.workout.selectedDay.clients to $scope.clients;
+    //     optimizeSelectedClients();
+    //     optimizeClientExercises();
+    // });
 
     $scope.$watch(function() {
         console.log('/* get the largest set in a selected day */');
