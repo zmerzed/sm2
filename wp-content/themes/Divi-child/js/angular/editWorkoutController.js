@@ -11,7 +11,6 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
-    var formUrl = ROOT_URL + '/gym/?data=edit-workout&workout=' + WORKOUT.workout_ID;
 
     init();
 
@@ -359,23 +358,71 @@ app.controller('editWorkoutController', function($scope, $http) {
     {
         var newCopy = angular.copy($scope.workout.selectedDay);
 
-        delete newCopy.wday_ID;
 
-        $http.get(urlApiClient + '/hash').then(function(res)
+
+        // $http.get(urlApiClient + '/hash').then(function(res)
+        // {
+        //     console.log(newCopy);
+        //     newCopy.exercises.forEach(function(ex) {
+        //         ex.hash = res.data.hash;
+        //     });
+        //
+        //     newCopy.wday_name = '';
+        //     $scope.workout.days.push(newCopy);
+        //     var countDays = $scope.workout.days.length;
+        //     optimizeDays();
+        //     selectDay($scope.workout.days[countDays - 1])
+        //
+        // });
+
+
+        $scope.onLeaveDay();
+        setTimeout(function()
         {
-            console.log(newCopy);
-            newCopy.exercises.forEach(function(ex) {
-                ex.hash = res.data.hash;
+            $scope.$apply(function() {
+                var newCopy = angular.copy($scope.workout.selectedDay);
+                delete newCopy.wday_ID;
+
+                console.log('copying workout day');
+                console.log($scope.workout.selectedDay);
+
+                var nOfExs = newCopy.exercises.length;
+                $http.get(urlApiClient + '/hash?sets=' + nOfExs).then(function(res)
+                {
+
+                    var setOfHashes = res.data.set_of_hash;
+
+                    newCopy.exercises.forEach(function(ex, i){
+                        delete ex.exer_ID;
+                        ex.hash = setOfHashes[i];
+                    });
+
+                    newCopy.clients.forEach(function(client)
+                    {
+                        client.exercises.forEach(function(exercise, i)
+                        {
+                            exercise.hash = setOfHashes[i];
+                            exercise.assignment_sets.forEach(function(set)
+                            {
+                                set.weight = angular.copy("");
+                            });
+                            console.log(exercise);
+                        });
+                    });
+
+                    console.log('after copying workout day');
+                    console.log(newCopy);
+
+                    newCopy.name = '';
+                    $scope.workout.days.push(newCopy);
+
+                    var countDays = $scope.workout.days.length;
+                    optimizeDays();
+                    selectDay($scope.workout.days[countDays - 1])
+
+                });
             });
-
-            newCopy.wday_name = '';
-            $scope.workout.days.push(newCopy);
-            var countDays = $scope.workout.days.length;
-            optimizeDays();
-            selectDay($scope.workout.days[countDays - 1])
-
-        });
-
+        }, 500)
     };
 
     $scope.onCopyExercise = function(exercise)
@@ -395,6 +442,13 @@ app.controller('editWorkoutController', function($scope, $http) {
 
     $scope.submitForm = function()
     {
+
+        if ($scope.currentUser.forGymVal) {
+            var formUrl = '/gym/?data=add-workouts&workout=' + $scope.workout.workout_ID;
+        } else {
+            var formUrl = '/trainer/?data=add-workouts&workout=' + $scope.workout.workout_ID;
+        }
+
         $('#idForm').attr('action', formUrl);
 
         delete $scope.workout.selectedDay;
