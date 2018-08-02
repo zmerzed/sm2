@@ -142,7 +142,9 @@ $userGoal = $currentUser['stats']['goal'];
 								echo '{ label: "'.$rpK.'",  y: '.$rpV.' }';							
 								echo ($tctr == $resCount) ? "" : ",";
 							}
-						}						
+						}else{
+							echo '{ label: "0",  y: 0 }';
+						}				
 					?>						
 				]
 			}]

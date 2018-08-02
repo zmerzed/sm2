@@ -61,9 +61,8 @@ require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account
 		$recipient = array();
 
 	$selopt = '<option value="">Select recipient</option>';
-	foreach($recipient as $v=>$k){
+	foreach($recipient as $v=>$k)
 		$selopt .= '<option value="'.$v.'">'.$v.' ('.$k.')</option>';
-	}
 ?>
 </div>
 <script>
@@ -72,12 +71,48 @@ require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account
 			if($('#fep-message-top').length != 0){
 				$('#fep-message-top').hide().after('<select onchange="selectRecipient(this)"><?php echo $selopt; ?></select>');
 			}
+		});
+		
+		var uArr = [], ctr = 0;
+		$('.fep-avatar-p img').each(function(){
+			ctr++;
+			uArr.push($(this).attr('title'));
+			$(this).closest('div').addClass('avatar-'+ctr);
+		});
+		
+		var jdata = {
+			action: 'get_message_user_image',
+			uArr: uArr
+		};
+		
+		/*AJAX*/
+		$.ajax({
+			url:  '<?php echo home_url(); ?>/wp-admin/admin-ajax.php',
+			method:'POST',
+			data: jdata,
+			dataType: 'json',
+			success: function(res){
+				var r = res.result;
+				console.log(res);
+				if(r){
+					r.forEach(function(v,i){
+						if(v!=""){
+							$('.avatar-'+(i+1)).wrapInner('<div class="jtbl"><div class="jtbl-cell"></div></div>').addClass('round');
+							$('.avatar-'+(i+1)+' img').attr('src', v);
+						}
+					});
+				}
+				
+			},
+			error: function(r,xhr, result){
+				console.log(r + ' ' + xhr + ' ' + result);
+			}
 		});		
 		
 	})(jQuery);
 	function selectRecipient(a){
 		jQuery('#fep-message-top').attr('value', a.value);
-	}
+	}	
 </script>
 <?php
 endif;

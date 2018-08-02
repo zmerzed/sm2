@@ -2008,3 +2008,45 @@ function getGoalResults($u){
 	$stats = $wpdb->get_results($statQ, OBJECT);
 	return $stats;
 }
+/*Get Client Latest Photo || Get Gym Logo*/
+function getUserPhoto($u){
+	global $wpdb;
+	$umlvl = getMembershipLevel($u);
+	$uid = $u->ID;
+	$rimg = "";
+	if($umlvl == "client"){
+		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image' AND uploaded_at=(SELECT MAX(uploaded_at) FROM workout_user_files)", ARRAY_A);
+		if(!empty($img))
+			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
+		else
+			$rimg = get_stylesheet_directory_uri() . "/accounts/images/personal-featured-image.jpg";
+	}elseif($umlvl == "gym"){
+		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id={$uid} AND type='image_gym_landscape' ORDER BY id desc", ARRAY_A);
+		if(!empty($img))
+			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
+	}elseif($umlvl == "trainer")
+		$rimg = get_stylesheet_directory_uri() . "/accounts/images/trainer-profile-image.png";
+
+	return $rimg;
+}
+/*WP AJAX*/
+add_action('wp_ajax_get_message_user_image', 'get_message_user_image');
+add_action('wp_ajax_nopriv_get_message_user_image', 'get_message_user_image');
+
+function get_message_user_image(){
+	$uArr = $_POST['uArr'];
+	$imgR = array();
+	$cimg = array();
+	foreach($uArr as $u){
+		$user = get_user_by('login', $u);
+		$uid = $user->ID;
+		$up = getUserPhoto($user);
+		
+		if($up)
+			$imgR[] = $up;
+		else
+			$imgR[] = "";	
+	}
+	echo json_encode(array('result' => $imgR));
+	wp_die();	
+}
