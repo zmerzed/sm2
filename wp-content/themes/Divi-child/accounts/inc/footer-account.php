@@ -91,7 +91,7 @@
 			if(dateToday == date && wisDone == 0){
 				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
-			htmlContent += '<a href="#"><img src="'+themedir+'/accounts/images/workout-note.png"></a></div></li>';
+			htmlContent += '<a href="#"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div></li>';
 		});
 		htmlContent += '</ul>';
 		$('#workoutModal .modal-body').html(htmlContent);

@@ -6,9 +6,9 @@
 
 	<ul class="workout-lists">
 		<?php 
-			$userdata = wp_get_current_user();
+			$uinfo = wp_get_current_user();
 			$daysOfWeek = getDaysOfWeek();
-			$weekSched = getWeeklySchedule($userdata);
+			$weekSched = getWeeklySchedule($uinfo);
 			$today = date('Y-m-d');
 			
 			if(!empty($weekSched)):
@@ -25,9 +25,9 @@
 						<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
 						<label><?php echo $ws['wname']; ?></label>
 						<div class="workout-controls">
-							<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+							<a href="#"><span class="sm-note-icon sm-icons"></span></a>
 							<?php if($ws['wsched'] == $today): ?>
-								<span><a href="<?php echo home_url() . '/client/?data=workout&dayId='.$ws['dayid'].'&workoutId='. $ws['wid']; ?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span>
+								<a href="<?php echo home_url() . '/client/?data=workout&dayId='.$ws['dayid'].'&workoutId='. $ws['wid']; ?>"><span class="sm-play-icon sm-icons"></span></a>
 							<?php endif; ?>
 						</div>
 					</div>

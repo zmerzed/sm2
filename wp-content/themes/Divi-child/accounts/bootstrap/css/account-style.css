@@ -908,6 +908,7 @@ table.dataTable thead .sorting_asc:after{
 
 .modal{background-color:rgba(0,0,0,0.5);}
 #workoutModal .modal-dialog{margin-top:15%;}
+.gym-page #workoutModal .workout-wrapper a span.sm-note-icon{display:block}
 .gym-page #workoutModal .workout-wrapper a span{display:none;}
 #workoutModal .workout-wrapper a{float:right;margin-left:5px;}
 #workoutModal .wdname{
@@ -1730,6 +1731,7 @@ body .member-page .member-links .children li a{color:#fff;}
 .gym-page .workout-wrapper label,
 .gym-page .workout-wrapper a{display:inline-block;line-height:normal;float:left;}
 /* .sm-workout-icon{background-image:url(../../images/sm-workout-icon.png);} */
+.sm-note-icon{background-image:url(../../images/notes.png);background-size:20px auto;}
 .sm-workout-icon{background-image:url(../../images/weight-lift.svg);}
 .sm-play-icon{background-image:url(../../images/sm-play-icon.png);}
 .sm-delete-icon{background-image:url(../../images/sm-delete-icon.png);}
