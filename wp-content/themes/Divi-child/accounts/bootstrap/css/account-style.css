@@ -663,6 +663,12 @@ table.dataTable thead .sorting_asc:after{
 
 
 /*** Message ***/
+.jtbl{display:table;}
+.jtbl-cell{display:table-cell;vertical-align:middle;}
+.page-template-page-messages .round{width:60px;height:60px;background-color:#303030;border-radius:50%;overflow:hidden}
+.page-template-page-messages .jtbl-cell{width:60px;height:60px;}
+.fep-avatar-p > div .jtbl-cell img{border-radius:0!important;}
+/* .fep-avatar-p > div .jtbl-cell{} */
 .counter-container .fep_unread_message_count{
 	position:absolute;
 	top:-5px;
