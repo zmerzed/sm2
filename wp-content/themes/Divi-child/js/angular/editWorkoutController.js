@@ -443,8 +443,8 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.submitForm = function()
     {
 
-        if ($scope.currentUser.forGymVal) {
-            var formUrl = '/gym/?data=add-workouts&workout=' + $scope.workout.workout_ID;
+        if ($scope.currentUser.isGym) {
+            var formUrl = '/gym/?data=edit-workout&workout=' + $scope.workout.workout_ID;
         } else {
             var formUrl = '/trainer/?data=add-workouts&workout=' + $scope.workout.workout_ID;
         }

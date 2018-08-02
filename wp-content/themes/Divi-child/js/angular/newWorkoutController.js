@@ -222,7 +222,7 @@ angular.module('smApp')
     $scope.sendForm = function() {
         
 
-        if ($scope.currentUser.forGymVal) {
+        if ($scope.currentUser.isGym) {
             var formUrl = '/gym/?data=workouts';
         } else {
             var formUrl = '/trainer/?data=workouts';
