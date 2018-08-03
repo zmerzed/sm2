@@ -69,7 +69,7 @@ class Program
             'workout_date' => $program->workout_date,
             'workout_description' => $program->workout_description,
             'workout_gym_ID' => $program->workout_gym_ID,
-            'workout_name' => 'Copy ' . time() . ' ' . $program->workout_name,
+            'workout_name' => 'Copy ' . $program->workout_name,
             'workout_time' => $program->workout_time
         ];
 
