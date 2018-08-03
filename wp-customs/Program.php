@@ -64,8 +64,8 @@ class Program
         $program = self::find($workoutId);
         global $wpdb;
 
-
         $newProgram = [
+            'workout_created_by' => $user->id,
             'workout_date' => $program->workout_date,
             'workout_description' => $program->workout_description,
             'workout_gym_ID' => $program->workout_gym_ID,
@@ -75,6 +75,7 @@ class Program
 
         if (isset($user->isGym) && $user->isGym) {
             $newProgram['workout_gym_ID'] = $user->id;
+            $newProgram['workout_trainer_ID'] = $program->workout_trainer_ID;
         } else {
             $newProgram['workout_trainer_ID'] = $user->id;
         }
