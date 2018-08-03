@@ -266,7 +266,7 @@ angular.module('smApp')
         $('#idWorkoutForm').val(JSON.stringify(toSend));
         return true;
     };
-
+    
     $scope.$watch('reader.selectedClient', function(val)
     {
         console.log('selectedClient');

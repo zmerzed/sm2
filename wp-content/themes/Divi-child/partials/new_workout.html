@@ -12,6 +12,18 @@
                     <button type="button" ng-click="newWorkOutDay()">+ new workout</button>
                 </div>
             </div>
+            <div class="col-lg-12 col-md-12">
+                <div ng-if="!workout.note_detail || workout.note_detail.length < 0">
+                    Program note is not yet provided.
+                    <button type="button" data-toggle="modal" data-target="#idNoteModal">create</button>
+                </div>
+
+                <div ng-if="workout.note_detail">
+                    <strong>Note:</strong>
+                    {{ workout.note_detail }}
+                    <button type="button" data-toggle="modal" data-target="#idNoteModal">edit</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -959,3 +971,25 @@
 
     <input type="hidden" name="workoutForm" value="test" id="idWorkoutForm" />
 </form>
+
+
+<!-- Note Modal -->
+<div id="idNoteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add a note</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" cols="30" rows="10" ng-model="workout.note_detail"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+
+    </div>
+</div>
