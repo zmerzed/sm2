@@ -124,7 +124,7 @@
                 user_id: CURRENT_USER_ID
             }, function(res) {
                 console.log(res);
-              //   window.location.reload();
+                window.location.reload();
             });
         }
     }

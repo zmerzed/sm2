@@ -40,7 +40,7 @@
 					<label><?php echo $program->workout_name ?></label>
 					<div class="workout-controls">
 						<a href="javascript:void(0);" onclick="toggleMembers(this)"><span class="sm-members-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/members-icon-blu.png'; ?>"> --></span></a>
-						<a onClick="return duplicate(<?php echo $workout->workout_ID ?>)" href="#"><span class="sm-record-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"> --></span></a>
+						<a onClick="return duplicate(<?php echo $program->workout_ID ?>)" href="#"><span class="sm-record-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/record-icon-blu.png'; ?>"> --></span></a>
 						<a href="/gym/?data=edit-workout&workout=<?php echo $program->workout_ID; ?>"><span class="sm-edit-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/edit-icon-blu.png'; ?>"> --></span></a>
 						<a onClick="return confirm('Are you sure you want to delete this item?')" href="/gym/?data=workouts&delete=<?php echo $program->workout_ID; ?>"><span class="sm-delete-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/delete-icon-blu.png'; ?>"> --></span></a>
 					</div>
@@ -122,7 +122,7 @@
 				user_id: CURRENT_USER_ID
 			}, function(res) {
 				console.log(res);
-				//   window.location.reload();
+				window.location.reload();
 			});
 		}
 	}
