@@ -94,10 +94,76 @@ class Program
             ];
 
             $wpdb->insert('workout_days_tbl', $newDay);
-
-            // duplicate clients
+            $newIdDay = $wpdb->insert_id;
 
             // duplicate exercises
+            if (isset($day['exercises']))
+            {
+
+                foreach ($day['exercises'] as $clientExercise)
+                {
+
+                    $m=microtime(true);
+                    $hash = sprintf("%8x%05x",floor($m),($m-floor($m))*1000000);
+
+                    // insert the new exercise
+                    $newExercise = [
+                        'exer_day_ID' => $newIdDay,
+                        'exer_workout_ID' => $newProgram->workout_ID,
+                        'exer_body_part' => $clientExercise['exer_body_part'],
+                        'exer_type' => $clientExercise['exer_type'],
+                        'exer_exercise_1' => $clientExercise['exer_exercise_1'],
+                        'exer_exercise_2' => $clientExercise['exer_exercise_2'],
+                        'exer_sq' => $clientExercise['exer_sq'],
+                        'exer_sets' => $clientExercise['exer_sets'],
+                        'exer_rep' => $clientExercise['exer_rep'],
+                        'exer_tempo' => $clientExercise['exer_tempo'],
+                        'exer_rest' => $clientExercise['exer_rest'],
+                        'exer_impl1' => $clientExercise['exer_impl1'],
+                        'hash' => $hash
+                    ];
+
+                    $wpdb->insert('workout_exercises_tbl', $newExercise);
+
+                }
+            }
+
+            // duplicate clients
+            if (isset($day['clients']))
+            {
+                foreach ($day['clients'] as $client)
+                {
+
+                    $newClientInDay = [
+                        'workout_client_dayID' => $newIdDay,
+                        'workout_client_workout_ID' => $newProgram->workout_ID,
+                        'workout_clientID' => $client['ID'],
+                        'workout_day_availability' => $client['day_availability'],
+                        'workout_client_schedule' => $client['date_availability'],
+                        'workout_isDone' => 0
+                    ];
+
+                    $wpdb->insert('workout_day_clients_tbl', $newClientInDay);
+
+                    // workout_client_exercise_assignments
+                    // get the exercises from the program (workout)
+
+                    $exQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_workout_ID={$newProgram->workout_ID}";
+                    $exercisesResult = $wpdb->get_results($exQuery, OBJECT);
+
+                    foreach ($exercisesResult as $nExercise)
+                    {
+                        $newClientAssignment = [
+                            'exercise_id' => $nExercise->exer_ID,
+                            'client_id' => $client['ID']
+                        ];
+
+                        $wpdb->insert('workout_client_exercise_assignments', $newClientAssignment);
+                    }
+
+                }
+            }
+
         }
 
         $newProgram = self::find($newProgram->id);
