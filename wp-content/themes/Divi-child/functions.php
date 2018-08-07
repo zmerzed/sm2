@@ -566,51 +566,50 @@ function workOutAdd($data)
 				foreach($d['clients'] as $client)
 				{
 
-					if ((int) $client['date_availability'] > 0)
-					{
+					$newClientDay = array(
+						'workout_client_dayID' => (int) $dayId,
+						'workout_client_workout_ID' => (int) $workOutId,
+						'workout_clientID' => (int) $client['ID'],
+					);
+
+					if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
 
 						$scheduleDate = new \Carbon\Carbon($client['date_availability']);
+						$newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
+						$newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
+					}
 
-						$wpdb->insert('workout_day_clients_tbl',
-							array(
-								'workout_client_dayID' => (int) $dayId,
-								'workout_client_workout_ID' => (int) $workOutId,
-								'workout_clientID' => (int) $client['ID'],
-								'workout_day_availability' => $scheduleDate->dayOfWeek,
-								'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
-							)
-						);
+					$wpdb->insert('workout_day_clients_tbl', $newClientDay);
 
-						foreach ($client['exercises'] as $ex)
+					foreach ($client['exercises'] as $ex)
+					{
+						$exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
+						$exerciseResult = $wpdb->get_results($exQuery, OBJECT);
+
+						if (count($exerciseResult) > 0)
 						{
-							$exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
-							$exerciseResult = $wpdb->get_results($exQuery, OBJECT);
+							$m = $exerciseResult[0];
 
-							if (count($exerciseResult) > 0)
+							$wpdb->insert('workout_client_exercise_assignments',
+								array(
+									'exercise_id' => (int) $m->exer_ID,
+									'client_id' => (int) $client['ID']
+								)
+							);
+
+							$assignmentId = $wpdb->insert_id;
+
+							if (isset($ex['assignment_sets']))
 							{
-								$m = $exerciseResult[0];
-
-								$wpdb->insert('workout_client_exercise_assignments',
-									array(
-										'exercise_id' => (int) $m->exer_ID,
-										'client_id' => (int) $client['ID']
-									)
-								);
-
-								$assignmentId = $wpdb->insert_id;
-
-								if (isset($ex['assignment_sets']))
+								foreach ($ex['assignment_sets'] as $key => $set)
 								{
-									foreach ($ex['assignment_sets'] as $key => $set)
-									{
-										$wpdb->insert('workout_client_exercise_assignment_sets',
-											array(
-												'assignment_id' => (int) $assignmentId,
-												'weight' => $set['weight'],
-												'seq' => $key + 1
-											)
-										);
-									}
+									$wpdb->insert('workout_client_exercise_assignment_sets',
+										array(
+											'assignment_id' => (int) $assignmentId,
+											'weight' => $set['weight'],
+											'seq' => $key + 1
+										)
+									);
 								}
 							}
 						}
@@ -869,36 +868,44 @@ function workOutUpdate($data)
 
 				if (isset($d['clients']))
 				{
-
+					//dd($d['clients']);
 					foreach($d['clients'] as $client)
 					{
-
-						if ((int) $client['date_availability'] > 0)
-						{
-							$scheduleDate = new \Carbon\Carbon($client['date_availability']);
 							$clientQuery = "SELECT * FROM workout_day_clients_tbl WHERE workout_client_dayID={$d['wday_ID']} AND workout_client_workout_ID={$workout['workout_ID']} AND workout_clientID={$client['ID']}";
 							$result = $wpdb->get_results($clientQuery, OBJECT);
 
 							// if theres no client
 							if(count($result) <= 0)
 							{
+								$newMClient = array(
+									'workout_client_dayID' => (int) $d['wday_ID'],
+									'workout_client_workout_ID' => (int) $workout['workout_ID'],
+									'workout_clientID' => (int) $client['ID'],
+								);
+
+								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
+									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
+									$newMClient['workout_day_availability'] = $scheduleDate->dayOfWeek;
+									$newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
+								}
 								// insert the new client id
-								$wpdb->insert('workout_day_clients_tbl',
-									array(
-										'workout_client_dayID' => (int) $d['wday_ID'],
-										'workout_client_workout_ID' => (int) $workout['workout_ID'],
-										'workout_clientID' => (int) $client['ID'],
+								$wpdb->insert('workout_day_clients_tbl', $newMClient);
+							} else {
+
+								$mUpdate = [];
+
+								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
+								{
+									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
+									$mUpdate = array(
 										'workout_day_availability' => $scheduleDate->dayOfWeek,
 										'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
-									)
-								);
-							} else {
+									);
+								}
+
 								$wpdb->update(
 									'workout_day_clients_tbl',
-									array(
-										'workout_day_availability' => $scheduleDate->dayOfWeek,
-										'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
-									),
+									$mUpdate,
 									array( 'workout_clientID' => $client['ID'],
 										'workout_client_dayID' => (int) $d['wday_ID'],
 										'workout_client_workout_ID' => (int) $workout['workout_ID'],
@@ -961,7 +968,7 @@ function workOutUpdate($data)
 									}
 								}
 							}
-						}
+
 					}
 				}
 			}
@@ -2043,7 +2050,7 @@ function getParent($u){
 		return array('trainer'=> $pt, 'gym' => checkPG($pt));
 	}else {
 		$mgym = get_user_meta($uid, 'parent_gym', true);
-		
+
 		if($mgym)
 			return array('gym' => $mgym);
 	}
