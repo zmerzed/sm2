@@ -2031,6 +2031,7 @@ function checkPG($uid){
 function getParent($u){
 	$uid = $u->ID;
 	$pl = getMembershipLevel($u);
+	//dd($pl);
 	if($pl == "gym")
 		return null;
 	elseif($pl == "trainer"){
@@ -2040,8 +2041,13 @@ function getParent($u){
 	}elseif($pl == "client"){
 		$pt = get_user_meta($uid, 'parent_trainer', true);
 		return array('trainer'=> $pt, 'gym' => checkPG($pt));
-	}else
-		return null;	
+	}else {
+		$mgym = get_user_meta($uid, 'parent_gym', true);
+		
+		if($mgym)
+			return array('gym' => $mgym);
+	}
+		return null;
 }
 add_filter( 'fep_form_fields', 'fep_cus_fep_form_fields' );
 function fep_cus_fep_form_fields( $fields ){
