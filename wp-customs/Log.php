@@ -154,7 +154,7 @@ class Log
 
                 } break;
 
-            case 'TRAINER_UPDATE_NOTE': {
+            /* case 'TRAINER_UPDATE_NOTE': {
 
                 $workout = $type['workout'];
                 $noteDetail = '';
@@ -170,7 +170,7 @@ class Log
                     self::getContent($type['type'])
                 );
 
-                } break;
+                } break; */
         }
 
         if (empty($logDescription)) return false;
