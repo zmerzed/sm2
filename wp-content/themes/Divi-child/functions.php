@@ -2028,6 +2028,21 @@ function getRecipients($u){
 function checkPG($uid){	
 	return get_user_meta($uid, 'parent_gym', true);
 }
+function getParent($u){
+	$uid = $u->ID;
+	$pl = getMembershipLevel($u);
+	if($pl == "gym")
+		return null;
+	elseif($pl == "trainer"){
+		$mgym = get_user_meta($uid, 'parent_gym', true);
+		if($mgym)
+			return array('gym' => $mgym);
+	}elseif($pl == "client"){
+		$pt = get_user_meta($uid, 'parent_trainer', true);
+		return array('trainer'=> $pt, 'gym' => checkPG($pt));
+	}else
+		return null;	
+}
 add_filter( 'fep_form_fields', 'fep_cus_fep_form_fields' );
 function fep_cus_fep_form_fields( $fields ){
     unset( $fields['message_content']['minlength'] );
