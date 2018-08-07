@@ -1,9 +1,10 @@
 <?php
 	global $current_user;
 	/* $userdata = get_currentuserinfo(); */
-
+    $currentUser = User::find(get_current_user_id());
+    
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workoutForm'])) {
-        $currentUser = User::find(get_current_user_id());
+
 		$newWorkout = workOutAdd(array_merge($_POST, ['workout_trainer_ID' => $current_user->ID]));
 		Log::insert(['type' => 'TRAINER_CREATE_PROGRAM', 'workout' => $newWorkout], $currentUser);
 	}
@@ -28,7 +29,7 @@
 	</div>
 
 	<ul class="workout-lists trainer-workouts-lists">
-		<?php foreach(workOutUserList($current_user->ID) as $workout): ?>
+		<?php foreach($currentUser->getPrograms() as $workout): ?>
 		<li class="workout-list-item">
 			<?php $url = "/trainer/?data=add-workouts&workout=" . $workout->workout_ID ?>
 			<div class="workout-wrapper">

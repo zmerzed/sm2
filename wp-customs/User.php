@@ -46,7 +46,7 @@ class User
         $mFileExtns = explode('.',$fileName);
         $fileExtension = strtolower($mFileExtns[1]);
 
-        if (in_array($fileExtension, $fileImageExtensions)) 
+        if (in_array($fileExtension, $fileImageExtensions))
         {
         //    echo 'xXXXXXXXXXXXXXXXXX';
 
@@ -371,8 +371,27 @@ class User
         /* current user id */
         $ids[] = $this->id;
 
+        if (getMembershipLevel($this) != 'gym') {
+            $parent = getParent($this);
+            $ids[] = $parent['gym'];
+        }
+
         $ids = implode(",", $ids);
-        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN({$ids}) ORDER BY workout_ID desc";
+        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN({$ids})";
+
+        // trainer
+        if (getMembershipLevel($this) != 'gym') {
+         //   dd($this);
+
+            $parent = getParent($this);
+
+            $mIds = $parent['gym'];
+            $querystr .= " OR workout_created_by IN ({$mIds})";
+        }
+
+        $querystr .= " ORDER BY workout_ID desc";
+
+     //   dd($querystr);
         $workouts = $wpdb->get_results($querystr, OBJECT);
         return $workouts;
     }
@@ -496,7 +515,7 @@ class User
             if (getMembershipLevel($user) == 'gym') {
                 $user->isGym = true;
             }
-
+            
             return $user;
         }
 
