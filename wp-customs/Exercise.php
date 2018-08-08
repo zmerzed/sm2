@@ -40,7 +40,8 @@ class Exercise
                     $type = [
                         'part'    => $part['part'],
                         'part_id' => $part['id'],
-                        'type'    => $option->type
+                        'type'    => $option->type,
+                        'video'   => $option->video_link
                     ];
 
                     $types[] = $type;
