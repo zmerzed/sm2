@@ -11,7 +11,7 @@
     <tbody>
 
     <tr ng-repeat="type in exerciseTypes  | start: (currentPage - 1) * perPage | limitTo: perPage">
-        <td><a href="javascript:void(0)" ng-click="modalClick()" ng-repeat="vidID in getVideoID(type.video)"><img src="http://i.ytimg.com/vi/{{vidID}}/maxresdefault.jpg" class="img-responsive img-vid" /></a></td>
+        <td><a href="javascript:void(0)" ng-click="modalClick()" ng-repeat="vidID in getVideoID(type.video)"><img src="https://i.ytimg.com/vi/{{vidID}}/maxresdefault.jpg" class="img-responsive img-vid" /></a></td>
         <td>{{ type.type }}</td>
         <td>{{ type.part }}</td>
     </tr>

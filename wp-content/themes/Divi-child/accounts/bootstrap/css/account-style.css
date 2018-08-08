@@ -431,14 +431,18 @@ ul.workout-lists li .workout-wrapper{
 /*** Body Status ***/
 
 .body-pictures-status li .jtbl-cell{background-color:#303030}
+.body-pictures-status:after{content:"";display:block;clear:both;}
 .body-pictures-status{
 	margin: 0;
 	padding: 0;
 }
 
 .body-pictures-status li{
+	float:left;
+	margin-right:1px;
 	display: inline-block;
-	width: 24%;
+	width: 100%;
+	max-width:95px;
 }
 
 .pictures-body-date{
