@@ -2117,3 +2117,22 @@ function get_message_user_image(){
 	echo json_encode(array('result' => $imgR));
 	wp_die();	
 }
+/*Print Gym Color Theme*/
+function printCss($a,$b,$c){
+	$ctr=0;
+	foreach($a as $v){
+		$ctr++;
+		echo '.gym-page '.$v;
+		echo ($ctr!=count($a)) ? "," : "";		
+	}
+	if($b==1)
+		echo '{background-color:'.$c.'}';
+	elseif($b==2)
+		echo '{background-color:#'.$c.';}';
+	elseif($b==3)
+		echo '{background-color:#'.$c.';border-color:#'.$c.';}';	
+	elseif($b==4)
+		echo '{color:#'.$c.';}';
+	elseif($b==5)
+		echo '{border-color:#'.$c.'!important;}';
+}

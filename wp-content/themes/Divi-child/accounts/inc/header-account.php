@@ -57,12 +57,62 @@
   <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
   
 	 <?php if($pm_lvl == "gym" && $gcolor != ""):
-		$rgb = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';		
+		$rgba = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';		
 	 ?>
-		<style>
-			
+		<style>			
 			<?php
-			echo '.trainer-per-day-schedule-box.today li{background-color:'.$rgb.'}.gym-page .responsive-calendar .day .badge,.gym-page .responsive-calendar .day.active.today a,.gym-page .responsive-calendar .day.active a:hover,.gym-page .responsive-calendar .btn,.gym-page .red-btn,.gym-page .progress-bar,.gym-page .exercise-number,.gym-page .workout-tab-pane-wrapper,.gym-page .wi-blu,.gym-page .compose-message button, .gym-page .btn-add-workout button,.gym-page .message-wrapper,.gym-page .trainer-add-workout a,.gym-page .workoutclass,.gym-page #table-sorter_wrapper, .gym-page #table-sorter-logs_wrapper,.gym-page .sm-icons{background-color:#'.$gcolor.';}.gym-page #message-nav-tab .nav-item.active{background-color:#'.$gcolor.';border-color:#'.$gcolor.';}.gym-page .trainer-profile-name,.gym-page .trainer-day-label,.gym-page .main-navigation ul li a.active,.gym-page .main-navigation h3{color:#'.$gcolor.';}.gym-page .container-title h3,.gym-page .title-welcome-section .container,.gym-page .trainer-dashboard tr td:nth-child(1){border-color:#'.$gcolor.'!important;}'; ?>
+			$jrgb = [ // background-color rgba
+				'.trainer-per-day-schedule-box.today li'
+			];
+			$jbgcolor = [ // background-color
+				'.responsive-calendar .day .badge',
+				'.responsive-calendar .day.active.today a',
+				'.responsive-calendar .day.active a:hover',
+				'.responsive-calendar .btn', '.red-btn',
+				'.progress-bar', '.exercise-number',
+				'.workout-tab-pane-wrapper', '.wi-blu',
+				'.compose-message button',
+				'.btn-add-workout button',
+				'.message-wrapper', '.trainer-add-workout a',
+				'.workoutclass',
+				'#table-sorter_wrapper',
+				'#table-sorter-logs_wrapper',
+				'.sm-icons',
+				'div[ng-controller="exercisesController"] div[src="workoutTemplate"]',
+				'div[ng-controller="logsController"] div[src="workoutTemplate"]'
+			];
+			$jbbcolor = [ // border-color && background-color
+				'#message-nav-tab .nav-item.active',
+				'.pagination>.active>a',
+				'.pagination>.active>a:focus',
+				'.pagination>.active>a:hover',
+				'.pagination>.active>span',
+				'.pagination>.active>span:focus',
+				'.pagination>.active>span:hover'
+			];
+			$jgcolor = [ // color
+				'.pagination>li>a',
+				'.pagination>li>span',
+				'.pagination>li>a:focus',
+				'.pagination>li>a:hover',
+				'.pagination>li>span:focus',
+				'.pagination>li>span:hover',
+				'.trainer-profile-name',
+				'.trainer-day-label',
+				'.main-navigation ul li a.active',
+				'.main-navigation h3'
+			];
+			$jbcolor = [ //border-color
+				'.container-title h3',
+				'.title-welcome-section .container',
+				'.trainer-dashboard tr td:nth-child(1)'
+			];			
+			printCss($jrgb, 1, $rgba);
+			printCss($jbgcolor, 2, $gcolor);
+			printCss($jbbcolor, 3, $gcolor);
+			printCss($jgcolor, 4, $gcolor);
+			printCss($jbcolor, 5, $gcolor);			
+			?>
 		</style>
 	<?php endif; ?>
   
@@ -71,6 +121,5 @@
 
   </head>
 
-  <body class="<?php echo ($pm_lvl == "gym") ? 'gym-page' : ''; ?>">
-	
+  <body class="<?php echo ($pm_lvl == "gym") ? 'gym-page' : ''; ?>">	
 <?php require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' ); ?>

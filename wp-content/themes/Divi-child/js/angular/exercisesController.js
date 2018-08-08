@@ -15,15 +15,24 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 	
 	$scope.modalClick = function(){
 		var vsrc = this.type.video;
-		if(vsrc != ""){
-			if(vsrc.indexOf('youtu.be') != -1){
-				vsrc = vsrc.replace('https://youtu.be/','');
-			}else{
-				vsrc = vsrc.split('v=')[1];
-			}
-		}
+		vsrc = getID(vsrc);		
 		$('#myModal').modal('show');
-		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+vsrc+'?rel=0&autoplay=1');
+		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+vsrc[0]+'?rel=0&autoplay=1');
+	}
+	
+	$scope.getVideoID = function(v){						
+		return getID(v);
+	}
+	
+	function getID(v){
+		var res = [];
+		if(v != ""){
+			if(v.indexOf('youtu.be') != -1)
+				res.push(v.replace('https://youtu.be/',''));
+			else
+				res.push(v.split('v=')[1]);			
+		}
+		return res;
 	}
 	
 	

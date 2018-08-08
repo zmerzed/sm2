@@ -430,6 +430,7 @@ ul.workout-lists li .workout-wrapper{
 
 /*** Body Status ***/
 
+.body-pictures-status li .jtbl-cell{background-color:#303030}
 .body-pictures-status{
 	margin: 0;
 	padding: 0;
@@ -451,7 +452,14 @@ ul.workout-lists li .workout-wrapper{
 
 
 /*** Notes ***/
-
+.pagination>li>a, .pagination>li>span,
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover{color:#ae1f23}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{color:#fff!important;background-color:#ae1f23;border-color:#ae1f23}
+body div[ng-controller="exercisesController"] .img-vid{max-width:100px;height:auto;}
+body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
+body div[ng-controller="logsController"] div[src="workoutTemplate"]{padding:20px;}
+div[ng-controller="exercisesController"] div[src="workoutTemplate"],
+div[ng-controller="logsController"] div[src="workoutTemplate"],
 #table-sorter_wrapper, #table-sorter-logs_wrapper{
     background: #ae1f23;
     padding: 10px 0px;
