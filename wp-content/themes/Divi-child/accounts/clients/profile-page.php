@@ -34,7 +34,6 @@ $userGoal = $currentUser['stats']['goal'];
 								$pp = round(abs(calcppbp($gw, $sw ,$cw)));//calculate Percentage per bodyparts
 						?>
 							<tr>
-								<!-- <td><?php echo "GW:" .$gw. ", SW:" .$sw .", CW:" .$cw . ", PP:". $pp; ?><hr></td> -->
 								<td class="progress-title"><label><?php echo $v; ?></label></td>
 								<td class="progress-status-bar">
 									<div class="progress">
@@ -107,11 +106,10 @@ $userGoal = $currentUser['stats']['goal'];
 	homeUrl = "<?php echo home_url(); ?>",
 	bodyPhotosHTML = "";
 	if(curUser.length != 0){
-		curUser['files'].forEach(function(e){
-			
+		curUser['files'].forEach(function(e){			
 			var imgSrc = homeUrl +'/sm-files/'+ e['user_id']  +'/'+ e['file'];
-			bodyPhotosHTML += '<li>';		
-			bodyPhotosHTML += '<img src="'+imgSrc+'" class="img-responsive">';	
+			bodyPhotosHTML += '<li><div class="jtbl-cell" style="height:120px;">';		
+			bodyPhotosHTML += '<img src="'+imgSrc+'" class="img-responsive"></div>';	
 			bodyPhotosHTML += '<span class="pictures-body-date">'+e['uploaded_at']+'</span>';	
 			bodyPhotosHTML += '</li>';		
 		});
