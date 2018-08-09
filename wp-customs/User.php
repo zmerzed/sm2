@@ -5,6 +5,7 @@ use Carbon\Carbon;
 class User
 {
     public $forGymVal = NULL;
+    public $forTrainerPhoto = FALSE;
     
     public function __construct()
     {
@@ -70,6 +71,10 @@ class User
                         $imageType = 'image_gym_landscape';
                     }
                 }
+                
+                if ($this->forTrainerPhoto) {
+                    $imageType = 'image_trainer';
+                }
 
                 $wpdb->insert('workout_user_files',
                     array(
@@ -112,7 +117,8 @@ class User
 
         return [
             'errors' => $errors,
-            'gymPhotos' => $this->getGymLogos()
+            'gymPhotos' => $this->getGymLogos(),
+            'trainerPhoto' => $this->getTrainerProfilePhoto()
         ];
     }
 
@@ -281,6 +287,20 @@ class User
         return $results;
     }
 
+    public function getTrainerProfilePhoto()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$this->id} AND type='image_trainer'", ARRAY_A);
+
+        if (count($results) > 0) {
+            $latest = $results[count($results) - 1];
+
+            return get_site_url() . "/sm-files/{$this->id}/" . $latest['file'];
+        }
+
+        return '';
+    }
+
     public function getFiles() {
         global $wpdb;
         $results = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$this->id} AND type='file'", ARRAY_A);
@@ -381,7 +401,6 @@ class User
 
         // trainer
         if (getMembershipLevel($this) != 'gym') {
-         //   dd($this);
 
             $parent = getParent($this);
 
@@ -391,7 +410,6 @@ class User
 
         $querystr .= " ORDER BY workout_ID desc";
 
-     //   dd($querystr);
         $workouts = $wpdb->get_results($querystr, OBJECT);
         return $workouts;
     }

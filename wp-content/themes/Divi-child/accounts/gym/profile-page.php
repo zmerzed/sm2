@@ -1,6 +1,5 @@
 <?php
 
-require_once getcwd() . '/wp-customs/User.php';
 $currentUser = User::find(get_current_user_id());
 $currentUser->gymPhotos = $currentUser->getGymLogos();
 
@@ -85,6 +84,7 @@ else:
 	var ROOTURL = '<?php echo get_site_url(); ?>';
 	var CURRENT_USER = JSON.parse('<?php echo json_encode($currentUser); ?>');
 
+	console.log(CURRENT_USER);
 	function encodeImageFileAsURL(cb)
 	{
 		return function(){

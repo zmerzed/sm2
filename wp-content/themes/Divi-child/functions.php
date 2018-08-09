@@ -1535,7 +1535,7 @@ function smUpload()
 	if (isset($_POST['userId']))
 	{
 		$user = User::find($_POST['userId']);
-		//var_dump($_FILES);
+
 		if ($user)
 		{
 			if (isset($_POST['gym_profile_portrait'])) {
@@ -1544,6 +1544,10 @@ function smUpload()
 
 			if (isset($_POST['gym_profile_landscape'])) {
 				$user->forGymVal = ['gym_profile_landscape' => true];
+			}
+
+			if (isset($_POST['trainer-profile'])) {
+				$user->forTrainerPhoto = true;
 			}
 
 			$data = $user->uploadFile($_FILES['myFile']);

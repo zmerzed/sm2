@@ -134,6 +134,13 @@ angular.module('smApp')
             });
         }));
 
+        $('#idTrainerProfile').change(encodeImageFileAsURL(function(base64Img){
+            console.log('xxxxxx')
+            var blob = $filter('dataURLtoBlob')(base64Img);
+            $('#idTrainerProfilePhotoResult').attr('src', base64Img);
+
+        }));
+
         $scope.gymRemoveLogo = function()
         {
 
@@ -150,7 +157,20 @@ angular.module('smApp')
                 $("#idGymPortrait").click();
             }
         };
-        
+
+        $scope.trainerUploadPhoto = function() {
+
+            var fd = new FormData();
+            fd.append('myFile', $('#idTrainerProfile')[0].files[0]);
+            fd.append('userId', $scope.currentUser.id);
+            fd.append('trainer-profile', true);
+            $scope.promise = $http.post(
+                apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+            ).then(function(res) {
+                
+            });
+        };
+
         $("#idStatsForm").submit(function (e) {
 
             console.log(JSON.stringify($scope.stats));
