@@ -2152,18 +2152,21 @@ function getProgramDeatils($pid){
 	$wQ = 'SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid; // Workout Query	
 	$workouts = $wpdb->get_results($wQ, OBJECT);
 	$workoutsArr = [];
-	$workoutExercises = [];
-	
-	foreach($workouts as $workout){
-		$wid = $workout->wday_ID;
-		$wname = $workout->wday_name;		
-		$workoutsArr[$wid]['workout_detail'][] = $workout;		
-		$wExerQ = 'SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid;
-		$wExers = $wpdb->get_results($wExerQ, OBJECT);	// Exercises		
-		
-		foreach($wExers as $wExer)
-			$workoutsArr[$wid]['exercises'][] = $wExer;
-	}
-	
-	return $workoutsArr;	
+	if(!empty($workouts)){
+		foreach($workouts as $workout){
+			$wid = $workout->wday_ID;
+			$wname = $workout->wday_name;		
+			$workoutsArr[$wid]['workout_detail'][] = $workout;		
+			$wExerQ = 'SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid;
+			$wExers = $wpdb->get_results($wExerQ, OBJECT);	// Exercises
+			
+			if(empty($wExers))
+				$workoutsArr[$wid]['exercises'][] = array();
+			else{
+				foreach($wExers as $wExer)		
+					$workoutsArr[$wid]['exercises'][] = $wExer;
+			}
+		}		
+	}	
+	return $workoutsArr;
 }
