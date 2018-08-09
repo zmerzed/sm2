@@ -40,7 +40,14 @@
     </div>
 
 	<ul class="workout-lists">
-		<?php foreach ($clientWorkouts['todayWorkouts'] as $workout) { ?>
+		<?php
+		if(!empty($clientWorkouts['todayWorkouts'])){
+			foreach ($clientWorkouts['todayWorkouts'] as $workout) {
+				$wID = $workout->workout->workout_ID;
+				$wnote = "";
+				if(!empty(getNote($wID)))
+					$wnote = getNote($wID)[0]['detail'];				
+		?>
 
 		<li>
 			<h4 class="workout-date"><?php echo helperGetCurrentDate()->format('l, Y-m-d'); ?> </h4>
@@ -51,12 +58,19 @@
 				<?php } ?>
 				<label><?php echo $workout->workout->workout_name . " - " . $workout->day->wday_name; ?></label>
 				<div class="workout-controls">
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+					<?php if($wnote): ?>
+						<span><a href="javascript:void(0);" onclick="showNote(this);"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+					<?php endif; ?>
 					<span><a href="<?php echo home_url(); ?>/client/?data=workout&dayId=<?php echo $workout->workout_client_dayID?>&workoutId=<?php echo $workout->	workout_client_workout_ID?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span>
 				</div>
 			</div>
+			<div class="wnote" style="display:none;"><?php echo $wnote; ?></div>
 		</li>
-		<?php } ?>
+		<?php }
+		}else{
+			echo '<li style="text-align:center;">No Workout</li>';
+		}
+		?>
 	</ul>
 
 	<div class="container-title">
@@ -64,21 +78,33 @@
 	</div>
 
 	<ul class="workout-lists">
-		<?php foreach ($clientWorkouts['upcomingWorkouts'] as $workout) {
-			if($workout->workout):
+		<?php
+		if(!empty($clientWorkouts['upcomingWorkouts'])){
+			foreach ($clientWorkouts['upcomingWorkouts'] as $workout) {
+				if($workout->workout):
+					$wID = $workout->workout->workout_ID;
+					$wnote = "";
+					if(!empty(getNote($wID)))
+						$wnote = getNote($wID)[0]['detail'];				
 		?>
 			<li>
 				<div class="workout-wrapper">
 					<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>					
 					<label><?php echo $workout->workout->workout_name . " - " . $workout->day->wday_name ?></label>
 					<div class="workout-controls">
-						<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+						<?php if($wnote): ?>
+							<span><a href="javascript:void(0);" onclick="showNote(this);"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+						<?php endif; ?>
 						<!--span><a href="<?php echo home_url(); ?>/client/?data=workout"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span-->
 					</div>
 				</div>
+				<div class="wnote" style="display:none;"><?php echo $wnote; ?></div>
 			</li>
 		<?php
-			endif;
+				endif;
+			}
+		}else{
+			echo '<li style="text-align:center;">No Workout</li>';
 		}
 		?>
 	</ul>
@@ -103,6 +129,11 @@
 </div>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/canvasjs.min.js"></script> 
 <script>
+function showNote(a){
+	$('.modal-title').html('<strong>Note</strong>');
+	$('.modal-body').html($(a).closest('li').find('.wnote').html());
+	$('#workoutModal').modal();
+}
 window.onload = function() {
 	var chart = new CanvasJS.Chart("chartContainer", {		
 		title: {

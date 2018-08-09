@@ -70,14 +70,15 @@
    dateToday = "<?php echo date('Y-m-d'); ?>";
    function pullWorkout(date){
 		var thisWork = workoutDates[date];		
-		/* console.log(thisWork);  */
+		/* console.log(thisWork); */
 		
 		$('#workoutModal').modal();
 		$('#workoutModal .modal-title').html('Program(s) for ' + date);
 		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
 		$.each(thisWork, function(i, v){			
 			var wisDone = v[0]['wisdone'],
-			vstatus = "";
+			vstatus = ""
+			v0 = v[0];
 			if(wisDone != 0){
 				vstatus = "(Completed)";
 			}				
@@ -87,15 +88,18 @@
 			if(dateToday < date && wisDone == 0){
 				vstatus = "(Pending)";
 			}				
-			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v[0]['wdname'] + ' - '+v[0]['wcnname']+' '+vstatus+'</span>';			
+			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v0['wdname'] + ' - '+v0['wcnname']+' '+vstatus+'</span>';			
 			if(dateToday == date && wisDone == 0){
-				htmlContent += '&nbsp;<a href="'+v[0]['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
+				htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
-			htmlContent += '<a href="#"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div></li>';
+			htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+v0['wnote'][0]['detail']+'</div></li>';
 		});
 		htmlContent += '</ul>';
 		$('#workoutModal .modal-body').html(htmlContent);
    }
+	function togglNote(a){
+		$(a).closest('li').find('.wnote').slideToggle();
+	}
 
   jQuery('#table-sorter').DataTable({
     "lengthMenu": [[8, 16, 24, -1], [8, 16, 24, "All"]]

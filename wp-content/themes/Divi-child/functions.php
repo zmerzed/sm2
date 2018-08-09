@@ -2140,3 +2140,9 @@ function printCss($a,$b,$c){
 	elseif($b==5)
 		echo '{border-color:#'.$c.'!important;}';
 }
+/*Get Note*/
+function getNote($uid){
+	global $wpdb;
+	$qNotes = 'SELECT * FROM workout_notes WHERE workout_id = '. $uid;
+	return $wpdb->get_results($qNotes, ARRAY_A);
+}
