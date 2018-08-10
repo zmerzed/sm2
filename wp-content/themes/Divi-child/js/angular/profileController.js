@@ -90,6 +90,7 @@ angular.module('smApp')
             var fd = new FormData();
             fd.append('myFile', file);
             fd.append('userId', USER_ID);
+            fd.append('health-doc', true);
             $http.post(
                 apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
             ).then(function() {

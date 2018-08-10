@@ -14,13 +14,20 @@ class Log
     {
         global $wpdb;
 
-        $logs = $wpdb->get_results( "SELECT * FROM workout_activity_logs WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
+        $user = User::find($userId);
 
-        if ($logs) {
+        if (getMembershipLevel($user) == 'gym') {
+
+            $trainersIds = $user->getTrainersById();
+            $trainersIds[] = $user->id; // include gym id
+            $idsStr = implode(",", $trainersIds);
+            $logs = $wpdb->get_results( "SELECT * FROM workout_activity_logs WHERE user_id IN({$idsStr}) ORDER BY id DESC", ARRAY_A);
+
             return $logs;
         }
 
-        return [];
+        $logs = $wpdb->get_results( "SELECT * FROM workout_activity_logs WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
+        return $logs;
     }
 
 	public static function getContent($logType=NULL)
@@ -38,6 +45,9 @@ class Log
             "TRAINER_UPDATE_PROGRAM" => "{-trainerName} updated a program ({-programName}).",
             "TRAINER_DELETE_PROGRAM" => "{-trainerName} deleted a program ({-programName}).",
             "TRAINER_UPDATE_NOTE"    => "{-trainerName} updated the program ({-programName}) note -{-noteDetail}.",
+
+            "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
+            "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
         ];
 
         if (in_array_recursive($logType, $types)) {
@@ -154,7 +164,7 @@ class Log
 
                 } break;
 
-            /* case 'TRAINER_UPDATE_NOTE': {
+            case 'TRAINER_UPDATE_NOTE': {
 
                 $workout = $type['workout'];
                 $noteDetail = '';
@@ -170,7 +180,29 @@ class Log
                     self::getContent($type['type'])
                 );
 
-                } break; */
+                } break;
+
+            case 'CLIENT_UPLOAD_DOCUMENT': {
+
+                $fileName = $type['file'];
+
+                $logDescription = str_replace(
+                    ["{-clientName}", "{-fileName}"],
+                    [$user->user_nicename, $fileName],
+                    self::getContent($type['type'])
+                );
+
+                } break;
+
+            case 'CLIENT_UPDATE_PROGRESS': {
+
+                $logDescription = str_replace(
+                    ["{-clientName}"],
+                    [$user->user_nicename],
+                    self::getContent($type['type'])
+                );
+
+                } break;
         }
 
         if (empty($logDescription)) return false;
@@ -179,7 +211,7 @@ class Log
         $trainerId = NULL;
         $clientId = NULL;
         
-        switch (getMembershipLevel($user))
+        switch (getMembershipLevel(get_userdata($user->id)))
         {
             case 'gym': {
                 $gymId = $user->id;
