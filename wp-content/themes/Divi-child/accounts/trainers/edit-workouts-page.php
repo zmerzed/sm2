@@ -23,12 +23,20 @@ $program = Program::find((int) $_GET['workout']);
 	var PROGRAM_NOTE = <?php echo json_encode($program->getNote()) ?>;
 	var EXERCISE_OPTIONS = <?php echo json_encode(workOutExerciseOptions()) ?>;
 	var EXERCISE_SQ_OPTIONS = <?php echo json_encode(workOutExerciseStrengthQualitiesOptions()) ?>;
-
+	
 </script>
 
-<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
-	<div ng-include src="workoutTemplate"></div>
-</div>
+<?php if(isset($_GET['print'])):  ?>
+	<div class="main-content padding20 matchHeight">
+		<a href="javascript:void(0);" onclick="tests()">test</a>
+		<?php require_once(get_stylesheet_directory() . '/accounts/inc/print-program-account.php'); ?>
+	</div>
+<?php else: ?>
+	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1">Print</a>
+	<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
+		<div ng-include src="workoutTemplate"></div>
+	</div>
+<?php endif; ?>
 
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/app.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/editWorkoutController.js'; ?>"></script>
