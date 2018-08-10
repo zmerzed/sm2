@@ -1,0 +1,5 @@
+@media(max-width: 480px){
+  .main-content { padding: 30px 15px; }
+  ul.workout-lists li label { font-size: 18px; }
+  .start-workout{ padding: 30px 15px; }
+}

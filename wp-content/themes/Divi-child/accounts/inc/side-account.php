@@ -15,7 +15,7 @@
 	
 	$r_uri = $_SERVER['REQUEST_URI'];
 ?>
-<div class="col-lg-2 col-md-2">
+<div class="col-md-4 col-lg-3 col-xl-2 mb-5">
 	<div class="main-navigation matchHeight">
 		<h3>Menu</h3>
 		

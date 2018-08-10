@@ -357,20 +357,20 @@
 				<div class="exercise-area">
 					<div class="col-lg-12 col-md-12">
 						<div class="exercise-label">
-							<div class="col-lg-4 col-md-4 col-sm-12">
+							<div class="col-12 col-lg-4 col-xl-4">
 								<label>{{ currentExercise.exer_body_part }} <br> <small>{{ currentExercise.exer_type }}</small></label>
 							</div>
-							<div class="col-lg-8 col-md-8 col-sm-12 exercise-details">
+							<div class="col-12 col-lg-8 col-xl-8 exercise-details">
 								<div class="ed-item">Sets: <span>{{ currentExercise.exer_sets }}</span></div>
 								<div class="ed-item">Tempo: <span>{{ currentExercise.exer_tempo }}</span></div>
 							</div>
 						</div>
 					</div>
 					<div class="exercise-set-area">
-						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="col-12 col-lg-5 col-xl-4 mb-5 text-center">
 							<a href="javascript:void(0);" onclick="modalClick('YyvSfVjQeL0');"><img class="img-responsive" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/video-sample.jpg" /></a>
 						</div>
-						<div class="col-lg-8 col-md-8 col-sm-12">
+						<div class="col-12 col-lg-7 col-xl-8">
 							<div class="exercise-set-item">
 								<div class="exercise-set-goal">
 									<h5>
@@ -395,12 +395,12 @@
 									</div>
 									<div class="rep-navigation">
 										<div>
-											<button ng-click="onBackSet();" id="idBackSet"><span class="btn-arrow btn-arr-back"></span>Back</button>
+											<button ng-click="onBackSet();" id="idBackSet" class = "mb-3 mb-lg-3 mb-xl-0"><span class="btn-arrow btn-arr-back"></span>Back</button>
 											<label>
 												Reps Complete:
 												<input type="text" ng-model="currentExercise.currentSet.reps"/>
 											</label>
-											<button ng-click="onNextSet();" id="idNextSet">Next Set <span class="btn-arrow btn-arr-next"></span></button>
+											<button ng-click="onNextSet();" id="idNextSet" class = "mt-3 mt-lg-3 mt-xl-0">Next Set <span class="btn-arrow btn-arr-next"></span></button>
 										</div>
 									</div>
 								</div>

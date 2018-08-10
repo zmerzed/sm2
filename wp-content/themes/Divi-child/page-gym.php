@@ -34,7 +34,7 @@ if( is_user_logged_in() ){
 		
 			<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
 			
-			<div class="col-lg-10 col-md-10">				
+			<div class="col-12 col-md-8 col-lg-9 col-xl-10">				
 				<?php
 					if(!checkUserOrParentStatus($uinfo)){
 						echo "Subscription ended, please contact admin.";

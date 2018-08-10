@@ -110,16 +110,16 @@
 	</ul>
 	<div class="recent-activity">
 		<div class="row">
-			<div class="col-lg-6 col-md-6">
+			<div class="col-12 col-lg-6 col-xl-6">
 				<h3>new message(s)</h3>
-				<div class="counter-container">
+				<div class="counter-container mx-auto mx-lg-0 mx-xl-0">
 					<a href="<?php echo home_url('messages'); ?>">
 					<?php echo do_shortcode('[fep_shortcode_new_message_count]'); ?>
 					<img class="img-responsive" src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/message-notification.png'; ?>">
 					</a>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6">
+			<div class="col-12 col-lg-6 col-xl-6">
 				<h3>Progress</h3>
 				<!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-graph.png'; ?>"> -->
 				<div class="chartContainer" id="chartContainer"></div>

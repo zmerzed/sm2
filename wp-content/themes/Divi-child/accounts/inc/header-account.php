@@ -55,6 +55,7 @@
   <link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/fullcalendar.print.min.css'; ?>' rel='stylesheet' media='print' />*/ ?>
   
   <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/css/jc-style.css'; ?>">
   
 	 <?php if($pm_lvl == "gym" && $gcolor != ""):
 		$rgba = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';		

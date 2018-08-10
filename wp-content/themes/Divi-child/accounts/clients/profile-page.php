@@ -22,7 +22,7 @@ $userGoal = $currentUser['stats']['goal'];
 
 	<div class="current-status">
 		<div class="row">
-			<div class="col-lg-6 col-md-6">
+			<div class="col-12 col-lg-6 col-xl-6 mb-4">
 				<div class="status-bar">
 					<table>						
 						<?php						
@@ -47,8 +47,8 @@ $userGoal = $currentUser['stats']['goal'];
 					</table>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6" ng-app="">
-				<ul class="body-pictures-status" id="bodypic">
+			<div class="col-12 col-lg-6 col-xl-6" ng-app="">
+				<ul class="body-pictures-status row m-0" id="bodypic">
 					<!-- <li>
 						<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/picture-01.png'; ?>">
 						<span class="pictures-body-date">1/12/2017</span>
@@ -108,8 +108,8 @@ $userGoal = $currentUser['stats']['goal'];
 	if(curUser.length != 0){
 		curUser['files'].forEach(function(e){			
 			var imgSrc = homeUrl +'/sm-files/'+ e['user_id']  +'/'+ e['file'];
-			bodyPhotosHTML += '<li><div class="jtbl-cell" style="height:120px;">';		
-			bodyPhotosHTML += '<img src="'+imgSrc+'" class="img-responsive"></div>';	
+			bodyPhotosHTML += '<li class = "col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 mb-3 p-0"><div class="jtbl-cell">';		
+			bodyPhotosHTML += '<img src="'+imgSrc+'" class="img-fluid"></div>';	
 			bodyPhotosHTML += '<span class="pictures-body-date">'+e['uploaded_at']+'</span>';	
 			bodyPhotosHTML += '</li>';		
 		});

@@ -18,7 +18,7 @@ if( is_user_logged_in() ){
 			<div class="row">
 			<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
 			<!-- .et_pb_column -->
-			<div class="col-lg-8 col-md-8">
+			<div class="col-12 col-md-8 col-lg-9 col-xl-10">
 				<div class="entry-content">
 					<?php while ( have_posts() ) : the_post(); ?>
 						<?php the_content(); ?>

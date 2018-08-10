@@ -47,121 +47,126 @@
 		<div class="current-status" style="max-width:80%;margin:0 auto;">
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
-					<div class="current-goal">
-						<h3>Goal</h3>
-						<form id="idStatsForm" action="/client/?data=profile&by=progress-goals" method="POST">
+					<form id="idStatsForm" action="/client/?data=profile&by=progress-goals" method="POST">
+						<div class="current-goal">
+							<h3>Goal</h3>							
 							<table style="width: 100%;">
-								<tbody><tr>
-									<th></th>
-									<th>Start #s</th>
-									<th>Goal #s</th>
-								</tr>
-
-								<tr>
-									<td><label>Weight (lbs)</label></td>
-									<td><input type="text" ng-model="stats.start.weight"></td>
-									<td><input type="text" ng-model="stats.goal.weight"></td>
-								</tr>
-								<tr>
-									<td><label>Body Fat (%)</label></td>
-									<td><input type="text" ng-model="stats.start.body_fat"></td>
-									<td><input type="text" ng-model="stats.goal.body_fat"></td>
-								</tr>
-								<tr>
-									<td><label>Waist (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.waist"></td>
-									<td><input type="text" ng-model="stats.goal.waist"></td>
-								</tr>
-								<tr>
-									<td><label>chest (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.chest"></td>
-									<td><input type="text" ng-model="stats.goal.chest"></td>
-								</tr>
-								<tr>
-									<td><label>arms (cm)</label></td>
-									<td><input type="text"ng-model="stats.start.arms"></td>
-									<td><input type="text"ng-model="stats.goal.arms"></td>
-								</tr>
-								<tr>
-									<td><label>forearms (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.forearms"></td>
-									<td><input type="text" ng-model="stats.goal.forearms"></td>
-								</tr>
-								<tr>
-									<td><label>shoulders (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.shoulders"></td>
-									<td><input type="text" ng-model="stats.goal.shoulders"></td>
-								</tr>
-								<tr>
-									<td><label>hips (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.hips"></td>
-									<td><input type="text" ng-model="stats.goal.hips"></td>
-								</tr>
-								<tr>
-									<td><label>thighs (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.thighs"></td>
-									<td><input type="text" ng-model="stats.goal.thighs"></td>
-								</tr>
-								<tr>
-									<td><label>calves (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.calves"></td>
-									<td><input type="text" ng-model="stats.goal.calves"></td>
-								</tr>
-								<tr>
-									<td><label>neck (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.neck"></td>
-									<td><input type="text" ng-model="stats.goal.neck"></td>
-								</tr>
-								<tr>
-									<td><label>height (cm)</label></td>
-									<td><input type="text" ng-model="stats.start.height"></td>
-									<td><input type="text" ng-model="stats.goal.height"></td>
-								</tr>
-								</tbody></table>
-					</div>
-					<div class="col-lg-12 col-md-12">
-						<div style="text-align:center;padding:10px 0;">
-							<input type="hidden" name="statsFormData" id="idStatsFormData"/>
-							<button type="submit" class="red-btn">Update</button>
+								<tbody>
+									<tr>
+										<th></th>
+										<th>Start #s</th>
+										<th>Goal #s</th>
+									</tr>
+									<tr>
+										<td><label>Weight (lbs)</label></td>
+										<td><input type="text" ng-model="stats.start.weight"></td>
+										<td><input type="text" ng-model="stats.goal.weight"></td>
+									</tr>
+									<tr>
+										<td><label>Body Fat (%)</label></td>
+										<td><input type="text" ng-model="stats.start.body_fat"></td>
+										<td><input type="text" ng-model="stats.goal.body_fat"></td>
+									</tr>
+									<tr>
+										<td><label>Waist (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.waist"></td>
+										<td><input type="text" ng-model="stats.goal.waist"></td>
+									</tr>
+									<tr>
+										<td><label>chest (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.chest"></td>
+										<td><input type="text" ng-model="stats.goal.chest"></td>
+									</tr>
+									<tr>
+										<td><label>arms (cm)</label></td>
+										<td><input type="text"ng-model="stats.start.arms"></td>
+										<td><input type="text"ng-model="stats.goal.arms"></td>
+									</tr>
+									<tr>
+										<td><label>forearms (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.forearms"></td>
+										<td><input type="text" ng-model="stats.goal.forearms"></td>
+									</tr>
+									<tr>
+										<td><label>shoulders (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.shoulders"></td>
+										<td><input type="text" ng-model="stats.goal.shoulders"></td>
+									</tr>
+									<tr>
+										<td><label>hips (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.hips"></td>
+										<td><input type="text" ng-model="stats.goal.hips"></td>
+									</tr>
+									<tr>
+										<td><label>thighs (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.thighs"></td>
+										<td><input type="text" ng-model="stats.goal.thighs"></td>
+									</tr>
+									<tr>
+										<td><label>calves (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.calves"></td>
+										<td><input type="text" ng-model="stats.goal.calves"></td>
+									</tr>
+									<tr>
+										<td><label>neck (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.neck"></td>
+										<td><input type="text" ng-model="stats.goal.neck"></td>
+									</tr>
+									<tr>
+										<td><label>height (cm)</label></td>
+										<td><input type="text" ng-model="stats.start.height"></td>
+										<td><input type="text" ng-model="stats.goal.height"></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
-					</div>
-					</form>
-					<div class="col-lg-12 col-md-12">
-						<div class="progress-photos">
-							<h3>progress photos</h3>
-
-							<ul class="progress-slider-photos">
-								<li ng-repeat="photo in currentUser.photos">
-									<div class="snap-container"><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
-									<span>{{ photo.uploaded_at }}</span>
-								</li>
-								<li>
-									<div class="browser-upload-image" ng-click="takeNew()">
-										<label class="btn btn-default btn-file">
-											<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">
-										</label>
-									</div>
-									<span>Take New</span>
-								</li>
-							</ul>
-
-							<div class="row" style="display:none">
-								<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
-								<div class="output">
-									<img style="max-width:100%; height: 120px;">
+						<div class = "row">
+							<div class="col-lg-12 col-md-12">
+								<div style="text-align:center;padding:10px 0;">
+									<input type="hidden" name="statsFormData" id="idStatsFormData"/>
+									<button type="submit" class="red-btn">Update</button>
 								</div>
-								<!-- <button class="btn btn-default" ng-click="upload()">UPLOAD</button> -->
 							</div>
 						</div>
-						<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
-							<div class="progress-notes">
-								<p class="label">In details, explain what are your trying to accomplish</p>
-								<textarea name="accomtext" class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"><?php echo $accomtext; ?></textarea>
+					</form>
+					<div class = "row">
+						<div class="col-lg-12 col-md-12">
+							<div class="progress-photos">
+								<h3>progress photos</h3>
+
+								<ul class="progress-slider-photos">
+									<li ng-repeat="photo in currentUser.photos">
+										<div class="snap-container"><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
+										<span>{{ photo.uploaded_at }}</span>
+									</li>
+									<li>
+										<div class="browser-upload-image" ng-click="takeNew()">
+											<label class="btn btn-default btn-file">
+												<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">
+											</label>
+										</div>
+										<span>Take New</span>
+									</li>
+								</ul>
+
+								<div class="row" style="display:none">
+									<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="display:none"/>
+									<div class="output">
+										<img style="max-width:100%; height: 120px;">
+									</div>
+									<!-- <button class="btn btn-default" ng-click="upload()">UPLOAD</button> -->
+								</div>
 							</div>
-							<div style="text-align:center;padding:10px 0;">
-								<button type="submit" class="red-btn">Update</button>
-							</div>
-						</form>
+							<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+								<div class="progress-notes">
+									<p class="label">In details, explain what are your trying to accomplish</p>
+									<textarea name="accomtext" class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"><?php echo $accomtext; ?></textarea>
+								</div>
+								<div style="text-align:center;padding:10px 0;">
+									<button type="submit" class="red-btn">Update</button>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
