@@ -153,6 +153,7 @@ ul.workout-lists{
     text-align: left;
 }
 
+ul.workout-lists li .wnote{padding:10px;}
 ul.workout-lists li{
     display: block;
     margin-bottom: 35px;
