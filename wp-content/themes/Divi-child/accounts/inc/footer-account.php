@@ -79,8 +79,6 @@
 			var wisDone = v[0]['wisdone'],
 			vstatus = "",
 			v0 = v[0];
-			
-			console.log(v0);
 			if(wisDone != 0){
 				vstatus = "(Completed)";
 			}				
