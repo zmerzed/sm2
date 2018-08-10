@@ -2178,3 +2178,11 @@ function getProgramDeatils($pid){
 	}	
 	return $workoutsArr;
 }
+
+/*AFTER SEND MESSAGE*/
+function fep_test($e) {
+	echo "<pre>";
+	var_dump($_POST);
+	echo "</pre>";
+}
+add_action('fep_action_message_after_send','fep_test');
