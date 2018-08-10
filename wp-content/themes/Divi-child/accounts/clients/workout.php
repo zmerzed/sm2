@@ -1,3 +1,10 @@
+<?php if(isset($_GET['print'])):  ?>
+	<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print.css" />
+	<div class="main-content padding20 matchHeight">
+		<?php require_once(get_stylesheet_directory() . '/accounts/inc/print-program-account.php'); ?>
+	</div>
+<?php else: ?>
+<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn" style="float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
 
@@ -424,3 +431,4 @@
 		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+a+'?rel=0&autoplay=1');
 	}
 </script>
+<?php endif; ?>

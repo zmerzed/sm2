@@ -2156,7 +2156,7 @@ function getNote($uid){
 	return $wpdb->get_results($qNotes, ARRAY_A);
 }
 /*Get Program Details*/
-function getProgramDeatils($pid){
+function getProgramDeatils($pid,$swid){
 	global $wpdb;
 	$workoutsArr = [];
 	$program = $wpdb->get_results('SELECT * FROM workout_tbl WHERE workout_ID = '. $pid, OBJECT);
@@ -2166,21 +2166,38 @@ function getProgramDeatils($pid){
 	if(!empty($workouts)){
 		foreach($workouts as $workout){
 			$wid = $workout->wday_ID;
-			$wname = $workout->wday_name;		
-			$workoutsArr[$wid]['workout_detail'][] = $workout;		
-			$wExerQ = 'SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid;
-			$wExers = $wpdb->get_results($wExerQ, OBJECT);	// Exercises
-			
-			if(empty($wExers))
-				$workoutsArr[$wid]['exercises'][] = array();
-			else{
-				foreach($wExers as $wExer)		
-					$workoutsArr[$wid]['exercises'][] = $wExer;
-			}
+			$wname = $workout->wday_name;
+			if($swid == 0){
+						
+				$workoutsArr[$wid]['workout_detail'][] = $workout;		
+				$wExers = getWExercises($wid);	// Exercises				
+				if(empty($wExers))
+					$workoutsArr[$wid]['exercises'][] = array();
+				else{
+					foreach($wExers as $wExer)		
+						$workoutsArr[$wid]['exercises'][] = $wExer;
+				}				
+			}else{
+				if($swid == $wid){
+					$workoutsArr[$wid]['workout_detail'][] = $workout;		
+					$wExers = getWExercises($wid);	// Exercises					
+					if(empty($wExers))
+						$workoutsArr[$wid]['exercises'][] = array();
+					else{
+						foreach($wExers as $wExer)		
+							$workoutsArr[$wid]['exercises'][] = $wExer;
+					}
+				}				
+			}			
 		}		
 	}
 	
 	return $workoutsArr;
+}
+
+function getWExercises($wid){
+	global $wpdb;
+	return $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
 }
 
 /*AFTER SEND MESSAGE*/
