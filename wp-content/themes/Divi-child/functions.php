@@ -2104,8 +2104,13 @@ function getUserPhoto($u){
 		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id={$uid} AND type='image_gym_landscape' ORDER BY id desc", ARRAY_A);
 		if(!empty($img))
 			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
-	}elseif($umlvl == "trainer")
-		$rimg = get_stylesheet_directory_uri() . "/accounts/images/trainer-profile-image.png";
+	}elseif($umlvl == "trainer"){
+		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image_trainer' AND uploaded_at=(SELECT MAX(uploaded_at) FROM workout_user_files WHERE user_id = {$uid} )", ARRAY_A);
+		if(!empty($img))
+			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
+		else
+			$rimg = get_stylesheet_directory_uri() . "/accounts/images/trainer-profile-image.png";
+	}
 
 	return $rimg;
 }
