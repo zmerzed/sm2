@@ -77,8 +77,10 @@
 		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
 		$.each(thisWork, function(i, v){			
 			var wisDone = v[0]['wisdone'],
-			vstatus = ""
+			vstatus = "",
 			v0 = v[0];
+			
+			console.log(v0);
 			if(wisDone != 0){
 				vstatus = "(Completed)";
 			}				

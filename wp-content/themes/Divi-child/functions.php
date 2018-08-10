@@ -385,10 +385,11 @@ function getSchedData($u)
 		foreach($woutArray as $wa){
 			$tempArr2 = array();
 			$ctrTemp++;
+			$wid = $wa['wid'];			
 			$wclientid = $wa['workout_clientid'];
 			$wclient = get_user_by('id', $wclientid);
-			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wa['wid']."&workout_client_id=".$wclientid;
-			$tempArr2[] = ['wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
+			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wid."&workout_client_id=".$wclientid;
+			$tempArr2[] = ['wnote'=>getNote($wid),'wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
 			$tempArr[$wa['wsched']][$ctrTemp] = $tempArr2;
 		}
 	}
@@ -2157,9 +2158,11 @@ function getNote($uid){
 /*Get Program Details*/
 function getProgramDeatils($pid){
 	global $wpdb;
-	$wQ = 'SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid; // Workout Query	
-	$workouts = $wpdb->get_results($wQ, OBJECT);
 	$workoutsArr = [];
+	$program = $wpdb->get_results('SELECT * FROM workout_tbl WHERE workout_ID = '. $pid, OBJECT);
+	$workoutsArr['program_name'] = $program[0]->workout_name; // Program Name
+	$workouts = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid, OBJECT); // Workout Query	
+	
 	if(!empty($workouts)){
 		foreach($workouts as $workout){
 			$wid = $workout->wday_ID;
@@ -2175,7 +2178,8 @@ function getProgramDeatils($pid){
 					$workoutsArr[$wid]['exercises'][] = $wExer;
 			}
 		}		
-	}	
+	}
+	
 	return $workoutsArr;
 }
 
