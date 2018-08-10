@@ -1551,6 +1551,12 @@ function smUpload()
 			}
 
 			$data = $user->uploadFile($_FILES['myFile']);
+
+			// add user activity log
+			if (isset($_POST['health-doc'])) {
+				require_once getcwd() . '/wp-customs/Log.php';
+				Log::insert(['type' => 'CLIENT_UPLOAD_DOCUMENT', 'file' => $data['uploadedFile']], $user);
+			}
 		}
 	}
 
@@ -1565,13 +1571,14 @@ function workoutUpdateNote()
 	require_once getcwd() . '/wp-customs/Log.php';
 
 	$program = Program::find($_POST['workout_id']);
+
 	$user = User::find($_POST['user_id']);
 
 	if ($program && $user)
 	{
 		$program->addNote($_POST);
 
-		switch (getMembershipLevel($user))
+		switch (getMembershipLevel(get_userdata($user->id)))
 		{
 			case 'gym': {
 				Log::insert(
@@ -1581,8 +1588,9 @@ function workoutUpdateNote()
 			} break;
 
 			case 'trainer': {
+	
 				Log::insert(
-					['type' => 'GYM_UPDATE_NOTE', 'workout' => $program],
+					['type' => 'TRAINER_UPDATE_NOTE', 'workout' => $program],
 					$user
 				);
 			} break;
@@ -1835,7 +1843,7 @@ function getMembershipLevel($u){
 	if(!empty($pparr)){
 		$p_lvl = strtolower($pparr->name);
 	}
-	
+
 	$u_lvl = "";
 	if($p_lvl == ""){
 		$uroles = array();
@@ -1850,8 +1858,8 @@ function getMembershipLevel($u){
 			$p_lvl = "gym";
 		}
 	}
-	
-	return $p_lvl;	
+
+	return $p_lvl;
 }
 //Add user_meta after registration
 add_action( 'user_register', 'first__login_registration', 10, 1 );

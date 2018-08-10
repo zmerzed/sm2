@@ -1,5 +1,6 @@
 <?php
 
+require_once getcwd() . '/wp-customs/Log.php';
 use Carbon\Carbon;
 
 class User
@@ -118,7 +119,8 @@ class User
         return [
             'errors' => $errors,
             'gymPhotos' => $this->getGymLogos(),
-            'trainerPhoto' => $this->getTrainerProfilePhoto()
+            'trainerPhoto' => $this->getTrainerProfilePhoto(),
+            'uploadedFile' => $newFileName
         ];
     }
 
@@ -153,7 +155,7 @@ class User
 
         $clientId = (int) $data['client_id'];
         $modifier = (int) $modifier;
-
+    
         if (isset($data['start']))
         {
            // dd($data);
@@ -278,6 +280,10 @@ class User
             }
         }
 
+        Log::insert(
+            ['type' => 'CLIENT_UPDATE_PROGRESS'],
+            $this
+        );
         return $this->getStats();
     }
     
