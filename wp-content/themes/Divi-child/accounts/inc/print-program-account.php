@@ -1,6 +1,15 @@
 <?php
-	$pid = $_GET['workout']; //Program ID
-	$pDet = getProgramDeatils($pid);	//Program Details
+	$pid = 0;
+	$wid = 0;
+	if(isset($_GET['workout']))
+		$pid = $_GET['workout']; //Program ID
+	else
+		$pid = $_GET['workoutId'];
+	
+	if(isset($_GET['dayId']))
+		$wid = $_GET['dayId'];
+			
+	$pDet = getProgramDeatils($pid,$wid);	//Program Details
 	/* echo "<pre>";
 	print_r($pDet);
 	echo "</pre>"; */
@@ -19,6 +28,7 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<td>#</td>
 				<td>Body Part</td>
 				<td style="width:20%;">Exercise Name</td>
 				<td>Type 1</td>
@@ -33,10 +43,13 @@
 		</thead>
 		<tbody>
 			<?php
+				$jctr = 0;
 				foreach($ed as $e):
+				$jctr++;
 					if(!empty($e)){
 			?>
 				<tr>
+					<td><?php echo $jctr; ?></td>
 					<?php
 						$notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
 						foreach($e as $k=>$v){
