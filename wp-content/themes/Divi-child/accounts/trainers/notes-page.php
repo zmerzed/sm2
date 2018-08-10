@@ -2,8 +2,6 @@
 require_once getcwd() . '/wp-customs/User.php';
 $currentUser = User::find(get_current_user_id());
 $currentUser->notes = $currentUser->getNotes();
-
-print_r($currentUser->notes);
 ?>
 <script>
     var CURRENT_USER = <?php echo json_encode($currentUser); ?>;

@@ -513,11 +513,40 @@ class User
             $ids[] = $m['gym'];
             $ids[] = $this->id;
         } else if (getMembershipLevel(get_userdata($this->id)) == 'gym') {
-            $ids[] = $m['gym'];
+
+            $ids = $this->getTrainersById();
             $ids[] = $this->id;
             // get all workout from his trainer and gym
         }
-        return $m;
+
+        global $wpdb;
+        $ids = implode(",", $ids);
+        $workouts = $wpdb->get_results("SELECT * FROM workout_tbl WHERE workout_trainer_ID IN({$ids}) OR workout_created_by IN ({$ids})", ARRAY_A);
+
+        $workoutsOutput = [];
+        foreach ($workouts as $key => $workout) {
+
+            $workouts[$key]['note'] = NULL;
+            $workouts[$key]['author'] = NULL;
+            // get note
+            $notes = $wpdb->get_results( "SELECT * FROM workout_notes WHERE workout_id={$workout['workout_ID']} ORDER BY id DESC", ARRAY_A);
+
+            if (count($notes) > 0) {
+               $workouts[$key]['note'] = $notes[0];
+            }
+
+            $author = $wpdb->get_results( "SELECT * FROM wp_users WHERE ID={$workout['workout_created_by']} LIMIT 1", ARRAY_A);
+
+            if (count($author) > 0) {
+                $workouts[$key]['author'] = $author[0];
+            }
+
+            if (!is_null($workouts[$key]['note'])) {
+                $workouts[] = $workouts[$key];
+            }
+        }
+
+        return $workouts;
     }
 
     public static function getDefaultStat()
