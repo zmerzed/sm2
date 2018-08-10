@@ -27,9 +27,17 @@
 
 </script>
 
-<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
-	<div ng-include src="workoutTemplate"></div>
-</div>
+<?php if(isset($_GET['print'])):  ?>
+	<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print.css" />
+	<div class="main-content padding20 matchHeight">
+		<?php require_once(get_stylesheet_directory() . '/accounts/inc/print-program-account.php'); ?>
+	</div>
+<?php else: ?>
+	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn" style="float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
+	<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
+		<div ng-include src="workoutTemplate"></div>
+	</div>
+<?php endif; ?>
 
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/app.js'; ?>"></script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/editWorkoutController.js'; ?>"></script>

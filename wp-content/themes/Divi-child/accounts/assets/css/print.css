@@ -455,7 +455,7 @@ ul.workout-exercise-lists {
 }
 .container.assign-client-to-workout .col-lg-2.col-md-2 {display: block !important;top: 10px;position: fixed;height: 30px;text-align: center;width: 100%;}
 .container.assign-client-to-workout #lorem .col-lg-2.col-md-2 {display: none !important;top: 0;}
-
+.gym-page .col-lg-2,
 .browse-client-workout {
     display: none;
 }
@@ -476,3 +476,4 @@ table{font-size:12px}
 html,
 body{background-color:transparent;}
 .main-content{background-color:transparent}
+.gym-page .col-lg-10{width:100%;max-width:100%;flex:inherit;}
