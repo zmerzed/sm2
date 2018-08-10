@@ -48,6 +48,7 @@ class Log
 
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
+            "SEND_MESSAGE" => "{-sender} send message to {-receiver}",
         ];
 
         if (in_array_recursive($logType, $types)) {
@@ -147,7 +148,7 @@ class Log
                 $workout = $type['workout'];
                 $logDescription = str_replace(
                     ["{-trainerName}", "{-programName}"],
-                    [$user->user_nicename, $workout['workout_name']],
+                    [$user->user_nicename, $workout->workout_name],
                     self::getContent($type['type'])
                 );
 
@@ -167,6 +168,7 @@ class Log
             case 'TRAINER_UPDATE_NOTE': {
 
                 $workout = $type['workout'];
+
                 $noteDetail = '';
 
                 if ($workout->getNote()) {
@@ -203,6 +205,18 @@ class Log
                 );
 
                 } break;
+
+            case 'SEND_MESSAGE' : {
+
+                $receiver = $type['receiver'];
+                $logDescription = str_replace(
+                    ["{-sender}", "{-receiver}"],
+                    [$user->user_nicename, $receiver->user_nicename],
+                    self::getContent($type['type'])
+                );
+
+
+            } break;
         }
 
         if (empty($logDescription)) return false;

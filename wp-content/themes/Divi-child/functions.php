@@ -2185,8 +2185,16 @@ function getProgramDeatils($pid){
 
 /*AFTER SEND MESSAGE*/
 function fep_test($e) {
-	echo "<pre>";
-	var_dump($_POST);
-	echo "</pre>";
+
+	require_once getcwd() . '/wp-customs/User.php';
+
+	$sender = User::find(get_current_user_id());
+	if ($sender) {
+		$receiver = User::find($_POST['message_to_id'][0]);
+		Log::insert(['type' => 'SEND_MESSAGE', 'receiver' => $receiver], $sender);
+	}
+
 }
+
+
 add_action('fep_action_message_after_send','fep_test');

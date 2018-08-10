@@ -20,7 +20,6 @@
 			Log::insert(['type' => 'GYM_DELETE_PROGRAM', 'workout' => $workout], $currentUser);
 			workOutDelete($_GET['delete']);
 		}
-
 	}
 ?>
 <div class="main-content matchHeight">

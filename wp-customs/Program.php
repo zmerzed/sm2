@@ -30,7 +30,8 @@ class Program
 
         $notes = $wpdb->get_results( "SELECT * FROM workout_notes WHERE workout_id={$this->id} ORDER BY id DESC", ARRAY_A);
 
-        if ($notes) {
+        if (count($notes) > 0) {
+
             return $notes[0];
         }
 

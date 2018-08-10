@@ -498,6 +498,28 @@ class User
         return $logs;
     }
 
+    public function getNotes()
+    {
+        $m = getParent(get_userdata($this->id));
+
+        $ids = [];
+
+        if (getMembershipLevel(get_userdata($this->id)) == 'client') {
+            // get all workout from his trainer and gym
+            $ids[] = $m['trainer'];
+            $ids[] = $m['gym'];
+        } else if (getMembershipLevel(get_userdata($this->id)) == 'trainer') {
+            // get all workout from his trainer and gym
+            $ids[] = $m['gym'];
+            $ids[] = $this->id;
+        } else if (getMembershipLevel(get_userdata($this->id)) == 'gym') {
+            $ids[] = $m['gym'];
+            $ids[] = $this->id;
+            // get all workout from his trainer and gym
+        }
+        return $m;
+    }
+
     public static function getDefaultStat()
     {
         return [
