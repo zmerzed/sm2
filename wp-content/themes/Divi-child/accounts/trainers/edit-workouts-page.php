@@ -5,10 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateWorkoutForm']))
 
 	$updatedWorkout = workOutUpdate($_POST);
 
-	Log::insert(
-		['type' => 'TRAINER_UPDATE_NOTE', 'workout' => $updatedWorkout],
-		$currentUser
-	);
+	$program = Program::find($updatedWorkout['workout_ID']);
+	Log::insert(['type' => 'TRAINER_UPDATE_PROGRAM', 'workout' => $program], $currentUser);
 }
 
 $program = Program::find((int) $_GET['workout']);
