@@ -418,6 +418,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				</div>
 				<div class="modal-body">
+					<span class="na-span" style="display:none">No Video</span>
 					<input class="hidden-video" type="hidden" value="{{ currentExercise.video }}" />
 					<iframe width="100%" height="300" frameborder="0" allowfullscreen=""></iframe>
 				</div>
@@ -432,7 +433,14 @@
 		imgSrc = 'https://i.ytimg.com/vi/'+ v +'/maxresdefault.jpg';		
 		
 		$('#myModal').modal('show');
-		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+v+'?rel=0&autoplay=1');
+		if(v){
+			$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+v+'?rel=0&autoplay=1').show();
+			$('.modal-body').find('.na-span').hide();
+		}else{
+			$('#myModal iframe').hide();
+			$('.modal-body').find('.na-span').show();
+			
+		}
 	}
 	function getID(v){
 		var res = "";
