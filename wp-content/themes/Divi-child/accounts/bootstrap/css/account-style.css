@@ -1561,45 +1561,8 @@ ul.workout-lists li .exercise-set-item .rep-navigation label{
 //** EDIT/NEW WORKOUT ADJUSTMENTS - Justin **//
 
 .workout-exercise-options tr td:nth-child(1)  {
-    width: 7%;
+  width: 7%;
 }
-.workout-exercise-options tr td:nth-child(2)  {
-    width: 23%;
-}
-.workout-exercise-options tr td:nth-child(3)  {
-    width: 39%;
-}
-.workout-exercise-options tr td:nth-child(4)  {
-    width: 31%;
-}
-.workout-exercise-options tr td:nth-child(5)  {
-    width: 20%;
-}
-.workout-exercise-options tr td:nth-child(6)  {
-    width: 6%;
-}
-.workout-exercise-options tr td:nth-child(7)  {
-    width: 7%;
-}
-.workout-exercise-options tr td:nth-child(8)  {
-    width: 9%;
-}
-.workout-exercise-options tr td:nth-child(9)  {
-    width: 12%;
-}
-.workout-exercise-options tr td:nth-child(10)  {
-    width: 8%;
-}
-.workout-exercise-options tr td:nth-child(11)  {
-    width: 15%;
-}
-.workout-exercise-options tr td:nth-child(12)  {
-    width: 9%;
-}
-.workout-exercise-options tr td:nth-child(13)  {
-    width: 7%;
-}
-
 span.exercise-number {
     width: 55px;
     height: 55px;

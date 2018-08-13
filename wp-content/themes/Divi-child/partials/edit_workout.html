@@ -29,7 +29,7 @@
     </div>
 
     <nav>
-        <div class="nav nav-tabs" id="message-nav-tab" role="tablist">
+        <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
             <a class="nav-item nav-link"
                id="nav-home-tab"
                data-toggle="tab"
@@ -44,7 +44,7 @@
             >Workout {{day.wday_order}} - {{day.wday_name}}</a>
         </div>
     </nav>
-
+    
     <div ng-mouseleave="onLeaveDay()">
         <div class="tab-content" id="nav-tabContent" ng-if="workout.selectedDay">
             <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -958,10 +958,12 @@
             </div>
         </div>
     </div>
+      
+    
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
+    <div class="container p-0">
+        <div class="row m-0">
+            <div class="col-12 mt-2 p-0">
                 <div class="btn-add-workout">
                     <button type="submit">> UPDATE</button>
                 </div>
