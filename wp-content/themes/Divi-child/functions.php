@@ -1737,6 +1737,22 @@ function workoutCreateClientExerciseLog()
 			'workout_clientID' => $userId
 		)
 	);
+
+	require_once getcwd() . '/wp-customs/User.php';
+	require_once getcwd() . '/wp-customs/Program.php';
+
+	// create a log if the client finishes the program
+
+	$user = User::find($userId);
+	$program = Program::find($data['exer_workout_ID']);
+
+	if ($user && $program) {
+
+		if ($user->checkIfFinishWorkout($data['exer_day_ID'])) {
+			Log::insert(['program' => $program, 'type' => 'CLIENT_DONE_PROGRAM'], $user);
+		}
+
+	}
 }
 
 function workoutCreateClientSetLog()

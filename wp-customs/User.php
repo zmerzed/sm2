@@ -549,6 +549,31 @@ class User
         return $workouts;
     }
 
+    public function checkIfFinishWorkout($dayId)
+    {
+        /*
+            - get the client exercise logs using day_id and client_id
+            - get the result and get all exercises
+            - match all the exercises and match with the day exercises to check if the client completed the day or workout
+        */
+
+        if (getMembershipLevel(get_userdata($this->id)) != 'client') {
+            return false;
+        }
+
+        global $wpdb;
+
+      //  $day = $wpdb->get_results( "SELECT * FROM workout_days_tbl WHERE wday_ID={$dayId} LIMIT 1", ARRAY_A);
+        $clientExerciseLogs = $wpdb->get_results( "SELECT * FROM workout_client_exercises_logs WHERE client_id={$this->id} AND day_id={$dayId}", ARRAY_A);
+        $dayAllExercises = $wpdb->get_results( "SELECT * FROM workout_exercises_tbl WHERE exer_day_ID={$dayId}", ARRAY_A);
+
+        if (count($clientExerciseLogs) == count($dayAllExercises)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function getDefaultStat()
     {
         return [

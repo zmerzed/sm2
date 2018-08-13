@@ -48,6 +48,8 @@ class Log
 
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
+            "CLIENT_DONE_PROGRAM" => "{-clientName} has finish the program {-programName}.",
+
             "SEND_MESSAGE" => "{-sender} send message to {-receiver}",
         ];
 
@@ -205,6 +207,17 @@ class Log
                 );
 
                 } break;
+
+            case 'CLIENT_DONE_PROGRAM': {
+
+                $program = $type['program'];
+                $logDescription = str_replace(
+                    ["{-clientName}", "{-programName}"],
+                    [$user->user_nicename, $program->workout_name],
+                    self::getContent($type['type'])
+                );
+
+            } break;
 
             case 'SEND_MESSAGE' : {
 
