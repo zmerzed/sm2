@@ -1,5 +1,46 @@
-@media(max-width: 480px){
+.trainer-additional-box-info img { object-fit: contain; }
+.gym-page .trainer-additional-box-info .btn-upload{ color:#fff; text-decoration: none; }
+.memberships-details table td,.memberships-details table th {
+  padding: 10px;
+  border: 1px solid #e2e2e2;
+}
+.memberships-details table {
+  margin-bottom: 30px;
+  color: #000;
+}
+.memberships-details #pmpro_account .pmpro_box h3 {
+  margin-bottom: 20px;
+  margin-top: 17px;
+}
+.pmpro_actionlinks { font-size: 15px; }
+#pmpro_account-profile .pmpro_actionlinks { margin-top: 15px; }
+#pmpro_account div#pmpro_account-profile ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+#pmpro_account div#pmpro_account-profile ul li { margin-bottom: 10px; }
+
+@media(max-width: 991px){
+  ul.workout-lists li .workout-wrapper label {
+    display: block;
+    float: none;
+    margin-left: 0;    
+    margin-top: 10px;
+  }
+
+  ul.workout-lists li .workout-wrapper { padding: 15px 10px; }
+  .workout-controls {
+    float: none;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  ul.workout-lists li .workout-wrapper { text-align: center; }
+}
+@media(max-width: 767px){
   .main-content { padding: 30px 15px; }
+}
+@media(max-width: 480px){
   ul.workout-lists li label { font-size: 18px; }
   .start-workout{ padding: 30px 15px; }
 }

@@ -45,51 +45,53 @@
 					</div>
 				</div>
 				<div class="list-of-clients-in-this-workout" style="display:none;">
-					<table class="table-bordered" style="width:100%;">
-						<tr>
-							<th>Client</th>
-							<th>Workout Name</th>
-							<th>Status</th>
-							<th>Date</th>
-						</tr>
-						<?php
-						if(!empty($gymTrainers)){
-							foreach($gymTrainers as $gymtrainer){
-								$clientsOfTrainer = getClientsOfTrainer($gymtrainer);
-								foreach($clientsOfTrainer as $client){
-									$workoutSched = getSchedData($client);
-									$todayScheds = array();
-									if(!empty($workoutSched[$dateToday]))
-										$todayScheds = $workoutSched[$dateToday];
+					<div class = "table-responsive">
+						<table class="table-bordered table" style="width:100%;">
+							<tr>
+								<th>Client</th>
+								<th>Workout Name</th>
+								<th>Status</th>
+								<th>Date</th>
+							</tr>
+							<?php
+							if(!empty($gymTrainers)){
+								foreach($gymTrainers as $gymtrainer){
+									$clientsOfTrainer = getClientsOfTrainer($gymtrainer);
+									foreach($clientsOfTrainer as $client){
+										$workoutSched = getSchedData($client);
+										$todayScheds = array();
+										if(!empty($workoutSched[$dateToday]))
+											$todayScheds = $workoutSched[$dateToday];
 
-									foreach($todayScheds as $ts){
-										$ts2 = $ts[0];
-										if($ts2['wname'] == $program->workout_name){
-											$client_info = get_userdata($client->ID);
-											$wdone = $ts2['wisdone'];
-											$wdayName = $ts2['wdname'];
-											$wlink = 'Ready to start';
-											if($wdone == 1){
-												$wlink="Completed";
+										foreach($todayScheds as $ts){
+											$ts2 = $ts[0];
+											if($ts2['wname'] == $program->workout_name){
+												$client_info = get_userdata($client->ID);
+												$wdone = $ts2['wisdone'];
+												$wdayName = $ts2['wdname'];
+												$wlink = 'Ready to start';
+												if($wdone == 1){
+													$wlink="Completed";
+												}
+												?>
+												<tr>
+													<td><span><?php echo $client_info->user_nicename; ?></span></td>
+													<td><?php echo $wdayName; ?></td>
+													<td><?php echo $wlink; ?></td>
+													<td><?php echo $dateToday; ?></td>
+												</tr>
+												<?php
+
 											}
-											?>
-											<tr>
-												<td><span><?php echo $client_info->user_nicename; ?></span></td>
-												<td><?php echo $wdayName; ?></td>
-												<td><?php echo $wlink; ?></td>
-												<td><?php echo $dateToday; ?></td>
-											</tr>
-											<?php
-
 										}
 									}
 								}
+							}else{
+								echo '<tr><td colspan="4">No Client</td></tr>';
 							}
-						}else{
-							echo '<tr><td colspan="4">No Client</td></tr>';
-						}
-						?>
-					</table>
+							?>
+						</table>
+					</div>
 				</div>
 			</li>
 		<?php } ?>
