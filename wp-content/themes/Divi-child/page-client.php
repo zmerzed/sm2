@@ -27,7 +27,7 @@ if( is_user_logged_in() ){
 				
 					<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
 
-					<div class="col-12 col-md-8 col-lg-9 col-xl-10">
+					<div class="col-12 col-md-8 col-lg-9 col-xl-9">
 
 						<?php
 						$data_request_by = "";									

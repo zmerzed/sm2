@@ -43,56 +43,58 @@
 				</div>
 			</div>
 			<div class="list-of-clients-in-this-workout" style="display:none;">
-				<table class="table-bordered" style="width:100%;">
-					<tr>
-					<th>Client</th>
-					<th>Workout Name</th>
-					<th>Status</th>
-					<th>Date</th>
-					</tr>
-					<?php
-					$workoutClientListArr = workoutClientsList($workout->workout_ID);
-					
-					if(!empty($workoutClientListArr)):						
-						foreach($workoutClientListArr as $wc):						
-							$clientID = $wc->workout_clientID;
-							$clientIn = get_userdata($clientID);
-							$dateToday = date('Y-m-d');
-							
-							$workoutSched = getSchedData($clientIn);
-							$wsched = date('Y-m-d', strtotime($wc->workout_client_schedule));
-							$todaySched = array();
-							if(!empty($workoutSched[$dateToday]))
-								$todaySched = $workoutSched[$dateToday];	
-							
-								foreach($todaySched as $wc2):								
-									$wc3 = $wc2[0];
-									if($wc3['wname'] == $workout->workout_name):
-									
-										$client_info = get_userdata($clientID);
-										$wdone = $wc3['wisdone'];
-										$wdayName = $wc3['wdname'];	
-										$wlink = '<a href="'.$wc3['daylink'].'" style="line-height:45px;"><span style="margin-right:5px;" class="sm-icons sm-play-icon"></span> Start Now</a>';
-										if($wdone == 1){
-											$wlink="Completed";
-										}
-					?>
+				<div class = "table-responsive">
+					<table class="table-bordered table" style="width:100%;">
 						<tr>
-							<td><span><?php echo $client_info->user_nicename; ?></span></td>
-							<td><?php echo $wdayName; ?></td>
-							<td><?php echo $wlink; ?></td>
-							<td><?php echo $dateToday; ?></td>
+						<th>Client</th>
+						<th>Workout Name</th>
+						<th>Status</th>
+						<th>Date</th>
 						</tr>
+						<?php
+						$workoutClientListArr = workoutClientsList($workout->workout_ID);
+						
+						if(!empty($workoutClientListArr)):						
+							foreach($workoutClientListArr as $wc):						
+								$clientID = $wc->workout_clientID;
+								$clientIn = get_userdata($clientID);
+								$dateToday = date('Y-m-d');
+								
+								$workoutSched = getSchedData($clientIn);
+								$wsched = date('Y-m-d', strtotime($wc->workout_client_schedule));
+								$todaySched = array();
+								if(!empty($workoutSched[$dateToday]))
+									$todaySched = $workoutSched[$dateToday];	
+								
+									foreach($todaySched as $wc2):								
+										$wc3 = $wc2[0];
+										if($wc3['wname'] == $workout->workout_name):
+										
+											$client_info = get_userdata($clientID);
+											$wdone = $wc3['wisdone'];
+											$wdayName = $wc3['wdname'];	
+											$wlink = '<a href="'.$wc3['daylink'].'" style="line-height:45px;"><span style="margin-right:5px;" class="sm-icons sm-play-icon"></span> Start Now</a>';
+											if($wdone == 1){
+												$wlink="Completed";
+											}
+						?>
+							<tr>
+								<td><span><?php echo $client_info->user_nicename; ?></span></td>
+								<td><?php echo $wdayName; ?></td>
+								<td><?php echo $wlink; ?></td>
+								<td><?php echo $dateToday; ?></td>
+							</tr>
 
-					<?php
-									endif;
+						<?php
+										endif;
+									endforeach;
 								endforeach;
-							endforeach;
-						else:
-					?>
-						<li>No Client</li>
-					<?php endif; ?>
-				</table>
+							else:
+						?>
+							<li>No Client</li>
+						<?php endif; ?>
+					</table>
+				</div>
 			</div>
 		</li>
 		<?php endforeach; ?>

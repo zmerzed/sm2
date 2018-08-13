@@ -45,7 +45,7 @@ require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account
 		<div class="container">
 			<div class="row">
 				<?php require_once( get_stylesheet_directory() . '/accounts/inc/side-account.php' ); ?>
-				<div class="col-12 col-md-8 col-lg-9 col-xl-10">
+				<div class="col-12 col-md-8 col-lg-9 col-xl-9">
 					<?php
 						while ( have_posts() ) : the_post();		
 							the_content();		

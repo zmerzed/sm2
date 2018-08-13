@@ -9,7 +9,8 @@ $currentUser->notes = $currentUser->getNotes();
     var ROOT_URL = '<?php echo get_site_url(); ?>';
 </script>
 <div class="main-content matchHeight" ng-app="smApp" ng-controller="notesController">
-    <div ng-include src="workoutTemplate"></div>
+  <div ng-include src="workoutTemplate" class = "table-responsive" ng-if = "currentUser.notes.length != 0"></div>
+  <div ng-if = "currentUser.notes.length == 0">No notes at the moment.</div>
 </div>
 
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/js/angular/app.js'; ?>"></script>

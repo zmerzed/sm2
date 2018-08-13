@@ -462,12 +462,15 @@ ul.workout-lists li .workout-wrapper{
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{color:#fff!important;background-color:#ae1f23;border-color:#ae1f23}
 body div[ng-controller="exercisesController"] .img-vid{max-width:100px;height:auto;}
 body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
+body div[ng-controller="notesController"] div[src="workoutTemplate"],
 body div[ng-controller="logsController"] div[src="workoutTemplate"]{padding:20px;}
+
+body div[ng-controller="notesController"] div[src="workoutTemplate"],
 div[ng-controller="exercisesController"] div[src="workoutTemplate"],
 div[ng-controller="logsController"] div[src="workoutTemplate"],
 #table-sorter_wrapper, #table-sorter-logs_wrapper{
     background: #ae1f23;
-    padding: 10px 0px;
+    padding: 10px 15px;
     border-radius: 10px;
 }
 
@@ -1841,7 +1844,7 @@ body .member-page .member-links .children li a{color:#fff;}
 
 @media(max-width: 600px){
   .container{
-    margin: 10px;
+    /* margin: 10px; */
   }
 
   .app #error-message{
