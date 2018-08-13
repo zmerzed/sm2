@@ -368,7 +368,7 @@
 					</div>
 					<div class="exercise-set-area">
 						<div class="col-12 col-lg-5 col-xl-4 mb-5 text-center">
-							<a href="javascript:void(0);" onclick="modalClick('YyvSfVjQeL0');"><img class="img-responsive" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/video-sample.jpg" /></a>
+							<a href="javascript:void(0);" onclick="modalClick();"><img class="img-responsive" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/video-sample.jpg" /></a>
 						</div>
 						<div class="col-12 col-lg-7 col-xl-8">
 							<div class="exercise-set-item">
@@ -411,24 +411,38 @@
 			</div>
 		</li>
 	</ul>
-</div>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			</div>
-			<div class="modal-body">
-				<iframe width="100%" height="300" frameborder="0" allowfullscreen=""></iframe>
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<div class="modal-body">
+					<input class="hidden-video" type="hidden" value="{{ currentExercise.video }}" />
+					<iframe width="100%" height="300" frameborder="0" allowfullscreen=""></iframe>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-	function modalClick(a){
-		var src = a;
+	function modalClick(){
+		var v = $('.hidden-video').val(),	
+		v = getID(v),		
+		imgSrc = 'https://i.ytimg.com/vi/'+ v +'/maxresdefault.jpg';		
+		
 		$('#myModal').modal('show');
-		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+a+'?rel=0&autoplay=1');
+		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+v+'?rel=0&autoplay=1');
+	}
+	function getID(v){
+		var res = "";
+		if(v != ""){
+			if(v.indexOf('youtu.be') != -1)
+				res = v.replace('https://youtu.be/','');
+			else
+				res = v.split('v=')[1];		
+		}
+		return res;
 	}
 </script>
 <?php endif; ?>

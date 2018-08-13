@@ -367,7 +367,7 @@ else:
 					<div class="col-lg-12 col-md-12">
 						<div class="exercise-label">
 							<div class="col-lg-4 col-md-4 col-sm-12">
-								<label>{{ currentExercise.exer_body_part }} <br> <small>{{ currentExercise.exer_type }}</small></label>
+								<label>{{ currentExercise.exer_body_part }}<br> <small>{{ currentExercise.exer_type }}</small></label>
 							</div>
 							<div class="col-lg-8 col-md-8 col-sm-12 exercise-details">
 								<div class="ed-item">Sets: <span>{{ currentExercise.exer_sets }}</span></div>
@@ -377,7 +377,7 @@ else:
 					</div>
 					<div class="exercise-set-area">
 						<div class="col-lg-4 col-md-4 col-sm-12">
-							<a href="javascript:void(0);" onclick="modalClick('YyvSfVjQeL0');"><img class="img-responsive" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/video-sample.jpg" /></a>
+							<a href="javascript:void(0);" onclick="modalClick();" class="vid-img"><img class="img-responsive" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/images/video-sample.jpg" /></a>
 						</div>
 						<div class="col-lg-8 col-md-8 col-sm-12">
 							<div class="exercise-set-item">
@@ -420,24 +420,39 @@ else:
 			</div>
 		</li>
 	</ul>
-</div>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			</div>
-			<div class="modal-body">
-				<iframe width="100%" height="300" frameborder="0" allowfullscreen=""></iframe>
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<div class="modal-body">
+					<input class="hidden-video" type="hidden" value="{{ currentExercise.video }}" />
+					<iframe width="100%" height="300" frameborder="0" allowfullscreen=""></iframe>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-	function modalClick(a){
-		var src = a;
+
+<script>	
+	function modalClick(){
+		var v = $('.hidden-video').val(),	
+		v = getID(v),		
+		imgSrc = 'https://i.ytimg.com/vi/'+ v +'/maxresdefault.jpg';		
+		
 		$('#myModal').modal('show');
-		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+a+'?rel=0&autoplay=1');
+		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+v+'?rel=0&autoplay=1');
+	}
+	function getID(v){
+		var res = "";
+		if(v != ""){
+			if(v.indexOf('youtu.be') != -1)
+				res = v.replace('https://youtu.be/','');
+			else
+				res = v.split('v=')[1];		
+		}
+		return res;
 	}
 </script>
 <?php endif;

@@ -1373,6 +1373,7 @@ function workoutClientWorkoutWithDay($workoutId, $dayId, $clientId)
 
 					$exercises[$k]['sets'] = $assignSetsResult;
 					$exercises[$k]['setss'] = $assignSetsResult;
+					$exercises[$k]['video'] = getExerciseVideo($ex['exer_body_part'],$ex['exer_type']);
 				}
 			}
 
@@ -2220,3 +2221,18 @@ function fep_test($e) {
 
 
 add_action('fep_action_message_after_send','fep_test');
+/*GET Exercise Video*/
+function getExerciseVideo($ePart, $exer){
+	$video = "";
+	
+	foreach(workOutExerciseOptions() as $eOpts){
+		if($eOpts['part'] == $ePart){
+			foreach($eOpts['options'] as $eOpt){
+				if($eOpt->type == $exer){
+					$video = $eOpt->video_link;
+				}				
+			}					
+		}
+	}
+	return $video;
+}
