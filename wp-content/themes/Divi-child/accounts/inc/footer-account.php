@@ -78,7 +78,11 @@
 		$.each(thisWork, function(i, v){			
 			var wisDone = v[0]['wisdone'],
 			vstatus = "",
-			v0 = v[0];
+			v0 = v[0],
+			wnote = "No Note";
+			if(v0['wnote'].length != 0)
+				wnote = v0['wnote'][0]['detail'];
+				
 			if(wisDone != 0){
 				vstatus = "(Completed)";
 			}				
@@ -92,7 +96,7 @@
 			if(dateToday == date && wisDone == 0){
 				htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
-			htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+v0['wnote'][0]['detail']+'</div></li>';
+			htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
 		});
 		htmlContent += '</ul>';
 		$('#workoutModal .modal-body').html(htmlContent);
