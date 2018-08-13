@@ -48,8 +48,8 @@ class Log
 
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
-            "CLIENT_DONE_PROGRAM" => "{-clientName} has finish the program {-programName}.",
-
+            "CLIENT_DONE_WORKOUT" => "{-clientName} has finish the workout {-workoutName}.",
+            "CLIENT_MISSED_WORKOUT" => "{-clientName} missed the workout {-workoutName}.",
             "SEND_MESSAGE" => "{-sender} send message to {-receiver}",
         ];
 
@@ -69,6 +69,8 @@ class Log
         global $wpdb;
 
         $logDescription = '';
+        $clientID = NULL;
+        $workoutID = NULL; // as day_id
 
         switch ($type['type'])
         {
@@ -208,17 +210,30 @@ class Log
 
                 } break;
 
-            case 'CLIENT_DONE_PROGRAM': {
+            case 'CLIENT_DONE_WORKOUT': {
 
-                $program = $type['program'];
+                $workout = $type['workout'];
                 $logDescription = str_replace(
-                    ["{-clientName}", "{-programName}"],
-                    [$user->user_nicename, $program->workout_name],
+                    ["{-clientName}", "{-workoutName}"],
+                    [$user->user_nicename, $workout['wday_name']],
                     self::getContent($type['type'])
                 );
 
             } break;
 
+            case 'CLIENT_MISSED_WORKOUT': {
+
+                $workout = $type['workout'];
+                $logDescription = str_replace(
+                    ["{-clientName}", "{-workoutName}"],
+                    [$user->user_nicename, $workout['wday_name']],
+                    self::getContent($type['type'])
+                );
+
+                $workoutID = $workout['wday_ID'];
+
+            } break;
+            
             case 'SEND_MESSAGE' : {
 
                 $receiver = $type['receiver'];
@@ -261,7 +276,8 @@ class Log
                 'gym_id'            => $gymId,
                 'trainer_id'        => $trainerId,
                 'client_id'         => $clientId,
-                'created_at'        => Carbon::now()->format('Y-m-d H:m:s')
+                'created_at'        => Carbon::now()->format('Y-m-d H:m:s'),
+                'workout_id'        => $workoutID
             )
         );
     }

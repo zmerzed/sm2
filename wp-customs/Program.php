@@ -60,6 +60,20 @@ class Program
         return NULL;
     }
 
+    public static function findByWorkout($workoutId)
+    {
+        global $wpdb;
+
+        $workouts = $wpdb->get_results( "SELECT * FROM workout_days_tbl WHERE wday_ID={$workoutId} LIMIT 1", ARRAY_A);
+
+        if (count($workouts) > 0) {
+
+            return $workouts[0];
+        }
+
+        return NULL;
+    }
+
     public static function duplicate($workoutId, $user)
     {
         $program = self::find($workoutId);

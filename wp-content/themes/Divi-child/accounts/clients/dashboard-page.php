@@ -1,4 +1,17 @@
 <?php
+
+$currentUser = User::find(get_current_user_id());
+
+if ($currentUser) {
+	$pastWorkouts = $currentUser->checkIfHasMissedWorkouts();
+
+	foreach ($pastWorkouts as $workout) {
+		Log::insert(['workout' => $workout, 'type' => 'CLIENT_MISSED_WORKOUT'], $currentUser);
+	}
+
+}
+?>
+<?php
 	$current_user = wp_get_current_user();
 	$clientWorkouts = workoutGetClientWorkouts($current_user->ID);
 	

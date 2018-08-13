@@ -574,6 +574,39 @@ class User
         return false;
     }
 
+    public function checkIfHasMissedWorkouts() {
+
+        // get all the workouts as today
+        // check if its already log the missed workouts by client_id and workout_id
+
+        global $wpdb;
+        $pastWorkouts = $wpdb->get_results("SELECT * FROM workout_day_clients_tbl WHERE DATE(`workout_client_schedule`) < DATE(NOW()) AND workout_clientID={$this->id} AND workout_isDone=0", ARRAY_A);
+
+        if (count($pastWorkouts) > 0) {
+            $toPassWorkouts = [];
+
+            // check if it has already log in activity_logs for the pastworkouts
+
+            foreach ($pastWorkouts as $pWorkout) {
+                $wId = (int) $pWorkout['workout_client_dayID'];
+                $logs = $wpdb->get_results("SELECT * FROM workout_activity_logs WHERE workout_id={$wId}", ARRAY_A);
+
+                if (count($logs) <= 0) {
+                    $workout = Program::findByWorkout($wId);
+
+                    if ($workout) {
+                        $toPassWorkouts[] = $workout;
+                    }
+
+                }
+            }
+
+            return $toPassWorkouts;
+        }
+
+        return [];
+    }
+
     public static function getDefaultStat()
     {
         return [
