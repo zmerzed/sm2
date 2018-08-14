@@ -37,6 +37,9 @@
   }
   ul.workout-lists li .workout-wrapper { text-align: center; }
 }
+@media(max-width: 991px){
+  .container { max-width: 100%; width:100%;}
+}
 @media(max-width: 767px){
   .main-content { padding: 30px 15px; }
 }

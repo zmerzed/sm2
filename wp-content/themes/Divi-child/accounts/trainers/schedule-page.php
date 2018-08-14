@@ -18,7 +18,7 @@
 			
 			if(!empty($memScheds)):				
 				foreach($daysOfWeek as $dow):	
-					$day = date_format(date_create($dow), 'l');
+					$day = date_format(date_create($dow), 'D');
 		?>
 		<?php if(!empty($memScheds[$dow])): ?>			
 			<div class="trainer-per-day-schedule">

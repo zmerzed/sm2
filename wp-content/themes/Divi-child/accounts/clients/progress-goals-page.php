@@ -44,7 +44,7 @@
 		<div class="container-title">
 			<h3>Progress / Goals</h3>
 		</div>
-		<div class="current-status" style="max-width:80%;margin:0 auto;">
+		<div class="current-status">
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<form id="idStatsForm" action="/client/?data=profile&by=progress-goals" method="POST">
@@ -129,17 +129,17 @@
 							</div>
 						</div>
 					</form>
-					<div class = "row">
+					<div class = "row mt-5">
 						<div class="col-lg-12 col-md-12">
 							<div class="progress-photos">
 								<h3>progress photos</h3>
 
-								<ul class="progress-slider-photos">
-									<li ng-repeat="photo in currentUser.photos">
+								<ul class="progress-slider-photos row">
+									<li ng-repeat="photo in currentUser.photos" class = "col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 pl-1 pr-1 mb-3">
 										<div class="snap-container"><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
 										<span>{{ photo.uploaded_at }}</span>
 									</li>
-									<li>
+									<li class = "col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 pl-1 pr-1 mb-3">
 										<div class="browser-upload-image" ng-click="takeNew()">
 											<label class="btn btn-default btn-file">
 												<img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/progress-btn-plus.png'; ?>">

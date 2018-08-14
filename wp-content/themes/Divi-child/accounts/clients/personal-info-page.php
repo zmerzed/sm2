@@ -35,18 +35,24 @@
 							if(!isset($_GET['edit'])):								
 						?>
 						<div class="col-lg-12">
-						<?php
-							$ufname = $uinfo->first_name;
-							$ulname = $uinfo->last_name;
-							$displayname = "";
-							if($ufname != ""){
-								$displayname = $ufname.' '.$ulname;
-							}else{
-								$displayname = $uinfo->user_nicename;
-							}
-						?>
-							<a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info&edit=1" style="float:right">edit</a>
-							<h2><?php echo $displayname; ?></h2>							
+							<?php
+								$ufname = $uinfo->first_name;
+								$ulname = $uinfo->last_name;
+								$displayname = "";
+								if($ufname != ""){
+									$displayname = $ufname.' '.$ulname;
+								}else{
+									$displayname = $uinfo->user_nicename;
+								}
+							?>							
+							<div class = "row">								
+								<div class = "order-2 order-lg-1 order-xl-1 col-12 col-lg-8 col-xl-8">
+									<h2 class = "mt-0"><?php echo $displayname; ?></h2>	
+								</div>
+								<div class = "mb-3 mb-lg-0 mb-xl-0 order-1 order-lg-2 order-xl-2 col-12 col-lg-4 col-xl-4 text-right">
+									<a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info&edit=1" class = "btn btn-secondary">edit</a>
+								</div>
+							</div>													
 						</div>
 						<div class="col-12 col-lg-5 col-xl-5">						
 							<!--div class="featured-image" ng-repeat="photo in currentUser.photos track by $index">							

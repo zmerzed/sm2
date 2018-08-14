@@ -390,18 +390,21 @@ ul.workout-lists li .workout-wrapper{
   margin: 10px 0px;
   padding: 0;
 }
-
+.progress-slider-photos li .snap-container img {
+  height: 150px;
+  object-fit: cover;
+}
 .progress-slider-photos li .snap-container{
   display:table-cell;
-  height:120px;
+  /*height:120px;*/
   vertical-align:middle;
   background-color:#4e4e4e;
 }
 
 .progress-slider-photos li{
-  min-height:144px;
-    display: inline-block;
-    max-width: 80px;
+  /*min-height:144px;*/
+  display: inline-block;
+  /*max-width: 80px;*/
   float:left;
   padding-right:2px;
 }
@@ -415,17 +418,16 @@ ul.workout-lists li .workout-wrapper{
 }
 
 .browser-upload-image{
-  height: 120px;
+  height: 150px;
   background: #ccc;
   position: relative;
+  display: table;
+  width: 100%;
+  text-align: center;
 }
 
 .browser-upload-image .btn-file{
-  position: absolute;
-    top: 30%;
-    bottom: 0;
-    left: 0;
-    right: 0
+  display: table-cell;
 }
 
 
@@ -1258,9 +1260,9 @@ ul.workout-exercise-lists li.workout-exercise-item{
 
 .client-goals-percentage{
   float: right;
-    width: 270px;
-    margin-bottom: 0px;
-    margin-right: 0px !important;
+  width: 100%;
+  margin-bottom: 0px;
+  margin-right: 0px !important;
 }
 
 
@@ -1463,7 +1465,7 @@ ul.workout-lists li .exercise-set-item .goal-set label{
   width:100%;
 }
 .rep-navigation input[type="text"]{
-  width:40px;
+  width:60px;
   text-align:center;
   margin-left:5px;
   border-radius:10px;
