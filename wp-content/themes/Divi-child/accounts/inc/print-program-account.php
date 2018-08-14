@@ -74,8 +74,10 @@
 								}else{
 									for ($x = 0; $x < $maxSet; $x++) {
 										echo '<td width="64">';	
-											if(!empty($v[$x]))
-												echo $v[$x]->weight . " lbs";
+											if(!empty($v[$x])){
+												$eW = $v[$x]->weight;
+												echo ($eW != "") ? $eW . " lbs" : "0 lbs";
+											}												
 										echo "</td>";
 									}
 								}						
