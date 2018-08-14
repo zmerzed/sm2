@@ -1138,6 +1138,7 @@ function workOutGetClients()
 		foreach($listOfClients as $listOfClient){
 			if($listOfClient->ID == $user->ID){
 				if(in_array('client', get_userdata($user->ID)->roles)) {
+					$user->focus = get_user_meta($user->ID, 'sm_accomtext', true);
 					$outputList[] = $user;
 				}
 			}
@@ -1311,6 +1312,7 @@ function workOutGet($workoutId)
 						}
 					}
 
+					$client['focus'] = get_user_meta($client['ID'], 'sm_accomtext', true);
 					$userClients[] = $client;
 				}
 			}
@@ -2112,7 +2114,7 @@ function getUserPhoto($u){
 	$uid = $u->ID;
 	$rimg = "";
 	if($umlvl == "client"){
-	$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image' AND uploaded_at=(SELECT MAX(uploaded_at) FROM workout_user_files WHERE user_id = {$uid} )", ARRAY_A);
+	$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image' AND uploaded_at=(SELECT MAX(uploaded_at) FROM workout_user_files WHERE user_id = {$uid} AND type = 'image' )", ARRAY_A);
 		if(!empty($img))
 			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
 		else

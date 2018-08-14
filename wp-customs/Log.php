@@ -32,6 +32,7 @@ class Log
 
 	public static function getContent($logType=NULL)
     {
+		require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
         if (!$logType) return NULL;
 
         $types = [
