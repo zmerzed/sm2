@@ -2190,16 +2190,16 @@ function getProgramDeatils($pid,$swid){
 	if(!empty($workouts)){
 		foreach($workouts as $workout){
 			$wid = $workout->wday_ID;
-			$wname = $workout->wday_name;
-			if($swid == 0){
-						
+			if($swid == 0){					
 				$workoutsArr[$wid]['workout_detail'][] = $workout;		
 				$wExers = getWExercises($wid);	// Exercises				
 				if(empty($wExers))
 					$workoutsArr[$wid]['exercises'][] = array();
 				else{
-					foreach($wExers as $wExer)		
+					foreach($wExers as $wExer){
+						$wExer->sets = getAssignmentSets($wExer->exer_ID);
 						$workoutsArr[$wid]['exercises'][] = $wExer;
+					}						
 				}				
 			}else{
 				if($swid == $wid){
@@ -2208,8 +2208,10 @@ function getProgramDeatils($pid,$swid){
 					if(empty($wExers))
 						$workoutsArr[$wid]['exercises'][] = array();
 					else{
-						foreach($wExers as $wExer)		
+						foreach($wExers as $wExer){
+							$wExer->sets = getAssignmentSets($wExer->exer_ID);
 							$workoutsArr[$wid]['exercises'][] = $wExer;
+						}
 					}
 				}				
 			}			
@@ -2218,10 +2220,18 @@ function getProgramDeatils($pid,$swid){
 	
 	return $workoutsArr;
 }
-
+function getAssignmentSets($exID){
+	global $wpdb;
+	$assID = $wpdb->get_results('SELECT id FROM workout_client_exercise_assignments WHERE exercise_id = '.$exID, OBJECT);
+	$assSets = $wpdb->get_results('SELECT * FROM workout_client_exercise_assignment_sets WHERE assignment_id = '.$assID[0]->id, OBJECT);
+	
+	return $assSets;
+}
 function getWExercises($wid){
 	global $wpdb;
-	return $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
+	$wExer = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
+	
+	return $wExer;
 }
 
 /*AFTER SEND MESSAGE*/

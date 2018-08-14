@@ -23,6 +23,12 @@
 				$wd = $v['workout_detail'][0]; //Workout Details
 				$ed = $v['exercises']; //Exercise Details
 				
+				$maxSet = 0;
+				foreach($ed as $e){
+					$eset = $e->exer_sets;
+					if($eset > $maxSet)
+						$maxSet = $eset;
+				}
 ?>
 	<br><h4>Workout - <?php echo $wd->wday_name; ?></h4>
 	<table class="table table-bordered">
@@ -37,8 +43,13 @@
 				<td>Sets</td>
 				<td>Reps</td>
 				<td>Tempo</td>
-				<td>Rest</td>
+				<td width="60">Rest</td>
 				<td>Implementation</td>
+				<?php
+					for ($x = 1; $x <= $maxSet; $x++) {
+					echo "<td>Set {$x}</td>";
+					} 
+				?>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,11 +64,21 @@
 					<?php
 						$notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
 						foreach($e as $k=>$v){
+							
 							if(!in_array($k,$notIn)){
-								if($v != "")
-									echo '<td>'.$v.'</td>';
-								else
-									echo '<td>N/A</td>';
+								if(!is_array($v)){
+									if($v != "")
+								echo "<td>{$v}</td>";
+									else
+										echo '<td>None</td>';
+								}else{
+									for ($x = 0; $x < $maxSet; $x++) {
+										echo '<td width="64">';	
+											if(!empty($v[$x]))
+												echo $v[$x]->weight . " lbs";
+										echo "</td>";
+									}
+								}						
 							}
 						}
 					?>	
