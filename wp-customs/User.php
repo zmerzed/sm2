@@ -541,12 +541,12 @@ class User
                 $workouts[$key]['author'] = $author[0];
             }
 
-            if (!is_null($workouts[$key]['note'])) {
-                $workouts[] = $workouts[$key];
+            if (isset($workouts[$key]['note']) && !is_null($workouts[$key]['note'])) {
+                $workoutsOutput[] = $workouts[$key];
             }
         }
 
-        return $workouts;
+        return $workoutsOutput;
     }
 
     public function checkIfFinishWorkout($dayId)
