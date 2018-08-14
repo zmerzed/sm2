@@ -3,6 +3,7 @@
 	$ufname = $uinfo->first_name;
 	$ulname = $uinfo->last_name;
 	$unname = "";
+	$upho = getUserPhoto($uinfo);	
 	
 	if($ufname == ""){
 		$unname = $uinfo->user_nicename;
@@ -22,7 +23,7 @@
 				<h2 class="trainer-profile-name"><?php echo $unname; ?></h2>
 			</div>
 			<div class="col-lg-2 col-md-2">
-				<img src="<?php echo get_stylesheet_directory_uri().'/accounts/images/trainer-profile-image.png';?>">
+				<img src="<?php echo ($upho) ? $upho : get_stylesheet_directory_uri().'/accounts/images/trainer-profile-image.png';?>">
 			</div>
 			<div class="col-lg-10 col-md-10">
 				<h3>trainer bio</h3>
