@@ -1,5 +1,5 @@
 <?php
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require_once getcwd() . '/wp-customs/Log.php';
 use Carbon\Carbon;
 
