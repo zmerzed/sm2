@@ -159,7 +159,7 @@
 							</div>
 							<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 								<div class="progress-notes">
-									<p class="label">In details, explain what are your trying to accomplish</p>
+									<p class="label">In details, explain what you are trying to accomplish:</p>
 									<textarea name="accomtext" class="progress-iframe" placeholder="EXAMPLE: FAT LOSS, SPORT PREPARATION, FLEXABILITY"><?php echo $accomtext; ?></textarea>
 								</div>
 								<div style="text-align:center;padding:10px 0;">
