@@ -427,7 +427,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
-                                                <p class="assign-focus">Client Focus: <span>Fat Loss</span></p>
+                                                <p class="assign-focus">Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
                                             </div>
                                             <div class="col-lg-2 col-md-2 assign-workout select-date-workout">
                                                 <input type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>

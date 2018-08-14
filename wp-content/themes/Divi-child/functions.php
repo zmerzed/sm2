@@ -1138,6 +1138,7 @@ function workOutGetClients()
 		foreach($listOfClients as $listOfClient){
 			if($listOfClient->ID == $user->ID){
 				if(in_array('client', get_userdata($user->ID)->roles)) {
+					$user->focus = get_user_meta($user->ID, 'sm_accomtext', true);
 					$outputList[] = $user;
 				}
 			}
@@ -1311,6 +1312,7 @@ function workOutGet($workoutId)
 						}
 					}
 
+					$client['focus'] = get_user_meta($client['ID'], 'sm_accomtext', true);
 					$userClients[] = $client;
 				}
 			}
