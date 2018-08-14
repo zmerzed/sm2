@@ -41,7 +41,7 @@
 				<td>Type 2</td>
 				<td>SQ</td>
 				<td>Sets</td>
-				<td>Reps</td>
+				<td width="62">Reps</td>
 				<td>Tempo</td>
 				<td width="60">Rest</td>
 				<td>Implementation</td>
