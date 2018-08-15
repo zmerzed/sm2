@@ -126,3 +126,35 @@ body .fep-message .fep-message-title-heading.participants{font-size:12px;}
 .page-template-page-messages #main-footer{display:none!important}
 #fep-menu .fep-button:hover, .fep-button-active{font-size:13px}
 .fep-form-field-message_content{margin-top:1em;}
+
+@media(max-width: 1200px){
+  #top-menu-nav{ display: none; }
+  #et_mobile_nav_menu{ display: block; }
+}
+@media(max-width: 767px){
+  .home .et_pb_row.et_pb_row_4 { padding: 10px 20px; }
+  .home .et_pb_section .et_pb_column .et_pb_module { margin-bottom: 10px; }
+  .home .et_pb_column { margin-bottom: 10px; }
+  .home .et_pb_column_12 { padding: 20px 20px; }
+  .home .et_pb_column_13 { padding: 20px 20px; }
+  .home-testimonials .et_pb_testimonial_description_inner { padding: 0px 15px !important; }
+  .home .et_pb_text_29 h1 { font-size: 7vw; }
+
+}
+@media(max-width: 600px){
+  .home .et_pb_row_13.et_pb_row {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  body #page-container .et_pb_button_1 {
+    width: 100%;
+    text-align: center;
+  }
+  body #page-container .et_pb_button_2 {
+    width: 100%;
+    text-align: center;
+  }
+  .et_pb_section .et_pb_row .et_pb_column.et_pb_column_1_4 { margin-bottom: 0 !important; }
+}
+
+
