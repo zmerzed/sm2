@@ -2199,7 +2199,7 @@ function printCss($a,$b,$c){
 /*Get Note*/
 function getNote($uid){
 	global $wpdb;
-	$qNotes = 'SELECT * FROM workout_notes WHERE workout_id = '. $uid;
+	$qNotes = 'SELECT * FROM workout_notes WHERE id=(SELECT MAX(id) FROM workout_notes WHERE workout_id='. $uid.')';
 	return $wpdb->get_results($qNotes, ARRAY_A);
 }
 /*Get Program Details*/

@@ -1,9 +1,7 @@
-<div class="main-content matchHeight schedule-page">
-	
+<div class="main-content matchHeight schedule-page">	
 	<div class="container-title">
         <h3>Weekly Schedule</h3>
     </div>
-
 	<ul class="workout-lists">
 		<?php 
 			$uinfo = wp_get_current_user();
@@ -32,7 +30,7 @@
 							<?php endif; ?>
 						</div>
 					</div>
-					<div class="wnote" style="display:none;"><?php echo $wnote[0]['detail']; ?></div>
+					<div class="wnote" style="display:none;"><?php echo (!empty($wnote)) ? $wnote[0]['detail'] : "No Note"; ?></div>
 				<?php
 						endif;
 					endforeach;
@@ -44,19 +42,7 @@
 		?>
 			<p class="text-center">No scheduled program</p>
 		<?php endif; ?>		
-		<!-- <li>
-			<h4 class="workout-day">Monday</h4>
-			<div class="workout-wrapper">
-				<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
-				<label>Workout NAME #1</label>
-				<div class="workout-controls">
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
-					<span><a href="#"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span>
-				</div>
-			</div>
-		</li> -->
-	</ul>
-	
+	</ul>	
 </div>
 <script>
 function showNote(a){
