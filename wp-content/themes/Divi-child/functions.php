@@ -299,6 +299,7 @@ function getMonthlySchedule($u)
 	/* $urole = $u->roles; */
 	$uid = $u->ID;
 	$wquery = "SELECT * FROM workout_day_clients_tbl WHERE workout_clientID";
+	$wqorder = ' ORDER BY workout_client_schedule ASC';
 	$results_w = $wpdb->get_results( "SELECT * FROM workout_tbl", OBJECT );
 	$results_w_day = array();
 
@@ -312,7 +313,7 @@ function getMonthlySchedule($u)
 		if($umeta)
 			$coft = implode(", ", get_user_meta($uid,'clients_of_trainer',true));
 
-		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")", OBJECT );
+		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")". $wqorder , OBJECT );
 	}elseif($m_lvl == 'gym'){
 		$umeta2 = get_user_meta($uid,'trainers_of_gym',true);
 		if(empty($umeta2))
@@ -334,7 +335,7 @@ function getMonthlySchedule($u)
 		if(!empty($temp_arr))
 			$coft = implode(", ", $temp_arr);
 		
-		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")", OBJECT );
+		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")". $wqorder, OBJECT );
 	}
 
 	return getWOutArr($results_w_day, $results_w);
@@ -358,6 +359,7 @@ function getWOutArr($results_w_day, $results_w)
 				$arrTemp['workout_clientid'] = $rwd->workout_clientID;
 				$arrTemp['workout_isdone'] = $rwd->workout_isDone;
 				$arrTemp['wid'] = $wid;
+				$arrTemp['wtime'] = date_format(date_create($rwd->workout_client_schedule), 'g:i a');
 				$arrTemp['wsched'] = date_format(date_create($rwd->workout_client_schedule), 'Y-m-d');
 				$arrTemp['wdname'] = getWorkoutDayName($dayid);
 				$woutArray[] = $arrTemp;
@@ -366,7 +368,11 @@ function getWOutArr($results_w_day, $results_w)
 	}
 	return $woutArray;
 }
-
+function printVar($a){
+	echo "<pre>";
+	print_r($a);
+	echo "</pre>";
+}
 function jabs($u)	
 {
 	/* echo "<pre>";
@@ -382,14 +388,14 @@ function getSchedData($u)
 	$urole = getMembershipLevel(wp_get_current_user());
 
 	if(!empty($woutArray)){
-		foreach($woutArray as $wa){
+		foreach($woutArray as $wa){			
 			$tempArr2 = array();
 			$ctrTemp++;
 			$wid = $wa['wid'];			
 			$wclientid = $wa['workout_clientid'];
 			$wclient = get_user_by('id', $wclientid);
 			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wid."&workout_client_id=".$wclientid;
-			$tempArr2[] = ['wnote'=>getNote($wid),'wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
+			$tempArr2[] = ['wnote'=>getNote($wid),'wtime'=>$wa['wtime'],'wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
 			$tempArr[$wa['wsched']][$ctrTemp] = $tempArr2;
 		}
 	}
