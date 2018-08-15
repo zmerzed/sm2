@@ -40,8 +40,8 @@
 				<td>#</td>
 				<td>Body Part</td>
 				<td style="width:20%;">Exercise Name</td>
-				<td>Type 1</td>
-				<td>Type 2</td>
+				<td>Variation 1</td>
+				<td>Variation 2</td>
 				<td>SQ</td>
 				<td>Sets</td>
 				<td width="62">Reps</td>
@@ -98,7 +98,7 @@
 			endforeach; ?>
 		</tbody>
 	</table>
-	<script>//window.print();</script>
+	<script>window.print();</script>
 <?php
 			endif;
 		}
