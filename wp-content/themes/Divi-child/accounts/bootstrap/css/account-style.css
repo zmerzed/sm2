@@ -1584,6 +1584,15 @@ span.exercise-btn-action a:hover {
     text-decoration: underline;
 }
 
+.container.assign-client-to-workout .uib-timepicker button{
+	padding: 0;
+	font-size: 12px;
+	line-height: 27px;
+	width: 30px;
+	margin-left: 5px;
+	border-radius: 50%;
+}
+.container.assign-client-to-workout .uib-timepicker tr.text-center{display:none;}
 .container.assign-client-to-workout .d-flex.flex-row.mt-2 {
     border-radius: 15px;
     padding: 0px;

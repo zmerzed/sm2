@@ -430,12 +430,13 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <p>Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
                                             </div>
-                                            <div class="col-lg-2 col-md-2 assign-workout select-date-workout">
+                                            <div class="col-lg-3 col-md-3 assign-workout select-date-workout">
                                                 <input type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
-                                                <p>Time</p>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 assign-workout select-date-workout">
                                                 <div uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
+                                            <div class="col-lg-5 col-md-5">
                                                 <ul class="workout-exercise-lists">
                                                     <li class="workout-exercise-item" ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
                                                         <table class="workout-exercise-options">
@@ -454,7 +455,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
+                                            <div class="col-lg-7 col-md-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-lg-4 col-md-4" ng-repeat="numSet in []|range:workoutMaxSet">
