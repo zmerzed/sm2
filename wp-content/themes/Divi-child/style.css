@@ -139,7 +139,7 @@ body .fep-message .fep-message-title-heading.participants{font-size:12px;}
   .home .et_pb_column_13 { padding: 20px 20px; }
   .home-testimonials .et_pb_testimonial_description_inner { padding: 0px 15px !important; }
   .home .et_pb_text_29 h1 { font-size: 7vw; }
-
+  .home .et_pb_text_0 h1{ font-size: 9vw; }
 }
 @media(max-width: 600px){
   .home .et_pb_row_13.et_pb_row {
