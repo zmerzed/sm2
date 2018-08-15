@@ -76,17 +76,17 @@
                                 </td>
                                 <td>
                                     <select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
-                                        <option value="">Type</option>
+                                        <option value="">Exercise</option>
                                     </select>
                                 </td>
                                 <td>
                                     <select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
-                                        <option value="">Exercise 1</option>
+                                        <option value="">Variation 1</option>
                                     </select>
                                 </td>
                                 <td>
                                     <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
-                                        <option value="">Exercise 2</option>
+                                        <option value="">Variation 2</option>
                                     </select>
                                 </td>
                                 <td>
@@ -429,9 +429,10 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <p class="assign-focus">Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
                                             </div>
-                                            <div class="col-lg-2 col-md-2 assign-workout select-date-workout">
-                                                <input type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
-                                                <p>Time</p>
+                                            <div class="col-lg-3 col-md-3 assign-workout select-date-workout">
+                                                <input placeholder="YY-MM-DD" type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 assign-workout select-date-workout">
                                                 <div uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
                                             </div>
                                             <div class="col-lg-4 col-md-4">

@@ -2197,12 +2197,19 @@ function getNote($uid){
 	return $wpdb->get_results($qNotes, ARRAY_A);
 }
 /*Get Program Details*/
-function getProgramDeatils($pid,$swid){
+function getProgramDeatils($pid,$swid,$cid){
 	global $wpdb;
 	$workoutsArr = [];
 	$program = $wpdb->get_results('SELECT * FROM workout_tbl WHERE workout_ID = '. $pid, OBJECT);
 	$workoutsArr['program_name'] = $program[0]->workout_name; // Program Name
-	$workouts = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid, OBJECT); // Workout Query	
+	$workouts = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid, OBJECT); // Workout Query
+	$u = wp_get_current_user();
+	$uid = 0;	
+	$urole = getMembershipLevel($u);
+	if($urole == "client")
+		$uid = $u->ID;
+	if($cid != 0)
+		$uid = $cid;
 	
 	if(!empty($workouts)){
 		foreach($workouts as $workout){
@@ -2214,7 +2221,7 @@ function getProgramDeatils($pid,$swid){
 					$workoutsArr[$wid]['exercises'][] = array();
 				else{
 					foreach($wExers as $wExer){
-						$wExer->sets = getAssignmentSets($wExer->exer_ID);
+						$wExer->sets = getAssignmentSets($wExer->exer_ID, $uid);
 						$workoutsArr[$wid]['exercises'][] = $wExer;
 					}						
 				}				
@@ -2226,7 +2233,7 @@ function getProgramDeatils($pid,$swid){
 						$workoutsArr[$wid]['exercises'][] = array();
 					else{
 						foreach($wExers as $wExer){
-							$wExer->sets = getAssignmentSets($wExer->exer_ID);
+							$wExer->sets = getAssignmentSets($wExer->exer_ID, $uid);
 							$workoutsArr[$wid]['exercises'][] = $wExer;
 						}
 					}
@@ -2237,9 +2244,13 @@ function getProgramDeatils($pid,$swid){
 	
 	return $workoutsArr;
 }
-function getAssignmentSets($exID){
+function getAssignmentSets($exID,$uid){
+	$aq = "";
+	if($uid != 0)
+		$aq = " AND client_id = ".$uid;
+		
 	global $wpdb;
-	$assID = $wpdb->get_results('SELECT id FROM workout_client_exercise_assignments WHERE exercise_id = '.$exID, OBJECT);
+	$assID = $wpdb->get_results('SELECT id FROM workout_client_exercise_assignments WHERE exercise_id = '.$exID . $aq, OBJECT);
 	$assSets = $wpdb->get_results('SELECT * FROM workout_client_exercise_assignment_sets WHERE assignment_id = '.$assID[0]->id, OBJECT);
 	
 	return $assSets;

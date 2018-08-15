@@ -1,6 +1,9 @@
 <?php
 	$pid = 0;
 	$wid = 0;
+	$cid = 0;
+	if(isset($_GET['workout_client_id']))
+		$cid = $_GET['workout_client_id'];
 	if(isset($_GET['workout']))
 		$pid = $_GET['workout']; //Program ID
 	else
@@ -9,7 +12,7 @@
 	if(isset($_GET['dayId']))
 		$wid = $_GET['dayId'];
 			
-	$pDet = getProgramDeatils($pid,$wid);	//Program Details
+	$pDet = getProgramDeatils($pid,$wid,$cid);	//Program Details
 	/* echo "<pre>";
 	print_r($pDet);
 	echo "</pre>"; */
@@ -37,8 +40,8 @@
 				<td>#</td>
 				<td>Body Part</td>
 				<td style="width:20%;">Exercise Name</td>
-				<td>Type 1</td>
-				<td>Type 2</td>
+				<td>Variation 1</td>
+				<td>Variation 2</td>
 				<td>SQ</td>
 				<td>Sets</td>
 				<td width="62">Reps</td>
@@ -46,9 +49,10 @@
 				<td width="60">Rest</td>
 				<td>Implementation</td>
 				<?php
-					for ($x = 1; $x <= $maxSet; $x++) {
-					echo "<td>Set {$x}</td>";
-					} 
+					if($wid != 0){
+						for ($x = 1; $x <= $maxSet; $x++)
+							echo "<td>Set {$x}</td>";
+					}
 				?>
 			</tr>
 		</thead>
@@ -72,13 +76,15 @@
 									else
 										echo '<td>None</td>';
 								}else{
-									for ($x = 0; $x < $maxSet; $x++) {
-										echo '<td width="64">';	
-											if(!empty($v[$x])){
-												$eW = $v[$x]->weight;
-												echo ($eW != "") ? $eW . " lbs" : "0 lbs";
-											}												
-										echo "</td>";
+									if($wid != 0){
+										for ($x = 0; $x < $maxSet; $x++) {
+											echo '<td width="64">';
+												if(!empty($v[$x])){
+													$eW = $v[$x]->weight;
+													echo ($eW != "") ? $eW . " lbs" : "0 lbs";
+												}										
+											echo "</td>";
+										}
 									}
 								}						
 							}
