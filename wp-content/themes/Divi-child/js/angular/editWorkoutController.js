@@ -145,8 +145,21 @@ app.controller('editWorkoutController', function($scope, $http) {
                         break;
                     }
                 }
+            }
 
+            for (var y in day.clients) {
+                var client = day.clients[y];
 
+                if (client.date_availability && client.time_availability) {
+                    var mHMR = client.time_availability.split(":");
+                    var mDate = new Date(client.date_availability);
+
+                    mDate.setHours(mHMR[0]);
+                    mDate.setMinutes(mHMR[1]);
+                    mDate.setSeconds(mHMR[2]);
+
+                    client.time_availability_temp = mDate;
+                }
             }
         }
 
@@ -256,6 +269,7 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.selectClient = function(client)
     {
         $scope.workout.selectedDay.selectedClient = client;
+        console.log('xxxxxx');
         console.log($scope.workout.selectedDay.selectedClient);
         optimizeClientExercises();
     };
@@ -287,6 +301,46 @@ app.controller('editWorkoutController', function($scope, $http) {
 
                     if (!found) {
                         $scope.workout.selectedDay.clients.push(client);
+                        $scope.selectClient(client);
+                    }
+
+                    break;
+                }
+            }
+            optimizeClientExercises();
+            optimizeSelectedClients();
+        }
+
+    }, true);
+
+    $scope.$watch('workout.selectedDay.selectedClient', function(val)
+    {
+        console.log('selectedClient');
+        console.log(val);
+
+        if (val)
+        {
+            var found = false;
+            for (var i in $scope.clients)
+            {
+                var client = $scope.clients[i];
+
+                if (client.ID == val)
+                {
+
+                    for (var x in $scope.workout.selectedDay.clients)
+                    {
+                        var xClient = $scope.workout.selectedDay.clients[x];
+
+                        if(xClient.ID == val)
+                        {
+                            found = true;
+                        }
+                    }
+
+                    if (!found) {
+                        $scope.workout.selectedDay.clients.push(client);
+                       
                         $scope.selectClient(client);
                     }
 
@@ -484,8 +538,9 @@ app.controller('editWorkoutController', function($scope, $http) {
 
     };
 
-    $scope.submitForm = function()
+    $scope.sendForm = function()
     {
+        console.log('xxxxxxxxxxxxxxxxxx');
 
         if ($scope.currentUser.isGym) {
             var formUrl = '/gym/?data=edit-workout&workout=' + $scope.workout.workout_ID;
@@ -495,42 +550,62 @@ app.controller('editWorkoutController', function($scope, $http) {
 
         $('#idForm').attr('action', formUrl);
 
-        delete $scope.workout.selectedDay;
+        var toSend = angular.copy($scope.workout);
 
-        for(var i in $scope.workout.days)
-        {
-            var day = $scope.workout.days[i];
+        try {
 
-            delete day.selectedClient;
-            for(var e in day.exercises)
-            {
-                var ex = day.exercises[e];
-                delete ex.exerciseOptions;
-                delete ex.exerciseSQoptions;
+            if (typeof toSend.selectedDay != 'undefined') {
+                delete toSend.selectedDay;
             }
 
-            for (var x in day.clients)
+            for(var i in toSend.days)
             {
-                var client  = day.clients[x];
+                var day = toSend.days[i];
 
-                for (var m in client.exercises)
+                delete day.selectedClient;
+                for(var e in day.exercises)
                 {
-                    var clientExercise = client.exercises[m];
-                    delete clientExercise.exerciseOptions;
-                    delete clientExercise.exerciseSQoptions;
-                    delete clientExercise.selectedPart;
-                    delete clientExercise.selectedSQ;
+                    var ex = day.exercises[e];
+                    delete ex.exerciseOptions;
+                    delete ex.exerciseSQoptions;
+                }
+
+                for (var x in day.clients)
+                {
+                    var client  = day.clients[x];
+
+                    if (client.time_availability_temp) {
+
+                        var mHour = nFormat(client.time_availability_temp.getHours());
+                        var mMin = nFormat(client.time_availability_temp.getMinutes());
+                        var mSec = nFormat(client.time_availability_temp.getSeconds());
+
+                        client.time_availability = mHour + ":" + mMin + ":" + mSec;
+                    }
+
+                    for (var m in client.exercises)
+                    {
+                        var clientExercise = client.exercises[m];
+                        delete clientExercise.exerciseOptions;
+                        delete clientExercise.exerciseSQoptions;
+                        delete clientExercise.selectedPart;
+                        delete clientExercise.selectedSQ;
+                    }
                 }
             }
+
+            $('#idWorkoutForm').val(JSON.stringify(toSend));
+            console.log(toSend);
+            return true;
+        }
+        catch(err) {
+            console.log('error');
+            return false;
         }
 
-        console.log($scope.workout);
-
-        $('#idWorkoutForm').val(JSON.stringify($scope.workout));
-
-        return true;
+        return false;
     };
-
+    
     $scope.updateNote = function()
     {
         var fd = new FormData();
@@ -543,6 +618,10 @@ app.controller('editWorkoutController', function($scope, $http) {
             $scope.workout.note = res.data.data;
         });
     };
+
+    function nFormat(n){
+        return n > 9 ? "" + n: "0" + n;
+    }
 
     function optimizeSelectedClients()
     {
