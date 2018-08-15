@@ -1,6 +1,6 @@
 angular.module('smApp')
 
-.controller('NewWorkoutController', function($scope, $http) {
+.controller('NewWorkoutController', function($scope, $http, global) {
 
     $scope.clients = CLIENTS;
     $scope.clientsBackUp = angular.copy(CLIENTS);
@@ -20,10 +20,7 @@ angular.module('smApp')
     {
         console.log('-----------INIT NewWorkoutController--------------');
 
-        console.log('CLIENTS');
-        console.log($scope.clients);
-        console.log('CLIENTS');
-        console.log(CURRENT_USER);
+        $scope.timeData = global.time;
         $http.get(urlApiClient + '/hash').then(function(res)
         {
             $scope.workout = {
@@ -250,6 +247,15 @@ angular.module('smApp')
             {
                 var client  = day.clients[x];
 
+                if (client.time_availability_temp) {
+
+                    var mHour = nFormat(client.time_availability_temp.getHours());
+                    var mMin = nFormat(client.time_availability_temp.getMinutes());
+                    var mSec = nFormat(client.time_availability_temp.getSeconds());
+
+                    client.time_availability = mHour + ":" + mMin + ":" + mSec;
+                }
+
                 for (var m in client.exercises)
                 {
                     var clientExercise = client.exercises[m];
@@ -263,10 +269,11 @@ angular.module('smApp')
 
         console.log(toSend);
         toSend.user_id = CURRENT_USER_ID;
+
         $('#idWorkoutForm').val(JSON.stringify(toSend));
         return true;
     };
-    
+
     $scope.$watch('reader.selectedClient', function(val)
     {
         console.log('selectedClient');
@@ -316,6 +323,10 @@ angular.module('smApp')
         }
 
     }, true);
+
+    function nFormat(n){
+        return n > 9 ? "" + n: "0" + n;
+    }
 
     function optimizeSelectedClients()
     {

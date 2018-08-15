@@ -573,11 +573,18 @@ function workOutAdd($data)
 						'workout_clientID' => (int) $client['ID'],
 					);
 
-					if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
+					if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
+					{
+
+						if (isset($client['time_availability'])) {
+
+							$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+						}
 
 						$scheduleDate = new \Carbon\Carbon($client['date_availability']);
+
 						$newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
-						$newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
+						$newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:m:s');
 					}
 
 					$wpdb->insert('workout_day_clients_tbl', $newClientDay);
