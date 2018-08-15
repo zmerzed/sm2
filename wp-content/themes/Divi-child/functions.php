@@ -642,7 +642,7 @@ function workOutUpdate($data)
 
 	$workout = stripslashes($workout);
 	$workout = json_decode($workout, true);
-
+	
 	$mWorkoutId = (int) $workout['workout_ID'];
 	$weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
@@ -892,6 +892,11 @@ function workOutUpdate($data)
 								);
 
 								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
+
+									if (isset($client['time_availability'])) {
+										$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+									}
+
 									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
 									$newMClient['workout_day_availability'] = $scheduleDate->dayOfWeek;
 									$newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
@@ -904,6 +909,10 @@ function workOutUpdate($data)
 
 								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
 								{
+									if (isset($client['time_availability'])) {
+										$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+									}
+
 									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
 									$mUpdate = array(
 										'workout_day_availability' => $scheduleDate->dayOfWeek,
@@ -1302,6 +1311,7 @@ function workOutGet($workoutId)
 					$client = $userResult[0];
 					$client['day_availability'] = $c['workout_day_availability'];
 					$client['date_availability'] = explode(" ", $c['workout_client_schedule'])[0];
+					$client['time_availability'] = explode(" ", $c['workout_client_schedule'])[1];
 					$client['exercises'] = [];
 
 					foreach ($exercises as $ex)
