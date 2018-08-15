@@ -21,12 +21,13 @@ class Log
             $trainersIds = $user->getTrainersById();
             $trainersIds[] = $user->id; // include gym id
             $idsStr = implode(",", $trainersIds);
-            $logs = $wpdb->get_results( "SELECT * FROM workout_activity_logs WHERE user_id IN({$idsStr}) ORDER BY id DESC", ARRAY_A);
+            $logs = $wpdb->get_results("SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id IN({$idsStr}) ORDER BY id DESC", ARRAY_A);
 
             return $logs;
         }
+        
+        $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
 
-        $logs = $wpdb->get_results( "SELECT * FROM workout_activity_logs WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
         return $logs;
     }
 

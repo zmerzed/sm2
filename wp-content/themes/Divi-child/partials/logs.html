@@ -9,7 +9,7 @@
 	<tbody>
 		<tr ng-repeat="log in currentUser.logs | start: (currentPage - 1) * perPage | limitTo: perPage">
 			<td style="width: 15%;">{{ log.log_description }}</td>
-			<td style="width: 15%;"><i>{{ log.user_id }}</i></td>
+			<td style="width: 15%;"><i>{{ log.user_nicename }}</i></td>
 			<td style="width: 12%;">{{ log.created_at }}</td>
 		</tr>
 	</tbody>
