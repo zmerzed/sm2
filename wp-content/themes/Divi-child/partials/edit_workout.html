@@ -431,7 +431,7 @@
                                                 <p>Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
                                             </div>
                                             <div class="col-lg-3 col-md-3 assign-workout select-date-workout">
-                                                <input type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
+                                                <input placeholder="YY-MM-DD" type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
                                             </div>
                                             <div class="col-lg-9 col-md-9 assign-workout select-date-workout">
                                                 <div uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
