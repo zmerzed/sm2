@@ -461,6 +461,7 @@ ul.workout-lists li .workout-wrapper{
 /*** Notes ***/
 .pagination>li>a, .pagination>li>span,
 .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover{color:#ae1f23}
+.gym-page .pagination>.active>a,.gym-page .pagination>.active>a:focus,.gym-page .pagination>.active>a:hover,.gym-page .pagination>.active>span,.gym-page .pagination>.active>span:focus,.gym-page .pagination>.active>span:hover{color:#fff!important;background-color:#6db6e5;border-color:#6db6e5}
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{color:#fff!important;background-color:#ae1f23;border-color:#ae1f23}
 body div[ng-controller="exercisesController"] .img-vid{max-width:100px;height:auto;}
 body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
@@ -1581,6 +1582,7 @@ span.exercise-number {
     /* line-height: 55px; */
     padding-top: 0;
 }
+.gym-page span.exercise-number.d-flex{ background:#6db6e5; }
 span.exercise-number.d-flex{ background:#ae1f23; }
 span.exercise-btn-action a {
     -webkit-transition: all 0.15s ease-in-out;
