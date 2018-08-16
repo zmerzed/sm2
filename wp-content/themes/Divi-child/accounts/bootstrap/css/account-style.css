@@ -467,6 +467,12 @@ body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
 body div[ng-controller="notesController"] div[src="workoutTemplate"],
 body div[ng-controller="logsController"] div[src="workoutTemplate"]{padding:20px;}
 
+body.gym-page div[ng-controller="notesController"] div[src="workoutTemplate"],
+.gym-page div[ng-controller="exercisesController"] div[src="workoutTemplate"],
+.gym-page div[ng-controller="logsController"] div[src="workoutTemplate"],
+.gym-page #table-sorter_wrapper, #table-sorter-logs_wrapper{
+	background-color:#6db6e5;
+}
 body div[ng-controller="notesController"] div[src="workoutTemplate"],
 div[ng-controller="exercisesController"] div[src="workoutTemplate"],
 div[ng-controller="logsController"] div[src="workoutTemplate"],
@@ -1708,6 +1714,7 @@ body .member-page .member-links .children li a{color:#fff;}
   background-size: 20px auto;
   display:inline-block;
 }
+.gym-page .sm-icons{background-color:#6db6e5;}
 .sm-icons{
   display:inline-block;
   width:45px;

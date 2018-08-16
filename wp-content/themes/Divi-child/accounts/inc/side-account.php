@@ -19,25 +19,7 @@
 	<div class="main-navigation matchHeight">
 		<h3>Menu</h3>
 		
-		<?php if($temp_slug == "page-member-templates.php"): ?>
-			<ul>
-				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
-			</ul>
-			<div class="menu-divider"></div>
-			<ul class="member-links">
-				<li>				
-					<ul  class="children">
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-account/">Member Account</a></li>
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-billing/">Member Billing</a></li>
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-cancel/">Member Cancel</a></li>
-						<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-checkout/">Member Checkout</a></li> -->
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-confirmation/">Member Confirmation</a></li>
-						<li><a href="<?php echo home_url();  ?>/membership-account/membership-invoice/">Member Invoice</a></li>
-						<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li> -->
-					</ul>
-				</li>
-			</ul>			
-		<?php else: ?>
+		
 		<ul>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
 			<li>
@@ -63,16 +45,26 @@
 				</ul>				
 			<?php endif; ?>			
 			</li>			
-			<!-- <li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=message" menu-item="message">Messages</a></li>	 -->	
 			<li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
 			<?php if(checkSubscribed($uinfo)): ?>
-				<li><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a></li>
+				<li><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a>
+					<?php if($temp_slug == "page-member-templates.php"): ?>
+						<ul class="children">
+							<li><a href="<?php echo home_url();  ?>/membership-account/membership-account/">Member Account</a></li>
+							<li><a href="<?php echo home_url();  ?>/membership-account/membership-billing/">Member Billing</a></li>
+							<li><a href="<?php echo home_url();  ?>/membership-account/membership-cancel/">Member Cancel</a></li>
+							<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-checkout/">Member Checkout</a></li> -->
+							<li><a href="<?php echo home_url();  ?>/membership-account/membership-confirmation/">Member Confirmation</a></li>
+							<li><a href="<?php echo home_url();  ?>/membership-account/membership-invoice/">Member Invoice</a></li>
+							<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li> -->
+						</ul>
+					<?php endif; ?>
+				</li>					
 			<?php endif; ?>
-		</ul>
-		
-			<?php if($op_train || $op_gym): ?>
+		</ul>		
+		<?php if($op_train || $op_gym): ?>
 			<div class="menu-divider"></div>
 
 			<ul>
@@ -83,8 +75,6 @@
 				<?php endif; ?>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
 			</ul>		
-			<?php
-				endif; 
-			endif; ?>
+		<?php endif; ?>
 	</div>
 </div>

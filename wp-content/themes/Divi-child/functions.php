@@ -2168,7 +2168,7 @@ function getUserPhoto($u){
 		if(!empty($img))
 			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
 	}elseif($umlvl == "trainer"){
-		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image_trainer' AND uploaded_at=(SELECT MAX(uploaded_at) FROM workout_user_files WHERE user_id = {$uid} )", ARRAY_A);
+		$img = $wpdb->get_results( "SELECT * FROM workout_user_files WHERE user_id = {$uid} AND type='image_trainer' AND id=(SELECT MAX(id) FROM workout_user_files WHERE user_id = {$uid} )", ARRAY_A);
 		if(!empty($img))
 			$rimg = home_url() . "/sm-files/{$uid}/" . $img[0]['file'];
 		else
@@ -2209,7 +2209,7 @@ function printCss($a,$b,$c){
 	if($b==1)
 		echo '{background-color:'.$c.'}';
 	elseif($b==2)
-		echo '{background-color:#'.$c.';}';
+		echo '{background-color:#'.$c.'!important;}';
 	elseif($b==3)
 		echo '{background-color:#'.$c.';border-color:#'.$c.';}';	
 	elseif($b==4)
