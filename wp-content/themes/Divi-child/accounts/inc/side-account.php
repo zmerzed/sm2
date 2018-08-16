@@ -18,10 +18,8 @@
 <div class="col-12 col-md-4 col-lg-3 col-xl-3 mb-5">
 	<div class="main-navigation matchHeight">
 		<h3>Menu</h3>
-		
-		
 		<ul>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard">Dashboard</a></li>
+			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard" class="<?php echo($r_uri == '/'.$urole.'/') ? "active" : ""; ?>">Dashboard</a></li>
 			<li>
 				<a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule" menu-item="schedule">Schedule</a>
 				<?php

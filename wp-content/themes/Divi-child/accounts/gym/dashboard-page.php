@@ -12,6 +12,7 @@
             </tr>
         </thead>
         <tbody>
+			<?php require_once(get_stylesheet_directory() . '/accounts/inc/today-schedule.php'); ?>
            <!--  <tr>
             	<td style="width: 15%;">8:00 <small>AM</small></td>
                 <td style="width: 15%;">Client Name #1</td>
