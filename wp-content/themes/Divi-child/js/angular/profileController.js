@@ -172,6 +172,21 @@ angular.module('smApp')
             });
         };
 
+        $scope.removePhotoClient = function(photo) {
+
+            var fd = new FormData();
+            var apiUrlDelete = ROOTURL + '/wp-json/v1/client/delete';
+
+            fd.append('photo_id', photo.id);
+            fd.append('user_id', $scope.currentUser.id);
+            $scope.promise = $http.post(
+                apiUrlDelete, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+            ).then(function(res) {
+                var idx = $scope.currentUser.photos.indexOf(photo);
+                $scope.currentUser.photos.splice(idx, 1);
+            });
+        };
+
         $("#idStatsForm").submit(function (e) {
 
             console.log(JSON.stringify($scope.stats));

@@ -1495,9 +1495,15 @@ function wpc_register_wp_api_endpoints() {
 		'callback' => 'workoutCreateClientExerciseLog',
 	));
 
+
 	register_rest_route( 'v1', 'hash', array(
 		'methods' => 'GET',
 		'callback' => 'workoutGenerateHash',
+	));
+
+	register_rest_route( 'v1', 'client/delete', array(
+		'methods' => 'POST',
+		'callback' => 'smDelete',
 	));
 
 	register_rest_route( 'v1', 'client/upload', array(
@@ -1582,6 +1588,21 @@ function smUpload()
 	}
 
 	return ['result' => true, 'data' => $data];
+}
+
+function smDelete()
+{
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+	require_once getcwd() . '/wp-customs/User.php';
+
+	if (isset($_POST['photo_id']) && isset($_POST['user_id'])) {
+
+		$user = User::find($_POST['user_id']);
+
+		if ($user && $user->deletePhoto($_POST['photo_id'])) {
+			return ['result' => true];
+		}
+	}
 }
 
 function workoutUpdateNote()

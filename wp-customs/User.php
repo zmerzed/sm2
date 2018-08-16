@@ -607,6 +607,32 @@ class User
         return [];
     }
 
+    public function deletePhoto($photoId) {
+
+        global $wpdb;
+        $photo = $wpdb->get_results("SELECT * FROM workout_user_files WHERE id={$photoId}", ARRAY_A);
+
+        if (count($photo) > 0) {
+            $photo = $photo[0];
+
+            if (DIRECTORY_SEPARATOR == '\\') {
+                $uploadDirectory = "\\sm-files\\{$this->id}\\";
+            } else {
+                $uploadDirectory = "/sm-files/{$this->id}/";
+            }
+
+            $file = getcwd() . $uploadDirectory . $photo['file'];
+
+            if (unlink($file)) {
+                $wpdb->delete(
+                    'workout_user_files',
+                    array('id' => $photo['id'])
+                );
+                return true;
+            }
+        }
+    }
+
     public static function getDefaultStat()
     {
         return [

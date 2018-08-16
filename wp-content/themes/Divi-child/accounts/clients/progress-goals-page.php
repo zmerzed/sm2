@@ -136,7 +136,7 @@
 
 								<ul class="progress-slider-photos row">
 									<li ng-repeat="photo in currentUser.photos" class = "col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 pl-1 pr-1 mb-3">
-										<div class="snap-container"><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
+										<div class="snap-container"><button ng-click="removePhotoClient(photo)">X</button><img class="img-responsive" ng-src="/sm-files/{{ currentUser.id }}/{{ photo.file }}"></div>
 										<span>{{ photo.uploaded_at }}</span>
 									</li>
 									<li class = "col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 pl-1 pr-1 mb-3">
