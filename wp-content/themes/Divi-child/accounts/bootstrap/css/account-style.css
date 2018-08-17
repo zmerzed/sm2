@@ -1199,7 +1199,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
   height: 25px;
   padding-top: 1px;
 }
-
+.assign-workout{ overflow-y:auto; }
 .assign-workout p{
   font-size: 13px;
   text-align: center;

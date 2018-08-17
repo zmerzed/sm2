@@ -26,7 +26,7 @@
     </div>
   </div>
   <nav>
-    <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
+    <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 5, 'multple-rows-detected' : workout.days.length >= 6 }" id="message-nav-tab" role="tablist">
       <a class="nav-item nav-link"
          id="nav-home-tab"
          data-toggle="tab"
@@ -136,7 +136,7 @@
         <div class="col-lg-12 col-md-12">
           <h3>Assign Clients to Workout</h3>
           <div class="d-md-flex flex-md-row bgDkGray mt-2">
-            <div class="col-12 col-sm-3 col-md-4 col-lg-2 p-0 assign-client-tab">
+            <div class="col-12 col-md-4 col-lg-2 p-0 assign-client-tab">
               <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left assign-clients-workout" role="navigation">
                 <li class="nav-item" ng-repeat="client in workout.selectedDay.clients">
                   <a href="javascript:void(0)"
@@ -154,7 +154,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-12 col-sm-9 col-md-8 col-lg-10 assign-client-tab-content" ng-if="workout.selectedDay.selectedClient">
+            <div class="col-12 col-md-8 col-lg-10 assign-client-tab-content" ng-if="workout.selectedDay.selectedClient">
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="lorem" role="tabpanel">
                   <div class="container">
@@ -193,7 +193,7 @@
                       </div>
                       <div class="col-12 col-lg-6 col-xl-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
                         <div class="row m-0">
-                          <div class="col-lg-4 col-md-4 p-0" ng-repeat="numSet in []|range:workoutMaxSet">
+                          <div class="col-4 p-0" ng-repeat="numSet in []|range:workoutMaxSet">
                             <p>SET {{ numSet + 1}}</p>
                             <div class="assign-sets-wrapper">
                               <table class="last-sets" style="width: 100% !important;">
