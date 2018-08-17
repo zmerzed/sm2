@@ -5,9 +5,10 @@ use Carbon\Carbon;
 
 class User
 {
-    public $forGymVal = NULL;
-    public $forTrainerPhoto = FALSE;
-    
+    public $forGymVal = null;
+    public $forTrainerPhoto = false;
+    public $forHealthDoc = false;
+
     public function __construct()
     {
 
@@ -43,14 +44,12 @@ class User
         $fileSize = $file['size'];
         $fileTmpName  = $file['tmp_name'];
         $fileType = $file['type'];
-       // $fileExtension = strtolower(end(explode('.',$fileName)));
 
         $mFileExtns = explode('.',$fileName);
         $fileExtension = strtolower($mFileExtns[1]);
 
         if (in_array($fileExtension, $fileImageExtensions))
         {
-        //    echo 'xXXXXXXXXXXXXXXXXX';
 
             $newFileName =  basename('photo_'.time()) . '.jpg';
             $uploadPath = $currentDir . $uploadDirectory . $newFileName;
@@ -58,7 +57,7 @@ class User
             // insert the filename
             $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
-            if ($didUpload) {
+            if ($didUpload && !$this->forHealthDoc) {
 
                 $imageType = 'image';
 
@@ -89,6 +88,7 @@ class User
             } else {
                 $errors[] = "An error occurred somewhere. Try again or contact the admin";
             }
+
         } else if(in_array($fileExtension, $fileExtensions)) {
 
             $newFileName =  basename($fileName);

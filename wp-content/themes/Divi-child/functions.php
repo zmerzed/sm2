@@ -1583,6 +1583,10 @@ function smUpload()
 				$user->forTrainerPhoto = true;
 			}
 
+			if (isset($_POST['health-doc'])) {
+				$user->forHealthDoc = true;
+			}
+			
 			$data = $user->uploadFile($_FILES['myFile']);
 
 			// add user activity log
