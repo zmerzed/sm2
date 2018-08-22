@@ -1829,7 +1829,13 @@ body .member-page .member-links .children li a{color:#fff;}
     font-size: 24px;
   }
 }
-
+@media(max-width:991px){
+  .trainer-weekly-schedule-wrapper .trainer-per-day-schedule{width:100%;margin-bottom:1em;}
+  .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:20%;display:inline-block;float:left;}
+}
+@media(max-width:480px){
+  .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:50%;}
+}
 @media(max-width: 600px){
   .container{
     /* margin: 10px; */
