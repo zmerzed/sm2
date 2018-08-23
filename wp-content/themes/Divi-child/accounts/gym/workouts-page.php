@@ -34,7 +34,7 @@
 			?>
 			<li class="workout-list-item">
 				<div class="workout-wrapper">
-					<span class="sm-workout-icon sm -icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"> --></span>
+					<span class="sm-workout-icon sm-icons"><!-- <img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-blu.png'; ?>"> --></span>
 					<!-- <span class="workout-ico wi-red wi-lifeter"></span> -->
 					<label><?php echo $program->workout_name ?></label>
 					<div class="workout-controls">
