@@ -8,16 +8,16 @@
 		$pid = $_GET['workout']; //Program ID
 	else
 		$pid = $_GET['workoutId'];
-	
+
 	if(isset($_GET['dayId']))
 		$wid = $_GET['dayId'];
-			
+
 	$pDet = getProgramDeatils($pid,$wid,$cid);	//Program Details
 	/* echo "<pre>";
 	print_r($pDet);
 	echo "</pre>"; */
-	
-	
+
+
 	if(!empty($pDet)){
 		foreach($pDet as $pd=>$v){
 			if($pd == "program_name"):
@@ -25,7 +25,7 @@
 			else:
 				$wd = $v['workout_detail'][0]; //Workout Details
 				$ed = $v['exercises']; //Exercise Details
-				
+
 				$maxSet = 0;
 				foreach($ed as $e){
 					$eset = $e->exer_sets;
@@ -38,6 +38,7 @@
 		<thead>
 			<tr>
 				<td>#</td>
+				<td>Photo</td>
 				<td>Body Part</td>
 				<td style="width:20%;">Exercise Name</td>
 				<td>Variation 1</td>
@@ -62,13 +63,32 @@
 				foreach($ed as $e):
 				$jctr++;
 					if(!empty($e)){
+						$ePart = "";
+						$exer = "";
+						foreach($e as $k=>$v){
+							if($k == 'exer_body_part')
+								$ePart = $v;
+							if($k == 'exer_type')
+								$exer = $v;
+						}
+					$vid = getExerciseVideo($ePart, $exer);
+					if($vid != "")
+						$vid = getVideoID($vid);
 			?>
 				<tr>
 					<td><?php echo $jctr; ?></td>
+					<td>
+						<?php
+							if($vid)
+								echo '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" />';
+							else {
+								echo "None";
+							}
+						?>
+					</td>
 					<?php
 						$notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
 						foreach($e as $k=>$v){
-							
 							if(!in_array($k,$notIn)){
 								if(!is_array($v)){
 									if($v != "")
@@ -82,14 +102,14 @@
 												if(!empty($v[$x])){
 													$eW = $v[$x]->weight;
 													echo ($eW != "") ? $eW . " lbs" : "0 lbs";
-												}										
+												}
 											echo "</td>";
 										}
 									}
-								}						
+								}
 							}
 						}
-					?>	
+					?>
 				</tr>
 			<?php
 				}else{
@@ -102,5 +122,5 @@
 <?php
 			endif;
 		}
-	}	
+	}
 ?>

@@ -28,19 +28,19 @@ function strength_mextrix_login_scripts(){
 /*
 *
 * Check what is the buddyPress member type
-* Redirect them to a specific pages. 
+* Redirect them to a specific pages.
 *
 */
 
 function sm_login_redirect( $redirect_to, $request, $user ) {
 	//is there a user to check?
 	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
-		
-		$pm_lvl = "";	
+
+		$pm_lvl = "";
 		$ppp = pmpro_getMembershipLevelForUser($user->ID);
 		if(!empty($ppp))
 			$pm_lvl = $ppp->name;
-		
+
 		/* $member_type = bp_get_member_type($user->data->ID); */
 
 		//check for admins
@@ -155,7 +155,7 @@ function assignClientToTrainer($client, $trainer) {
 	$ppp = pmpro_getMembershipLevelForUser($trainer->ID);
 	if(!empty($ppp))
 		$pm_lvl_train = $ppp->name;
-	
+
 	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {
 		return false;
 	}
@@ -187,12 +187,12 @@ function assignTrainerToGym($trainer, $gym) {
 	$ppp2 = pmpro_getMembershipLevelForUser($trainer->ID);
 	if(!empty($ppp2))
 		$pm_lvl_train = $ppp2->name;
-	
-	if ( ! in_array('gym', $gym->roles, true) && $pm_lvl_gym != "Gym" ) {		
+
+	if ( ! in_array('gym', $gym->roles, true) && $pm_lvl_gym != "Gym" ) {
 		return false;
 	}
 
-	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {		
+	if ( ! in_array('trainer', $trainer->roles, true) && $pm_lvl_train != "Trainer" ) {
 		return false;
 	}
 
@@ -211,32 +211,32 @@ function assignTrainerToGym($trainer, $gym) {
 /*User Trapping*/
 function checkUserOrParentStatus($user)
 {
-	global $wpdb;	
+	global $wpdb;
 	$ppm = pmpro_getMembershipLevelForUser($user->ID);
 	$pm_lvl = "";
 	if(!empty($ppm)){
 		$pm_lvl = $ppm->name;
 	}
-		
+
 	$query = "";
 	$member = array();
 	$uopid = ""; //user_or_parent_id
-	
+
 	if($pm_lvl == "Gym"){
 		$uopid = $user->ID;
 	}elseif($pm_lvl == "Trainer"){
 		$uopid = $user->ID;
 	}elseif(in_array( 'trainer', $user->roles )){
 		$parent_id = get_user_meta($user->ID, 'parent_gym', true);
-		
+
 		if($parent_id != ""){
-			$uopid = get_user_by('id', $parent_id)->ID;					
+			$uopid = get_user_by('id', $parent_id)->ID;
 		}else{
 			$uopid = $user->ID;
 		}
 	}elseif(in_array( 'client', $user->roles )){
 		$parent_id = get_user_meta($user->ID, 'parent_trainer', true);
-		
+
 		if($parent_id != ""){
 			$gparent_id = get_user_meta($parent_id, 'parent_gym', true);
 			if($gparent_id != ""){
@@ -246,10 +246,10 @@ function checkUserOrParentStatus($user)
 			}
 		}
 	}
-	
+
 	$query = "SELECT * FROM wp_pmpro_memberships_users WHERE user_id = '" . $uopid . "'";
 	$member = $wpdb->get_results($query, OBJECT);
-	
+
 	if(!empty($member)){
 		$tempStat = array();
 		foreach($member as $mem){
@@ -259,7 +259,7 @@ function checkUserOrParentStatus($user)
 			return true;
 		}else{
 			return false;
-		}		
+		}
 	}else{
 		return false;
 	}
@@ -319,22 +319,22 @@ function getMonthlySchedule($u)
 		if(empty($umeta2))
 			$umeta2 = array();
 		$temp_arr = array();
-		
+
 		foreach($umeta2 as $v){
 			$vv = get_user_meta($v,'clients_of_trainer',true);
 			if(empty($vv))
 				$vv = array();
-			
+
 			foreach($vv as $k){
 				$temp_arr[] = $k;
 			}
 		}
-		
+
 		$coft = "";
-		
+
 		if(!empty($temp_arr))
 			$coft = implode(", ", $temp_arr);
-		
+
 		$results_w_day = $wpdb->get_results( $wquery . " IN (" . $coft . ")". $wqorder, OBJECT );
 	}
 
@@ -373,7 +373,7 @@ function printVar($a){
 	print_r($a);
 	echo "</pre>";
 }
-function jabs($u)	
+function jabs($u)
 {
 	/* echo "<pre>";
 	 print_r( getClientsOfTrainer(wp_get_current_user()));
@@ -388,10 +388,10 @@ function getSchedData($u)
 	$urole = getMembershipLevel(wp_get_current_user());
 
 	if(!empty($woutArray)){
-		foreach($woutArray as $wa){			
+		foreach($woutArray as $wa){
 			$tempArr2 = array();
 			$ctrTemp++;
-			$wid = $wa['wid'];			
+			$wid = $wa['wid'];
 			$wclientid = $wa['workout_clientid'];
 			$wclient = get_user_by('id', $wclientid);
 			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wid."&workout_client_id=".$wclientid;
@@ -439,7 +439,7 @@ function test2()
 {
 	global $wpdb;
 
-	$get_user_ids = $wpdb->get_col( "SELECT u.ID FROM {$wpdb->users} u INNER JOIN 
+	$get_user_ids = $wpdb->get_col( "SELECT u.ID FROM {$wpdb->users} u INNER JOIN
 {$wpdb->prefix}term_relationships r ON u.ID = r.object_id WHERE u.user_status = 0 AND r.term_taxonomy_id = 71");
 
 	print_r($get_user_ids);
@@ -491,7 +491,7 @@ function workOutAdd($data)
 			}
 
 		}
-		
+
 		foreach($workout['days'] as $d)
 		{
 			$wpdb->insert('workout_days_tbl',
@@ -648,7 +648,7 @@ function workOutUpdate($data)
 
 	$workout = stripslashes($workout);
 	$workout = json_decode($workout, true);
-	
+
 	$mWorkoutId = (int) $workout['workout_ID'];
 	$weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
@@ -1538,10 +1538,10 @@ function smUpload()
 
 	$upload_file = wp_handle_upload($_FILES["myFile"], array('test_form' => false), date('Y/m'));
 	var_dump($upload_file);
-	
+
 	$wp_upload_dir = wp_upload_dir();
 	$guid = $wp_upload_dir['baseurl'] . "/" . _wp_relative_upload_path( $upload_file );
-	
+
 	$attachment = array(
 		'post_mime_type' => $_FILES["myFile"]['type'],
 		'guid' => $guid,
@@ -1552,13 +1552,13 @@ function smUpload()
 		'post_date' => date('Y-m-d H:i:s'),
 		'post_date_gmt' => date('Y-m-d H:i:s')
 	);
-	
+
 	$attach_id = wp_insert_attachment($attachment, $upload_file['file']);
 	$meta = wp_generate_attachment_metadata($attach_id,$upload_file['file']);
 	wp_update_attachment_metadata($meta);
-	
+
 	$upload_feedback = false;
-	
+
 	return $attach_id; */
 
 	/* $image = New ImageMeta; */
@@ -1586,7 +1586,7 @@ function smUpload()
 			if (isset($_POST['health-doc'])) {
 				$user->forHealthDoc = true;
 			}
-			
+
 			$data = $user->uploadFile($_FILES['myFile']);
 
 			// add user activity log
@@ -1640,7 +1640,7 @@ function workoutUpdateNote()
 			} break;
 
 			case 'trainer': {
-	
+
 				Log::insert(
 					['type' => 'TRAINER_UPDATE_NOTE', 'workout' => $program],
 					$user
@@ -1898,7 +1898,7 @@ function workoutGenerateHash()
 //Triggered when first visit in dashboard page
 function triggerFirstLogin($uinfo){
 	$first_login = get_user_meta($uinfo->ID, 'prefix_first_login', true);
-	if( $first_login == '1' ) {		 
+	if( $first_login == '1' ) {
 		return true;
     }else{
 		return false;
@@ -1917,7 +1917,7 @@ function getMembershipLevel($u){
 		$uroles = array();
 		if(!empty($u->roles))
 			$uroles = $u->roles;
-		
+
 		if(in_array('trainer', $uroles)){
 			$p_lvl = "trainer";
 		}elseif(in_array('client', $uroles)){
@@ -1943,9 +1943,9 @@ add_action('init','wpse23007_redirect');
 
 /*Trainer Edit Profile*/
 function getTrainerInfo($u){
-	$umeta = get_user_meta($u->ID);		
+	$umeta = get_user_meta($u->ID);
 	$tinfo = array();
-	
+
 	if(isset($umeta['sm_bio']))
 		$tinfo['ubio'] = $umeta['sm_bio'][0];
 	else
@@ -1966,14 +1966,14 @@ function getTrainerInfo($u){
 		$tinfo['uexp'] = $umeta['sm_experience'][0];
 	else
 		$tinfo['uexp'] = "";
-	
+
 	return $tinfo;
 }
 /*Gym Edit Profile*/
 function getGymInfo($u){
-	$umeta = get_user_meta($u->ID);		
+	$umeta = get_user_meta($u->ID);
 	$tinfo = array();
-	
+
 	if(isset($umeta['sm_gym_about']))
 		$tinfo['sm_gym_about'] = $umeta['sm_gym_about'][0];
 	else
@@ -1982,14 +1982,14 @@ function getGymInfo($u){
 		$tinfo['sm_gym_color'] = $umeta['sm_gym_color'][0];
 	else
 		$tinfo['sm_gym_color'] = "";
-	
+
 	return $tinfo;
 }
 /*get Workout Day Name / Workout Name*/
 function getWorkoutDayName($wdid){
 	global $wpdb;
 	$wdayQ = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_ID = ' .$wdid, OBJECT);
-	
+
 	return $wdayQ[0]->wday_name;
 }
 /*Check user id exists*/
@@ -2002,19 +2002,19 @@ function user_id_exists($user){
 function getGoalPerc($stats){
 	$sta = array();
 	$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date', 'created_at', 'updated_at'];
-	foreach($stats as $k2 => $v2){			
+	foreach($stats as $k2 => $v2){
 		foreach($v2 as $k => $v){
 			if(!in_array($k, $not_inc)){
 				if($k2 == "start"){
-					$sta[$k]['sw'] = $v;				
+					$sta[$k]['sw'] = $v;
 				}elseif($k2 == "goal"){
 					$sta[$k]['gw'] = $v;
 				}else{
 					$sta[$k]['cw'] = $v;
 				}
 			}
-		}			
-	}	
+		}
+	}
 	return $sta;
 }
 /*calculate Percentage per bodyparts*/
@@ -2025,7 +2025,7 @@ function calcppbp($gw,$sw,$cw){
 		$sw = 0;
 	if($cw == "")
 		$cw =0;
-	if($gw > $sw){//Gain									
+	if($gw > $sw){//Gain
 		if($cw > $sw){
 			if($cw >= $gw)
 				$pp = 0;
@@ -2036,7 +2036,7 @@ function calcppbp($gw,$sw,$cw){
 		}else{
 			$pp = 0;
 		}
-		
+
 	}elseif($gw < $sw){//Loss
 		if($cw < $sw){
 			if($cw <= $gw)
@@ -2052,17 +2052,17 @@ function calcppbp($gw,$sw,$cw){
 		$pp = 100;
 	}else{
 		$pp = 0;
-	}	
+	}
 	return $pp;
 }
 function getBPPercAvg($eachBPStats){ //Get Average Percentage on each Body Part
 	$avgArr = array();
 	foreach($eachBPStats as $v=>$sa){
-		$gw = $sa['gw'];           
-		$sw = $sa['sw'];         
+		$gw = $sa['gw'];
+		$sw = $sa['sw'];
 		$cw = $sa['cw'];
 		$pp = round(abs(calcppbp($gw, $sw ,$cw)));
-		$avgArr[] = $pp;		
+		$avgArr[] = $pp;
 	}
 	return round(abs(array_sum($avgArr)/count($avgArr)));
 }
@@ -2073,7 +2073,7 @@ function pushClientsToRecipient($u){
 	if(empty($clients))
 		$clients = array();
 	foreach($clients as $client){
-		$r[$client->user_login] = $client->roles[0];			
+		$r[$client->user_login] = $client->roles[0];
 	}
 	return $r;
 }
@@ -2085,12 +2085,12 @@ function getRecipients($u){
 		if($pgym != ""){ //Under a Gym
 			$gym = get_user_by('id',$pgym);
 			$r = pushClientsToRecipient($u);
-			$r[$gym->user_login] = getMembershipLevel($gym);			
+			$r[$gym->user_login] = getMembershipLevel($gym);
 		}else{ //Not Under a Gym
 			$r = pushClientsToRecipient($u);
 		}
 	}elseif($plvl == 'gym'){
-		$tog = get_user_meta($u->ID, 'trainers_of_gym', true);		
+		$tog = get_user_meta($u->ID, 'trainers_of_gym', true);
 		foreach($tog as $t){
 			$trainer = get_user_by('id', $t);
 			$r[$trainer->user_login] = getMembershipLevel($trainer);
@@ -2112,7 +2112,7 @@ function getRecipients($u){
 	}
 	return $r;
 }
-function checkPG($uid){	
+function checkPG($uid){
 	return get_user_meta($uid, 'parent_gym', true);
 }
 function getParent($u){
@@ -2149,7 +2149,7 @@ function checkSubscribed($u){
 		return false;
 }
 /*Get all Goal results*/
-function getGoalResults($u){	
+function getGoalResults($u){
 	global $wpdb;
 	$statQ = 'SELECT * FROM workout_client_stats WHERE type="result" AND client_id = '. $u->ID;
 	$stats = $wpdb->get_results($statQ, OBJECT);
@@ -2193,14 +2193,14 @@ function get_message_user_image(){
 		$user = get_user_by('login', $u);
 		$uid = $user->ID;
 		$up = getUserPhoto($user);
-		
+
 		if($up)
 			$imgR[] = $up;
 		else
-			$imgR[] = "";	
+			$imgR[] = "";
 	}
 	echo json_encode(array('result' => $imgR));
-	wp_die();	
+	wp_die();
 }
 /*Print Gym Color Theme*/
 function printCss($a,$b,$c){
@@ -2208,14 +2208,14 @@ function printCss($a,$b,$c){
 	foreach($a as $v){
 		$ctr++;
 		echo '.gym-page '.$v;
-		echo ($ctr!=count($a)) ? "," : "";		
+		echo ($ctr!=count($a)) ? "," : "";
 	}
 	if($b==1)
 		echo '{background-color:'.$c.'}';
 	elseif($b==2)
 		echo '{background-color:#'.$c.'!important;}';
 	elseif($b==3)
-		echo '{background-color:#'.$c.';border-color:#'.$c.';}';	
+		echo '{background-color:#'.$c.';border-color:#'.$c.';}';
 	elseif($b==4)
 		echo '{color:#'.$c.';}';
 	elseif($b==5)
@@ -2235,31 +2235,31 @@ function getProgramDeatils($pid,$swid,$cid){
 	$workoutsArr['program_name'] = $program[0]->workout_name; // Program Name
 	$workouts = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_workout_ID = '. $pid, OBJECT); // Workout Query
 	$u = wp_get_current_user();
-	$uid = 0;	
+	$uid = 0;
 	$urole = getMembershipLevel($u);
 	if($urole == "client")
 		$uid = $u->ID;
 	if($cid != 0)
 		$uid = $cid;
-	
+
 	if(!empty($workouts)){
 		foreach($workouts as $workout){
 			$wid = $workout->wday_ID;
-			if($swid == 0){					
-				$workoutsArr[$wid]['workout_detail'][] = $workout;		
-				$wExers = getWExercises($wid);	// Exercises				
+			if($swid == 0){
+				$workoutsArr[$wid]['workout_detail'][] = $workout;
+				$wExers = getWExercises($wid);	// Exercises
 				if(empty($wExers))
 					$workoutsArr[$wid]['exercises'][] = array();
 				else{
 					foreach($wExers as $wExer){
 						$wExer->sets = getAssignmentSets($wExer->exer_ID, $uid);
 						$workoutsArr[$wid]['exercises'][] = $wExer;
-					}						
-				}				
+					}
+				}
 			}else{
 				if($swid == $wid){
-					$workoutsArr[$wid]['workout_detail'][] = $workout;		
-					$wExers = getWExercises($wid);	// Exercises					
+					$workoutsArr[$wid]['workout_detail'][] = $workout;
+					$wExers = getWExercises($wid);	// Exercises
 					if(empty($wExers))
 						$workoutsArr[$wid]['exercises'][] = array();
 					else{
@@ -2268,28 +2268,28 @@ function getProgramDeatils($pid,$swid,$cid){
 							$workoutsArr[$wid]['exercises'][] = $wExer;
 						}
 					}
-				}				
-			}			
-		}		
+				}
+			}
+		}
 	}
-	
+
 	return $workoutsArr;
 }
 function getAssignmentSets($exID,$uid){
 	$aq = "";
 	if($uid != 0)
 		$aq = " AND client_id = ".$uid;
-		
+
 	global $wpdb;
 	$assID = $wpdb->get_results('SELECT id FROM workout_client_exercise_assignments WHERE exercise_id = '.$exID . $aq, OBJECT);
 	$assSets = $wpdb->get_results('SELECT * FROM workout_client_exercise_assignment_sets WHERE assignment_id = '.$assID[0]->id, OBJECT);
-	
+
 	return $assSets;
 }
 function getWExercises($wid){
 	global $wpdb;
 	$wExer = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
-	
+
 	return $wExer;
 }
 
@@ -2311,15 +2311,25 @@ add_action('fep_action_message_after_send','fep_test');
 /*GET Exercise Video*/
 function getExerciseVideo($ePart, $exer){
 	$video = "";
-	
+
 	foreach(workOutExerciseOptions() as $eOpts){
 		if($eOpts['part'] == $ePart){
 			foreach($eOpts['options'] as $eOpt){
 				if($eOpt->type == $exer){
 					$video = $eOpt->video_link;
-				}				
-			}					
+				}
+			}
 		}
 	}
 	return $video;
+}
+function getVideoID($v){
+	$res = [];
+	if($v != ""){
+		if(strpos($v,'youtu.be') != -1)
+			$res[] = str_replace('https://youtu.be/', '', $v);
+		else
+			$res[] = explode('v=', $v)[1];
+	}
+	return $res;
 }
