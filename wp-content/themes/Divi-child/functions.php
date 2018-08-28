@@ -2281,8 +2281,10 @@ function getAssignmentSets($exID,$uid){
 		$aq = " AND client_id = ".$uid;
 
 	global $wpdb;
+	$assSets = [];
 	$assID = $wpdb->get_results('SELECT id FROM workout_client_exercise_assignments WHERE exercise_id = '.$exID . $aq, OBJECT);
-	$assSets = $wpdb->get_results('SELECT * FROM workout_client_exercise_assignment_sets WHERE assignment_id = '.$assID[0]->id, OBJECT);
+	if($assID)
+		$assSets = $wpdb->get_results('SELECT * FROM workout_client_exercise_assignment_sets WHERE assignment_id = '.$assID[0]->id, OBJECT);
 
 	return $assSets;
 }

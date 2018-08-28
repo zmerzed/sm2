@@ -1,3 +1,20 @@
+<div class="col-lg-12">
+<select onchange="selectClient(this.value)" class="float-left program-selected-clients">
+  <option value="{{ client.ID }}" ng-repeat="client in workout.selectedDay.clients">
+    {{ client.user_nicename }}
+  </option>
+</select>
+<a href="?data=add-workouts&amp;workout=47&amp;print=1&amp;workout_client_id={{workout.selectedDay.clients[0].ID}}" class="print-btn btn red-btn float-left" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
+<script>
+function selectClient(a){
+  var curVal = $('.print-btn').attr('href');
+  curVal = curVal.split('&workout_client_id=');
+  curVal += '&workout_client_id=' + a;
+  $('.print-btn').attr('href', curVal);
+}
+</script>
+</div>
+
 <form id="idForm" submit="sendForm" action="" method="POST">
   <div class="container trainer-header-section">
     <div class="row">
@@ -27,7 +44,7 @@
   </div>
   <nav>
     <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 6 }" id="message-nav-tab" role="tablist">
-      
+
         <a class="nav-item nav-link"
            id="nav-home-tab"
            data-toggle="tab"
@@ -40,7 +57,7 @@
            ng-class="{active: isActive(day)}"
            ng-show="!day.isDelete && $index < 3"
         >Workout {{day.wday_order}} - {{day.wday_name}}</a>
-      
+
       <div ng-if=" workout.days.length > 3  " class = "">
         <a href = "javascript:void(0);" class = "btn btn-secondary btn__workout">More</a>
         <div class = "workout-hidden d-none">
@@ -60,7 +77,7 @@
       </div>
     </div>
   </nav>
-    
+
   <div ng-mouseleave="onLeaveDay()">
     <div class="tab-content" id="nav-tabContent" ng-if="workout.selectedDay">
       <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
@@ -148,7 +165,7 @@
             </div>
           </div>
         </div>
-      </div>            
+      </div>
     </div>
     <div class="container assign-client-to-workout" ng-show="workout.selectedDay && !currentUser.isGym">
       <div class="row">
@@ -197,7 +214,7 @@
                             <table class="workout-exercise-options">
                               <td><span class="exercise-number d-flex"><label class = "w-100">{{ $index + 1 }}</label></span></td>
                               <td class = "w-35">
-                                <select> 
+                                <select>
                                   <option>{{ ex.exer_body_part }}</option>
                                 </select>
                               </td>
@@ -207,7 +224,7 @@
                                 </select>
                               </td>
                             </table>
-                          </li> 
+                          </li>
                         </ul>
                       </div>
                       <div class="col-12 col-lg-6 col-xl-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
@@ -225,11 +242,11 @@
                               </table>
                             </div>
                           </div>
-                        </div>                                            
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>                          
+                </div>
               </div>
             </div>
           </div>

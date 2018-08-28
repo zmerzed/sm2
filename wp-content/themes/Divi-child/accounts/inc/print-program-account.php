@@ -38,22 +38,22 @@
 		<thead>
 			<tr>
 				<td>#</td>
-				<td>Photo</td>
-				<td>Body Part</td>
-				<td style="width:20%;">Exercise Name</td>
-				<td>Variation 1</td>
-				<td>Variation 2</td>
-				<td>SQ</td>
+				<td width="20%">Pic</td>
+				<!-- <td>Body Part</td> -->
+				<td width="30%">Exercise(Tempo)</td>
+				<!-- <td>Variation 1</td>
+				<td>Variation 2</td> -->
+				<!-- <td>SQ</td> -->
 				<td>Sets</td>
 				<td width="62">Reps</td>
-				<td>Tempo</td>
+				<!-- <td>Tempo</td> -->
 				<td width="60">Rest</td>
-				<td>Implementation</td>
+				<td>Start Weight</td>
 				<?php
-					if($wid != 0){
+					// if($wid != 0){
 						for ($x = 1; $x <= $maxSet; $x++)
 							echo "<td>Set {$x}</td>";
-					}
+					// }
 				?>
 			</tr>
 		</thead>
@@ -87,27 +87,87 @@
 						?>
 					</td>
 					<?php
-						$notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
+						// $notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
+						// printVar($e);
+						$exercise = $e->exer_type;
+						$eTempo = $e->exer_tempo;
+						$eSet = $e->exer_sets;
+						$eRep = $e->exer_rep;
+						$eSets = $e->sets;
+						$eRest = $e->exer_rest;
+						$eStartWeight = "None";
+						if($eSets)
+							$eStartWeight = $eSets[0]->weight;
+
+						echo '<td>';
+							if($exercise){
+								echo $exercise;
+								echo ($eTempo) ? ' ('.$eTempo.')' : '';
+							}else {
+								echo "None";
+							}
+						echo '</td>';
+
+						echo '<td>';
+							if($eSet)
+								echo $eSet;
+							else {
+								echo 'None';
+							}
+						echo '</td>';
+
+						echo '<td>';
+							if($eRep)
+								echo $eRep;
+							else {
+								echo 'None';
+							}
+						echo '</td>';
+
+						echo '<td>';
+							if($eRest)
+								echo $eRest;
+							else {
+								echo 'None';
+							}
+						echo '</td>';
+
+						echo '<td>';
+								echo $eStartWeight;
+						echo '</td>';
+
+
 						foreach($e as $k=>$v){
-							if(!in_array($k,$notIn)){
-								if(!is_array($v)){
-									if($v != "")
-								echo "<td>{$v}</td>";
-									else
-										echo '<td>None</td>';
-								}else{
-									if($wid != 0){
+							// if(!in_array($k,$notIn)){
+								if(is_array($v)){
+									// if($wid != 0){
 										for ($x = 0; $x < $maxSet; $x++) {
-											echo '<td width="64">';
+						?>
+							<td width="64" style="padding:0">
+								<table class="tabl table-borderless">
+									<tr>
+						<?php
+											echo '<td style="border:0;border-bottom:1pxsolid #ccc;"><strong>WGT</strong> ';
 												if(!empty($v[$x])){
 													$eW = $v[$x]->weight;
 													echo ($eW != "") ? $eW . " lbs" : "0 lbs";
 												}
 											echo "</td>";
+						?>
+
+									</tr>
+									<tr>
+										<td style="border:0;border-top:1px solid #ccc;">
+											<strong>REPS</strong>
+										</td>
+									</tr>
+								</table>
+							</td>
+						<?php
 										}
-									}
+									// }
 								}
-							}
+							// }
 						}
 					?>
 				</tr>
@@ -118,7 +178,7 @@
 			endforeach; ?>
 		</tbody>
 	</table>
-	<script>window.print();</script>
+	<script>//window.print();</script>
 <?php
 			endif;
 		}

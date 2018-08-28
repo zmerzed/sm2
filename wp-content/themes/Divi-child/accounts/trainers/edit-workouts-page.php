@@ -21,7 +21,7 @@ $program = Program::find((int) $_GET['workout']);
 	var PROGRAM_NOTE = <?php echo json_encode($program->getNote()) ?>;
 	var EXERCISE_OPTIONS = <?php echo json_encode(workOutExerciseOptions()) ?>;
 	var EXERCISE_SQ_OPTIONS = <?php echo json_encode(workOutExerciseStrengthQualitiesOptions()) ?>;
-	
+
 </script>
 
 <?php if(isset($_GET['print'])):  ?>
@@ -30,7 +30,7 @@ $program = Program::find((int) $_GET['workout']);
 		<?php require_once(get_stylesheet_directory() . '/accounts/inc/print-program-account.php'); ?>
 	</div>
 <?php else: ?>
-	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn" style="float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
+	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn print-url" style="display:none;float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
 	<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
 		<div ng-include src="workoutTemplate"></div>
 	</div>

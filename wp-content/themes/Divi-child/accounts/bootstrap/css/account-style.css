@@ -1072,6 +1072,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
   float: left;
 }
 
+.program-selected-clients,
 .workout-exercise-options tr td select{
     border: 0px;
     border-radius: 100px;
@@ -1216,7 +1217,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
 padding-right: 2px; */
 }
 
-.assign-workout .col-lg-6, 
+.assign-workout .col-lg-6,
 .assign-workout .col-lg-4{
   /* padding-left: 2px;
   padding-right: 2px; */
@@ -1321,7 +1322,7 @@ padding-right: 2px; */
 .workout-ico.wi-red{background-color:#ae1f23}
 .workout-ico{
   height:45px;
-  width:45px; 
+  width:45px;
   display:inline-block;
   float:left;
   border-radius:50%;
@@ -1385,7 +1386,7 @@ button[disabled="disabled"]{
   padding:0;
 } */
 .start-workout h4{
-  color:#fff; 
+  color:#fff;
   font-weight:bold;
 }
 .exercise-details span{
@@ -1494,7 +1495,7 @@ ul.workout-lists li .exercise-set-item .goal-set label{
   font-size:24px;
   font-weight:700;
 }
-.rest-timer{  
+.rest-timer{
   color:#ae1f23;
   display:inline-block;
 }
