@@ -32,6 +32,7 @@ $program = Program::find((int) $_GET['workout']);
 <?php else: ?>
 	<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn print-url" style="display:none;float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
 	<div class="main-content padding20 matchHeight" ng-app="smApp" ng-controller="editWorkoutController" ng-cloak>
+		<input type="hidden" ng-init="printUrl = '<?php echo $_SERVER['REQUEST_URI']; ?>&print=1'" ng-model="printUrl"  />
 		<div ng-include src="workoutTemplate"></div>
 	</div>
 <?php endif; ?>

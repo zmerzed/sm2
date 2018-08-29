@@ -1811,6 +1811,12 @@ body .member-page .member-links .children li a{color:#fff;}
   /* display: flex; */
   display:inline-block;
 }
+.print-btn{
+  margin-left:10px;
+}
+.program-selected-clients{
+  padding:6px;
+}
 
 
 @media(max-width: 1000px){

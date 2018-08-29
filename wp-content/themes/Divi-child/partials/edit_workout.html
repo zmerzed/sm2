@@ -1,20 +1,20 @@
 <div class="col-lg-12">
-<select onchange="selectClient(this.value)" class="float-left program-selected-clients">
-  <option value="{{ client.ID }}" ng-repeat="client in workout.selectedDay.clients">
-    {{ client.user_nicename }}
-  </option>
-</select>
-<a href="?data=add-workouts&amp;workout=47&amp;print=1&amp;workout_client_id={{workout.selectedDay.clients[0].ID}}" class="print-btn btn red-btn float-left" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
-<script>
-function selectClient(a){
-  var curVal = $('.print-btn').attr('href');
-  curVal = curVal.split('&workout_client_id=');
-  curVal += '&workout_client_id=' + a;
-  $('.print-btn').attr('href', curVal);
-}
-</script>
+  <a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-right" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
+  <select onchange="selectClient(this.value)" class="float-right program-selected-clients">
+    <option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
+      {{ client.user_nicename }}
+    </option>
+  </select>
+  <script>
+  function selectClient(a){
+    var curVal = $('.print-btn').attr('href');
+    curVal = curVal.split('&workout_client_id=');
+    curVal += '&workout_client_id=' + a;
+    $('.print-btn').attr('href', curVal);
+  }
+  </script>
 </div>
-
+<hr class="clearfix">
 <form id="idForm" submit="sendForm" action="" method="POST">
   <div class="container trainer-header-section">
     <div class="row">

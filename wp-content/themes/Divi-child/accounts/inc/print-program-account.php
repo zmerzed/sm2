@@ -61,19 +61,30 @@
 			<?php
 				$jctr = 0;
 				foreach($ed as $e):
-				$jctr++;
-					if(!empty($e)){
-						$ePart = "";
-						$exer = "";
-						foreach($e as $k=>$v){
-							if($k == 'exer_body_part')
-								$ePart = $v;
-							if($k == 'exer_type')
-								$exer = $v;
-						}
+					$jctr++;
+					$exercise = $e->exer_type;
+					$eTempo = $e->exer_tempo;
+					$eSet = $e->exer_sets;
+					$eRep = $e->exer_rep;
+					$eSets = $e->sets;
+					$eRest = $e->exer_rest;
+					$eStartWeight = "None";
+					if($eSets)
+						$eStartWeight = $eSets[0]->weight;
+					$ePart = "";
+					$exer = "";
+					foreach($e as $k=>$v){
+						if($k == 'exer_body_part')
+							$ePart = $v;
+						if($k == 'exer_type')
+							$exer = $v;
+					}
 					$vid = getExerciseVideo($ePart, $exer);
 					if($vid != "")
 						$vid = getVideoID($vid);
+
+
+					if(!empty($e) && $eStartWeight != "None"){
 			?>
 				<tr>
 					<td><?php echo $jctr; ?></td>
@@ -89,15 +100,6 @@
 					<?php
 						// $notIn = ['exer_ID','exer_day_ID','exer_workout_ID','hash'];
 						// printVar($e);
-						$exercise = $e->exer_type;
-						$eTempo = $e->exer_tempo;
-						$eSet = $e->exer_sets;
-						$eRep = $e->exer_rep;
-						$eSets = $e->sets;
-						$eRest = $e->exer_rest;
-						$eStartWeight = "None";
-						if($eSets)
-							$eStartWeight = $eSets[0]->weight;
 
 						echo '<td>';
 							if($exercise){
@@ -147,17 +149,17 @@
 								<table class="tabl table-borderless">
 									<tr>
 						<?php
-											echo '<td style="border:0;border-bottom:1pxsolid #ccc;"><strong>WGT</strong> ';
+											echo '<td style="border:0;border-bottom:1pxsolid #ccc;height:60px;"><strong>WGT</strong> ';
 												if(!empty($v[$x])){
 													$eW = $v[$x]->weight;
-													echo ($eW != "") ? $eW . " lbs" : "0 lbs";
+													// echo ($eW != "") ? $eW . " lbs" : "0 lbs";
 												}
 											echo "</td>";
 						?>
 
 									</tr>
 									<tr>
-										<td style="border:0;border-top:1px solid #ccc;">
+										<td style="border:0;border-top:1px solid #ccc;height:60px;">
 											<strong>REPS</strong>
 										</td>
 									</tr>
