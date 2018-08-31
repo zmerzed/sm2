@@ -19,7 +19,9 @@ angular.module('smApp')
     function init()
     {
         console.log('-----------INIT NewWorkoutController--------------');
+        console.log($scope.exerciseSQoptions);
 
+        /* add others for exercise options tempo */
         $scope.timeData = global.time;
         $http.get(urlApiClient + '/hash').then(function(res)
         {
@@ -324,6 +326,7 @@ angular.module('smApp')
 
     }, true);
 
+
     function nFormat(n){
         return n > 9 ? "" + n: "0" + n;
     }
@@ -439,6 +442,58 @@ angular.module('smApp')
 
         for (var i in $scope.workout.selectedDay.exercises)
         {
+            var mExercise = $scope.workout.selectedDay.exercises[i];
+
+            /* check if others is selected for Tempo */
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'others') {
+                var mOtherName = prompt("Tempo");
+
+                while (mOtherName == 'others') {
+                    mOtherName = prompt("Tempo");
+                }
+
+                var mTempos = [];
+
+                for (var mI in mExercise.selectedSQ.options.tempo)
+                {
+                    var tempo = mExercise.selectedSQ.options.tempo[mI];
+
+                    if (tempo == 'others') {
+                        tempo = angular.copy(mOtherName);
+                    }
+
+                    mTempos.push(tempo);
+                }
+
+                mExercise.selectedSQ.options.tempo = mTempos;
+                mExercise.selectedSQ.selectedTempo = mOtherName;
+            }
+
+            /* check if others is selected for Rest */
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'others') {
+                var mOtherName = prompt("Rest");
+
+                while (mOtherName == 'others') {
+                    mOtherName = prompt("Rest");
+                }
+
+                var mRests = [];
+
+                for (var mI in mExercise.selectedSQ.options.rest)
+                {
+                    var rest = mExercise.selectedSQ.options.rest[mI];
+
+                    if (rest == 'others') {
+                        rest = angular.copy(mOtherName);
+                    }
+
+                    mRests.push(rest);
+                }
+
+                mExercise.selectedSQ.options.rest = mRests;
+                mExercise.selectedSQ.selectedRest = mOtherName;
+            }
+
             var exercise = angular.copy($scope.workout.selectedDay.exercises[i]);
             var noSet = 0;
             $scope.clientExerciseSets[i] = 0;
@@ -463,6 +518,7 @@ angular.module('smApp')
             } else if(noSet >= $scope.workoutMaxSet) {
                 $scope.workoutMaxSet = noSet;
             }
+
         }
     }
 

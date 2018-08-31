@@ -1463,7 +1463,7 @@ function workOutExerciseOptions()
 	{
 		$options[$key]['options'] = json_decode($option['options']);
 	}
-	//dd($options);
+
 	return $options;
 
 }
@@ -1478,9 +1478,11 @@ function workOutExerciseStrengthQualitiesOptions()
 
 	foreach($options as $key => $option)
 	{
-		$options[$key]['options'] = json_decode($option['options']);
+		$options[$key]['options'] = json_decode($option['options'], true);
+		$options[$key]['options']['tempo'][] = 'others';
+		$options[$key]['options']['rest'][] = 'others';
 	}
-	//dd($options);
+
 	return $options;
 }
 
