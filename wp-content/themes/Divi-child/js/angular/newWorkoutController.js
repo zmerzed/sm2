@@ -184,9 +184,20 @@ angular.module('smApp')
 
     };
 
+    $scope.onRemoveSelectedClient = function(client) 
+    {
+
+       var idx = $scope.workout.selectedDay.clients.indexOf(client);
+
+       $scope.clients.push(angular.copy(client));
+       $scope.workout.selectedDay.clients.splice(idx, 1);
+
+    }
+
     $scope.testWorkout = function()
     {
         console.log($scope.workout);
+
     };
 
     $scope.selectClient = function(client) {

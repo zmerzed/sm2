@@ -1315,6 +1315,7 @@ function workOutGet($workoutId)
 				if(count($userResult) >= 1)
 				{
 					$client = $userResult[0];
+					$client['clientDayId'] = $c['workout_client_ID'];
 					$client['day_availability'] = $c['workout_day_availability'];
 					$client['date_availability'] = explode(" ", $c['workout_client_schedule'])[0];
 					$client['time_availability'] = explode(" ", $c['workout_client_schedule'])[1];
@@ -1530,6 +1531,12 @@ function wpc_register_wp_api_endpoints() {
 		'methods' => 'POST',
 		'callback' => 'workoutDuplicate',
 	));
+
+	/* api used to update a note for a program */
+	register_rest_route( 'v1', 'remove-workout-client', array(
+		'methods' => 'POST',
+		'callback' => 'workoutRemoveClient',
+	));
 }
 
 function smUpload()
@@ -1600,6 +1607,18 @@ function smUpload()
 	}
 
 	return ['result' => true, 'data' => $data];
+}
+
+function workoutRemoveClient() {
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+	require_once getcwd() . '/wp-customs/Program.php';
+
+	if (isset($_POST['program_id'])) {
+		$p = Program::find($_POST['program_id']);
+		$p->removeClientWorkout($_POST['client_id'], $_POST['day_id'], $_POST['client_day_id']);
+	}
+	
+	return ['result' => true];
 }
 
 function smDelete()

@@ -38,6 +38,21 @@ class Program
         return NULL;
     }
 
+    /* remove workout as day */
+    public function removeClientWorkout($clientId, $dayId, $clientDayId) {
+        global $wpdb;
+
+        // workout_day_clients_tbl
+        $result = $wpdb->delete(
+            'workout_day_clients_tbl',
+            array(
+                'workout_client_ID' => $clientDayId
+            )
+        );
+
+        return true;
+    }
+
 	public static function find($workoutId)
     {
         $programArr = workOutGet($workoutId);

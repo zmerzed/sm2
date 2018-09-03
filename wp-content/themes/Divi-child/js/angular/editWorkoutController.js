@@ -201,6 +201,27 @@ app.controller('editWorkoutController', function($scope, $http) {
         $scope.onLeaveDay();
     };
 
+    $scope.onRemoveSelectedClient = function(client) 
+    {
+
+        var fd = new FormData();
+
+        fd.append("program_id", $scope.workout.selectedDay.wday_workout_ID);
+        fd.append("day_id", $scope.workout.selectedDay.wday_ID);
+        fd.append("client_id", client.ID);
+        fd.append("client_day_id", client.clientDayId);
+        $http.post(
+            urlApiClient + '/remove-workout-client', fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+        ).then(function(res) {
+            
+            var idx = $scope.workout.selectedDay.clients.indexOf(client);
+
+            $scope.clients.push(angular.copy(client));
+            $scope.workout.selectedDay.clients.splice(idx, 1);
+        });
+      
+    }
+
     $scope.onSelectDay = function(day)
     {
         optimizeSelectedDay();
