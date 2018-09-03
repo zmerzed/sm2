@@ -15,6 +15,7 @@ div:after{
   width: 160px;
 }
 
+.gray-btn,
 #logout_btn{
   background-color: #a3a3a3;
   font-weight: bold;
@@ -1818,7 +1819,28 @@ body .member-page .member-links .children li a{color:#fff;}
   padding:6px;
 }
 
-
+.gray-btn.add-exercise{
+	margin:0 0 10px;
+	font-size:12px;
+}
+body .add-exercise-form select.form-control{height:auto!important;}
+.exer-values{margin-top:5px;}
+.exer-values label button{
+	cursor:pointer;
+	border:1px solid #afafaf;
+	background-color:#efefef;
+	padding:2px 4px;
+	font-size:9px;
+	display:inline-block;
+	line-height:12px;
+}
+.exer-values label{
+	line-height:12px;
+	display:inline-block;
+	padding:5px;
+	font-size:10px;
+	background-color:#ccc;
+}
 @media(max-width: 1000px){
 /*  .container{
     margin: 40px;

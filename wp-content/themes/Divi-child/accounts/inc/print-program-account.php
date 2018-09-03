@@ -180,7 +180,7 @@
 			endforeach; ?>
 		</tbody>
 	</table>
-	<script>//window.print();</script>
+	<script>window.print();</script>
 <?php
 			endif;
 		}
