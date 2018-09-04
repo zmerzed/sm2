@@ -180,7 +180,7 @@
                      data-toggle="tab" role="tab"
                      ng-click="selectClient(client)"
                      ng-class="{active: isClientActive(client)}"
-                  >{{ client.user_nicename }}</a>
+                  >{{ client.user_nicename }} <small><button type="button" ng-click="onRemoveSelectedClient(client)">X</button></small></a>
                 </li>
               </ul>
               <div class="browse-client-workout">

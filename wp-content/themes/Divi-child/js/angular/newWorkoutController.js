@@ -159,7 +159,6 @@ angular.module('smApp')
 
     $scope.onCopyExercise = function(exercise)
     {
-        console.log(exercise);
         var newExercise = angular.copy(exercise);
 
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -178,8 +177,6 @@ angular.module('smApp')
         {
             var idx = $scope.workout.selectedDay.exercises.indexOf(exercise);
             $scope.workout.selectedDay.exercises.splice(idx,1);
-            console.log(exercise);
-            console.log(idx);
         }
 
     };
@@ -279,8 +276,6 @@ angular.module('smApp')
                 }
             }
         }
-
-        console.log(toSend);
         toSend.user_id = CURRENT_USER_ID;
 
         $('#idWorkoutForm').val(JSON.stringify(toSend));
