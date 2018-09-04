@@ -70,7 +70,7 @@
 							</div>
 						</div>
 						<div class="col-lg-5 col-sm-12 pb-2">
-							<label>Implimentation</label>
+							<label>Implementation</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
 							<input name="implementation_options" type="hidden" value='' />
@@ -83,7 +83,7 @@
 							<label>Youtube Video Link</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" />
+							<input name="video_link" placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" />
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-5">
 							<button class="btn-danger btn float-right">Add Exercise</button>
@@ -129,11 +129,12 @@
 		varSrc = $(parent).find('input[type="text"]'),
 		valAdded = $(varSrc).val(),
 		targetVal = $(parent).find('.exer-values'),
-		addOption = '<label>'+valAdded+' <button onclick="removeVal(this, \''+valAdded+'\')">x</button>'+'</label>',
 		curVal = [];
 		
 		if($(thisArr).val() != "")
 			curVal = JSON.parse($(thisArr).val());
+			
+		addOption = '<label>'+valAdded+' <button onclick="removeVal(this, '+(curVal.length)+')">x</button>'+'</label>'
 		
 		if(valAdded != ""){		
 			$(targetVal).append(addOption);
@@ -145,13 +146,22 @@
 			$(varSrc).attr('placeholder', 'Enter here').focus();
 	}
 	function removeVal(a,b){			
-		var parent = $(a).closest('.pb-2'),
+		var ctr = 0,
+		parent = $(a).closest('.pb-2'),
 		thisArr = $(parent).find('input[type="hidden"]'),		
 		curVal = JSON.parse($(thisArr).val());
-		curVal = removeA(curVal,b);		
+		for (var key in curVal) {
+			if(key == b)
+				curVal.splice(b, 1);
+		}				
 		$(thisArr).val(JSON.stringify(curVal));	
 		$(a).closest('label').remove();
 		$(parent).find('input[type="text"]').focus();
+		
+		$(parent).find('.exer-values label button').each(function(){		
+			$(this).attr('onclick', 'removeVal(this, '+ctr+')');
+			ctr++;
+		});
 	}
 	$(document).ready(function(){
 		$(".input-values").attr('onkeypress', 'keypressInBox(this)');
