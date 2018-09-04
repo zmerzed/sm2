@@ -1823,6 +1823,7 @@ body .member-page .member-links .children li a{color:#fff;}
 	margin:0 0 10px;
 	font-size:12px;
 }
+body .add-exercise-form .btn-success{padding:5px;line-height:10px;}
 body .add-exercise-form select.form-control{height:auto!important;}
 .exer-values{margin-top:5px;}
 .exer-values label button{
@@ -1835,6 +1836,7 @@ body .add-exercise-form select.form-control{height:auto!important;}
 	line-height:12px;
 }
 .exer-values label{
+	margin-right:5px;
 	line-height:12px;
 	display:inline-block;
 	padding:5px;

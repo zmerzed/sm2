@@ -46,41 +46,34 @@
 						<div class="col-lg-7 col-sm-12 pb-2">
 							<input name="type" type="text" class="form-control" />
 						</div>
-						<div class="col-lg-5 col-sm-12 pb-2 addon-detail">
+						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Variations 1</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
 							<input type="text" />
-							<button class="btn-danger">+</button>
-							<input name="exercise_1" type="hidden" value='["Variation 1","Variation 2","Variation 3"]' />
+							<button class="btn-success btn" onclick="addVal(this)">+</button>
+							<input name="exercise_1" type="hidden" value='' />
 							<div class="exercise_1_values exer-values">
-								<label>Variation 1 <button>x</button></label>
-								<label>Variation 2 <button>x</button></label>
-								<label>Variation 3 <button>x</button></label>
 							</div>
 						</div>
-						<div class="col-lg-5 col-sm-12 pb-2 addon-detail">
+						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Variations 2</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
 							<input type="text" />
-							<button class="btn-danger">+</button>
-							<input name="exercise_2" type="hidden" value='["Variation 1","Variation 2","Variation 3"]' />
-							<div class="exercise_1_values exer-values">
-								<label>Variation 1 <button>x</button></label>
-								<label>Variation 2 <button>x</button></label>
-								<label>Variation 3 <button>x</button></label>
+							<button class="btn-success btn" onclick="addVal(this)">+</button>
+							<input ng-model="exercise_2" name="exercise_2" type="hidden" value='' />
+							<div class="exercise_2_values exer-values">
 							</div>
 						</div>
-						<div class="col-lg-5 col-sm-12 pb-2 addon-detail">
+						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Implimentation</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">						
 							<input type="text" />
-							<button class="btn-danger">+</button>
-							<input name="implementation_options" type="hidden" value='["Impl 1","Impl 2","Impl 3"]' />
+							<button class="btn-success btn" onclick="addVal(this)">+</button>
+							<input name="implementation_options" type="hidden" value='' />
 							<div class="exercise_1_values exer-values">
-								<label>Impl 1 <button onclick="removeVal(this, 'Impl 1')">x</button></label>
 							</div>
 						</div>
 						<div class="col-lg-5 col-sm-12 pb-2">
@@ -119,11 +112,33 @@
 		}
 		return arr;
 	}
+	function addVal(a){
+		var parent = $(a).closest('div'),
+		thisArr = $(parent).find('input[type="hidden"]'),
+		varSrc = $(parent).find('input[type="text"]'),
+		valAdded = $(varSrc).val(),
+		targetVal = $(parent).find('.exer-values'),
+		addOption = '<label>'+valAdded+' <button onclick="removeVal(this, \''+valAdded+'\')">x</button>'+'</label>',
+		curVal = [];
+		
+		if($(thisArr).val() != "")
+			curVal = JSON.parse($(thisArr).val());
+		
+		if(valAdded != ""){		
+			$(targetVal).append(addOption);
+			curVal.push(valAdded);
+			console.log(curVal.join());
+			$(thisArr).val(JSON.stringify(curVal));
+			$(varSrc).val('');
+		}else
+			$(varSrc).attr('placeholder', 'Enter here').focus();
+	}
 	function removeVal(a,b){			
 		var thisArr = $(a).closest('.pb-2').find('input[type="hidden"]'),		
 		curVal = JSON.parse($(thisArr).val());
 		curVal = removeA(curVal,b);		
-		$(thisArr).val(curVal.toString());		
+		$(thisArr).val(JSON.stringify(curVal));	
+		$(a).closest('label').remove();
 		console.log(curVal);
 	}
 </script>
