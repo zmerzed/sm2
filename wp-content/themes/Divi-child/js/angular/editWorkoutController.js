@@ -204,21 +204,21 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.onRemoveSelectedClient = function(client) 
     {
 
-        var fd = new FormData();
+        var idx = $scope.workout.selectedDay.clients.indexOf(client);
 
+        $scope.clients.push(angular.copy(client));
+        $scope.workout.selectedDay.clients.splice(idx, 1);
+        optimizeClientExercises();
+        optimizeSelectedClients();
+
+        var fd = new FormData();
         fd.append("program_id", $scope.workout.selectedDay.wday_workout_ID);
         fd.append("day_id", $scope.workout.selectedDay.wday_ID);
         fd.append("client_id", client.ID);
         fd.append("client_day_id", client.clientDayId);
         $http.post(
             urlApiClient + '/remove-workout-client', fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
-        ).then(function(res) {
-            
-            var idx = $scope.workout.selectedDay.clients.indexOf(client);
-
-            $scope.clients.push(angular.copy(client));
-            $scope.workout.selectedDay.clients.splice(idx, 1);
-        });
+        ).then(function(res) {});
       
     }
 
@@ -290,8 +290,6 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.selectClient = function(client)
     {
         $scope.workout.selectedDay.selectedClient = client;
-        console.log('xxxxxx');
-        console.log($scope.workout.selectedDay.selectedClient);
         optimizeClientExercises();
     };
 
@@ -905,12 +903,6 @@ app.controller('editWorkoutController', function($scope, $http) {
 
         for(var i in $scope.workout.days)
         {
-//				var day = $scope.workout.days[i];
-//
-//				if (!day.isDelete)
-//				{
-//
-//				}
             $scope.workout.days[i].wday_order = count;
             count++;
         }
