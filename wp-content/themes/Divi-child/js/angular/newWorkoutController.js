@@ -183,13 +183,19 @@ angular.module('smApp')
 
     $scope.onRemoveSelectedClient = function(client) 
     {
-
        var idx = $scope.workout.selectedDay.clients.indexOf(client);
 
        $scope.clients.push(angular.copy(client));
        $scope.workout.selectedDay.clients.splice(idx, 1);
 
-    }
+        /* select the first client */
+        if ($scope.workout.selectedDay.clients.length > 0) {
+            $scope.selectClient($scope.workout.selectedDay.clients[0]);
+        }
+
+        optimizeClientExercises();
+        optimizeSelectedClients();
+    };
 
     $scope.testWorkout = function()
     {
@@ -212,7 +218,8 @@ angular.module('smApp')
         return false;
     };
 
-    $scope.isClientActive = function(client) {
+    $scope.isClientActive = function(client)
+    {
 
         if ($scope.workout.selectedDay.selectedClient && $scope.workout.selectedDay.selectedClient.ID == client.ID) {
             return true;
@@ -226,8 +233,8 @@ angular.module('smApp')
         $scope.onLeaveDay();
     };
 
-    $scope.sendForm = function() {
-        
+    $scope.sendForm = function()
+    {
 
         if ($scope.currentUser.isGym) {
             var formUrl = '/gym/?data=workouts';
@@ -321,7 +328,8 @@ angular.module('smApp')
 
     }, true);
 
-    $scope.$watch('workout.selectedDay.exercises', function(val){
+    $scope.$watch('workout.selectedDay.exercises', function(val)
+    {
         console.log('/* get the largest set in a selected day */');
         console.log(val);
 
@@ -387,7 +395,6 @@ angular.module('smApp')
             $scope.workout.days[i].seq = count;
             count++;
         }
-
     }
 
     function optimizeClientExercises()

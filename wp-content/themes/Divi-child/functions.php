@@ -2010,8 +2010,11 @@ function getGymInfo($u){
 function getWorkoutDayName($wdid){
 	global $wpdb;
 	$wdayQ = $wpdb->get_results('SELECT * FROM workout_days_tbl WHERE wday_ID = ' .$wdid, OBJECT);
-
-	return $wdayQ[0]->wday_name;
+    $wDayName = '';
+	if (isset($wdayQ[0]->wday_name)) {
+        $wDayName = $wdayQ[0]->wday_name;
+    }
+	return $wDayName;
 }
 /*Check user id exists*/
 function user_id_exists($user){
