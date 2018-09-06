@@ -662,7 +662,8 @@ app.controller('editWorkoutController', function($scope, $http) {
             var obj = $scope.clients[i];
 
             if(listToDelete.indexOf(obj.ID) !== -1) {
-                $scope.clients.splice(i, lengthToDelete);
+                /* $scope.clients.splice(i, lengthToDelete); */
+                $scope.clients.splice(i, 1);
             }
         }
 

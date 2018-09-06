@@ -1168,7 +1168,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
 .assign-clients-workout li a.active{
     background-color: #303030 !important;
     border: 0px;
-    padding: 5px 15px;
+    /* padding: 5px 15px; */
     border-radius: 10px 0px 0px 10px;
     color: #fff !important;
 }
@@ -1838,12 +1838,28 @@ body .add-exercise-form select.form-control{height:auto!important;}
 	line-height:12px;
 }
 .exer-values label{
+	font-weight:normal;
 	margin-right:5px;
 	line-height:12px;
 	display:inline-block;
 	padding:5px;
 	font-size:10px;
 	background-color:#ccc;
+}
+.assign-clients-workout li{position:relative;}
+.assign-clients-workout li a{padding-right:20px;word-wrap:break-word;}
+.assign-clients-workout li a small button{
+	cursor:pointer;
+	border-radius:50%;
+	background-color:transparent;
+	border:1px solid #fff;
+	color:#fff;
+	font-size:10px;
+}
+.assign-clients-workout li a small{
+	position:absolute;
+	right:0;
+	top:8px;
 }
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
