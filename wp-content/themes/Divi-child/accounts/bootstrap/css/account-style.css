@@ -1861,6 +1861,38 @@ body .add-exercise-form select.form-control{height:auto!important;}
 	right:0;
 	top:8px;
 }
+.header-section .row > div{width:50%;}
+#menu *{color:#fff;}
+#menu .mobile-menu h3{display:none;}
+#menu .mobile-menu>ul>li>a{font-size:20px;display:block;line-height:20px;padding:8px 0;text-decoration:none;}
+#menu .mobile-menu>ul>li{padding-bottom:5px;}
+#menu .mobile-menu ul.children a{font-size:14px;}
+#menu .mobile-menu ul.children{padding-left:10px;padding-top:10px;}
+#menu .mobile-menu ul{list-style:none;padding:0;}
+#menu .mobile-menu{height:60%;overflow-y:scroll;}
+#menu{
+	position:fixed;
+	right:0;
+	top:0;
+	height:100%;
+	width:100%;
+	max-width:250px;
+	background-color:#404040;
+	box-sizing:border-box;
+	padding:20px;
+	margin-right:-250px;
+	z-index:999;
+	-webkit-transition: all 0.5s ease; /* Safari */
+    transition: all 0.5s ease;
+}
+.btn-times,
+.btn-bars{
+	background-color:transparent;
+	color:#fff;
+	border:0;
+	font-size:40px;
+}
+.et_header_style_left #logo{max-width:none}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
@@ -1884,6 +1916,9 @@ body .add-exercise-form select.form-control{height:auto!important;}
 @media(max-width:991px){
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule{width:100%;margin-bottom:1em;}
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:20%;display:inline-block;float:left;}
+}
+@media(max-width:767px){
+	.title-welcome-section{margin-top:0;}
 }
 @media(max-width:480px){
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:50%;}

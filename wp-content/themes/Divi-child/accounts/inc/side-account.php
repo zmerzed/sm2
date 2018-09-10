@@ -15,7 +15,7 @@
 	
 	$r_uri = $_SERVER['REQUEST_URI'];
 ?>
-<div class="col-12 col-md-4 col-lg-3 col-xl-3 mb-5">
+<div class="col-12 col-md-4 col-lg-3 col-xl-3 mb-5 d-none d-sm-none d-md-block">
 	<div class="main-navigation matchHeight">
 		<h3>Menu</h3>
 		<ul>
@@ -76,3 +76,10 @@
 		<?php endif; ?>
 	</div>
 </div>
+<script>
+	(function( $ ) {
+		$(document).ready(function(){
+			$('#menu .mobile-menu').html($('.main-navigation').html());
+		});
+	})(jQuery);	
+</script>

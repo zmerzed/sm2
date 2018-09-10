@@ -8,6 +8,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 if ( !function_exists( 'chld_thm_cfg_parent_css' ) ):
 	function chld_thm_cfg_parent_css() {
 		wp_enqueue_style( 'chld_thm_cfg_parent', trailingslashit( get_template_directory_uri() ) . 'style.css', array(  ) );
+		wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array(  ) );
+		wp_enqueue_style( 'jc-style', trailingslashit( get_stylesheet_directory_uri() ) . 'css/jc-style.css', array(  ) );
 	}
 endif;
 add_action( 'wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 10 );
@@ -20,8 +22,8 @@ function no_register_link($url){
 
 add_action('login_enqueue_scripts', 'strength_mextrix_login_scripts', 10);
 function strength_mextrix_login_scripts(){
-	wp_enqueue_script( 'strength_mextrix.js', get_stylesheet_directory_uri() . '/js/strength_metrix.js', array( 'jquery' ), 1.0 );
-	wp_enqueue_style( 'strength_mextrix_login.css', get_stylesheet_directory_uri() . '/css/strength_mextrix_login.css', array(  ) );
+	wp_enqueue_script( 'strength_mextrix', get_stylesheet_directory_uri() . '/js/strength_metrix.js', array( 'jquery' ), 1.0 );
+	wp_enqueue_style( 'strength_mextrix_login', get_stylesheet_directory_uri() . '/css/strength_mextrix_login.css', array(  ) );	
 }
 
 

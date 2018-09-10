@@ -38,9 +38,11 @@
 		<link href='<?php echo get_stylesheet_directory_uri() .'/accounts/assets/css/responsive-calendar.css'; ?>' rel='stylesheet' />  
 		<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/accounts/bootstrap/css/account-style.css'; ?>">
 		<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() .'/css/jc-style.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
 		<?php require_once( get_stylesheet_directory() . '/accounts/inc/gym-color.php' ); ?>
 		<title>My Account - <?php echo $userdata->user_login; ?></title>
 	</head>
-	<body class="<?php echo (getMembershipLevel($userdata) == "gym") ? 'gym-page' : ''; ?>">	
-<?php require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' ); ?>
+	<body class="<?php echo (getMembershipLevel($userdata) == "gym") ? 'gym-page' : ''; ?>">
+	<?php require_once( get_stylesheet_directory() . '/accounts/inc/mobile-menu.php' ); ?>
+	<?php require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' ); ?>

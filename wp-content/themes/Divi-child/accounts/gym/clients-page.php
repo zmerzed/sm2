@@ -6,6 +6,7 @@
 	<div class="trainer-add-workout">
 		<a href="<?php echo home_url(); ?>/gym/?data=clients&add=1" class="red-btn">+ Add Client</a>
 	</div>
+	<div class="table-responsive">
 	<table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
 	    <thead>
 	        <tr>
@@ -103,5 +104,6 @@
 			-->
 	    </tbody>
 	</table>
+	</div>
 	<?php endif; ?>
 </div>
