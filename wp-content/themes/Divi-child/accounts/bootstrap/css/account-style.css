@@ -990,6 +990,7 @@ table.dataTable thead .sorting_asc:after{
 }
 
 .trainer-additional-box-info h3{
+	word-wrap:break-word;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
@@ -998,6 +999,7 @@ table.dataTable thead .sorting_asc:after{
 
 .trainer-additional-box-info p{
   font-size: 14px;
+  word-wrap:break-word;
 }
 
 .trainer-workouts-lists li{
@@ -1893,6 +1895,20 @@ body .add-exercise-form select.form-control{height:auto!important;}
 	font-size:40px;
 }
 .et_header_style_left #logo{max-width:none}
+.list-table thead tr th{
+	text-transform:uppercase;
+	border:0;
+	color:#fff;
+	text-align:center;
+}
+.list-table{
+	border-radius:10px;
+	background-color:#ae1f23;
+	padding:10px 15px;
+}
+.gym-trainer-page .table-striped tbody tr:nth-of-type(odd){
+	background-color:#fff;
+}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

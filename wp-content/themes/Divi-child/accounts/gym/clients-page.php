@@ -6,8 +6,9 @@
 	<div class="trainer-add-workout">
 		<a href="<?php echo home_url(); ?>/gym/?data=clients&add=1" class="red-btn">+ Add Client</a>
 	</div>
-	<div class="table-responsive">
-	<table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
+	<div class = "table-responsive list-table">
+	<!-- <table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%"> -->
+	<table id="" class="table table-striped table-bordered" style="width:100%">
 	    <thead>
 	        <tr>
 	            <th>Photo</th>
@@ -15,7 +16,7 @@
 	            <th>Purpose</th>
 	            <th>Trainer</th>
 	            <th>Last Activity</th>
-	            <th>Goal</th>
+	            <th style="min-width:100px;">Goal</th>
 	        </tr>
 	    </thead>
 	    <tbody>

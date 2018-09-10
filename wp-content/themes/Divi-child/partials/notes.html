@@ -1,18 +1,21 @@
-<table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
-	<thead>
-	<tr>
-		<th>Author</th>
-		<th>Program</th>
-		<th>Content</th>
-	</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="program in programs | start: (currentPage - 1) * perPage | limitTo: perPage">
-			<td style="width: 15%;">{{ program.author.user_nicename }}</td>
-			<td style="width: 15%;"><i>{{ program.workout_name }}</i></td>
-			<td style="width: 12%;">{{ program.note.detail }}</td>
+<div class = "table-responsive list-table">
+	<!-- <table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%"> -->
+	<table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
+		<thead>
+		<tr>
+			<th>Author</th>
+			<th>Program</th>
+			<th>Content</th>
 		</tr>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<tr ng-repeat="program in programs | start: (currentPage - 1) * perPage | limitTo: perPage">
+				<td style="width: 15%;">{{ program.author.user_nicename }}</td>
+				<td style="width: 15%;"><i>{{ program.workout_name }}</i></td>
+				<td style="width: 12%;">{{ program.note.detail }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 <uib-pagination total-items="programs.length" items-per-page="5" next-text="Next" previous-text="Previous" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></uib-pagination>

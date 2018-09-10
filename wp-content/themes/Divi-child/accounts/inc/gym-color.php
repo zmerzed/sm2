@@ -13,6 +13,8 @@
 		'.trainer-per-day-schedule-box.today li'
 		];
 		$jbgcolor = [ // background-color
+		'.red-btn, form input[type="submit"], .trainer-add-workout a',
+		'.list-table',
 		'div[ng-controller="notesController"] div[src="workoutTemplate"]',
 		'.responsive-calendar .day .badge',
 		'.responsive-calendar .day.active.today a',
