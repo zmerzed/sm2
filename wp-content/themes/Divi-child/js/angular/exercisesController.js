@@ -54,14 +54,14 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 				});
 
 			});
-		}, 200)
+		}, 2000)
     }
 	
 	$scope.modalClick = function(){
 		var vsrc = this.type.video;
 		vsrc = getID(vsrc);		
-		$('#myModal').modal('show');
-		$('#myModal iframe').attr('src', 'https://www.youtube.com/embed/'+vsrc[0]+'?rel=0&autoplay=1').show();
+		$('#idModalCreateExercise').modal('show');
+		$('#idModalCreateExercise iframe').attr('src', 'https://www.youtube.com/embed/'+vsrc[0]+'?rel=0&autoplay=1').show();
 		$('.add-exercise-form').hide();
 	}
 	
