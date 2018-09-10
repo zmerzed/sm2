@@ -457,659 +457,663 @@ function helperGetCurrentDate()
 
 function workOutAdd($data)
 {
-	global $wpdb;
+    global $wpdb;
 
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-	$workout = htmlspecialchars_decode($data['workoutForm'], ENT_NOQUOTES);
-	$workout = preg_replace('/\\\"/',"\"", $workout);
+    $workout = htmlspecialchars_decode($data['workoutForm'], ENT_NOQUOTES);
+    $workout = preg_replace('/\\\"/',"\"", $workout);
 
-	$workout = stripslashes($workout);
-	$workout = json_decode($workout, true);
+    $workout = stripslashes($workout);
+    $workout = json_decode($workout, true);
 
-	$wpdb->insert('workout_tbl',
-		array(
-			'workout_name' => $workout['name'],
-			'workout_trainer_ID' => $data['workout_trainer_ID'],
-			'workout_created_by' => (int) $workout['user_id']
-		),
-		array(
-			'%s',
-			'%d'
-		)
-	);
+    $wpdb->insert('workout_tbl',
+        array(
+            'workout_name' => $workout['name'],
+            'workout_trainer_ID' => $data['workout_trainer_ID'],
+            'workout_created_by' => (int) $workout['user_id']
+        ),
+        array(
+            '%s',
+            '%d'
+        )
+    );
 
-	$workOutId = (int) $wpdb->insert_id;
+    $workOutId = (int) $wpdb->insert_id;
 
-	if ($workout['days'])
-	{
-		if (isset($workout['note_detail']))
-		{
-			require_once getcwd() . '/wp-customs/Program.php';
-			$program = Program::find($workOutId);
+    if ($workout['days'])
+    {
+        if (isset($workout['note_detail']))
+        {
+            require_once getcwd() . '/wp-customs/Program.php';
+            $program = Program::find($workOutId);
 
-			if ($program) {
-				$program->addNote(['note' => $workout['note_detail']]);
-			}
+            if ($program) {
+                $program->addNote(['note' => $workout['note_detail']]);
+            }
 
-		}
+        }
 
-		foreach($workout['days'] as $d)
-		{
-			$wpdb->insert('workout_days_tbl',
-				array(
-					'wday_workout_ID' => $workOutId,
-					'wday_name' => $d['name'],
-					'wday_order' => (int) $d['seq']
-				)
-			);
+        foreach($workout['days'] as $d)
+        {
+            $wpdb->insert('workout_days_tbl',
+                array(
+                    'wday_workout_ID' => $workOutId,
+                    'wday_name' => $d['name'],
+                    'wday_order' => (int) $d['seq']
+                )
+            );
 
-			$dayId = $wpdb->insert_id;
+            $dayId = $wpdb->insert_id;
 
-			if ($d['exercises'])
-			{
+            if ($d['exercises'])
+            {
 
-				foreach($d['exercises'] as $ex)
-				{
-					$exercise = [
-						'exer_day_ID' => $dayId,
-						'exer_workout_ID' => $workOutId,
-						'hash'	=> $ex['hash']
-					];
+                foreach($d['exercises'] as $ex)
+                {
+                    $exercise = [
+                        'exer_day_ID' => $dayId,
+                        'exer_workout_ID' => $workOutId,
+                        'hash'	=> $ex['hash'],
+                        'group_by' => strtoupper($ex['group_by'])
+                    ];
 
-					if (isset($ex['selectedPart']))
-					{
-						$exercise['exer_body_part'] = $ex['selectedPart']['part'];
+                    if (isset($ex['selectedPart']))
+                    {
+                        $exercise['exer_body_part'] = $ex['selectedPart']['part'];
 
-						if (isset($ex['selectedPart']['selectedType']))
-						{
-							$exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
+                        if (isset($ex['selectedPart']['selectedType']))
+                        {
+                            $exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
 
-							if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
-							{
-								$exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
-							}
+                            if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
+                            {
+                                $exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
+                            }
 
-							if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
-							{
-								$exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
-							}
+                            if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
+                            {
+                                $exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
+                            }
 
-							if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
-							{
-								$exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
-							}
-						}
-					}
+                            if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
+                            {
+                                $exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
+                            }
+                        }
+                    }
 
-					if (isset($ex['selectedSQ']))
-					{
-						$exercise['exer_sq'] = $ex['selectedSQ']['name'];
+                    if (isset($ex['selectedSQ']))
+                    {
+                        $exercise['exer_sq'] = $ex['selectedSQ']['name'];
 
-						if (isset($ex['selectedSQ']['selectedSet']))  {
-							$exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
-						}
+                        if (isset($ex['selectedSQ']['selectedSet']))  {
+                            $exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
+                        }
 
-						if (isset($ex['selectedSQ']['selectedRep']))  {
-							$exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
-						}
+                        if (isset($ex['selectedSQ']['selectedRep']))  {
+                            $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
+                        }
 
-						if (isset($ex['selectedSQ']['selectedTempo']))  {
-							$exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
-						}
+                        if (isset($ex['selectedSQ']['selectedTempo']))  {
+                            $exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
+                        }
 
-						if (isset($ex['selectedSQ']['selectedRest']))  {
-							$exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
-						}
-					}
+                        if (isset($ex['selectedSQ']['selectedRest']))  {
+                            $exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
+                        }
+                    }
 
-					$wpdb->insert('workout_exercises_tbl', $exercise);
+                    $wpdb->insert('workout_exercises_tbl', $exercise);
 
-				}
-			}
+                }
+            }
 
-			/* inserting clients */
-			if($d['clients'])
-			{
+            /* inserting clients */
+            if($d['clients'])
+            {
 
-				foreach($d['clients'] as $client)
-				{
+                foreach($d['clients'] as $client)
+                {
 
-					$newClientDay = array(
-						'workout_client_dayID' => (int) $dayId,
-						'workout_client_workout_ID' => (int) $workOutId,
-						'workout_clientID' => (int) $client['ID'],
-					);
+                    $newClientDay = array(
+                        'workout_client_dayID' => (int) $dayId,
+                        'workout_client_workout_ID' => (int) $workOutId,
+                        'workout_clientID' => (int) $client['ID'],
+                    );
 
-					if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
-					{
+                    if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
+                    {
 
-						if (isset($client['time_availability'])) {
+                        if (isset($client['time_availability'])) {
 
-							$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
-						}
+                            $client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+                        }
 
-						$scheduleDate = new \Carbon\Carbon($client['date_availability']);
+                        $scheduleDate = new \Carbon\Carbon($client['date_availability']);
 
-						$newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
-						$newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:m:s');
-					}
+                        $newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
+                        $newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:m:s');
+                    }
 
-					$wpdb->insert('workout_day_clients_tbl', $newClientDay);
+                    $wpdb->insert('workout_day_clients_tbl', $newClientDay);
 
-					foreach ($client['exercises'] as $ex)
-					{
-						$exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
-						$exerciseResult = $wpdb->get_results($exQuery, OBJECT);
+                    foreach ($client['exercises'] as $ex)
+                    {
+                        $exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
+                        $exerciseResult = $wpdb->get_results($exQuery, OBJECT);
 
-						if (count($exerciseResult) > 0)
-						{
-							$m = $exerciseResult[0];
+                        if (count($exerciseResult) > 0)
+                        {
+                            $m = $exerciseResult[0];
 
-							$wpdb->insert('workout_client_exercise_assignments',
-								array(
-									'exercise_id' => (int) $m->exer_ID,
-									'client_id' => (int) $client['ID']
-								)
-							);
+                            $wpdb->insert('workout_client_exercise_assignments',
+                                array(
+                                    'exercise_id' => (int) $m->exer_ID,
+                                    'client_id' => (int) $client['ID']
+                                )
+                            );
 
-							$assignmentId = $wpdb->insert_id;
+                            $assignmentId = $wpdb->insert_id;
 
-							if (isset($ex['assignment_sets']))
-							{
-								foreach ($ex['assignment_sets'] as $key => $set)
-								{
-									$wpdb->insert('workout_client_exercise_assignment_sets',
-										array(
-											'assignment_id' => (int) $assignmentId,
-											'weight' => $set['weight'],
-											'seq' => $key + 1
-										)
-									);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                            if (isset($ex['assignment_sets']))
+                            {
+                                foreach ($ex['assignment_sets'] as $key => $set)
+                                {
+                                    $wpdb->insert('workout_client_exercise_assignment_sets',
+                                        array(
+                                            'assignment_id' => (int) $assignmentId,
+                                            'weight' => $set['weight'],
+                                            'seq' => $key + 1
+                                        )
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	$workout = workOutGet($workOutId);
+    $workout = workOutGet($workOutId);
 
-	return $workout;
+    return $workout;
 }
 
 function workOutUpdate($data)
 {
-	global $wpdb;
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-
-	$workout = htmlspecialchars_decode($data['updateWorkoutForm'], ENT_NOQUOTES);
-	$workout = preg_replace('/\\\"/',"\"", $workout);
-
-	$workout = stripslashes($workout);
-	$workout = json_decode($workout, true);
-
-	$mWorkoutId = (int) $workout['workout_ID'];
-	$weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-
-	/* update workout */
-	$wpdb->update(
-		'workout_tbl',
-		array('workout_name' => $workout['workout_name']),
-		array('workout_ID' => $workout['workout_ID'])
-	);
-
-	if (isset($workout['days']))
-	{
-		/* update days */
-
-		foreach($workout['days'] as $d)
-		{
-
-			if (isset($d['wday_ID']) && isset($d['isDelete']))
-			{
+    global $wpdb;
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+
+    $workout = htmlspecialchars_decode($data['updateWorkoutForm'], ENT_NOQUOTES);
+    $workout = preg_replace('/\\\"/',"\"", $workout);
+
+    $workout = stripslashes($workout);
+    $workout = json_decode($workout, true);
+
+    $mWorkoutId = (int) $workout['workout_ID'];
+    $weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+
+    /* update workout */
+    $wpdb->update(
+        'workout_tbl',
+        array('workout_name' => $workout['workout_name']),
+        array('workout_ID' => $workout['workout_ID'])
+    );
+
+    if (isset($workout['days']))
+    {
+        /* update days */
+
+        foreach($workout['days'] as $d)
+        {
+
+            if (isset($d['wday_ID']) && isset($d['isDelete']))
+            {
+
+                /* delete exercises and clients */
+
+                // delete day exercises relates to workout
+                $mDayId = (int) $d['wday_ID'];
+
+                $dayExercisesQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_day_ID={$mDayId} AND exer_workout_ID={$mWorkoutId}";
+                $dayExercises = $wpdb->get_results($dayExercisesQuery, ARRAY_A);
+
+                foreach ($dayExercises as $ex)
+                {
+                    // delete workout_client_exercise_assignments relates to exercise
+                    $assignmentQuery = "SELECT * FROM workout_client_exercise_assignments WHERE exercise_id={$ex['exer_ID']}";
+                    $assignments = $wpdb->get_results($assignmentQuery, ARRAY_A);
+
+                    // delete workout_client_exercise_assignment_sets > which is sets relates to exercise assignment
+                    foreach ($assignments as $assign)
+                    {
+                        $wpdb->delete(
+                            'workout_client_exercise_assignment_sets',
+                            array( 'assignment_id' => $assign['id'] )
+                        );
+                    }
+
+                    $wpdb->delete(
+                        'workout_client_exercise_assignments',
+                        array('exercise_id' => $ex['exer_ID'])
+                    );
+                }
+
+                $wpdb->delete(
+                    'workout_day_clients_tbl',
+                    array( 'workout_client_dayID' => $d['wday_ID'] )
+                );
+
+                $wpdb->delete(
+                    'workout_exercises_tbl',
+                    array( 'exer_day_ID' => $d['wday_ID'] )
+                );
+
+                $wpdb->delete(
+                    'workout_days_tbl',
+                    array( 'wday_ID' => $d['wday_ID'] )
+                );
+
+            }
+            // existing day
+            else if (isset($d['wday_ID']))
+            {
+                $wpdb->update(
+                    'workout_days_tbl',
+                    array(
+                        'wday_name' => $d['wday_name'],
+                        'wday_order' => $d['wday_order']
+                    ),
+                    array( 'wday_ID' => $d['wday_ID'] )
+                );
 
-				/* delete exercises and clients */
+                // for exercises
+                if ($d['exercises'])
+                {
 
+                    foreach($d['exercises'] as $ex)
+                    {
+                        // check if the exercise exist
 
-				// delete day exercises relates to workout
-				$mDayId = (int) $d['wday_ID'];
+                        if (isset($ex['exer_ID']))
+                        {
 
-				$dayExercisesQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_day_ID={$mDayId} AND exer_workout_ID={$mWorkoutId}";
-				$dayExercises = $wpdb->get_results($dayExercisesQuery, ARRAY_A);
+                            $exerciseQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_ID={$ex['exer_ID']} LIMIT 1";
+                            $result = $wpdb->get_results($exerciseQuery, ARRAY_A);
 
+                            if(count($result) > 0)
+                            {
 
-				foreach ($dayExercises as $ex)
-				{
-					// delete workout_client_exercise_assignments relates to exercise
-					$assignmentQuery = "SELECT * FROM workout_client_exercise_assignments WHERE exercise_id={$ex['exer_ID']}";
-					$assignments = $wpdb->get_results($assignmentQuery, ARRAY_A);
+                                $exercise = $result[0];
 
-					// delete workout_client_exercise_assignment_sets > which is sets relates to exercise assignment
-					foreach ($assignments as $assign)
-					{
-						$wpdb->delete(
-							'workout_client_exercise_assignment_sets',
-							array( 'assignment_id' => $assign['id'] )
-						);
-					}
-
-					$wpdb->delete(
-						'workout_client_exercise_assignments',
-						array('exercise_id' => $ex['exer_ID'])
-					);
-				}
-
-				$wpdb->delete(
-					'workout_day_clients_tbl',
-					array( 'workout_client_dayID' => $d['wday_ID'] )
-				);
-
-				$wpdb->delete(
-					'workout_exercises_tbl',
-					array( 'exer_day_ID' => $d['wday_ID'] )
-				);
-
-				$wpdb->delete(
-					'workout_days_tbl',
-					array( 'wday_ID' => $d['wday_ID'] )
-				);
-
-			}
-			// existing day
-			else if (isset($d['wday_ID']))
-			{
-				$wpdb->update(
-					'workout_days_tbl',
-					array(
-						'wday_name' => $d['wday_name'],
-						'wday_order' => $d['wday_order']
-					),
-					array( 'wday_ID' => $d['wday_ID'] )
-				);
+                                // delete exercise
+                                if (isset($ex['isDelete']))
+                                {
 
-				// for exercises
-				if ($d['exercises'])
-				{
+                                    $wpdb->delete(
+                                        'workout_exercises_tbl',
+                                        array('exer_ID' => $ex['exer_ID'])
+                                    );
 
-					foreach($d['exercises'] as $ex)
-					{
-						// check if the exercise exist
+                                    // delete client assignments exercise
+                                    // delete assignment sets
 
-						if (isset($ex['exer_ID']))
-						{
+                                } else {
 
-							$exerciseQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_ID={$ex['exer_ID']} LIMIT 1";
-							$result = $wpdb->get_results($exerciseQuery, ARRAY_A);
+                                    // update part
 
-							if(count($result) > 0)
-							{
+                                    if (isset($ex['selectedPart']))
+                                    {
 
-								$exercise = $result[0];
+                                        $exercise['exer_body_part'] = $ex['selectedPart']['part'];
 
-								// delete exercise
-								if (isset($ex['isDelete']))
-								{
+                                        if (isset($ex['selectedPart']['selectedType']))
+                                        {
+                                            $exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
 
-									$wpdb->delete(
-										'workout_exercises_tbl',
-										array('exer_ID' => $ex['exer_ID'])
-									);
+                                            if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
+                                            {
+                                                $exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
+                                            }
 
-									// delete client assignments exercise
-									// delete assignment sets
+                                            if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
+                                            {
+                                                $exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
+                                            }
 
-								} else {
+                                            if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
+                                            {
+                                                $exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
+                                            }
+                                        }
+                                    }
 
-									// update part
+                                    // update sq
+                                    if (isset($ex['selectedSQ']))
+                                    {
+                                        $exercise['exer_sq'] = $ex['selectedSQ']['name'];
 
-									if (isset($ex['selectedPart']))
-									{
+                                        if (isset($ex['selectedSQ']['selectedSet']))  {
+                                            $exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
+                                        }
 
-										$exercise['exer_body_part'] = $ex['selectedPart']['part'];
+                                        if (isset($ex['selectedSQ']['selectedRep']))  {
+                                            $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
+                                        }
 
-										if (isset($ex['selectedPart']['selectedType']))
-										{
-											$exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
+                                        if (isset($ex['selectedSQ']['selectedTempo']))  {
+                                            $exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
+                                        }
 
-											if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
-											{
-												$exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
-											}
+                                        if (isset($ex['selectedSQ']['selectedRest']))  {
+                                            $exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
+                                        }
 
-											if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
-											{
-												$exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
-											}
+                                    }
 
-											if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
-											{
-												$exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
-											}
-										}
-									}
+                                    if (isset($ex['group_by'])) {
+                                        $exercise['group_by'] = strtoupper($ex['group_by']);
+                                    }
+
+                                    $exercise['hash'] = $ex['hash'];
 
-									// update sq
-									if (isset($ex['selectedSQ']))
-									{
-										$exercise['exer_sq'] = $ex['selectedSQ']['name'];
+                                    $wpdb->update('workout_exercises_tbl', $exercise, array('exer_ID' => (int) $ex['exer_ID']));
 
-										if (isset($ex['selectedSQ']['selectedSet']))  {
-											$exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
-										}
+                                }
 
-										if (isset($ex['selectedSQ']['selectedRep']))  {
-											$exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
-										}
+                            }
+
+                        } else {
 
-										if (isset($ex['selectedSQ']['selectedTempo']))  {
-											$exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
-										}
-
-										if (isset($ex['selectedSQ']['selectedRest']))  {
-											$exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
-										}
-									}
-
-									$exercise['hash'] = $ex['hash'];
-
-									$wpdb->update('workout_exercises_tbl', $exercise, array('exer_ID' => (int) $ex['exer_ID']));
-
-								}
-
-							}
-
-						} else {
-
-							$exercise = [
-								'exer_day_ID' => $d['wday_ID'],
-								'exer_workout_ID' => $workout['workout_ID']
-							];
-
-							if (isset($ex['selectedPart']))
-							{
-								$exercise['exer_body_part'] = $ex['selectedPart']['part'];
-
-								if (isset($ex['selectedPart']['selectedType']))
-								{
-									$exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
-
-									if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
-									{
-										$exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
-									}
-
-									if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
-									{
-										$exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
-									}
-
-									if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
-									{
-										$exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
-									}
-								}
-							}
-
-
-							if (isset($ex['selectedSQ']))
-							{
-								$exercise['exer_sq'] = $ex['selectedSQ']['name'];
-
-								if (isset($ex['selectedSQ']['selectedSet']))  {
-									$exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
-								}
-
-								if (isset($ex['selectedSQ']['selectedRep']))  {
-									$exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
-								}
-
-								if (isset($ex['selectedSQ']['selectedTempo']))  {
-									$exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
-								}
-
-								if (isset($ex['selectedSQ']['selectedRest']))  {
-									$exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
-								}
-							}
-
-							$exercise['hash'] = $ex['hash'];
-							$wpdb->insert('workout_exercises_tbl', $exercise);
-						}
-
-					}
-				}
-
-				if (isset($d['clients']))
-				{
-					//dd($d['clients']);
-					foreach($d['clients'] as $client)
-					{
-							$clientQuery = "SELECT * FROM workout_day_clients_tbl WHERE workout_client_dayID={$d['wday_ID']} AND workout_client_workout_ID={$workout['workout_ID']} AND workout_clientID={$client['ID']}";
-							$result = $wpdb->get_results($clientQuery, OBJECT);
-
-							// if theres no client
-							if(count($result) <= 0)
-							{
-								$newMClient = array(
-									'workout_client_dayID' => (int) $d['wday_ID'],
-									'workout_client_workout_ID' => (int) $workout['workout_ID'],
-									'workout_clientID' => (int) $client['ID'],
-								);
-
-								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
-
-									if (isset($client['time_availability'])) {
-										$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
-									}
-
-									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
-									$newMClient['workout_day_availability'] = $scheduleDate->dayOfWeek;
-									$newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
-								}
-								// insert the new client id
-								$wpdb->insert('workout_day_clients_tbl', $newMClient);
-							} else {
-
-								$mUpdate = [];
-
-								if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
-								{
-									if (isset($client['time_availability'])) {
-										$client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
-									}
-
-									$scheduleDate = new \Carbon\Carbon($client['date_availability']);
-									$mUpdate = array(
-										'workout_day_availability' => $scheduleDate->dayOfWeek,
-										'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
-									);
-								}
-
-								$wpdb->update(
-									'workout_day_clients_tbl',
-									$mUpdate,
-									array( 'workout_clientID' => $client['ID'],
-										'workout_client_dayID' => (int) $d['wday_ID'],
-										'workout_client_workout_ID' => (int) $workout['workout_ID'],
-									)
-								);
-							}
-
-							// insert assignment exercises and sets
-
-							if (isset($client['exercises']))
-							{
-
-								$exHashes = implode("','", array_column($client['exercises'], 'hash'));
-								$clientExercisesQuery = "SELECT * FROM workout_exercises_tbl WHERE hash in ('{$exHashes}')";
-								//	dd($clientExercisesQuery);
-								$clientExercisesResult = $wpdb->get_results($clientExercisesQuery, ARRAY_A);
-								//dd($clientExercisesResult);
-								$exIds = implode(",", array_column($clientExercisesResult, 'exer_ID'));
-								$clientAssignmentsQuery = "SELECT * FROM workout_client_exercise_assignments WHERE exercise_id in ({$exIds}) AND client_id=".(int) $client['ID'];
-
-								$clientAssignmentsResult = $wpdb->get_results($clientAssignmentsQuery, ARRAY_A);
-								$assignmentIds = implode(",", array_column($clientAssignmentsResult, 'id'));
-
-								$wpdb->query( "DELETE FROM `workout_client_exercise_assignment_sets` WHERE `assignment_id` IN ({$assignmentIds})");
-								$wpdb->query( "DELETE FROM `workout_client_exercise_assignments` WHERE `exercise_id` IN ({$exIds}) AND client_id=".(int) $client['ID']);
-
-								foreach ($client['exercises'] as $ex)
-								{
-									$exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
-									$exerciseResult = $wpdb->get_results($exQuery, OBJECT);
-
-									if (count($exerciseResult) > 0)
-									{
-
-										$m = $exerciseResult[0];
-
-										$wpdb->insert('workout_client_exercise_assignments',
-											array(
-												'exercise_id' => (int) $m->exer_ID,
-												'client_id' => (int) $client['ID']
-											)
-										);
-
-										$assignmentId = $wpdb->insert_id;
-
-										if (isset($ex['assignment_sets']))
-										{
-											//dd($assignmentId);
-											foreach ($ex['assignment_sets'] as $key => $set)
-											{
-												$wpdb->insert('workout_client_exercise_assignment_sets',
-													array(
-														'assignment_id' => (int) $assignmentId,
-														'weight' => $set['weight'],
-														'seq' => $key + 1
-													)
-												);
-											}
-										}
-									}
-								}
-							}
-
-					}
-				}
-			}
-			else { /* insert if there is no existing day */
-
-				$wpdb->insert('workout_days_tbl',
-					array(
-						'wday_workout_ID' => $workout['workout_ID'],
-						'wday_name' => $d['wday_name'],
-						'wday_order' => (int) $d['wday_order']
-					)
-				);
-
-				$dayId = $wpdb->insert_id;
-
-				if ($d['exercises'])
-				{
-					foreach($d['exercises'] as $ex)
-					{
-
-						$exercise = [
-							'exer_day_ID' => $dayId,
-							'exer_workout_ID' => (int) $workout['workout_ID'],
-							'hash' => $ex['hash']
-						];
-
-						if (isset($ex['selectedPart']))
-						{
-							$exercise['exer_body_part'] = $ex['selectedPart']['part'];
-
-							if (isset($ex['selectedPart']['selectedType']))
-							{
-								$exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
-
-								if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
-								{
-									$exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
-								}
-
-								if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
-								{
-									$exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
-								}
-
-								if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
-								{
-									$exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
-								}
-							}
-						}
-
-
-						if (isset($ex['selectedSQ']))
-						{
-							$exercise['exer_sq'] = $ex['selectedSQ']['name'];
-
-							if (isset($ex['selectedSQ']['selectedSet']))  {
-								$exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
-							}
-
-							if (isset($ex['selectedSQ']['selectedRep']))  {
-								$exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
-							}
-
-							if (isset($ex['selectedSQ']['selectedTempo']))  {
-								$exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
-							}
-
-							if (isset($ex['selectedSQ']['selectedRest']))  {
-								$exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
-							}
-						}
-
-						$wpdb->insert('workout_exercises_tbl', $exercise);
-
-					}
-				}
-
-				if (isset($d['clients']))
-				{
-					foreach($d['clients'] as $client)
-					{
-
-						if ((int) $client['date_availability'] > 0)
-						{
-							$scheduleDate = new \Carbon\Carbon($client['date_availability']);
-							// insert the new client id
-							$wpdb->insert('workout_day_clients_tbl',
-								array(
-									'workout_client_dayID' => $dayId,
-									'workout_client_workout_ID' => (int) $workout['workout_ID'],
-									'workout_clientID' => (int) $client['ID'],
-									'workout_day_availability' => $scheduleDate->dayOfWeek,
-									'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
-								)
-							);
-
-							if (isset($client['exercises']))
-							{
-
-								foreach ($client['exercises'] as $ex)
-								{
-									$exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
-									$exerciseResult = $wpdb->get_results($exQuery, OBJECT);
-
-									if (count($exerciseResult) > 0)
-									{
-
-										$m = $exerciseResult[0];
-
-										$wpdb->insert('workout_client_exercise_assignments',
-											array(
-												'exercise_id' => (int) $m->exer_ID,
-												'client_id' => (int) $client['ID']
-											)
-										);
+                            $exercise = [
+                                'exer_day_ID' => $d['wday_ID'],
+                                'exer_workout_ID' => $workout['workout_ID']
+                            ];
+
+                            if (isset($ex['selectedPart']))
+                            {
+                                $exercise['exer_body_part'] = $ex['selectedPart']['part'];
+
+                                if (isset($ex['selectedPart']['selectedType']))
+                                {
+                                    $exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
+
+                                    if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
+                                    {
+                                        $exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
+                                    }
+
+                                    if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
+                                    {
+                                        $exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
+                                    }
+
+                                    if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
+                                    {
+                                        $exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
+                                    }
+                                }
+                            }
+
+
+                            if (isset($ex['selectedSQ']))
+                            {
+                                $exercise['exer_sq'] = $ex['selectedSQ']['name'];
+
+                                if (isset($ex['selectedSQ']['selectedSet']))  {
+                                    $exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
+                                }
+
+                                if (isset($ex['selectedSQ']['selectedRep']))  {
+                                    $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
+                                }
+
+                                if (isset($ex['selectedSQ']['selectedTempo']))  {
+                                    $exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
+                                }
+
+                                if (isset($ex['selectedSQ']['selectedRest']))  {
+                                    $exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
+                                }
+                            }
+
+                            $exercise['hash'] = $ex['hash'];
+                            $wpdb->insert('workout_exercises_tbl', $exercise);
+                        }
+
+                    }
+                }
+
+                if (isset($d['clients']))
+                {
+                    //dd($d['clients']);
+                    foreach($d['clients'] as $client)
+                    {
+                        $clientQuery = "SELECT * FROM workout_day_clients_tbl WHERE workout_client_dayID={$d['wday_ID']} AND workout_client_workout_ID={$workout['workout_ID']} AND workout_clientID={$client['ID']}";
+                        $result = $wpdb->get_results($clientQuery, OBJECT);
+
+                        // if theres no client
+                        if(count($result) <= 0)
+                        {
+                            $newMClient = array(
+                                'workout_client_dayID' => (int) $d['wday_ID'],
+                                'workout_client_workout_ID' => (int) $workout['workout_ID'],
+                                'workout_clientID' => (int) $client['ID'],
+                            );
+
+                            if (isset($client['date_availability']) && (int) $client['date_availability'] > 0) {
+
+                                if (isset($client['time_availability'])) {
+                                    $client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+                                }
+
+                                $scheduleDate = new \Carbon\Carbon($client['date_availability']);
+                                $newMClient['workout_day_availability'] = $scheduleDate->dayOfWeek;
+                                $newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
+                            }
+                            // insert the new client id
+                            $wpdb->insert('workout_day_clients_tbl', $newMClient);
+                        } else {
+
+                            $mUpdate = [];
+
+                            if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
+                            {
+                                if (isset($client['time_availability'])) {
+                                    $client['date_availability'] = $client['date_availability'] . " " . $client['time_availability'];
+                                }
+
+                                $scheduleDate = new \Carbon\Carbon($client['date_availability']);
+                                $mUpdate = array(
+                                    'workout_day_availability' => $scheduleDate->dayOfWeek,
+                                    'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
+                                );
+                            }
+
+                            $wpdb->update(
+                                'workout_day_clients_tbl',
+                                $mUpdate,
+                                array( 'workout_clientID' => $client['ID'],
+                                    'workout_client_dayID' => (int) $d['wday_ID'],
+                                    'workout_client_workout_ID' => (int) $workout['workout_ID'],
+                                )
+                            );
+                        }
+
+                        // insert assignment exercises and sets
+
+                        if (isset($client['exercises']))
+                        {
+
+                            $exHashes = implode("','", array_column($client['exercises'], 'hash'));
+                            $clientExercisesQuery = "SELECT * FROM workout_exercises_tbl WHERE hash in ('{$exHashes}')";
+                            //	dd($clientExercisesQuery);
+                            $clientExercisesResult = $wpdb->get_results($clientExercisesQuery, ARRAY_A);
+                            //dd($clientExercisesResult);
+                            $exIds = implode(",", array_column($clientExercisesResult, 'exer_ID'));
+                            $clientAssignmentsQuery = "SELECT * FROM workout_client_exercise_assignments WHERE exercise_id in ({$exIds}) AND client_id=".(int) $client['ID'];
+
+                            $clientAssignmentsResult = $wpdb->get_results($clientAssignmentsQuery, ARRAY_A);
+                            $assignmentIds = implode(",", array_column($clientAssignmentsResult, 'id'));
+
+                            $wpdb->query( "DELETE FROM `workout_client_exercise_assignment_sets` WHERE `assignment_id` IN ({$assignmentIds})");
+                            $wpdb->query( "DELETE FROM `workout_client_exercise_assignments` WHERE `exercise_id` IN ({$exIds}) AND client_id=".(int) $client['ID']);
+
+                            foreach ($client['exercises'] as $ex)
+                            {
+                                $exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
+                                $exerciseResult = $wpdb->get_results($exQuery, OBJECT);
+
+                                if (count($exerciseResult) > 0)
+                                {
+
+                                    $m = $exerciseResult[0];
+
+                                    $wpdb->insert('workout_client_exercise_assignments',
+                                        array(
+                                            'exercise_id' => (int) $m->exer_ID,
+                                            'client_id' => (int) $client['ID']
+                                        )
+                                    );
+
+                                    $assignmentId = $wpdb->insert_id;
+
+                                    if (isset($ex['assignment_sets']))
+                                    {
+                                        //dd($assignmentId);
+                                        foreach ($ex['assignment_sets'] as $key => $set)
+                                        {
+                                            $wpdb->insert('workout_client_exercise_assignment_sets',
+                                                array(
+                                                    'assignment_id' => (int) $assignmentId,
+                                                    'weight' => $set['weight'],
+                                                    'seq' => $key + 1
+                                                )
+                                            );
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            else { /* insert if there is no existing day */
+
+                $wpdb->insert('workout_days_tbl',
+                    array(
+                        'wday_workout_ID' => $workout['workout_ID'],
+                        'wday_name' => $d['wday_name'],
+                        'wday_order' => (int) $d['wday_order']
+                    )
+                );
+
+                $dayId = $wpdb->insert_id;
+
+                if ($d['exercises'])
+                {
+                    foreach($d['exercises'] as $ex)
+                    {
+
+                        $exercise = [
+                            'exer_day_ID' => $dayId,
+                            'exer_workout_ID' => (int) $workout['workout_ID'],
+                            'hash' => $ex['hash'],
+                            'group_by' => strtoupper($ex['group_by'])
+                        ];
+
+                        if (isset($ex['selectedPart']))
+                        {
+                            $exercise['exer_body_part'] = $ex['selectedPart']['part'];
+
+                            if (isset($ex['selectedPart']['selectedType']))
+                            {
+                                $exercise['exer_type'] = $ex['selectedPart']['selectedType']['type'];
+
+                                if (isset($ex['selectedPart']['selectedType']['selectedExercise1']))
+                                {
+                                    $exercise['exer_exercise_1'] = $ex['selectedPart']['selectedType']['selectedExercise1'];
+                                }
+
+                                if (isset($ex['selectedPart']['selectedType']['selectedExercise2']))
+                                {
+                                    $exercise['exer_exercise_2'] = $ex['selectedPart']['selectedType']['selectedExercise2'];
+                                }
+
+                                if (isset($ex['selectedPart']['selectedType']['selectedImplementation1']))
+                                {
+                                    $exercise['exer_impl1'] = $ex['selectedPart']['selectedType']['selectedImplementation1'];
+                                }
+                            }
+                        }
+
+                        if (isset($ex['selectedSQ']))
+                        {
+                            $exercise['exer_sq'] = $ex['selectedSQ']['name'];
+
+                            if (isset($ex['selectedSQ']['selectedSet']))  {
+                                $exercise['exer_sets'] = $ex['selectedSQ']['selectedSet'];
+                            }
+
+                            if (isset($ex['selectedSQ']['selectedRep']))  {
+                                $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
+                            }
+
+                            if (isset($ex['selectedSQ']['selectedTempo']))  {
+                                $exercise['exer_tempo'] = $ex['selectedSQ']['selectedTempo'];
+                            }
+
+                            if (isset($ex['selectedSQ']['selectedRest']))  {
+                                $exercise['exer_rest'] = $ex['selectedSQ']['selectedRest'];
+                            }
+                        }
+
+                        $wpdb->insert('workout_exercises_tbl', $exercise);
+
+                    }
+                }
+
+                if (isset($d['clients']))
+                {
+                    foreach($d['clients'] as $client)
+                    {
+
+                        if ((int) $client['date_availability'] > 0)
+                        {
+                            $scheduleDate = new \Carbon\Carbon($client['date_availability']);
+                            // insert the new client id
+                            $wpdb->insert('workout_day_clients_tbl',
+                                array(
+                                    'workout_client_dayID' => $dayId,
+                                    'workout_client_workout_ID' => (int) $workout['workout_ID'],
+                                    'workout_clientID' => (int) $client['ID'],
+                                    'workout_day_availability' => $scheduleDate->dayOfWeek,
+                                    'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
+                                )
+                            );
+
+                            if (isset($client['exercises']))
+                            {
+
+                                foreach ($client['exercises'] as $ex)
+                                {
+                                    $exQuery = "SELECT * FROM workout_exercises_tbl WHERE hash='{$ex['hash']}' LIMIT 1";
+                                    $exerciseResult = $wpdb->get_results($exQuery, OBJECT);
+
+                                    if (count($exerciseResult) > 0)
+                                    {
+
+                                        $m = $exerciseResult[0];
+
+                                        $wpdb->insert('workout_client_exercise_assignments',
+                                            array(
+                                                'exercise_id' => (int) $m->exer_ID,
+                                                'client_id' => (int) $client['ID']
+                                            )
+                                        );
 
 //									dd(
 //										array(
@@ -1119,34 +1123,34 @@ function workOutUpdate($data)
 //									);
 
 
-										$assignmentId = $wpdb->insert_id;
-										//dd($assignmentId);
-										if (isset($ex['assignment_sets']))
-										{
+                                        $assignmentId = $wpdb->insert_id;
+                                        //dd($assignmentId);
+                                        if (isset($ex['assignment_sets']))
+                                        {
 
-											foreach ($ex['assignment_sets'] as $key => $set)
-											{
-												$wpdb->insert('workout_client_exercise_assignment_sets',
-													array(
-														'assignment_id' => (int) $assignmentId,
-														'weight' => $set['weight'],
-														'seq' => $key + 1
-													)
-												);
-											}
-										}
-									}
-								}
-							}
-						}
+                                            foreach ($ex['assignment_sets'] as $key => $set)
+                                            {
+                                                $wpdb->insert('workout_client_exercise_assignment_sets',
+                                                    array(
+                                                        'assignment_id' => (int) $assignmentId,
+                                                        'weight' => $set['weight'],
+                                                        'seq' => $key + 1
+                                                    )
+                                                );
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
 
-					}
-				}
-			}
-		}
-	}
+                    }
+                }
+            }
+        }
+    }
 
-	return $workout;
+    return $workout;
 }
 
 function workOutGetClients()
@@ -1533,12 +1537,34 @@ function wpc_register_wp_api_endpoints() {
 		'methods' => 'POST',
 		'callback' => 'workoutDuplicate',
 	));
-
-	/* api used to update a note for a program */
+    /* api used to update a note for a program */
+    register_rest_route( 'v1', 'add-exercise-option', array(
+        'methods' => 'POST',
+        'callback' => 'workoutAddExerciseOption',
+    ));
+    /* api used to update a note for a program */
 	register_rest_route( 'v1', 'remove-workout-client', array(
 		'methods' => 'POST',
 		'callback' => 'workoutRemoveClient',
 	));
+}
+function workoutAddExerciseOption()
+{
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+    require_once getcwd() . '/wp-customs/Program.php';
+
+    $input = json_decode(file_get_contents('php://input'), true);
+
+    $name = $input['name'];
+    $part = $input['part'];
+    $variations1 = json_decode($input['var1'], true);
+    $variations2 =  json_decode($input['var2'], true);
+    $implementations =  json_decode($input['imp'], true);
+    $videoLink = $input['video_link'];
+
+    $result = Program::addExerciseOption(compact('name', 'part', 'variations1', 'variations2', 'implementations', 'videoLink'));
+
+    return $result;
 }
 
 function smUpload()
