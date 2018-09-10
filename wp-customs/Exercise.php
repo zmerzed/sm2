@@ -13,7 +13,7 @@ class Exercise
     public static function parts()
     {
         global $wpdb;
-        $querystr = "SELECT * FROM workout_exercise_options_tbl";
+        $querystr = "SELECT * FROM workout_exercise_options_tbl ORDER BY id desc";
         $parts = $wpdb->get_results($querystr, ARRAY_A);
 
         foreach($parts as $key => $part)

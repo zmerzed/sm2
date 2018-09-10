@@ -23,7 +23,7 @@
     </tbody>
 </table>
 </div>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="idModalCreateExercise" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="top:25%;">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -36,24 +36,24 @@
 							<label>Exercise</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input name="type" type="text" class="form-control" />
+							<input type="text" class="form-control" id="idExerciseName"/>
 						</div>
 						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Body Part</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<select onchange="bodySel(this)" class="form-control">
+							<select onchange="bodySel(this)" class="form-control" id="idExercisePart">
 								<option>Select Options</option>
 								<option value="{{ part }}"  ng-repeat="part in parts track by $index">{{ part }}</option>
 								<option value="new-part">Add New</option>
 							</select>
-							<input name="part" type="text" style="display:none;" class="body form-control" placeholder="New Body Part" />
+							<input name="part" type="text" style="display:none;" class="body form-control" placeholder="New Body Part" id="idExerciseNewPart"/>
 						</div>					
 						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Variations 1</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input name="exercise_1" type="hidden" value='' />
+							<input name="exercise_1" type="hidden" value='' id="idExerciseVar1"/>
 							<input type="text" class="form-control input-values" />
 							<button class="btn-success btn" onclick="addVal(this)">+</button>							
 							<div class="exercise_1_values exer-values">
@@ -63,7 +63,7 @@
 							<label>Variations 2</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input name="exercise_2" type="hidden" value='' />
+							<input name="exercise_2" type="hidden" value='' id="idExerciseVar2"/>
 							<input type="text" class="form-control input-values" />
 							<button class="btn-success btn" onclick="addVal(this)">+</button>							
 							<div class="exercise_2_values exer-values">
@@ -73,7 +73,7 @@
 							<label>Implementation</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input name="implementation_options" type="hidden" value='' />
+							<input name="implementation_options" type="hidden" value='' id="idExerciseImp"/>
 							<input type="text" class="form-control input-values" />
 							<button class="btn-success btn" onclick="addVal(this)">+</button>							
 							<div class="exercise_1_values exer-values">
@@ -83,10 +83,10 @@
 							<label>Youtube Video Link</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input name="video_link" placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" />
+							<input name="video_link" placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" id="idExerciseVidLink"/>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-5">
-							<button class="btn-danger btn float-right">Add Exercise</button>
+							<button class="btn-danger btn float-right" id="idExerciseAdd">Add Exercise</button>
 						</div>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 		}
 	}
 	function addExer(){
-		$('#myModal').modal();
+		$('#idModalCreateExercise').modal();
 		$('.add-exercise-form').show();
 		$('.modal-body iframe').hide();
 	}

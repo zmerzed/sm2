@@ -18,7 +18,43 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 			{
 				$scope.parts.push($scope.exerciseTypes[x].part);				
 			}
-		}			
+		}
+
+		setTimeout(function()
+		{
+			$("#idExerciseAdd").click(function() {
+
+				var newExercise = {
+					name: $('#idExerciseName').val(),
+					part: $('#idExercisePart').val(),
+                    var1: $('#idExerciseVar1').val(),
+                    var2: $('#idExerciseVar2').val(),
+                    imp: $('#idExerciseImp').val(),
+					video_link: $('#idExerciseVidLink').val()
+				};
+
+				if (newExercise.part == 'new-part') {
+					newExercise.part = $('#idExerciseNewPart').val();
+				}
+
+				console.log(newExercise);
+
+				$http.post(ROOT_URL + '/wp-json/v1/add-exercise-option', newExercise).then(function(res) {
+
+					if (res.data.newType) {
+						$scope.exerciseTypes.unshift(res.data.newType);
+                        $('#idExerciseName').val('');
+						$('#idExercisePart').val('');
+                        $('#idExerciseVar1').val('');
+						$('#idExerciseVar2').val('');
+						$('#idExerciseImp').val('');
+                        $('#idExerciseVidLink').val('');
+						$('#idModalCreateExercise').modal('hide');
+					}
+				});
+
+			});
+		}, 200)
     }
 	
 	$scope.modalClick = function(){
@@ -43,8 +79,6 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 		}
 		return res;
 	}
-	
-	
 
     $scope.tasks = [];
     $scope.filtered = {};

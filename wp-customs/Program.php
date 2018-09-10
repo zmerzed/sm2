@@ -200,4 +200,79 @@ class Program
 
         return $newProgram;
     }
+
+    public static function addExerciseOption($data)
+    {
+        global $wpdb;
+
+        $checkQuery = "SELECT * FROM workout_exercise_options_tbl where part='{$data['part']}'";
+        $type = $data['name'];
+
+        $messages = [];
+        $rows = $wpdb->get_results($checkQuery, ARRAY_A);
+        $newType = false;
+
+        if (count($rows) > 0) { // part already existed
+            $part = $rows[0];
+            $part['options']  = json_decode($part['options'], true);
+            $isFound = false;
+
+            // check if the type is already existed
+            foreach ($part['options'] as $key => $option)
+            {
+                if ($type == $option['type']) {
+                    $messages[] = 'Type is already existed';
+                    $isFound = true;
+                    break;
+                }
+            }
+
+            if (!$isFound) { // insert new type
+                $newType = [
+                    'type' => $type,
+                    'exercise_1' => $data['variations1'],
+                    'exercise_2' => $data['variations2'],
+                    'implementation_options' => $data['implementations'],
+                    'video_link' => $data['videoLink']
+                ];
+
+                $part['options'][] = $newType;
+            }
+
+            // update the part record
+            $wpdb->update(
+                'workout_exercise_options_tbl',
+                array(
+                    'options' => json_encode($part['options'])
+                ),
+                array('id' => $part['id'])
+            );
+        }
+        else { // create new part
+            $newType = [
+                'type' => $type,
+                'exercise_1' => $data['variations1'],
+                'exercise_2' => $data['variations2'],
+                'implementation_options' => $data['implementations'],
+                'video_link' => $data['videoLink']
+            ];
+
+            $newPart = [
+                'part' => $data['part'],
+                'options' => json_encode([$newType])
+            ];
+
+            $wpdb->insert('workout_exercise_options_tbl', $newPart);
+
+            $part = $newPart;
+        }
+
+        $newType['part'] = $part['part'];
+
+        return [
+            'data' => $part,
+            'newType' => $newType,
+            'messages' => $messages
+        ];
+    }
 }
