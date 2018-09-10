@@ -48,5 +48,13 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 	</div> <!-- #page-container -->
 
 	<?php wp_footer(); ?>
+	<script>
+		function smMenuToggle(){
+			jQuery('#menu').css({marginRight: 0});
+		}
+		function closeMenu(){
+			jQuery('#menu').css({marginRight: -250});
+		}
+	</script>
 </body>
 </html>

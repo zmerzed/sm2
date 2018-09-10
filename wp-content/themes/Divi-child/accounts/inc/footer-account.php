@@ -39,6 +39,12 @@
    
 
   <script type="text/javascript">
+	function smMenuToggle(){
+		$('#menu').css({marginRight: 0});
+	}
+	function closeMenu(){
+		$('#menu').css({marginRight: -250});
+	}
 	$('input[name="myFile"]').on('change', function(){
 		var fileP = this.value;
 		fileSplit = fileP.split('\\');

@@ -26,6 +26,8 @@ else:
 		$gcolor = $gymInfo['sm_gym_color'];
 ?>
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/bootstrap/css/account-style.css">
 <?php if($pm_lvl == "gym" && $gcolor != ""):
 	$rgb = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';		
@@ -39,7 +41,8 @@ else:
 require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' );
 ?>
 <style>html.js{margin-top:0!important;}</style>
-<div class="message-body">
+<div class="message-body">	
+	<?php require_once( get_stylesheet_directory() . '/accounts/inc/mobile-menu.php' ); ?>
 	<?php require_once( get_stylesheet_directory() . '/accounts/inc/top-account.php' ); ?>
 	<div class="main-section">
 		<div class="container">
