@@ -31,7 +31,23 @@ app.constant('global', {
         { label: '10PM', value: 22},
         { label: '11PM', value: 23},
         { label: '12AM', value: 24}
-    ]
+    ],
+    sortByKey: function (array, key) {
+        return array.sort(function (a, b) {
+            var x = a[key],
+                y = b[key];
+            if (typeof x === 'string') {
+                x = x.toLowerCase();
+                y = y.toLowerCase();
+                if (!isNaN(x) && !isNaN(y)) {
+                    x = parseInt(x, 10);
+                    y = parseInt(y, 10);
+                }
+            }
+            return (x < y ? -1 : (x > y ? 1 : 0));
+        });
+    }
+
 });
 app.filter('dataURLtoBlob', function() {
     return function(dataurl) {

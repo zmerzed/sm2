@@ -1,4 +1,4 @@
-app.controller('editWorkoutController', function($scope, $http) {
+app.controller('editWorkoutController', function($scope, $http, global) {
 
     $scope.currentUser = CURRENT_USER;
     $scope.clients = CLIENTS;
@@ -10,6 +10,7 @@ app.controller('editWorkoutController', function($scope, $http) {
     $scope.clientExerciseSets = [];
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
+    $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
 
@@ -194,6 +195,26 @@ app.controller('editWorkoutController', function($scope, $http) {
 
             selectDay($scope.workout.days[countDays - 1])
         });
+    };
+
+    $scope.onNamingExercise = function(exercise) {
+        $('#idSortExerciseModal').modal('show');
+        console.log(exercise);
+        $scope.selectedExercise = exercise;
+    };
+
+    $scope.updateExerciseGroupBy = function() {
+        console.log($scope.selectedExercise);
+
+        if (!$scope.selectedExercise.group_by_letter) {
+            $scope.selectedExercise.group_by_letter = '';
+        }
+
+        if (!$scope.selectedExercise.group_by_number) {
+            $scope.selectedExercise.group_by_number = '';
+        }
+
+        $scope.selectedExercise.group_by = $scope.selectedExercise.group_by_letter + $scope.selectedExercise.group_by_number;
     };
 
     $scope.onChangeDayName = function()
@@ -421,6 +442,7 @@ app.controller('editWorkoutController', function($scope, $http) {
 
     $scope.$watch(function() {
         console.log('/* get the largest set in a selected day */');
+        global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
         return $scope.workout.selectedDay.exercises;
     }, function(newValue, oldValue){
 
@@ -804,7 +826,14 @@ app.controller('editWorkoutController', function($scope, $http) {
 
     function generateNewExercise(hash)
     {
-        return {hash:hash, exerciseOptions: angular.copy($scope.exerciseOptions), exerciseSQoptions: angular.copy($scope.exerciseSQoptions)};
+        return {
+            hash:hash,
+            exerciseOptions: angular.copy($scope.exerciseOptions),
+            exerciseSQoptions: angular.copy($scope.exerciseSQoptions),
+            group_by : '',
+            group_by_letter: '',
+            group_by_number: ''
+        };
     }
 
     function selectDay(day)

@@ -26,7 +26,7 @@
           </div>
       </div>
   </div>
-
+    
   <nav>
       <div class="nav nav-tabs" id="message-nav-tab" role="tablist">
           <a class="nav-item nav-link"
@@ -68,7 +68,7 @@
                   <ul class="workout-exercise-lists">
                       <li class="workout-exercise-item" ng-repeat="exercise in workout.selectedDay.exercises track by $index">
                           <table class="workout-exercise-options">
-                              <td><span class="exercise-number d-flex"><label class = "w-100 my-auto">{{$index + 1}}</label></span></td>
+                              <td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class = "w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span></td>
                               <td>
                                   <select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
                                       <option value="">Body Part</option>
@@ -716,11 +716,11 @@
   <input type="hidden" name="workoutForm" value="test" id="idWorkoutForm" />
 </form>
 
+<div ng-include src="workoutSortExerTemplate"></div>
 
 <!-- Note Modal -->
 <div id="idNoteModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
       <!-- Modal content-->
       <div class="modal-content">
           <div class="modal-header">
@@ -734,6 +734,5 @@
               <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
           </div>
       </div>
-
   </div>
 </div>

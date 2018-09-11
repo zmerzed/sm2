@@ -11,7 +11,7 @@ angular.module('smApp')
     $scope.workoutMaxSet = 0;
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/new_workout.html';
-
+    $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
     var urlApiClient = ROOT_URL + '/wp-json/v1';
     
     init();
@@ -33,6 +33,7 @@ angular.module('smApp')
         });
 
         console.log('-----------END INIT--------------');
+
     }
 
     $scope.newWorkOutDay = function ()
@@ -44,13 +45,20 @@ angular.module('smApp')
 
             var countDays = $scope.workout.days.length;
             $scope.workout.selectedDay = $scope.workout.days[countDays - 1];
-
             $scope.selectedClient = "Add Client";
-
             selectDay($scope.workout.days[countDays - 1])
-
         });
 
+    };
+
+    $scope.onNamingExercise = function(exercise) {
+        $('#idSortExerciseModal').modal('show');
+        $scope.selectedExercise = exercise;
+    };
+
+    $scope.updateExerciseGroupBy = function() {
+        console.log($scope.selectedExercise);
+        $scope.selectedExercise.group_by = $scope.selectedExercise.group_by_letter + $scope.selectedExercise.group_by_number;
     };
 
     $scope.newExercise = function() {
@@ -336,6 +344,7 @@ angular.module('smApp')
         if (val) {
             findTheLargestSet();
             optimizeClientExercises();
+            global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
         }
 
     }, true);
@@ -372,7 +381,10 @@ angular.module('smApp')
         return {
             hash:hash,
             exerciseOptions: angular.copy($scope.exerciseOptions),
-            exerciseSQoptions: angular.copy($scope.exerciseSQoptions)
+            exerciseSQoptions: angular.copy($scope.exerciseSQoptions),
+            group_by : '',
+            group_by_letter: '',
+            group_by_number: ''
             //assignment_sets: nAssignments
         };
     }
