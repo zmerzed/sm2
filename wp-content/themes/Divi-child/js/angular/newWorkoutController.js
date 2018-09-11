@@ -357,22 +357,11 @@ angular.module('smApp')
     function optimizeSelectedClients()
     {
         $scope.clients = angular.copy($scope.clientsBackUp);
-
-        var listToDelete = [];
-
         for (var i = 0; i < $scope.workout.selectedDay.clients.length; i++) {
-            listToDelete.push($scope.workout.selectedDay.clients[i].ID);
-        }
-
-        var lengthToDelete = listToDelete.length;
-
-        for(var i = 0; i < $scope.clients.length; i++) {
-            var obj = $scope.clients[i];
-
-            if(listToDelete.indexOf(obj.ID) !== -1) {
-                /* $scope.clients.splice(i, lengthToDelete); */
-                $scope.clients.splice(i, 1);
-            }
+			$scope.clients.forEach((v,index)=>{			
+				if(v.ID == $scope.workout.selectedDay.clients[i].ID)
+					$scope.clients.splice(index, 1);
+			});
         }
     }
 

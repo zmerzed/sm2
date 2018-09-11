@@ -8,10 +8,31 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Group by:</label>
-                    <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" ng-model="selectedExercise.group_by_letter" ng-change="updateExerciseGroupBy()"/>
+                    <label>Circuit:</label>
+                    <input type="text" class="form-control" onkeypress="return onlyAlphabets(event,this)" onkeyup="this.value = this.value.toUpperCase()" maxlength="1" ng-model="selectedExercise.group_by_letter" ng-change="updateExerciseGroupBy()"/>
+					<br>
                     <label>Number:</label>
                     <input type="number" class="form-control" onkeyup="this.value = this.value.toUpperCase();" ng-model="selectedExercise.group_by_number" ng-change="updateExerciseGroupBy()"/>
+					<script>
+						function onlyAlphabets(e, t) {
+							try {
+								if (window.event) {
+									var charCode = window.event.keyCode;
+								}
+								else if (e) {
+									var charCode = e.which;
+								}
+								else { return true; }
+								if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+									return true;
+								else
+									return false;
+							}
+							catch (err) {
+								alert(err.Description);
+							}
+						}
+					</script>
                 </div>
             </div>
             <div class="modal-footer">

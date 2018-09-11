@@ -42,41 +42,22 @@
       </div>
     </div>
   </div>
-  <nav>
-    <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 6 }" id="message-nav-tab" role="tablist">
-
-        <a class="nav-item nav-link"
-           id="nav-home-tab"
-           data-toggle="tab"
-           href="#workout-1"
-           role="tab"
-           aria-controls="nav-home"
-           aria-selected="true"
-           ng-repeat="day in workout.days | limitTo: 3"
-           ng-click="onSelectDay(day)"
-           ng-class="{active: isActive(day)}"
-           ng-show="!day.isDelete && $index < 3"
-        >Workout {{day.wday_order}} - {{day.wday_name}}</a>
-
-      <div ng-if=" workout.days.length > 3  " class = "">
-        <a href = "javascript:void(0);" class = "btn btn-secondary btn__workout">More</a>
-        <div class = "workout-hidden d-none">
-          <a class="nav-item nav-link"
-             id="nav-home-tab"
-             data-toggle="tab"
-             href="#workout-1"
-             role="tab"
-             aria-controls="nav-home"
-             aria-selected="true"
-             ng-repeat="day in workout.days | limitTo : workout.days.length : 3"
-             ng-click="onSelectDay(day)"
-             ng-class="{active: isActive(day)}"
-             ng-show="!day.isDelete"
-          >Workout {{day.wday_order}} - {{day.wday_name}}</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+	<nav>
+		<div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
+			<a class="nav-item nav-link"
+			   id="nav-home-tab"
+			   data-toggle="tab"
+			   href="#workout-1"
+			   role="tab"
+			   aria-controls="nav-home"
+			   aria-selected="true"
+			   ng-repeat="day in workout.days"
+			   ng-click="onSelectDay(day)"
+			   ng-class="{active: isActive(day)}"
+			   ng-show="!day.isDelete"
+			>Workout {{day.wday_order}} - {{day.wday_name}}</a>
+		</div>
+	</nav>
 
   <div ng-mouseleave="onLeaveDay()">
     <div class="tab-content" id="nav-tabContent" ng-if="workout.selectedDay">

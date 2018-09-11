@@ -671,30 +671,13 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     function optimizeSelectedClients()
     {
-        $scope.clients = angular.copy($scope.clientsBackup);
-        var listToDelete = [];
-
-        for (var i = 0; i < $scope.workout.selectedDay.clients.length; i++) {
-            listToDelete.push($scope.workout.selectedDay.clients[i].ID);
-        }
-
-        var lengthToDelete = listToDelete.length;
-
-        for(var i = 0; i < $scope.clients.length; i++) {
-            var obj = $scope.clients[i];
-
-            if(listToDelete.indexOf(obj.ID) !== -1) {
-                /* $scope.clients.splice(i, lengthToDelete); */
-                $scope.clients.splice(i, 1);
-            }
-        }
-
-
-        /* console.log('===========xxxxxxxxxxAFTERxxxxxxxxxxx=========');
-         console.log($scope.workout.selectedDay.clients);
-         console.log($scope.clients);
-         console.log('===========xxxxxxxxxxAFTERxxxxxxxxxxx========='); */
-
+        $scope.clients = angular.copy($scope.clientsBackup);       
+        for (var i = 0; i < $scope.workout.selectedDay.clients.length; i++){			
+			$scope.clients.forEach((v,index)=>{			
+				if(v.ID == $scope.workout.selectedDay.clients[i].ID)
+					$scope.clients.splice(index, 1);
+			});
+		}
     }
 
     function findTheLargestSet()
