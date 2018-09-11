@@ -42,6 +42,7 @@
 		'.pagination>.active>span:hover'
 		];
 		$jgcolor = [ // color
+		'#menu .mobile-menu>ul>li>a.active',
 		'.pagination>li>a',
 		'.pagination>li>span',
 		'.pagination>li>a:focus',
