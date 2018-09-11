@@ -1,0 +1,22 @@
+<!-- Exercise Sort Modal -->
+<div id="idSortExerciseModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modify Exercise</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Group by:</label>
+                    <input type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();" ng-model="selectedExercise.group_by_letter" ng-change="updateExerciseGroupBy()"/>
+                    <label>Number:</label>
+                    <input type="number" class="form-control" onkeyup="this.value = this.value.toUpperCase();" ng-model="selectedExercise.group_by_number" ng-change="updateExerciseGroupBy()"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
