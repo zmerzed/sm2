@@ -129,7 +129,7 @@ div:after{
 .padding20{
   padding: 30px 20px;
 }
-
+#menu .mobile-menu>ul>li>a.active,
 .main-navigation ul li a.active{
   color: #b92025;
 }
