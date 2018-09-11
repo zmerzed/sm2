@@ -12,7 +12,8 @@
 		$jrgb = [ // background-color rgba
 		'.trainer-per-day-schedule-box.today li'
 		];
-		$jbgcolor = [ // background-color
+		$jbgcolor = [ // background-color		
+		'.gray-btn.add-exercise',
 		'.red-btn, form input[type="submit"], .trainer-add-workout a',
 		'.list-table',
 		'div[ng-controller="notesController"] div[src="workoutTemplate"]',
@@ -33,6 +34,8 @@
 		'div[ng-controller="logsController"] div[src="workoutTemplate"]'
 		];
 		$jbbcolor = [ // border-color && background-color
+		'.add-exercise-form .btn-danger',
+		'.add-exercise-form .btn-success',
 		'#message-nav-tab .nav-item.active',
 		'.pagination>.active>a',
 		'.pagination>.active>a:focus',

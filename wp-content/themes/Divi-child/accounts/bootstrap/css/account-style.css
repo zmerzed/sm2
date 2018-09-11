@@ -464,6 +464,8 @@ ul.workout-lists li .workout-wrapper{
 .gym-page .pagination>li>a:focus,.gym-page .pagination>li>a:hover,.gym-page .pagination>li>span:focus,.gym-page .pagination>li>span:hover{color:#6db6e5}
 .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover{color:#ae1f23}
 .gym-page .pagination>.active>a,.gym-page .pagination>.active>a:focus,.gym-page .pagination>.active>a:hover,.gym-page .pagination>.active>span,.gym-page .pagination>.active>span:focus,.gym-page .pagination>.active>span:hover{color:#fff!important;background-color:#6db6e5;border-color:#6db6e5}
+.add-exercise-form .btn-success,
+.add-exercise-form .btn-danger,
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{color:#fff!important;background-color:#ae1f23;border-color:#ae1f23}
 body div[ng-controller="exercisesController"] .img-vid{max-width:100px;height:auto;}
 body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
@@ -1824,6 +1826,7 @@ body .member-page .member-links .children li a{color:#fff;}
 .gray-btn.add-exercise{
 	margin:0 0 10px;
 	font-size:12px;
+	background-color:#ae1f23;
 }
 body .add-exercise-form .form-control.input-values{float:left;width:auto;}
 body .add-exercise-form .form-control{margin-bottom:5px;}
@@ -1908,6 +1911,10 @@ body .add-exercise-form select.form-control{height:auto!important;}
 }
 .gym-trainer-page .table-striped tbody tr:nth-of-type(odd){
 	background-color:#fff;
+}
+.vid-error{
+	color:#ae1f23;
+	font-size:9px;
 }
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}

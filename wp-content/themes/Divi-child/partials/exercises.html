@@ -5,9 +5,9 @@
 <table id="table-sorter-logs" class="table table-striped table-bordered" style="width:100%">
     <thead>
     <tr>
-        <th>Video</th>
-        <th>Exercise</th>
-        <th>Body Part</th>
+		<th>Body Part</th>
+		<th>Exercise</th>
+        <th>Video</th>  
         <!-- <th>Categories</th>
         <th>Equipment</th> -->
     </tr>
@@ -15,9 +15,11 @@
     <tbody>
 
     <tr ng-repeat="type in exerciseTypes  | start: (currentPage - 1) * perPage | limitTo: perPage">
+		<td>{{ type.part }}</td>
+		<td>{{ type.type }}</td>
         <td><a href="javascript:void(0)" ng-click="modalClick()" ng-repeat="vidID in getVideoID(type.video)"><img src="https://i.ytimg.com/vi/{{vidID}}/maxresdefault.jpg" class="img-responsive img-vid" /></a></td>
-        <td>{{ type.type }}</td>
-        <td>{{ type.part }}</td>
+        
+        
     </tr>
 
     </tbody>
@@ -33,21 +35,21 @@
 				<div class="add-exercise-form" style="display:none;">
 					<div class="row">
 						<div class="col-lg-5 col-sm-12 pb-2">
-							<label>Exercise</label>
+							<label>Exercise *</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input tabindex="0" type="text" class="form-control" id="idExerciseName"/>
+							<input onkeyup="checkRequired()" tabindex="0" type="text" class="form-control" id="idExerciseName"/>
 						</div>
 						<div class="col-lg-5 col-sm-12 pb-2">
-							<label>Body Part</label>
+							<label>Body Part *</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<select tabindex="0" onchange="bodySel(this)" class="form-control" id="idExercisePart">
-								<option>Select Options</option>
+							<select tabindex="0" onchange="bodySel(this);checkRequired();" class="form-control" id="idExercisePart" placeholder="Select Options">
+								<option></option>
 								<option value="{{ part }}"  ng-repeat="part in parts track by $index">{{ part }}</option>
 								<option value="new-part">Add New</option>
 							</select>
-							<input name="part" type="text" style="display:none;" class="body form-control" placeholder="New Body Part" id="idExerciseNewPart"/>
+							<input onkeyup="checkRequired()" name="part" type="text" style="display:none;" class="body form-control" placeholder="New Body Part" id="idExerciseNewPart"/>
 						</div>					
 						<div class="col-lg-5 col-sm-12 pb-2">
 							<label>Variations 1</label>
@@ -83,10 +85,11 @@
 							<label>Youtube Video Link</label>
 						</div>
 						<div class="col-lg-7 col-sm-12 pb-2">
-							<input tabindex="0" name="video_link" placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" id="idExerciseVidLink"/>
+							<input onkeyup="checkRequired()" tabindex="0" name="video_link" placeholder="ex. https://youtu.be/-614qJJQtGQ" type="text" class="form-control" id="idExerciseVidLink" />
+							<small class="vid-error" style="display:none;">ex. https://youtu.be/-614qJJQtGQ or https://www.youtube.com/watch?v=OaTPKEZwM7s</small>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-5">
-							<button tabindex="1" class="btn-danger btn float-right" id="idExerciseAdd">Add Exercise</button>
+							<button disabled="disabled" onclick="checkRequired()" tabindex="1" class="btn-danger btn float-right" id="idExerciseAdd">Add Exercise</button>
 						</div>
 					</div>
 				</div>
@@ -100,8 +103,37 @@
 
 
 <script>
+	function checkRequired(){
+		var idExerciseName = $('#idExerciseName').val(),
+		idExerciseNewPart = $('#idExerciseNewPart').val(),
+		idExerciseVidLink = $('#idExerciseVidLink').val(),
+		error = [],
+		vidLink = ['https://youtu.be/','https://www.youtube.com/watch?v='],
+		checker = 0;
+		
+		if(idExerciseName == "")
+			error.push("idExerciseName");
+		if(idExerciseNewPart == "")
+			error.push("idExerciseNewPart");
+		if(idExerciseVidLink != ""){
+			vidLink.forEach((v, i)=>{
+				if(idExerciseVidLink.indexOf(v) >= 0)
+					checker = 1;
+			});			
+			if(checker == 0){
+				error.push('idExerciseVidLink');
+				$('.vid-error').show();
+			}else
+				$('.vid-error').hide();
+		}else
+			$('.vid-error').hide();
+		
+		if(error.length > 0)
+			$('#idExerciseAdd').attr('disabled','disabled');
+		else
+			$('#idExerciseAdd').removeAttr('disabled');
+	}
 	function bodySel(a){
-		console.log($(a).val());
 		if($(a).val() == "new-part")
 			$('input[name="part"]').show().val('').focus();
 		else{
@@ -139,7 +171,6 @@
 		if(valAdded != ""){		
 			$(targetVal).append(addOption);
 			curVal.push(valAdded);
-			console.log(curVal.join());
 			$(thisArr).val(JSON.stringify(curVal));
 			$(varSrc).val('').focus();
 		}else
@@ -170,10 +201,9 @@
 
 	function keypressInBox(e) {
 		var code = (event.keyCode ? event.keyCode : event.which);
-		/*console.log(code);*/
-		if (code == 13) { //Enter keycode                        
+		if (code == 13) {                    
 			event.preventDefault();
 			addVal(e);
 		}
-	};
+	}
 </script>
