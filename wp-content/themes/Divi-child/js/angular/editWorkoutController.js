@@ -442,7 +442,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     $scope.$watch(function() {
         console.log('/* get the largest set in a selected day */');
-        global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
+        $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
         return $scope.workout.selectedDay.exercises;
     }, function(newValue, oldValue){
 

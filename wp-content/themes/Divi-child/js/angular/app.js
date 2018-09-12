@@ -46,8 +46,50 @@ app.constant('global', {
             }
             return (x < y ? -1 : (x > y ? 1 : 0));
         });
-    }
+    },
 
+    customSort: function(arr)
+    {
+        function dynamicSort(property)
+        {
+            var sortOrder = 1;
+            if(property[0] === "-") {
+                sortOrder = -1;
+                property = property.substr(1);
+            }
+            return function (a,b) {
+                var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+                return result * sortOrder;
+            }
+        }
+
+        arr.sort(dynamicSort("group_by"));
+
+        arr.sort(function(a, b) {
+
+            return a.group_by.length - b.group_by.length;
+        });
+
+        arr.sort(function(a, b){
+
+            var x = a.group_by.charAt(0);
+            var y = b.group_by.charAt(0);
+
+            return x > y;
+        });
+
+
+        /* 	arr.sort(function(a, b){
+                // ASC  -> a.length - b.length
+                // DESC -> b.length - a.length
+                var x = a.group_by.charAt(1);
+                var y = b.group_by.charAt(1);
+
+                return x > y;
+              });
+               */
+        return arr;
+    }
 });
 app.filter('dataURLtoBlob', function() {
     return function(dataurl) {

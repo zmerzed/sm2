@@ -345,6 +345,9 @@ angular.module('smApp')
             findTheLargestSet();
             optimizeClientExercises();
             global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
+
+            $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
+            /* check the exercises as the last to take the rest */
         }
 
     }, true);
@@ -447,7 +450,6 @@ angular.module('smApp')
         ) {
             $scope.$apply();
         }
-
     }
 
     function findTheLargestSet()
