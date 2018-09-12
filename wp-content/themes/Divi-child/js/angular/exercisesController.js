@@ -5,7 +5,8 @@ app.controller('exercisesController', function($scope, $http, $filter) {
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/exercises.html';
 	$scope.root_url = ROOT_URL;
 	$scope.parts = [];
-	
+	$scope.query = {};
+
     init();
 
     function init ()
@@ -56,18 +57,23 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 			});
 		}, 2000)
     }
-	
+
+    $scope.onSearch = function() {
+        console.log($scope.query);
+    };
+
+
 	$scope.modalClick = function(){
 		var vsrc = this.type.video;
 		vsrc = getID(vsrc);		
 		$('#idModalCreateExercise').modal('show');
 		$('#idModalCreateExercise iframe').attr('src', 'https://www.youtube.com/embed/'+vsrc[0]+'?rel=0&autoplay=1').show();
 		$('.add-exercise-form').hide();
-	}
+	};
 	
 	$scope.getVideoID = function(v){						
 		return getID(v);
-	}
+	};
 	
 	function getID(v){
 		var res = [];
