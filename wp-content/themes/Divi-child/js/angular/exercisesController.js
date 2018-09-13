@@ -2,6 +2,7 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 
     $scope.currentUser = CURRENT_USER;
     $scope.exerciseTypes = EXERCISE_TYPES;
+	$scope.exerciseBackup = angular.copy($scope.exerciseTypes);
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/exercises.html';
 	$scope.root_url = ROOT_URL;
 	$scope.parts = [];
@@ -20,7 +21,9 @@ app.controller('exercisesController', function($scope, $http, $filter) {
 				$scope.parts.push($scope.exerciseTypes[x].part);				
 			}
 		}
-
+		
+		updateTotal($scope.exerciseTypes.length * 2);
+		
 		setTimeout(function()
 		{
 			$("#idExerciseAdd").click(function() {
@@ -59,8 +62,26 @@ app.controller('exercisesController', function($scope, $http, $filter) {
     }
 
     $scope.onSearch = function() {
-        console.log($scope.query);
+        var keyword = $scope.query.keywords.toLowerCase(),
+		keyArr = [];		
+		if(keyword != ""){
+			$scope.exerciseBackup.forEach(function(v,i){
+				if(v.type.toLowerCase().indexOf(keyword) != -1 || v.part.toLowerCase().indexOf(keyword) != -1)
+					keyArr.push(v);
+			});
+			$scope.exerciseTypes = keyArr;
+			updateTotal(keyArr.length * 2);
+		}else{
+			$scope.exerciseTypes = $scope.exerciseBackup;
+			 updateTotal($scope.exerciseBackup.length * 2);
+		}	
     };
+	
+	function updateTotal(a){
+		$scope.query.totalitems = a;
+	}
+	
+	
 
 
 	$scope.modalClick = function(){

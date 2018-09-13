@@ -40,7 +40,7 @@
 					<a href="javascript:void(0);" onclick="toggleMembers(this)"><span class="sm-members-icon sm-icons"></span></a>
 					<a onClick="return duplicate(<?php echo $workout->workout_ID ?>)" href="#"><span class="sm-record-icon sm-icons"></span></a>
 					<a href="<?php echo $url; ?>"><span class="sm-edit-icon sm-icons"></span></a>
-					<a onClick="return confirm('Are you sure you want to delete this item?')" href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><span class="sm-icons sm-delete-icon"</a>
+					<a onClick="return confirm('Are you sure you want to delete this item?')" href="/trainer/?data=workouts&delete=<?php echo $workout->workout_ID; ?>"><span class="sm-icons sm-delete-icon"></span></a>
 				</div>
 			</div>
 			<div class="list-of-clients-in-this-workout" style="display:none;">
