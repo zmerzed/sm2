@@ -43,7 +43,7 @@
 		$('#menu').css({marginRight: 0});
 	}
 	function closeMenu(){
-		$('#menu').css({marginRight: -250});
+		$('#menu').css({marginRight: -320});
 	}
 	$('input[name="myFile"]').on('change', function(){
 		var fileP = this.value;

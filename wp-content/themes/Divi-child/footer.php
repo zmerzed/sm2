@@ -53,7 +53,7 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 			jQuery('#menu').css({marginRight: 0});
 		}
 		function closeMenu(){
-			jQuery('#menu').css({marginRight: -250});
+			jQuery('#menu').css({marginRight: -320});
 		}
 	</script>
 </body>
