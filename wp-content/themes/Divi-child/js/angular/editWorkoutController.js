@@ -5,8 +5,8 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     $scope.clientsBackup = angular.copy(CLIENTS);
     $scope.workout = WORKOUT;
     $scope.workoutMaxSet = 0;
-    $scope.exerciseOptions = EXERCISE_OPTIONS;
-    $scope.exerciseSQoptions = EXERCISE_SQ_OPTIONS;
+    $scope.exerciseOptions = angular.copy(EXERCISE_OPTIONS);
+    $scope.exerciseSQoptions = angular.copy(EXERCISE_SQ_OPTIONS);
     $scope.clientExerciseSets = [];
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
@@ -22,7 +22,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         console.log($scope.workout);
         console.log($scope.currentUser);
         console.log(EXERCISE_OPTIONS);
-
+        console.log(EXERCISE_SQ_OPTIONS)
         $scope.workout.note = PROGRAM_NOTE;
 
         for(var i in $scope.workout.days)
@@ -109,6 +109,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                                 break;
                             }
                         }
+
 
                         for(var o in sq.options.rep_options)
                         {
@@ -398,48 +399,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     }, true);
 
-    // $scope.$watch('selectedClient', function(val)
-    // {
-    //
-    //     console.log('select client...........');
-    //     console.log(val);
-    //     var found = false;
-    //     for(var i in $scope.clients)
-    //     {
-    //         var client = $scope.clients[i];
-    //
-    //         if(client.ID == val)
-    //         {
-    //             for(var x in $scope.workout.selectedDay.clients)
-    //             {
-    //                 var xClient = $scope.workout.selectedDay.clients[x];
-    //
-    //                 if(xClient.ID == val)
-    //                 {
-    //                     found = true;
-    //                 }
-    //             }
-    //
-    //             if(!found) {
-    //                 $scope.workout.selectedDay.clients.push(client);
-    //                 $scope.selectClient(client);
-    //             }
-    //
-    //             break;
-    //         }
-    //     }
-    //
-    //
-    //     /* console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx=========');
-    //      console.log($scope.workout.selectedDay.clients);
-    //      console.log($scope.clients);
-    //      console.log('===========xxxxxxxxxxBEFORExxxxxxxxxxx========='); */
-    //
-    //     // match $scope.workout.selectedDay.clients to $scope.clients;
-    //     optimizeSelectedClients();
-    //     optimizeClientExercises();
-    // });
-
     $scope.$watch(function() {
         console.log('/* get the largest set in a selected day */');
         $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
@@ -501,24 +460,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     $scope.onCopy = function()
     {
         var newCopy = angular.copy($scope.workout.selectedDay);
-
-
-
-        // $http.get(urlApiClient + '/hash').then(function(res)
-        // {
-        //     console.log(newCopy);
-        //     newCopy.exercises.forEach(function(ex) {
-        //         ex.hash = res.data.hash;
-        //     });
-        //
-        //     newCopy.wday_name = '';
-        //     $scope.workout.days.push(newCopy);
-        //     var countDays = $scope.workout.days.length;
-        //     optimizeDays();
-        //     selectDay($scope.workout.days[countDays - 1])
-        //
-        // });
-
 
         $scope.onLeaveDay();
         setTimeout(function()
@@ -685,11 +626,108 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         /* get the max set */
         $scope.workoutMaxSet = 0;
         console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGG');
+        console.log($scope.workout.selectedDay);
         for (var i in $scope.workout.selectedDay.exercises)
         {
 
             var mExercise = $scope.workout.selectedDay.exercises[i];
 
+
+                 /* check for selected part and implementation */
+
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType) 
+            {
+                console.log('check for selected part and implementation');
+
+
+                if (mExercise.selectedPart.selectedType.implementation_options.indexOf(mExercise.exer_impl1) < 0 
+                    && !mExercise.selectedPart.selectedType.selectedImplementation1 && mExercise.exer_impl1)
+                {
+
+                    mExercise.selectedPart.selectedType.implementation_options.push(mExercise.exer_impl1);
+                    mExercise.selectedPart.selectedType.selectedImplementation1 = mExercise.exer_impl1;
+                }
+
+                if (mExercise.selectedPart.selectedType.selectedImplementation1 == 'custom') 
+                {
+                    mImpCustom = prompt("Please add a custom implementation");
+
+                    if (mImpCustom != 'custom' && (mImpCustom && mImpCustom.length > 0)) 
+                    {
+                        var mImp1s = [];
+
+                        for (var mI in mExercise.selectedPart.selectedType.implementation_options)
+                        {
+                            var imp = mExercise.selectedPart.selectedType.implementation_options[mI];
+
+                            if (imp == 'custom') {
+                                imp = angular.copy(mImpCustom);
+                            }
+
+                            mImp1s.push(imp);
+                        }
+
+                        mImp1s.push('custom');
+                        mExercise.selectedPart.selectedType.implementation_options = mImp1s;
+                        mExercise.selectedPart.selectedType.selectedImplementation1 = mImpCustom;
+                    } else {
+                        delete mExercise.selectedPart.selectedType.selectedImplementation1  ; 
+                        console.log('uuuuuuuuuuuuuuuuuuuuu')
+                    }
+                }      
+            }
+
+
+            /* SQ selectedRep */
+
+            if (mExercise.selectedSQ) 
+            {
+
+                /* check if custom is selected for rep */
+
+                if (mExercise.selectedSQ.options.rep_options.indexOf(mExercise.exer_rep) < 0 
+                    && !mExercise.selectedSQ.selectedRep && mExercise.exer_rep)
+                {
+
+                    mExercise.selectedSQ.options.rep_options.push(mExercise.exer_rep);
+                    mExercise.selectedSQ.selectedRep = mExercise.exer_rep;
+                }
+
+                /* check if others is selected for rep */
+                if (mExercise.selectedSQ.selectedRep == 'custom') 
+                {
+
+                    var mReps = [];
+                    var mRep = prompt("Please add a custom reps");
+
+                    if (mRep != 'custom'  && (mRep && mRep.length > 0)) 
+                    {
+                        for (var mI in mExercise.selectedSQ.options.rep_options)
+                        {
+                            var rep = mExercise.selectedSQ.options.rep_options[mI];
+
+                            if (rep == 'custom') {
+                                console.log('hjjjjjjjjjjjjjjjjjj');
+                                rep = angular.copy(mRep);
+                            }
+
+                           
+                            mReps.push(rep);
+                            
+                        }
+                        mReps.push('custom');
+                        mExercise.selectedSQ.options.rep_options = mReps;
+                        mExercise.selectedSQ.selectedRep = mRep;
+                    } else {
+                        delete mExercise.selectedSQ.selectedRep; 
+                        console.log('uuuuuuuuuuuuuuuuuuuuu')
+                    }
+                    
+                    break;
+                }
+
+            }
+           
             /* check if others is selected tempo */
             if (mExercise.selectedSQ && mExercise.exer_tempo && !mExercise.selectedSQ.selectedTempo) {
                 mExercise.selectedSQ.selectedTempo = mExercise.exer_tempo;

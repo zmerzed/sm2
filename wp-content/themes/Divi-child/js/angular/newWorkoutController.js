@@ -20,7 +20,7 @@ angular.module('smApp')
     {
         console.log('-----------INIT NewWorkoutController--------------');
         console.log($scope.exerciseSQoptions);
-
+        console.log($scope.exerciseOptions);
         /* add others for exercise options tempo */
         $scope.timeData = global.time;
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -456,13 +456,74 @@ angular.module('smApp')
     {
         /* get the max set */
         $scope.workoutMaxSet = 0;
-
+        console.log('mmmmmmmm');
         for (var i in $scope.workout.selectedDay.exercises)
         {
             var mExercise = $scope.workout.selectedDay.exercises[i];
 
+            /* check for selected part and implementation */
+
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType) 
+            {
+                console.log('check for selected part and implementation');
+                if (mExercise.selectedPart.selectedType.selectedImplementation1 == 'custom') 
+                {
+                    mImpCustom = prompt("Please add a custom implementation");
+
+                    while (mImpCustom == 'custom') {
+                        mImpCustom = prompt("Please add a custom implementation");
+                    }
+
+                    var mImp1s = [];
+
+                    for (var mI in mExercise.selectedPart.selectedType.implementation_options)
+                    {
+                        var imp = mExercise.selectedPart.selectedType.implementation_options[mI];
+
+                        if (imp == 'custom') {
+                            imp = angular.copy(mImpCustom);
+                        }
+
+                        mImp1s.push(imp);
+                    }
+
+                    mImp1s.push('custom');
+                    mExercise.selectedPart.selectedType.implementation_options = mImp1s;
+                    mExercise.selectedPart.selectedType.selectedImplementation1 = mImpCustom;
+                }      
+            }
+
+
             /* check if others is selected for Tempo */
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'others') {
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRep == 'custom') 
+            {
+                var mRep = prompt("Please add a custom reps");
+
+                while (mRep == 'custom') {
+                    mRep = prompt("Please add a custom reps");
+                }
+
+                var mReps = [];
+
+                for (var mI in mExercise.selectedSQ.options.rep_options)
+                {
+                    var rep = mExercise.selectedSQ.options.rep_options[mI];
+
+                    if (rep == 'custom') {
+                        rep = angular.copy(mRep);
+                    }
+
+                    mReps.push(rep);
+                }
+
+                mReps.push('custom');
+                mExercise.selectedSQ.options.rep_options = mReps;
+                mExercise.selectedSQ.selectedRep = mRep;
+            }
+
+            /* check if others is selected for Tempo */
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'others') 
+            {
                 var mOtherName = prompt("Tempo");
 
                 while (mOtherName == 'others') {
@@ -487,7 +548,8 @@ angular.module('smApp')
             }
 
             /* check if others is selected for Rest */
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'others') {
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'others') 
+            {
                 var mOtherName = prompt("Rest");
 
                 while (mOtherName == 'others') {
@@ -515,17 +577,20 @@ angular.module('smApp')
             var noSet = 0;
             $scope.clientExerciseSets[i] = 0;
 
-            if (exercise.exer_sets) {
+            if (exercise.exer_sets) 
+            {
                 noSet = parseInt(angular.copy(exercise.exer_sets));
                 $scope.clientExerciseSets[i] = parseInt(angular.copy(exercise.exer_sets));
             }
 
-            if (exercise.selectedSQ && exercise.selectedSQ.selectedSet) {
+            if (exercise.selectedSQ && exercise.selectedSQ.selectedSet) 
+            {
                 noSet = exercise.selectedSQ.selectedSet;
                 $scope.clientExerciseSets[i] = exercise.selectedSQ.selectedSet;
             }
 
-            if (typeof $scope.workoutMaxSet == 'undefined') {
+            if (typeof $scope.workoutMaxSet == 'undefined') 
+            {
                 $scope.workoutMaxSet = 0;
 
                 if(noSet >= $scope.workoutMaxSet) {

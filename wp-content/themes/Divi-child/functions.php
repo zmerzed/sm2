@@ -1474,6 +1474,11 @@ function workOutExerciseOptions()
 	foreach($options as $key => $option)
 	{
 		$options[$key]['options'] = json_decode($option['options']);
+
+		foreach ($options[$key]['options'] as $option) 
+		{
+			$option->implementation_options[] = 'custom';
+		}
 	}
 
 	return $options;
@@ -1493,6 +1498,7 @@ function workOutExerciseStrengthQualitiesOptions()
 		$options[$key]['options'] = json_decode($option['options'], true);
 		$options[$key]['options']['tempo'][] = 'others';
 		$options[$key]['options']['rest'][] = 'others';
+		$options[$key]['options']['rep_options'][] = 'custom';
 	}
 
 	return $options;
