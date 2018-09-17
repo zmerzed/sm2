@@ -390,14 +390,15 @@ function getSchedData($u)
 	$urole = getMembershipLevel(wp_get_current_user());
 
 	if(!empty($woutArray)){
-		foreach($woutArray as $wa){
+		foreach($woutArray as $wa){			
 			$tempArr2 = array();
 			$ctrTemp++;
 			$wid = $wa['wid'];
+			$wdid = $wa['dayid'];
 			$wclientid = $wa['workout_clientid'];
 			$wclient = get_user_by('id', $wclientid);
-			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wa['dayid']."&workoutId=".$wid."&workout_client_id=".$wclientid;
-			$tempArr2[] = ['wnote'=>getNote($wid),'wtime'=>$wa['wtime'],'wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
+			$daylink = home_url() ."/".$urole."/?data=workout&dayId=".$wdid."&workoutId=".$wid."&workout_client_id=".$wclientid;
+			$tempArr2[] = ['pid'=>$wid,'wid'=>$wdid,'wnote'=>getNote($wid),'wtime'=>$wa['wtime'],'wisdone'=>$wa['workout_isdone'],'wdname' => $wa['wdname'], 'daylink' => $daylink, 'wclient' => $wclientid, 'wname' => $wa['wname'], 'wcname' => $wclient->first_name. ' ' .$wclient->last_name, 'wcnname' => $wclient->user_nicename];
 			$tempArr[$wa['wsched']][$ctrTemp] = $tempArr2;
 		}
 	}

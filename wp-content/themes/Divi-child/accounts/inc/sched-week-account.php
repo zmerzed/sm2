@@ -30,14 +30,20 @@
 								$wsta = "[Completed]";							
 								$wsta2 = "comp";
 							}
-								
+							$program_details = [];
+							if(getProgramDeatils($ms0['pid'],$ms0['wid'],$ms0['wclient']))
+								$program_details = getProgramDeatils($ms0['pid'],$ms0['wid'],$ms0['wclient']);
+							
+							$workoutDetails = []; //Day Details
+							if($ms0['wid'])
+								$workoutDetails = $program_details[$ms0['wid']];
+							
+							if($workoutDetails){
 						?>							
 							<li class="<?php echo $wsta2; ?>">
 								<a href="<?php echo ($ms0['wisdone'] == 0 && $dow == $today) ? $ms0['daylink'] : "javascript:void(0)"; ?>">
 									<span>
-										<!-- <img src="<?php echo get_stylesheet_directory_uri().'/accounts/images/gym-schedule-icon.png';?>"> -->
 										<span class="sm-icons sm-workout-icon sm-icon-small"></span>
-										<!-- <label>--:-- <small>--</small></label> -->
 										<label><small><?php echo $ms0['wtime']; ?></small></label>
 									</span>
 									<h4><?php echo $ms0['wcnname']; //Workout Client Name ?></h4>
@@ -45,7 +51,9 @@
 									<h4><?php echo $wsta; //Status ?></h4>
 								</a>
 							</li>
-						<?php endforeach; ?>						
+						<?php
+							}
+						endforeach; ?>						
 					</ul>				
 				</div>
 			</div>

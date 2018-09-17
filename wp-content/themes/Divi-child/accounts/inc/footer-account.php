@@ -98,11 +98,13 @@
 			if(dateToday < date && wisDone == 0){
 				vstatus = "(Pending)";
 			}				
-			htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v0['wdname'] + ' - '+v0['wcnname']+' '+vstatus+'</span>';			
-			if(dateToday == date && wisDone == 0){
-				htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
-			}			
-			htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
+			if(v0['wdname'] != ""){
+				htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v0['wdname'] + ' - '+v0['wcnname']+' '+vstatus+'</span>';			
+				if(dateToday == date && wisDone == 0){
+					htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
+				}			
+				htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
+			}
 		});
 		htmlContent += '</ul>';
 		$('#workoutModal .modal-body').html(htmlContent);
@@ -163,9 +165,14 @@
 					$ctrTemp = 0;
 					$nctr = count($scheData);
 					foreach($scheData as $k=>$v):
-						$ctrTemp++;					
-						echo '"'.$k.'": {"number": '.count($v).',"badgeClass": "badge-primary", "url": ""}';
-						echo ($ctrTemp == $nctr) ? "" : ","; 
+						$ctrTemp++;
+						$tempArr = [];						
+						foreach($v as $w){
+							if($w[0]['wdname'] != "")
+								$tempArr[] = $w;
+						}						
+							echo '"'.$k.'": {"number": '.count($tempArr).',"badgeClass": "badge-primary", "url": ""}';
+							echo ($ctrTemp == $nctr) ? "" : ",";						
 					endforeach;
 				?>
 				}	
