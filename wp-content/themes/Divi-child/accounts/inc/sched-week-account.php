@@ -5,16 +5,20 @@
 			$memScheds = getSchedData($uinfo);
 			$today = date('Y-m-d');
 			
-			if(!empty($memScheds)):				
+			if(!empty($memScheds)):
+				$schedule_ctr = 0;	
 				foreach($daysOfWeek as $dow):	
 					$day = date_format(date_create($dow), 'D');
+					
 		?>
 		<?php if(!empty($memScheds[$dow])): ?>
 			<div class="trainer-per-day-schedule">
 				<div class="per-day-schedule-box-wrapper">
 					<h3 class="trainer-day-label"><?php echo $day; ?></h3>				
 					<ul class="trainer-per-day-schedule-box trainer-schedule-wrapper <?php echo ($dow == $today) ? "today":""; ?>">
-						<?php foreach($memScheds[$dow] as $ms):
+						<?php											
+						foreach($memScheds[$dow] as $ms):
+							$schedule_ctr++;						
 							$ms0 = $ms[0];
 							$wsta = "";
 							$wsta2 = "";
@@ -39,9 +43,14 @@
 								$workoutDetails = $program_details[$ms0['wid']];
 							
 							if($workoutDetails){
+								//printVar($workoutDetails);
+								$sched_var = "sched".$schedule_ctr;
 						?>							
 							<li class="<?php echo $wsta2; ?>">
-								<a href="<?php echo ($ms0['wisdone'] == 0 && $dow == $today) ? $ms0['daylink'] : "javascript:void(0)"; ?>">
+								<script>
+									<?php echo "var ".$sched_var." = ". json_encode($workoutDetails); ?>
+								</script>
+								<a onclick="scheduleModal(<?php echo $sched_var; ?>.exercises)" href="javascript:void(0)<?php //echo ($ms0['wisdone'] == 0 && $dow == $today) ? $ms0['daylink'] : "javascript:void(0)"; ?>">
 									<span>
 										<span class="sm-icons sm-workout-icon sm-icon-small"></span>
 										<label><small><?php echo $ms0['wtime']; ?></small></label>
@@ -74,3 +83,30 @@
 			<p class="text-center">No scheduled program</p>
 		<?php endif; ?>	
 	</div>
+	
+<script>
+ function scheduleModal(a){
+	 var ctr = 0,
+	 scheds = 	'<div class="table-responsive"><table class="table table-bordered"><tr style="font-weight:800">'
+				+'<td>#</td>'
+				+'<td>Exercise</td>'
+				+'<td>Var 1</td>'
+				+'<td>Var 2</td>'
+				+'<td>Sets</td>'
+				+'</tr>';
+	 a.forEach(function(elem){
+		 ctr++;
+		 scheds += "<tr>";
+		 scheds += "<td>"+ctr+"</td>";
+		 scheds += "<td>"+(elem.exer_type != null ? elem.exer_type : "--")+"</td>";
+		 scheds += "<td>"+(elem.exer_exercise_1 != null ? elem.exer_exercise_1 : "--")+"</td>";
+		 scheds += "<td>"+(elem.exer_exercise_2 != null ? elem.exer_exercise_2 : "--")+"</td>";
+		 scheds += "<td>"+(elem.exer_sets != null ? elem.exer_sets : "--")+"</td>";
+		 scheds += "</tr>";
+	 });
+	 scheds += "</table></div>";
+	 $('#workoutModal').modal();
+	 $('#workoutModal .modal-title').html('Exercises');
+	 $('#workoutModal .modal-body').html(scheds);
+ }
+</script>
