@@ -2396,7 +2396,7 @@ function getExerciseVideo($ePart, $exer){
 function getVideoID($v){
 	$res = [];
 	if($v != ""){
-		if(strpos($v,'youtu.be') != -1)
+		if(strpos($v,'youtu.be') !== false)
 			$res[] = str_replace('https://youtu.be/', '', $v);
 		else
 			$res[] = explode('v=', $v)[1];

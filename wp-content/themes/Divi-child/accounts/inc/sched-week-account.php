@@ -1,3 +1,9 @@
+<?php if(isset($_GET['print'])):  ?>
+	<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print.css" />
+	<div class="main-content padding20 matchHeight">
+		<?php get_template_part( 'accounts/inc/print-program-type-3', 'page'); ?>
+	</div>
+<?php else: ?>
 <div class="trainer-weekly-schedule-wrapper">
 		<?php
 			$uinfo = wp_get_current_user();
@@ -52,7 +58,7 @@
 									<?php echo "var ".$sched_var." = ". json_encode($workoutDetails) ; ?>
 									<?php echo ','.$sched_var.'link = ' . ($ms0['wisdone'] == 0 && $dow == $today ? '"' . $ms0['daylink'] . '"' : '""'); ?>;
 								</script>
-								<a onclick="scheduleModal(<?php echo $sched_var; ?>.exercises,<?php echo $sched_var."link"; ?>)" href="javascript:void(0)<?php //echo ($ms0['wisdone'] == 0 && $dow == $today) ? $ms0['daylink'] : "javascript:void(0)"; ?>">
+								<a onclick="scheduleModal(<?php echo $sched_var; ?>.exercises,<?php echo $sched_var."link". ",". $ms0['wid'].",".$ms0['wclient']; ?>)" href="javascript:void(0)<?php //echo ($ms0['wisdone'] == 0 && $dow == $today) ? $ms0['daylink'] : "javascript:void(0)"; ?>">
 									<span>
 										<span class="sm-icons sm-workout-icon sm-icon-small"></span>
 										<label><small><?php echo $ms0['wtime']; ?></small></label>
@@ -93,8 +99,9 @@
 	</div>
 	
 <script>
- function scheduleModal(a,b){
-	 var ctr = 0,	 
+ function scheduleModal(a,b,c,d){
+	 var ctr = 0,
+	 ml = "<?php echo $_SERVER['REQUEST_URI']; ?>&print=1&workout_id=" +c+ "&client_id=" + d,
 	 scheds = '<div class="table-responsive"><table class="table table-bordered"><tr style="font-weight:800">'
 				+'<td>#</td>'
 				+'<td>Exercise</td>'
@@ -102,6 +109,7 @@
 				+'<td>Var 2</td>'
 				+'<td>Sets</td>'
 				+'</tr>';
+	console.log(a);
 	 a.forEach(function(elem){
 		 ctr++;
 		 scheds += "<tr>";
@@ -109,14 +117,15 @@
 		 scheds += "<td>"+(elem.exer_type != null ? elem.exer_type : "--")+"</td>";
 		 scheds += "<td>"+(elem.exer_exercise_1 != null ? elem.exer_exercise_1 : "--")+"</td>";
 		 scheds += "<td>"+(elem.exer_exercise_2 != null ? elem.exer_exercise_2 : "--")+"</td>";
-		 scheds += "<td>"+(elem.exer_sets != null ? elem.exer_sets : "--")+"</td>";
-		 
+		 scheds += "<td>"+(elem.exer_sets != null ? elem.exer_sets : "--")+"</td>";	 
 		 scheds += "</tr>";
 	 });
 	 scheds += "</table></div>";
-	 scheds += 	'<div class="schdeule-action" style="margin-bottom:10px;">'+(b != '' ? '<a style="display:inline-block;line-height:45px;" href="' +b+ '"><span style="margin-right:10px;" class="sm-icons sm-play-icon"></span> Start Workout</a>' : '')+'</div>';
+	 scheds += 	'<div class="schdeule-action float-left" style="margin-bottom:10px;">'+(b != '' ? '<a style="display:inline-block;line-height:45px;" href="' +b+ '"><span style="margin-right:10px;" class="sm-icons sm-play-icon"></span> Start Workout</a>' : '')+'</div>';
+	 scheds += '<div class="float-right"><a target="_blank" href="'+ml+'" class="red-btn">Print</a></div>';
 	 $('#workoutModal').modal();
 	 $('#workoutModal .modal-title').html('Overview');
 	 $('#workoutModal .modal-body').html(scheds);
  }
 </script>
+<?php endif; ?>
