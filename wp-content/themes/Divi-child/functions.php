@@ -2352,11 +2352,15 @@ function getAssignmentSets($exID,$uid){
 
 	return $assSets;
 }
-function getWExercises($wid){
+function getWExercises($wid){ //Get Workout Exercises
 	global $wpdb;
-	$wExer = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
-
-	return $wExer;
+	$wExers = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
+	
+	foreach($wExers as $wE){
+		$wE->exer_video = getExerciseVideo($wE->exer_body_part,$wE->exer_type);
+	}	
+	
+	return $wExers;
 }
 
 /*AFTER SEND MESSAGE*/
