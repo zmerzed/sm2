@@ -268,3 +268,135 @@
 
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++
+ -->
+ 
+	<nav>
+		<div class="nav nav-tabs"  id="message-nav-tab" role="tablist">
+			<!-- ngRepeat: day in workout.days --><a class="nav-item nav-link ng-binding ng-scope active" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true" >Workout 1 - Agility</a><!-- end ngRepeat: day in workout.days --><a class="nav-item nav-link ng-binding ng-scope" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true"  >Workout 2 - Agility 2</a><!-- end ngRepeat: day in workout.days -->
+		</div>
+	</nav>
+
+  <div ng-mouseleave="onLeaveDay()">
+    <!-- ngIf: workout.selectedDay --><div class="tab-content ng-scope" id="nav-tabContent" >
+      <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="workout-tab-pane-wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <span class="workout-day-name">
+                  <label>Workout Name: </label>
+                  <input type="text"  class="ng-pristine ng-valid ng-not-empty ng-touched">
+                </span>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <ul class="workout-btn-actions">
+                  <li><a href="#">Duplicate</a></li>
+                  <li><a href="javascript:void(0)">Delete</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+		<div class="circuit">
+			<ul class="workout-exercise-lists">
+				<li class="workout-exercise-item ng-scope" >
+					<table class="workout-exercise-options">
+					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
+					</td>
+					</tr></tbody></table>
+				</li>
+				<li class="workout-exercise-item ng-scope" >
+					<table class="workout-exercise-options">
+					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
+					</td>
+					</tr></tbody></table>
+				</li>
+			</ul>
+			<div class="circuit-attr">
+				<div><span>A: </span>  <select><option>Sets</option></select><select><option>Sets</option></select></div>
+			</div>
+		</div>
+		<div class="circuit">
+			<ul class="workout-exercise-lists">
+				<li class="workout-exercise-item ng-scope" >
+					<table class="workout-exercise-options">
+					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Rest</option></select>
+					</td>
+					</tr></tbody></table>
+				</li>
+				<li class="workout-exercise-item ng-scope" >
+					<table class="workout-exercise-options">
+					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
+					</td>
+					<td>
+					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
+					</td>
+					</tr></tbody></table>
+				</li>
+			</ul>
+			<div class="circuit-attr">
+				<div><span>B: </span>  <select><option>Sets</option></select><select><option>Rest</option></select></div>
+			</div>
+		</div>
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="workout-btn-wrapper">
+                <button type="button" class="add-workout-btn" ng-click="newExercise()">+ Add Exercise</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end ngIf: workout.selectedDay -->
+  </div>

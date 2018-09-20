@@ -58,7 +58,7 @@
 					<td><?php echo $jctr; ?></td>
 					<td>
 						<?php
-							echo ($vid[0]) ? '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />' : $n;
+							echo ($vid) ? '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />' : $n;
 						?>
 					</td>
 					<td>

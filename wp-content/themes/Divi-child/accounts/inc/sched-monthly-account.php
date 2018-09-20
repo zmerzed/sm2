@@ -21,7 +21,7 @@ function togglNote(a){
 	});
 	$('.wexer').hide();
 }
-function toggleExercise(a,b,c,d){
+function toggleExercise(a,b,c){
 	var thisExer = $(b).closest('li').find('.wexer');	
 	$('.wexer').each(function(){
 		if(!$(this).is(thisExer))
@@ -39,7 +39,7 @@ function toggleExercise(a,b,c,d){
 			dataType: 'json',
 			success: function(res){
 				var ctr = 0,
-				 ml = "<?php echo $_SERVER['REQUEST_URI']; ?>&print=1&workout_id=" +c+ "&client_id=" + d,
+				 ml = "<?php echo $_SERVER['REQUEST_URI']; ?>&print=1&workout_id=" +a+ "&client_id=" + c,
 				 scheds = '<div style="margin-top:10px;" class="table-responsive"><table class="table table-bordered"><tr style="font-weight:800">'
 							+'<td>#</td>'
 							+'<td>Exercise</td>'
@@ -101,7 +101,7 @@ function pullWorkout(date){
 			if(dateToday == date && wisDone == 0){
 				htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
 			}			
-			htmlContent += '<a href="javascript:void(0)" onclick="toggleExercise('+v0['wid']+',this,'+v0['pid']+','+v0['wclient']+')"><span class="sm-icons sm-fa" style="text-align:center;"><i style="color:#fff;font-size:22px;" class="fa fa-eye"></i></span></a><a href="javascript:void(0)" onclick="togglNote(this)"><span class="sm-icons sm-note-icon"></span></a></div><div class="wexer" style="display:none;"></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
+			htmlContent += '<a href="javascript:void(0)" onclick="toggleExercise('+v0['wid']+',this,'+v0['wclient']+')"><span class="sm-icons sm-fa" style="text-align:center;"><i style="color:#fff;font-size:22px;" class="fa fa-eye"></i></span></a><a href="javascript:void(0)" onclick="togglNote(this)"><span class="sm-icons sm-note-icon"></span></a></div><div class="wexer" style="display:none;"></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
 		}
 	});
 	htmlContent += '</ul>';

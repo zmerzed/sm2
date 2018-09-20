@@ -1082,6 +1082,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
   float: left;
 }
 
+.circuit-attr select,
 .program-selected-clients,
 .workout-exercise-options tr td select{
     border: 0px;
@@ -1928,6 +1929,9 @@ body .add-exercise-form select.form-control{height:auto!important;}
 }
 body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 .red-btn:hover{color:#fff;text-decoration:none;}
+.circuit-attr select{margin-left:5px;}
+.circuit-attr{color:#fff;font-weight:800;padding:0 5px;}
+.circuit{background-color:#808181;padding:10px;margin-top:10px;margin-bottom:5px;border-radius:8px;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
