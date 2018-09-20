@@ -1,11 +1,7 @@
 <div class="main-content matchHeight">
-
 	<div class="container-title">
         <h3>Monthly Schedule</h3>
-    </div>
-
-	<!-- <div id='calendar'></div> -->
-	
+    </div>	
 	<div class="container">
       <!-- Responsive calendar - START -->
     	<div class="responsive-calendar">
@@ -23,11 +19,9 @@
           <div class="day header">Sat</div>
           <div class="day header">Sun</div>
         </div>
-        <div class="days" data-group="days">
-          
-        </div>
+        <div class="days" data-group="days"></div>
       </div>
       <!-- Responsive calendar - END -->
     </div>
-
 </div>
+<?php get_template_part( 'accounts/inc/sched-monthly-account', 'page' ); ?>

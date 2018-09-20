@@ -941,6 +941,7 @@ table.dataTable thead .sorting_asc:after{
 
 .modal{background-color:rgba(0,0,0,0.5);}
 #workoutModal .modal-dialog{margin-top:15%;}
+.gym-page #workoutModal .workout-wrapper a span.sm-fa,
 .gym-page #workoutModal .workout-wrapper a span.sm-note-icon{display:block}
 .gym-page .schdeule-action,
 .gym-page #workoutModal .workout-wrapper a span{display:none;}

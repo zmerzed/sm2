@@ -27,7 +27,7 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery-3.2.1.slim.min.js"></script> -->
 <!--  <script src='--><?php //echo get_stylesheet_directory_uri() .'/accounts/assets/js/jquery-3.3.1.min.js';?><!--'></script>-->
-  <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/responsive-calendar.min.js"></script>
+  <!-- <script type="text/javascript" src="<?php //echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/responsive-calendar.min.js"></script> -->
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/popper.min.js"></script>
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/bootstrap.min.js"></script>
   <!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.matchHeight-min.js"></script>  --> 
@@ -74,44 +74,6 @@
    var workoutDates = <?php echo json_encode($scheData); ?>,
    themedir = "<?php echo get_stylesheet_directory_uri(); ?>";
    dateToday = "<?php echo date('Y-m-d'); ?>";
-   function pullWorkout(date){
-		var thisWork = workoutDates[date];		
-		/* console.log(thisWork); */
-		
-		$('#workoutModal').modal();
-		$('#workoutModal .modal-title').html('Program(s) for ' + date);
-		htmlContent = '<ul class="workout-lists trainer-workouts-lists">';	  
-		$.each(thisWork, function(i, v){			
-			var wisDone = v[0]['wisdone'],
-			vstatus = "",
-			v0 = v[0],
-			wnote = "No Note";
-			if(v0['wnote'].length != 0)
-				wnote = v0['wnote'][0]['detail'];
-				
-			if(wisDone != 0){
-				vstatus = "(Completed)";
-			}				
-			if(dateToday > date && wisDone == 0){
-				vstatus = "(Not Completed)";
-			}								
-			if(dateToday < date && wisDone == 0){
-				vstatus = "(Pending)";
-			}				
-			if(v0['wdname'] != ""){
-				htmlContent += '<li class="workout-list-item"><div class="workout-wrapper"><span class="sm-workout-icon sm-icons"></span><span class="wdname">' + v0['wdname'] + ' - '+v0['wcnname']+' '+vstatus+'</span>';			
-				if(dateToday == date && wisDone == 0){
-					htmlContent += '&nbsp;<a href="'+v0['daylink']+'"><span class="sm-play-icon sm-icons"></span></a>';
-				}			
-				htmlContent += '<a href="javascript:void(0)" onclick="togglNote(this)"><img src="'+themedir+'/accounts/images/workout-note.png" style="display:none;"><span class="sm-icons sm-note-icon"></span></a></div><div class="wnote" style="display:none;">'+wnote+'</div></li>';
-			}
-		});
-		htmlContent += '</ul>';
-		$('#workoutModal .modal-body').html(htmlContent);
-   }
-	function togglNote(a){
-		$(a).closest('li').find('.wnote').slideToggle();
-	}
 
   jQuery('#table-sorter').DataTable({
     "lengthMenu": [[8, 16, 24, -1], [8, 16, 24, "All"]]
@@ -144,41 +106,7 @@
 			$("#myModal").on('hidden.bs.modal', function (e) {
 				$("#myModal iframe").attr("src", "");
 			});
-		}
-		function alz(num) {
-			if (num < 10) {
-				return "0" + num;
-			} else {
-				return "" + num;
-			}
-		}
-		if($('.responsive-calendar').length != 0){
-			$(".responsive-calendar").responsiveCalendar({
-				onDayClick: function(events) {
-					var key = $(this).data('year')+'-'+alz( $(this).data('month') )+'-'+alz( $(this).data('day'));										
-					if(events[key]){
-						pullWorkout(key);
-					}
-				},
-				events: {
-				<?php
-					$ctrTemp = 0;
-					$nctr = count($scheData);
-					foreach($scheData as $k=>$v):
-						$ctrTemp++;
-						$tempArr = [];						
-						foreach($v as $w){
-							if($w[0]['wdname'] != "")
-								$tempArr[] = $w;
-						}						
-							echo '"'.$k.'": {"number": '.count($tempArr).',"badgeClass": "badge-primary", "url": ""}';
-							echo ($ctrTemp == $nctr) ? "" : ",";						
-					endforeach;
-				?>
-				}	
-			});		
-		}	
-		    
+		} 
 	});
 	
 	<?php

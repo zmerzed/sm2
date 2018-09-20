@@ -2266,6 +2266,15 @@ function get_message_user_image(){
 	echo json_encode(array('result' => $imgR));
 	wp_die();
 }
+add_action('wp_ajax_getWExercises_ajax', 'getWExercises_ajax');
+add_action('wp_ajax_nopriv_getWExercises_ajax', 'getWExercises_ajax');
+
+function getWExercises_ajax(){
+	$wid = $_POST['wid'];
+	$wE = getWExercises($wid);
+	echo json_encode(array('result' => $wE));
+	wp_die();
+}
 /*Print Gym Color Theme*/
 function printCss($a,$b,$c){
 	$ctr=0;

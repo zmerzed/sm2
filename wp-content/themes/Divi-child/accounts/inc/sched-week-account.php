@@ -109,7 +109,6 @@
 				+'<td>Var 2</td>'
 				+'<td>Sets</td>'
 				+'</tr>';
-	console.log(a);
 	 a.forEach(function(elem){
 		 ctr++;
 		 scheds += "<tr>";
