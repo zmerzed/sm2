@@ -833,6 +833,10 @@ function workOutUpdate($data)
                                 'exer_workout_ID' => $workout['workout_ID']
                             ];
 
+                            if (isset($ex['group_by'])) {
+                                $exercise['group_by'] = strtoupper($ex['group_by']);
+                            }
+
                             if (isset($ex['selectedPart']))
                             {
                                 $exercise['exer_body_part'] = $ex['selectedPart']['part'];

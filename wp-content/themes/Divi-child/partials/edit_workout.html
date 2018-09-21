@@ -1,249 +1,254 @@
 <div class="col-lg-12">
-  <a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-right" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
-  <select onchange="selectClient(this.value)" class="float-right program-selected-clients">
-    <option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
-      {{ client.user_nicename }}
-    </option>
-  </select>
-  <script>
-  function selectClient(a){
-    var curVal = $('.print-btn').attr('href');
-    curVal = curVal.split('&workout_client_id=');
-    curVal += '&workout_client_id=' + a;
-    $('.print-btn').attr('href', curVal);
-  }
-  </script>
+    <a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-right" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
+    <select onchange="selectClient(this.value)" class="float-right program-selected-clients">
+        <option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
+            {{ client.user_nicename }}
+        </option>
+    </select>
+    <script>
+        function selectClient(a){
+            var curVal = $('.print-btn').attr('href');
+            curVal = curVal.split('&workout_client_id=');
+            curVal += '&workout_client_id=' + a;
+            $('.print-btn').attr('href', curVal);
+        }
+    </script>
 </div>
 <hr class="clearfix">
 <form id="idForm" submit="sendForm" action="" method="POST">
-  <div class="container trainer-header-section">
-    <div class="row">
-      <div class="col-lg-6 col-md-6">
+    <div class="container trainer-header-section">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
         <span class="workout-day-name">
           <label>Program Name: </label>
           <input type="text" ng-model="workout.workout_name">
         </span>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="btn-add-workout">
-          <button type="button" ng-click="newWorkOutDay()">+ new workout</button>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="btn-add-workout">
+                    <button type="button" ng-click="newWorkOutDay()">+ new workout</button>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div ng-if="!workout.note">
+                    Program note is not yet provided.
+                    <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">create</button>
+                </div>
+                <div class = "mt-3" ng-if="workout.note.detail">
+                    <strong>Note:</strong>
+                    {{ workout.note.detail }}
+                    <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">edit</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-lg-12 col-md-12">
-        <div ng-if="!workout.note">
-          Program note is not yet provided.
-          <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">create</button>
-        </div>
-        <div class = "mt-3" ng-if="workout.note.detail">
-          <strong>Note:</strong>
-          {{ workout.note.detail }}
-          <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">edit</button>
-        </div>
-      </div>
     </div>
-  </div>
-	<nav>
-		<div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
-			<a class="nav-item nav-link"
-			   id="nav-home-tab"
-			   data-toggle="tab"
-			   href="#workout-1"
-			   role="tab"
-			   aria-controls="nav-home"
-			   aria-selected="true"
-			   ng-repeat="day in workout.days"
-			   ng-click="onSelectDay(day)"
-			   ng-class="{active: isActive(day)}"
-			   ng-show="!day.isDelete"
-			>Workout {{day.wday_order}} - {{day.wday_name}}</a>
-		</div>
-	</nav>
+    <nav>
+        <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
+            <a class="nav-item nav-link"
+               id="nav-home-tab"
+               data-toggle="tab"
+               href="#workout-1"
+               role="tab"
+               aria-controls="nav-home"
+               aria-selected="true"
+               ng-repeat="day in workout.days"
+               ng-click="onSelectDay(day)"
+               ng-class="{active: isActive(day)}"
+               ng-show="!day.isDelete"
+            >Workout {{day.wday_order}} - {{day.wday_name}}</a>
+        </div>
+    </nav>
 
-  <div ng-mouseleave="onLeaveDay()">
-    <div class="tab-content" id="nav-tabContent" ng-if="workout.selectedDay">
-      <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div class="workout-tab-pane-wrapper">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
+    <div ng-mouseleave="onLeaveDay()">
+        <div class="tab-content" id="nav-tabContent" ng-if="workout.selectedDay">
+            <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="workout-tab-pane-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
                 <span class="workout-day-name">
                   <label>Workout Name: </label>
                   <input type="text" ng-model="workout.selectedDay.wday_name" ng-change="onChangeDayName();">
                 </span>
-              </div>
-              <div class="col-lg-6 col-md-6">
-                <ul class="workout-btn-actions">
-                  <li ng-click="onCopy()"><a href="#">Duplicate</a></li>
-                  <li ng-click="removeDay(workout.selectedDay)"><a href="javascript:void(0)">Delete</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <ul class="workout-exercise-lists">
-            <li class="workout-exercise-item" ng-repeat="exercise in workout.selectedDay.exercises track by $index" ng-show="!exercise.isDelete">
-              <table class="workout-exercise-options">
-                <td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class = "w-100 my-auto">{{ exercise.group_by }}</label></span></td>
-                <td>
-                  <select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
-                    <option value="{{exercise.exer_body_part}}">{{exercise.exer_body_part}}</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
-                    <option value="">Exercise</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
-                    <option value="">Variation 1</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
-                    <option value="">Variation 2</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
-                    <option value="">SQ</option>
-                  </select>
-                </td>
-                <td>
-                    <select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">
-                      <option value="">Sets</option>
-                    </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
-                    <option value="">Reps</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
-                    <option value="">Tempo</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
-                    <option value="">Rest</option>
-                  </select>
-                </td>
-                <td>
-                  <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
-                    <option value="">IMPL 1</option>
-                  </select>
-                </td>
-                <td><span class="exercise-btn-action"><a href="#" ng-click="onCopyExercise(exercise)">Duplicate</a><span></td>
-                <td><span class="exercise-btn-action"><a href="javascript:void(0)" ng-click="removeExercise(exercise)">Delete</a><span></td>
-              </table>
-            </li>
-          </ul>
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="workout-btn-wrapper">
-                <button type="button" class="add-workout-btn" ng-click="newExercise()">+ Add Exercise</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container assign-client-to-workout" ng-show="workout.selectedDay && !currentUser.isGym">
-      <div class="row">
-        <div class="col-lg-12 col-md-12">
-          <h3>Assign Clients to Workout</h3>
-          <div class="d-md-flex flex-md-row bgDkGray mt-2">
-            <div class="col-12 col-md-4 col-lg-2 p-0 assign-client-tab">
-              <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left assign-clients-workout" role="navigation">
-                <li class="nav-item" ng-repeat="client in workout.selectedDay.clients">
-                  <a href="javascript:void(0)"
-                     class="nav-link"
-                     data-toggle="tab" role="tab"
-                     ng-click="selectClient(client)"
-                     ng-class="{active: isClientActive(client)}"
-                  >{{ client.user_nicename }} <small><button type="button" ng-click="onRemoveSelectedClient(client)">X</button></small></a>
-                </li>
-              </ul>
-              <div class="browse-client-workout">
-                <select ng-model="reader.selectedClient">
-                  <option disabled selected>Add Client</option>
-                  <option ng-repeat="client in clients" ng-value="client.ID">{{ client.user_nicename}} </option>
-                </select>
-              </div>
-            </div>
-            <div class="col-12 col-md-8 col-lg-10 assign-client-tab-content" ng-if="workout.selectedDay.clients.length > 0 && workout.selectedDay.selectedClient">
-              <div class="tab-content">
-                <div class="tab-pane fade show active" id="lorem" role="tabpanel">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-lg-12 col-md-12">
-                        <p>Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-12 col-lg-4 col-xl-3 mb-3 m-lg-0 assign-workout select-date-workout">
-                        <input placeholder="YY-MM-DD" type="text" class = "mx-auto mx-lg-0" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
-                      </div>
-                      <div class="col-12 col-lg-8 col-xl-9 assign-workout select-date-workout">
-                        <div uib-timepicker class = "mx-auto mx-lg-0 " ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 col-lg-6 col-xl-5 mb-3 mb-lg-0 workout-assign-clients">
-                        <ul class="workout-exercise-lists">
-                          <li class="workout-exercise-item" ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
-                            <table class="workout-exercise-options">
-                              <td><span class="exercise-number d-flex"><label class = "w-100">{{ ex.group_by }}</label></span></td>
-                              <td class = "w-35">
-                                <select>
-                                  <option>{{ ex.exer_body_part }}</option>
-                                </select>
-                              </td>
-                              <td class = "w-50">
-                                <select>
-                                  <option>{{ ex.exer_type }}</option>
-                                </select>
-                              </td>
-                            </table>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-12 col-lg-6 col-xl-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
-                        <div class="row m-0">
-                          <div class="col-4 p-0" ng-repeat="numSet in []|range:workoutMaxSet">
-                            <p>SET {{ numSet + 1}}</p>
-                            <div class="assign-sets-wrapper">
-                              <table class="last-sets" style="width: 100% !important;">
-                                <tr>
-                                  <th>Weight</th>
-                                </tr>
-                                <tr ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
-                                  <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ $index + 1 }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
-                                </tr>
-                              </table>
                             </div>
-                          </div>
+                            <div class="col-lg-6 col-md-6">
+                                <ul class="workout-btn-actions">
+                                    <li ng-click="onCopy()"><a href="#">Duplicate</a></li>
+                                    <li ng-click="removeDay(workout.selectedDay)"><a href="javascript:void(0)">Delete</a></li>
+                                </ul>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                    <div class="circuit" ng-repeat="circuit in workout.selectedDay.circuits">
+                        <ul class="workout-exercise-lists">
+                            <li class="workout-exercise-item" ng-repeat="exercise in circuit.exercises track by $index" ng-show="!exercise.isDelete">
+                                <table class="workout-exercise-options">
+                                    <td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class = "w-100 my-auto">{{ exercise.group_by }}</label></span></td>
+                                    <td>
+                                        <select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
+                                            <option value="{{exercise.exer_body_part}}">{{exercise.exer_body_part}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
+                                            <option value="">Exercise</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
+                                            <option value="">Variation 1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
+                                            <option value="">Variation 2</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
+                                            <option value="">SQ</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">
+                                            <option value="">Sets</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
+                                            <option value="">Reps</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
+                                            <option value="">Tempo</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
+                                            <option value="">Rest</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
+                                            <option value="">IMPL 1</option>
+                                        </select>
+                                    </td>
+                                    <td><span class="exercise-btn-action"><a href="#" ng-click="onCopyExercise(exercise)">Duplicate</a><span></td>
+                                    <td><span class="exercise-btn-action"><a href="javascript:void(0)" ng-click="removeExercise(exercise)">Delete</a><span></td>
+                                </table>
+                            </li>
+                        </ul>
+                        <div class="circuit-attr">
+                            <div><span>{{ circuit.group_by_letter }}: </span> </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="workout-btn-wrapper">
+                                <button type="button" class="add-workout-btn" ng-click="newExercise()">+ Add Exercise</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="container p-0">
-    <div class="row m-0">
-      <div class="col-12 mt-2 p-0">
-        <div class="btn-add-workout">
-          <button type="submit">> UPDATE</button>
+        <div class="container assign-client-to-workout" ng-show="workout.selectedDay && !currentUser.isGym">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h3>Assign Clients to Workout</h3>
+                    <div class="d-md-flex flex-md-row bgDkGray mt-2">
+                        <div class="col-12 col-md-4 col-lg-2 p-0 assign-client-tab">
+                            <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left assign-clients-workout" role="navigation">
+                                <li class="nav-item" ng-repeat="client in workout.selectedDay.clients">
+                                    <a href="javascript:void(0)"
+                                       class="nav-link"
+                                       data-toggle="tab" role="tab"
+                                       ng-click="selectClient(client)"
+                                       ng-class="{active: isClientActive(client)}"
+                                    >{{ client.user_nicename }} <small><button type="button" ng-click="onRemoveSelectedClient(client)">X</button></small></a>
+                                </li>
+                            </ul>
+                            <div class="browse-client-workout">
+                                <select ng-model="reader.selectedClient">
+                                    <option disabled selected>Add Client</option>
+                                    <option ng-repeat="client in clients" ng-value="client.ID">{{ client.user_nicename}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-8 col-lg-10 assign-client-tab-content" ng-if="workout.selectedDay.clients.length > 0 && workout.selectedDay.selectedClient">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="lorem" role="tabpanel">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <p>Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-12 col-lg-4 col-xl-3 mb-3 m-lg-0 assign-workout select-date-workout">
+                                                <input placeholder="YY-MM-DD" type="text" class = "mx-auto mx-lg-0" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
+                                            </div>
+                                            <div class="col-12 col-lg-8 col-xl-9 assign-workout select-date-workout">
+                                                <div uib-timepicker class = "mx-auto mx-lg-0 " ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6 col-xl-5 mb-3 mb-lg-0 workout-assign-clients">
+                                                <ul class="workout-exercise-lists">
+                                                    <li class="workout-exercise-item" ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
+                                                        <table class="workout-exercise-options">
+                                                            <td><span class="exercise-number d-flex"><label class = "w-100">{{ ex.group_by }}</label></span></td>
+                                                            <td class = "w-35">
+                                                                <select>
+                                                                    <option>{{ ex.exer_body_part }}</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class = "w-50">
+                                                                <select>
+                                                                    <option>{{ ex.exer_type }}</option>
+                                                                </select>
+                                                            </td>
+                                                        </table>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-12 col-lg-6 col-xl-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
+                                                <div class="row m-0">
+                                                    <div class="col-4 p-0" ng-repeat="numSet in []|range:workoutMaxSet">
+                                                        <p>SET {{ numSet + 1}}</p>
+                                                        <div class="assign-sets-wrapper">
+                                                            <table class="last-sets" style="width: 100% !important;">
+                                                                <tr>
+                                                                    <th>Weight</th>
+                                                                </tr>
+                                                                <tr ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
+                                                                    <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ $index + 1 }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="container p-0">
+        <div class="row m-0">
+            <div class="col-12 mt-2 p-0">
+                <div class="btn-add-workout">
+                    <button type="submit">> UPDATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <input type="hidden" name="updateWorkoutForm" value="test" id="idWorkoutForm" />
 </form>
@@ -268,135 +273,3 @@
 
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-++++++++++++++++++++++++++++++++++++++
-++++++++++++++++++++++++++++++++++++++
- -->
- 
-	<nav>
-		<div class="nav nav-tabs"  id="message-nav-tab" role="tablist">
-			<!-- ngRepeat: day in workout.days --><a class="nav-item nav-link ng-binding ng-scope active" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true" >Workout 1 - Agility</a><!-- end ngRepeat: day in workout.days --><a class="nav-item nav-link ng-binding ng-scope" id="nav-home-tab" data-toggle="tab" href="#workout-1" role="tab" aria-controls="nav-home" aria-selected="true"  >Workout 2 - Agility 2</a><!-- end ngRepeat: day in workout.days -->
-		</div>
-	</nav>
-
-  <div ng-mouseleave="onLeaveDay()">
-    <!-- ngIf: workout.selectedDay --><div class="tab-content ng-scope" id="nav-tabContent" >
-      <div class="tab-pane fade show active" id="workout-1" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div class="workout-tab-pane-wrapper">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <span class="workout-day-name">
-                  <label>Workout Name: </label>
-                  <input type="text"  class="ng-pristine ng-valid ng-not-empty ng-touched">
-                </span>
-              </div>
-              <div class="col-lg-6 col-md-6">
-                <ul class="workout-btn-actions">
-                  <li><a href="#">Duplicate</a></li>
-                  <li><a href="javascript:void(0)">Delete</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-		<div class="circuit">
-			<ul class="workout-exercise-lists">
-				<li class="workout-exercise-item ng-scope" >
-					<table class="workout-exercise-options">
-					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
-					</td>
-					</tr></tbody></table>
-				</li>
-				<li class="workout-exercise-item ng-scope" >
-					<table class="workout-exercise-options">
-					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
-					</td>
-					</tr></tbody></table>
-				</li>
-			</ul>
-			<div class="circuit-attr">
-				<div><span>A: </span>  <select><option>Sets</option></select><select><option>Sets</option></select></div>
-			</div>
-		</div>
-		<div class="circuit">
-			<ul class="workout-exercise-lists">
-				<li class="workout-exercise-item ng-scope" >
-					<table class="workout-exercise-options">
-					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Rest</option></select>
-					</td>
-					</tr></tbody></table>
-				</li>
-				<li class="workout-exercise-item ng-scope" >
-					<table class="workout-exercise-options">
-					<tbody><tr><td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class="w-100 my-auto ng-binding"></label></span></td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option label="Abs/Hip Flexors" value="object:420">Abs/Hip Flexors</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Reps</option></select>
-					</td>
-					<td>
-					<select  class="ng-pristine ng-untouched ng-valid ng-not-empty"><option value="" class="">Tempo</option></select>
-					</td>
-					</tr></tbody></table>
-				</li>
-			</ul>
-			<div class="circuit-attr">
-				<div><span>B: </span>  <select><option>Sets</option></select><select><option>Rest</option></select></div>
-			</div>
-		</div>
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="workout-btn-wrapper">
-                <button type="button" class="add-workout-btn" ng-click="newExercise()">+ Add Exercise</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- end ngIf: workout.selectedDay -->
-  </div>

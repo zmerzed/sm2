@@ -602,6 +602,8 @@ angular.module('smApp')
             }
 
         }
+
+        $scope.workout.selectedDay.circuits = global.circuits($scope.workout.selectedDay.exercises);
     }
 
     setTimeout(function() {

@@ -48,6 +48,21 @@ app.constant('global', {
         });
     },
 
+    circuits: function(arr)
+    {
+        var group_to_values = arr.reduce(function (obj, item) {
+            obj[item.group_by_letter] = obj[item.group_by_letter] || [];
+            obj[item.group_by_letter].push(item);
+            return obj;
+        }, {});
+
+        var groups = Object.keys(group_to_values).map(function (key) {
+            return {group_by_letter: key, exercises: group_to_values[key]};
+        });
+
+        return groups;
+    },
+
     customSort: function(arr)
     {
         function dynamicSort(property)
@@ -78,16 +93,39 @@ app.constant('global', {
             return x > y;
         });
 
+        var prevLetter = '';
 
-        /* 	arr.sort(function(a, b){
-                // ASC  -> a.length - b.length
-                // DESC -> b.length - a.length
-                var x = a.group_by.charAt(1);
-                var y = b.group_by.charAt(1);
+        for (var n in arr) {
 
-                return x > y;
-              });
-               */
+            if (arr[n].isLast) {
+                delete arr[n].isLast;
+            }
+
+            if (arr[n].isFirst) {
+                delete arr[n].isFirst;
+            }
+
+            if (parseInt(n) <= 0) {
+                prevLetter = arr[n].group_by.charAt(0);
+                arr[n].isFirst = true;
+            }
+
+            if (arr[n].group_by.charAt(0) != prevLetter) {
+                // current customer id same as previous id
+
+                arr[n - 1].isLast = true;
+                arr[n].isFirst = true;
+            }
+
+            if (n == (arr.length - 1)) {
+                arr[n].isLast = true;
+            } else {
+                prevLetter = arr[n].group_by.charAt(0);
+            }
+
+            arr[n].group_by_letter = arr[n].group_by.charAt(0);
+        }
+
         return arr;
     },
     isObject : function isObject(val) {
