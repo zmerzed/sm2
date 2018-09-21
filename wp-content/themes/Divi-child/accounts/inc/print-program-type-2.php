@@ -1,5 +1,5 @@
+<!-- Print Type 2 -->
 <?php
-	echo "<!-- Print Type 2 -->";
 	$program_id = 0;
 	if(isset($_GET['workout']))
 		$program_id = $_GET['workout'];
@@ -22,9 +22,15 @@
 	if($program_workout_clients){		
 		foreach($program_workout_clients as $workout){
 			$workout_id = $workout->workout_client_dayID;
-			$program_details = getProgramDeatils($program_id,$workout_id,$client_id);
-			$workout_details = $program_details[$workout_id]['workout_detail'][0];
-			$exercises = $program_details[$workout_id]['exercises'];
+			$program_details = [];
+			if(getProgramDeatils($program_id,$workout_id,$client_id))
+				$program_details = getProgramDeatils($program_id,$workout_id,$client_id);
+			$workout_details = [];
+			if(!empty($program_details[$workout_id]))
+				$workout_details = $program_details[$workout_id]['workout_detail'][0];
+			$exercises = [];
+			if(!empty($program_details[$workout_id]))
+				$exercises = $program_details[$workout_id]['exercises'];
 			
 			$set_counter = 0;				
 			foreach($exercises as $e){
@@ -34,7 +40,8 @@
 						$set_counter = $eset;							
 				}						
 			}
-			echo '<h4>'.$workout_details->wday_name.'</h4>';
+			if(!empty($workout_details)){
+				echo '<h4>'.$workout_details->wday_name.'</h4>';
 ?>
 			<table class="table table-bordered print-program-type-2">
 				<tr>
@@ -94,8 +101,9 @@
 				?>
 			</table>
 			<script>window.print();</script>
-		<?php
+	<?php
 			}
-		}else
-			echo "No Workouts";
+		}
+	}else
+		echo "No Workouts";
 	/*End if &data=add-workouts*/

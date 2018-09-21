@@ -34,6 +34,7 @@
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/spectrum.js"></script>
+  <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/mobile.js"></script>
 
   <!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri() .'/accounts/assets/js/fullcalendar.min.js';?>"></script> -->
    
