@@ -565,8 +565,12 @@ function workOutAdd($data)
                         }
                     }
 
-                    $wpdb->insert('workout_exercises_tbl', $exercise);
 
+                    if (isset($ex['group_by'])) {
+                        $exercise['group_by'] = strtoupper($ex['group_by']);
+                    }
+
+                    $wpdb->insert('workout_exercises_tbl', $exercise);
                 }
             }
 
@@ -631,6 +635,26 @@ function workOutAdd($data)
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            /* circuits */
+
+            if ($d['circuits'])
+            {
+                foreach ($d['circuits'] as $c)
+                {
+
+                    if (isset($c['sets'])) {
+                        $wpdb->update(
+                            'workout_exercises_tbl',
+                            array(
+                                'exer_sets' => $c['sets'],
+
+                            ),
+                            array('exer_workout_ID' => $workOutId)
+                        );
                     }
                 }
             }
@@ -1501,8 +1525,8 @@ function workOutExerciseStrengthQualitiesOptions()
 	foreach($options as $key => $option)
 	{
 		$options[$key]['options'] = json_decode($option['options'], true);
-		$options[$key]['options']['tempo'][] = 'others';
-		$options[$key]['options']['rest'][] = 'others';
+		$options[$key]['options']['tempo'][] = 'custom';
+		$options[$key]['options']['rest'][] = 'custom';
 		$options[$key]['options']['rep_options'][] = 'custom';
 	}
 

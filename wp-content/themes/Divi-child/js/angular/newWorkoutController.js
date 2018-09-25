@@ -352,7 +352,6 @@ angular.module('smApp')
 
     }, true);
 
-
     function nFormat(n){
         return n > 9 ? "" + n: "0" + n;
     }
@@ -484,7 +483,9 @@ angular.module('smApp')
                             imp = angular.copy(mImpCustom);
                         }
 
-                        mImp1s.push(imp);
+                        if (imp) {
+                            mImp1s.push(imp);
+                        }
                     }
 
                     mImp1s.push('custom');
@@ -522,11 +523,11 @@ angular.module('smApp')
             }
 
             /* check if others is selected for Tempo */
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'others') 
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'custom')
             {
                 var mOtherName = prompt("Tempo");
 
-                while (mOtherName == 'others') {
+                while (mOtherName == 'custom') {
                     mOtherName = prompt("Tempo");
                 }
 
@@ -536,7 +537,7 @@ angular.module('smApp')
                 {
                     var tempo = mExercise.selectedSQ.options.tempo[mI];
 
-                    if (tempo == 'others') {
+                    if (tempo == 'custom') {
                         tempo = angular.copy(mOtherName);
                     }
 
@@ -548,11 +549,11 @@ angular.module('smApp')
             }
 
             /* check if others is selected for Rest */
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'others') 
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'custom')
             {
                 var mOtherName = prompt("Rest");
 
-                while (mOtherName == 'others') {
+                while (mOtherName == 'custom') {
                     mOtherName = prompt("Rest");
                 }
 
@@ -562,7 +563,7 @@ angular.module('smApp')
                 {
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
-                    if (rest == 'others') {
+                    if (rest == 'custom') {
                         rest = angular.copy(mOtherName);
                     }
 
