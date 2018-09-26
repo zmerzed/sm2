@@ -1055,9 +1055,11 @@ ul.workout-exercise-lists{
 ul.workout-exercise-lists li.workout-exercise-item{
   display: block;
   background: #303030;
-  padding: 2px;
+  /* padding: 2px; */
+  padding: 5px;
   margin-bottom: 5px;
-  border-radius: 100px 30px 30px 100px;
+  /* border-radius: 100px 30px 30px 100px; */
+  border-radius: 10px;
   height: auto;
   padding-right: 10px;
 }
@@ -1935,6 +1937,22 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 .circuit-attr select{margin-left:5px;}
 .circuit-attr{color:#fff;font-weight:800;padding:0 5px;}
 .circuit{background-color:#808181;padding:10px;margin-top:10px;margin-bottom:5px;border-radius:8px;}
+.exercise-btn-action{padding-top:10px}
+.workout-exercise-lists .sm-icons{
+	width:25px;
+	height:25px;
+	background-size:18px auto;
+	display:inline-block;
+	float:none;
+}
+.exercise-number:hover{cursor:pointer;}
+.workout-exercise-lists li td > label{
+	color:#fff;
+	margin-bottom:0;
+	display:block;
+	text-align:left;
+	font-size:12px;
+}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

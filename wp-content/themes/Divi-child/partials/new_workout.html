@@ -68,28 +68,35 @@
                       <ul class="workout-exercise-lists">
                           <li class="workout-exercise-item" ng-repeat="exercise in circuit.exercises track by $index">
                               <table class="workout-exercise-options">
-                                  <td ng-click="onNamingExercise(exercise)"><span class="exercise-number d-flex"><label class = "w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span></td>
+                                <td class="pr-2">
+									<span title="Click to group" ng-click="onNamingExercise(exercise)" class="exercise-number d-flex"><label class="w-100 my-auto">{{ exercise.group_by }}</label></span>
+								</td>
                                   <td>
+									  <label>Body Part</label>
                                       <select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
                                           <option value="">Body Part</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>Exercise</label>
                                       <select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
                                           <option value="">Exercise</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>Variation 1</label>
                                       <select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
                                           <option value="">Variation 1</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>Variation 2</label>
                                       <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
                                           <option value="">Variation 2</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>SQ</label>
                                       <select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
                                           <option value="">SQ</option>
                                       </select>
@@ -100,31 +107,36 @@
                                       <!--</select>-->
                                   <!--</td>-->
                                   <td>
+									<label>Reps</label>
                                       <select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
                                           <option value="">Reps</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>Tempo</label>
                                       <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
                                           <option value="">Tempo</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>Rest</label>
                                       <select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
                                           <option value="">Rest</option>
                                       </select>
                                   </td>
                                   <td>
+									<label>IMPL</label>
                                       <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
                                           <option value="">IMPL 1</option>
                                       </select>
                                   </td>
-                                  <td>
-                          <span class="exercise-btn-action"><a href="javascript:void(0)" ng-click="onCopyExercise(exercise)">Duplicate</a><span>
-                                  </td>
-                                  <td>
-                          <span class="exercise-btn-action"><a href="javascript:void(0)" ng-click="onRemoveExercise(exercise)">Delete</a><span>
-                                  </td>
+								 <td class="pl-2">
+									<label>Actions</label>
+									<div class="text-center exercise-actions">
+										<a title="Duplicate" href="#" ng-click="onCopyExercise(exercise)"><span class="sm-icons sm-record-icon"></span></a>
+										<a title="Delete" href="javascript:void(0)" ng-click="removeExercise(exercise)"><span class="sm-icons sm-delete-icon"></span></a>
+									</div>
+								</td>
                               </table>
                           </li>
                       </ul>
@@ -186,7 +198,6 @@
                               </select>
                           </div>
                       </div>
-
                       <div class="col-lg-10 col-md-10 assign-client-tab-content" ng-if="workout.selectedDay.clients.length > 0 && workout.selectedDay.selectedClient">
                         <div class="tab-content">
                           <div class="tab-pane fade show active" id="lorem" role="tabpanel">
@@ -244,483 +255,9 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="tab-pane fade" id="ipsum" role="tabpanel">
-                              <div class="container">
-                                  <div class="row">
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-                                          <p>Client Focus: <span>Fat Loss</span></p>
-                                          <ul class="workout-exercise-lists">
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>1</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 2</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>2</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 2</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>3</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 2</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>4</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 2</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-                                          <p>Last 2 completed sets</p>
-
-                                          <div class="container">
-                                              <div class="row">
-                                                  <div class="col-lg-6 col-md-6">
-                                                      <div class="last-completed-sets">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Sets</th>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="10"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="75LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="2"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="8"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="115LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="4"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="12"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="95LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="9"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="210LBS"></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-6 col-md-6">
-                                                      <div class="last-completed-sets">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Sets</th>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="10"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="75LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="2"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="8"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="115LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="4"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="12"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="95LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="9"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="210LBS"></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-
-                                      </div>
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-
-                                          <div class="container">
-                                              <div class="row">
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 1</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 2</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 3</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="tab-pane fade" id="dolor" role="tabpanel">
-                              <div class="container">
-                                  <div class="row">
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-                                          <p>Client Focus: <span>Fat Loss</span></p>
-                                          <ul class="workout-exercise-lists">
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>1</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 3</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>2</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 3</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>3</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 3</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                              <li class="workout-exercise-item">
-                                                  <table class="workout-exercise-options">
-                                                      <td><span class="exercise-number"><label>4</label></span></td>
-                                                      <td>
-                                                          <select>
-                                                              <option>Body Part</option>
-                                                          </select>
-                                                      </td>
-                                                      <td>
-                                                          <select>
-                                                              <option>IMPL 3</option>
-                                                          </select>
-                                                      </td>
-                                                  </table>
-                                              </li>
-                                          </ul>
-                                      </div>
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-                                          <p>Last 2 completed sets</p>
-
-                                          <div class="container">
-                                              <div class="row">
-                                                  <div class="col-lg-6 col-md-6">
-                                                      <div class="last-completed-sets">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Sets</th>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="10"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="75LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="2"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="8"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="115LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="4"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="12"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="95LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="9"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="210LBS"></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-6 col-md-6">
-                                                      <div class="last-completed-sets">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Sets</th>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="10"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="75LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="2"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="8"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="115LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="4"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="12"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="95LBS"></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-prev-val" type="text" value="3"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="9"></td>
-                                                                  <td><input class="set-prev-val" type="text" value="210LBS"></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-
-                                      </div>
-                                      <div class="col-lg-4 col-md-4 assign-workout">
-
-                                          <div class="container">
-                                              <div class="row">
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 1</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 2</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                                  <div class="col-lg-4 col-md-4">
-                                                      <p>SET 3</p>
-                                                      <div class="assign-sets-wrapper">
-                                                          <table class="last-sets" style="width: 100% !important;">
-                                                              <tr>
-                                                                  <th>Reps</th>
-                                                                  <th>Weight</th>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                                  <td><input class="set-val" type="text" value=""></td>
-                                                              </tr>
-
-                                                          </table>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                          </div> 
                         </div>
-
                       </div>
-
                   </div>
               </div>
           </div>
