@@ -165,10 +165,12 @@ app.controller('editWorkoutController', function($scope, $http, global) {
             }
         }
 
-
+        console.log('LLLLLLLLLLLLLLLLLLLLLLLLLL');
+        console.log(angular.copy($scope.workout.days));
         if ($scope.workout.days.length > 0)
         {
             optimizeDays();
+
             selectDay($scope.workout.days[0]);
 
             /* get the largest set in a selected day */
@@ -663,7 +665,9 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                                 imp = angular.copy(mImpCustom);
                             }
 
-                            mImp1s.push(imp);
+                            if (imp) {
+                                mImp1s.push(imp);
+                            }
                         }
 
                         mImp1s.push('custom');
@@ -706,12 +710,12 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                             var rep = mExercise.selectedSQ.options.rep_options[mI];
 
                             if (rep == 'custom') {
-                                console.log('hjjjjjjjjjjjjjjjjjj');
                                 rep = angular.copy(mRep);
                             }
 
-                           
-                            mReps.push(rep);
+                            if (rep) {
+                                mReps.push(rep);
+                            }
                             
                         }
                         mReps.push('custom');
@@ -719,7 +723,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                         mExercise.selectedSQ.selectedRep = mRep;
                     } else {
                         delete mExercise.selectedSQ.selectedRep; 
-                        console.log('uuuuuuuuuuuuuuuuuuuuu')
+
                     }
                     
                     break;
@@ -737,20 +741,23 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                 {
                     var tempo = mExercise.selectedSQ.options.tempo[mI];
 
-                    if (tempo == 'others') {
+                    if (tempo == 'custom') {
                         tempo = angular.copy(mExercise.exer_tempo);
                     }
 
-                    mTempos.push(tempo);
+                    if (tempo) {
+                        mTempos.push(tempo);
+                    }
+
                 }
 
                 mExercise.selectedSQ.options.tempo = mTempos;
             }
 
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'others') {
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedTempo == 'custom') {
                 var mOtherName = prompt("Tempo");
 
-                while (mOtherName == 'others') {
+                while (mOtherName == 'custom') {
                     mOtherName = prompt("Tempo");
                 }
 
@@ -760,11 +767,14 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                 {
                     var tempo = mExercise.selectedSQ.options.tempo[mI];
 
-                    if (tempo == 'others') {
+                    if (tempo == 'custom') {
                         tempo = angular.copy(mOtherName);
                     }
 
-                    mTempos.push(tempo);
+                    if (tempo) {
+                        mTempos.push(tempo);
+                    }
+
                 }
 
                 mExercise.selectedSQ.options.tempo = mTempos;
@@ -782,21 +792,24 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                 {
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
-                    if (rest == 'others') {
+                    if (rest == 'custom') {
                         rest = angular.copy(mExercise.exer_rest);
                     }
 
-                    mRests.push(rest);
+                    if (rest) {
+                        mRests.push(rest);
+                    }
+
                 }
 
                 mExercise.selectedSQ.options.rest = mRests;
             }
 
-            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'others')
+            if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'custom')
             {
                 var mOtherName = prompt("Rest");
 
-                while (mOtherName == 'others') {
+                while (mOtherName == 'custom') {
                     mOtherName = prompt("Rest");
                 }
 
@@ -806,11 +819,14 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                 {
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
-                    if (rest == 'others') {
+                    if (rest == 'custom') {
                         rest = angular.copy(mOtherName);
                     }
 
-                    mRests.push(rest);
+                    if (rest) {
+                        mRests.push(rest);
+                    }
+
                 }
 
                 mExercise.selectedSQ.options.rest = mRests;
@@ -844,6 +860,22 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         }
 
         $scope.workout.selectedDay.circuits = global.circuits($scope.workout.selectedDay.exercises);
+
+
+
+        setTimeout(function()
+        {
+            if ($scope.workout.selectedDay.exercises.length > 0)  {
+                console.log( global.circuits($scope.workout.selectedDay.exercises));
+                $scope.workout.selectedDay.exercises[0].test = 'test';
+            }
+        }, 200);
+
+        if($scope.$root.$$phase != '$apply' &&
+            $scope.$root.$$phase != '$digest'
+        ) {
+            $scope.$apply();
+        }
     }
 
     function generateNewExercise(hash)

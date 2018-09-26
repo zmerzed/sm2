@@ -1181,6 +1181,30 @@ function workOutUpdate($data)
                     }
                 }
             }
+
+
+            /* circuits */
+
+            if (isset($d['circuits']))
+            {
+                foreach ($d['circuits'] as $c)
+                {
+
+                    foreach ($c['exercises'] as $exercise) {
+                        if (isset($c['exer_sets'])) {
+                            $wpdb->update(
+                                'workout_exercises_tbl',
+                                array(
+                                    'exer_sets' => $c['exer_sets'],
+
+                                ),
+                                array('exer_ID' => $exercise['exer_ID'])
+                            );
+                        }
+                    }
+
+                }
+            }
         }
     }
 

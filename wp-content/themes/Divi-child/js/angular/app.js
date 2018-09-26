@@ -57,7 +57,8 @@ app.constant('global', {
         }, {});
 
         var groups = Object.keys(group_to_values).map(function (key) {
-            return {group_by_letter: key, exercises: group_to_values[key]};
+
+            return {group_by_letter: key, exercises: group_to_values[key], exer_sets: group_to_values[key][0].exer_sets};
         });
 
         return groups;

@@ -116,12 +116,12 @@
                                             <option value="">SQ</option>
                                         </select>
                                     </td>
-                                    <td>
-										<label>Sets</label>
-                                        <select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">
-                                            <option value="">Sets</option>
-                                        </select>
-                                    </td>
+                                    <!--<td>-->
+										<!--<label>Sets</label>-->
+                                        <!--<select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">-->
+                                            <!--<option value="">Sets</option>-->
+                                        <!--</select>-->
+                                    <!--</td>-->
                                     <td>
 										<label>Reps</label>
                                         <select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
@@ -157,8 +157,28 @@
                                 </table>
                             </li>
                         </ul>
-                        <div class="circuit-attr">
+                        <div class="circuit-attr" ng-show="circuit.group_by_letter != 'undefined'">
                             <div><span>{{ circuit.group_by_letter }}: </span> </div>
+                            <div>
+                                <select ng-model="circuit.exer_sets">
+                                    <option value="">SETS</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select>
+                                    <option value="">REPS</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
