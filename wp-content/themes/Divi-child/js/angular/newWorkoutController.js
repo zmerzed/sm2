@@ -292,8 +292,9 @@ angular.module('smApp')
             }
         }
         toSend.user_id = CURRENT_USER_ID;
-
+        console.log(toSend);
         $('#idWorkoutForm').val(JSON.stringify(toSend));
+        //return false;
         return true;
     };
 
@@ -602,10 +603,31 @@ angular.module('smApp')
                 $scope.workoutMaxSet = noSet;
             }
 
+
         }
 
         $scope.workout.selectedDay.circuits = global.circuits($scope.workout.selectedDay.exercises);
+
     }
+
+    $scope.onChangeCircuitSet = function() {
+
+        var noSet  = 0;
+        $scope.workoutMaxSet = 0;
+
+        for (var i in $scope.workout.selectedDay.circuits) {
+
+            var circuit = $scope.workout.selectedDay.circuits[i];
+
+            if (circuit.sets) {
+                noSet = parseInt(circuit.sets);
+            }
+
+            if (noSet >= $scope.workoutMaxSet) {
+                $scope.workoutMaxSet = noSet;
+            }
+        }
+    };
 
     setTimeout(function() {
         $("#idSelectClient").change(function() {

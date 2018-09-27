@@ -149,7 +149,7 @@ PM-->
                       <div class="circuit-attr" ng-if="circuit.group_by_letter.length > 0">
                           <div><span>{{ circuit.group_by_letter }}: </span></div>
                           <div>
-                              <select ng-model="circuit.sets">
+                              <select ng-model="circuit.sets" ng-change="onChangeCircuitSet()">
                                   <option value="">SETS</option>
                                   <option value="1">1</option>
                                   <option value="2">2</option>
@@ -250,7 +250,9 @@ PM-->
                                             <th>Weight</th>
                                           </tr>
                                           <tr ng-repeat="exer in workout.selectedDay.selectedClient.exercises track by $index">
-                                            <td><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="exer.assignment_sets[numSet].weight"></td>
+                                                <!--<td><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="exer.assignment_sets[numSet].weight"></td>-->
+                                                <td><input class="set-val" type="text" ng-model="exer.assignment_sets[numSet].weight"></td>
+
                                           </tr>
                                         </table>
                                       </div>
