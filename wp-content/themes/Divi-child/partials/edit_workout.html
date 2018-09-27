@@ -1,45 +1,62 @@
-<div class="col-lg-12">
-    <a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-right" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
-    <select onchange="selectClient(this.value)" class="float-right program-selected-clients">
-        <option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
-            {{ client.user_nicename }}
-        </option>
-    </select>
-    <script>
-        function selectClient(a){
-            var curVal = $('.print-btn').attr('href');
-            curVal = curVal.split('&workout_client_id=');
-            curVal += '&workout_client_id=' + a;
-            $('.print-btn').attr('href', curVal);
-        }
-    </script>
+<script>
+	function selectClient(a){
+		var curVal = $('.print-btn').attr('href');
+		curVal = curVal.split('&workout_client_id=');
+		curVal += '&workout_client_id=' + a;
+		$('.print-btn').attr('href', curVal);
+	}
+	function togTopOpt(a){
+		var targ = $('.top-options');
+		if(!$(targ).is(':visible'))
+			$(a).find('.down').attr('class', 'down fa fa-chevron-up');
+		else
+			$(a).find('.down').attr('class', 'down fa fa-chevron-down');
+		$(targ).slideToggle();
+	}
+</script>
+<div class="text-right pr-3">
+	<a href="javascript:void(0)" class="prog-option red-btn" style="font-size:11px;" onclick="togTopOpt(this)">
+		<span class="fa fa-gear pr-1"></span> <span class="down fa fa-chevron-down"></span>
+	</a>
+</div>
+<div class="container top-options pt-4" style="display:none;">
+	<div class="row">
+		<div class="col-lg-6 col-md-6">
+			<select onchange="selectClient(this.value)" class="float-left program-selected-clients">
+				<option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
+					{{ client.user_nicename }}
+				</option>
+			</select>
+			<a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-left" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
+		</div>
+		<div class="col-lg-6 col-md-6 text-right">
+			<div ng-if="!workout.note">
+				Program note is not yet provided.
+				<button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">create</button>
+			</div>
+			<div ng-if="workout.note.detail">
+				<strong>Note:</strong>
+				{{ workout.note.detail }}
+				<button style="font-size:11px;" type="button" data-toggle="modal" data-target="#idNoteModal" class="btn red-btn">edit</button>
+			</div>
+		</div>
+	</div>
 </div>
 <hr class="clearfix">
 <form id="idForm" submit="sendForm" action="" method="POST">
     <div class="container trainer-header-section">
         <div class="row">
-            <div class="col-lg-6 col-md-6">
-        <span class="workout-day-name">
-          <label>Program Name: </label>
-          <input type="text" ng-model="workout.workout_name">
-        </span>
+            <div class="col-lg-7 col-md-7">
+				<span class="workout-day-name">
+				  <label>Program Name: </label>
+				  <input type="text" ng-model="workout.workout_name">
+				</span>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="btn-add-workout">
-                    <button type="button" ng-click="newWorkOutDay()">+ new workout</button>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12">
-                <div ng-if="!workout.note">
-                    Program note is not yet provided.
-                    <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">create</button>
-                </div>
-                <div class = "mt-3" ng-if="workout.note.detail">
-                    <strong>Note:</strong>
-                    {{ workout.note.detail }}
-                    <button type="button" data-toggle="modal" data-target="#idNoteModal" class = "btn btn-secondary">edit</button>
-                </div>
-            </div>
+            <div class="col-lg-5 col-md-5 text-right">
+				 <div class="btn-add-workout pb-3">
+					<button type="button" ng-click="newWorkOutDay()">+ new workout</button>			
+				</div>
+            </div>            
         </div>
     </div>
     <div class="mobile-nav-program">
@@ -94,10 +111,10 @@
                     <div class="circuit" ng-repeat="circuit in workout.selectedDay.circuits">
                         <ul class="workout-exercise-lists">
                             <li class="workout-exercise-item" ng-repeat="exercise in circuit.exercises track by $index" ng-show="!exercise.isDelete">
-								<div style="width:10%;" class="float-left">
+								<div style="width:10%;" class="exer-left float-left">
 									<span ng-click="onNamingExercise(exercise)" class="exercise-number d-flex"><label class="w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span>
 								</div>
-								<div class="exercise-details float-left pt-0" style="width:80%;">
+								<div class="exer-center exercise-details float-left pt-0" style="width:80%;">
 									<table class="workout-exercise-options">                                   
 										<td>
 											<label>Body Part</label>
@@ -162,7 +179,7 @@
 										<!-- <td></td> -->
 									</table>
 								</div>
-								<div style="width:10%;" class="exercise-details pt-0 float-left text-center exercise-actions">
+								<div style="width:10%;" class="exer-right exercise-details pt-0 float-left text-center exercise-actions">
 									<label>Actions</label>
 									<div>
 										<a title="Duplicate" href="#" ng-click="onCopyExercise(exercise)"><span class="sm-icons sm-record-icon"></span></a>
@@ -221,7 +238,7 @@
                             </ul>
                             <div class="browse-client-workout">
                                 <select ng-model="reader.selectedClient">
-                                    <option disabled selected>Add Client</option>
+                                    <option value="" disabled selected>Add Client</option>
                                     <option ng-repeat="client in clients" ng-value="client.ID">{{ client.user_nicename}} </option>
                                 </select>
                             </div>
@@ -232,7 +249,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
-                                                <p>Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
+                                                <p class="assign-focus">Client Focus: <span>{{ workout.selectedDay.selectedClient.focus }}</span></p>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -273,7 +290,7 @@
                                                                     <th>Weight</th>
                                                                 </tr>
                                                                 <tr ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
-                                                                    <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ $index + 1 }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
+                                                                    <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ ex.group_by }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
                                                                 </tr>
                                                             </table>
                                                         </div>

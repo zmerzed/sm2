@@ -1348,7 +1348,7 @@ padding-right: 2px; */
 /*---------------*/
 /*------GYM------*/
 /*---------------*/
-.gym-page .btn-add-workout button{margin-top:10px;}
+.gym-page .btn-add-workout button[type="submit"]{margin-top:10px;}
 .gym-page .red-btn{background-color:#6db6e5}
 ul.workout-exercise-lists li.workout-exercise-item:after,
 .workout-wrapper:after{
@@ -1965,6 +1965,10 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 }
 .circuit-attr{padding-top:5px;}
 .circuit-attr input[type="text"]{padding:0 5px;}
+.prog-option{padding:2px 5px;text-transform:lowercase;}
+.prog-option,
+.prog-option .fa.fa-gear{font-size:14px;}
+.prog-option .fa{font-size:12px;line-height:normal;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
@@ -2005,6 +2009,93 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 }
 @media(max-width:767px){
 	.title-welcome-section{margin-top:0;}	
+}
+@media(max-width:680px){
+	.exer-left,
+	.exer-center,
+	.exer-right{
+		width:100%!important;
+		padding-bottom:10px;
+	}
+	.exer-right.exercise-details label{
+		padding-bottom:5px;
+	}
+	.exer-right.exercise-details{
+		padding-top:10px!important;
+		border-top:1px solid #ccc;
+		text-align:left!important;
+	}
+	span.exercise-number{
+		width:100%;
+		z-index:1;
+		border-radius:10px;
+	}
+	ul.workout-exercise-lists li.workout-exercise-item{
+		padding:5px;
+	}
+	.btn-add-workout button{
+		width:100%;
+		margin-top:10px;
+	}
+	.trainer-header-section{
+		margin-bottom:10px;
+	}
+	.workout-tab-pane-wrapper{
+		border-radius:10px 10px 0 0;
+	}
+	div[ng-if="workout.note.detail"] strong{display:block;}
+	div[ng-if="!workout.note_detail || workout.note_detail.length < 0"],
+	div[ng-if="workout.note.detail"]{
+		text-align:left;
+		padding-top:15px;
+		border-top:1px solid #ccc;
+	}
+	.assign-clients-workout li a.active{
+		border-radius:10px;
+	}
+	.assign-clients-workout li a small{
+		right:10px;
+	}
+	ul.nav.nav-tabs.nav-tabs--vertical.nav-tabs--left.assign-clients-workout{
+		padding-top:5px;
+	}
+	.assign-clients-workout li a{
+		border-top-left-radius:0;
+		border-top-right-radius:0;
+		border-radius:10px!important;
+		padding-right:40px;		
+		margin-right:2px;
+		background-color:#808181;
+	}
+	.assign-clients-workout li{
+		display:inline-block;
+		width:auto;
+	}
+	.browse-client-workout select{
+		width:100%;
+	}
+	.workout-day-name input{
+		width:100%;
+	}
+	.workout-btn-actions{
+		border-bottom:1px solid #ccc;
+		text-align:left;
+		padding-top:10px;
+		margin-bottom:10px;
+	}
+	.assign-client-tab-content{
+		border-radius:0;
+	}
+	.assign-client-to-workout .workout-exercise-lists{margin-top:0;}
+	.assign-client-to-workout .select-date-workout table{
+		margin:0!important;
+	}
+	.assign-client-to-workout .select-date-workout input{
+		display:inline-block;
+	}
+	.select-date-workout{
+		text-align:left;
+	}
 }
 @media(max-width:480px){
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:50%;}
