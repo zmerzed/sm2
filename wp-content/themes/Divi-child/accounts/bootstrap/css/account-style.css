@@ -2008,28 +2008,8 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	}
 }
 @media(max-width:767px){
-	.title-welcome-section{margin-top:0;}	
-}
-@media(max-width:680px){
-	.exer-left,
-	.exer-center,
-	.exer-right{
-		width:100%!important;
-		padding-bottom:10px;
-	}
-	.exer-right.exercise-details label{
-		padding-bottom:5px;
-	}
-	.exer-right.exercise-details{
-		padding-top:10px!important;
-		border-top:1px solid #ccc;
-		text-align:left!important;
-	}
-	span.exercise-number{
-		width:100%;
-		z-index:1;
-		border-radius:10px;
-	}
+	.title-welcome-section{margin-top:0;}
+	
 	ul.workout-exercise-lists li.workout-exercise-item{
 		padding:5px;
 	}
@@ -2096,6 +2076,27 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	.select-date-workout{
 		text-align:left;
 	}
+}
+@media(max-width:680px){
+	.exer-left,
+	.exer-center,
+	.exer-right{
+		width:100%!important;
+		padding-bottom:10px;
+	}
+	.exer-right.exercise-details label{
+		padding-bottom:5px;
+	}
+	.exer-right.exercise-details{
+		padding-top:10px!important;
+		border-top:1px solid #ccc;
+		text-align:left!important;
+	}
+	span.exercise-number{
+		width:100%;
+		z-index:1;
+		border-radius:10px;
+	}	
 }
 @media(max-width:480px){
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:50%;}

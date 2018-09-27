@@ -34,6 +34,7 @@
 			$('a.nav-item:eq('+val+')').click();
 		}
 	</script>
+	<strong class="d-sm-block d-md-none">Select Workout to manage</strong>
 	<select onchange="update(this);" class="mb-3 d-sm-block d-md-none">
 		<option ng-repeat="day in workout.days" ng-selected="isActive(day)" value="{{day.seq}}" >Workout {{day.seq}} - {{day.name}}</option>
 	</select>
