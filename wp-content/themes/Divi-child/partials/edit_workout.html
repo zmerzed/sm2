@@ -94,79 +94,81 @@
                     <div class="circuit" ng-repeat="circuit in workout.selectedDay.circuits">
                         <ul class="workout-exercise-lists">
                             <li class="workout-exercise-item" ng-repeat="exercise in circuit.exercises track by $index" ng-show="!exercise.isDelete">
-                                <table class="workout-exercise-options">
-                                    <td class="pr-2">
-										<span ng-click="onNamingExercise(exercise)" class="exercise-number d-flex"><label class="w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span>
-									</td>
-                                    <td>
-										<label>Body Part</label>
-                                        <select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
-                                            <option value="{{exercise.exer_body_part}}">{{exercise.exer_body_part}}</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>Exercise</label>
-                                        <select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
-                                            <option value="">Exercise</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>Variation 1</label>
-                                        <select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
-                                            <option value="">Variation 1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>Variation 2</label>
-                                        <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
-                                            <option value="">Variation 2</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>SQ</label>
-                                        <select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
-                                            <option value="">SQ</option>
-                                        </select>
-                                    </td>
-                                    <!--<td>-->
-										<!--<label>Sets</label>-->
-                                        <!--<select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">-->
-                                            <!--<option value="">Sets</option>-->
-                                        <!--</select>-->
-                                    <!--</td>-->
-                                    <!--<td>-->
-										<!--<label>Reps</label>-->
-                                        <!--<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">-->
-                                            <!--<option value="">Reps</option>-->
-                                        <!--</select>-->
-                                    <!--</td>-->
-                                    <td>
-										<label>Tempo</label>
-                                        <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
-                                            <option value="">Tempo</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>Rest</label>
-                                        <select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
-                                            <option value="">Rest</option>
-                                        </select>
-                                    </td>
-                                    <td>
-										<label>IMPL</label>
-                                        <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
-                                            <option value="">IMPL 1</option>
-                                        </select>
-                                    </td>
-                                    <td class="pl-2">
-										<label>Actions</label>
-										<div class="text-center exercise-actions">
-											<a title="Duplicate" href="#" ng-click="onCopyExercise(exercise)"><span class="sm-icons sm-record-icon"></span></a>
-											<a title="Delete" href="javascript:void(0)" ng-click="removeExercise(exercise)"><span class="sm-icons sm-delete-icon"></span></a>
-										</div>
-									</td>
-                                    <!-- <td></td> -->
-                                </table>
+								<div style="width:10%;" class="float-left">
+									<span ng-click="onNamingExercise(exercise)" class="exercise-number d-flex"><label class="w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span>
+								</div>
+								<div class="exercise-details float-left pt-0" style="width:80%;">
+									<table class="workout-exercise-options">                                   
+										<td>
+											<label>Body Part</label>
+											<select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
+												<option value="{{exercise.exer_body_part}}">{{exercise.exer_body_part}}</option>
+											</select>
+										</td>
+										<td>
+											<label>Exercise</label>
+											<select ng-model="exercise.selectedPart.selectedType" ng-options="type.type for type in exercise.selectedPart.options">
+												<option value="">Exercise</option>
+											</select>
+										</td>
+										<td>
+											<label>Variation 1</label>
+											<select ng-model="exercise.selectedPart.selectedType.selectedExercise1" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_1">
+												<option value="">Variation 1</option>
+											</select>
+										</td>
+										<td>
+											<label>Variation 2</label>
+											<select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
+												<option value="">Variation 2</option>
+											</select>
+										</td>
+										<td>
+											<label>SQ</label>
+											<select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
+												<option value="">SQ</option>
+											</select>
+										</td>
+										<!--<td>-->
+											<!--<label>Sets</label>-->
+											<!--<select ng-model="exercise.selectedSQ.selectedSet" ng-options="set as set for set in exercise.selectedSQ.options.set_options">-->
+												<!--<option value="">Sets</option>-->
+											<!--</select>-->
+										<!--</td>-->
+										<!--<td>-->
+											<!--<label>Reps</label>-->
+											<!--<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">-->
+												<!--<option value="">Reps</option>-->
+											<!--</select>-->
+										<!--</td>-->
+										<td>
+											<label>Tempo</label>
+											<select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
+												<option value="">Tempo</option>
+											</select>
+										</td>
+										<td>
+											<label>Rest</label>
+											<select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
+												<option value="">Rest</option>
+											</select>
+										</td>
+										<td>
+											<label>IMPL</label>
+											<select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
+												<option value="">IMPL 1</option>
+											</select>
+										</td>
+										<!-- <td></td> -->
+									</table>
+								</div>
+								<div style="width:10%;" class="exercise-details pt-0 float-left text-center exercise-actions">
+									<label>Actions</label>
+									<div>
+										<a title="Duplicate" href="#" ng-click="onCopyExercise(exercise)"><span class="sm-icons sm-record-icon"></span></a>
+										<a title="Delete" href="javascript:void(0)" ng-click="removeExercise(exercise)"><span class="sm-icons sm-delete-icon"></span></a>
+									</div>
+								</div>
                             </li>
                         </ul>
                         <div class="circuit-attr" ng-show="circuit.group_by_letter != 'undefined'">
