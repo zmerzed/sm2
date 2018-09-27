@@ -122,12 +122,12 @@
                                             <!--<option value="">Sets</option>-->
                                         <!--</select>-->
                                     <!--</td>-->
-                                    <td>
-										<label>Reps</label>
-                                        <select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
-                                            <option value="">Reps</option>
-                                        </select>
-                                    </td>
+                                    <!--<td>-->
+										<!--<label>Reps</label>-->
+                                        <!--<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">-->
+                                            <!--<option value="">Reps</option>-->
+                                        <!--</select>-->
+                                    <!--</td>-->
                                     <td>
 										<label>Tempo</label>
                                         <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
@@ -175,9 +175,7 @@
                                 </select>
                             </div>
                             <div>
-                                <select>
-                                    <option value="">REPS</option>
-                                </select>
+                                <input type="text" ng-model="circuit.exer_rep" placeholder="reps">
                             </div>
                         </div>
                     </div>

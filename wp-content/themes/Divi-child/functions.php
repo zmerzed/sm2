@@ -553,7 +553,7 @@ function workOutAdd($data)
                         }
 
                         if (isset($ex['selectedSQ']['selectedRep']))  {
-                            $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
+                        //    $exercise['exer_rep'] = $ex['selectedSQ']['selectedRep'];
                         }
 
                         if (isset($ex['selectedSQ']['selectedTempo']))  {
@@ -641,21 +641,35 @@ function workOutAdd($data)
 
             /* circuits */
 
-            if ($d['circuits'])
+            if (isset($d['circuits']))
             {
                 foreach ($d['circuits'] as $c)
                 {
 
-                    if (isset($c['sets'])) {
+                    foreach ($c['exercises'] as $exercise)
+                    {
+                        $sets = '';
+                        $reps = '';
+
+                        if (isset($c['sets'])) {
+                            $sets = $c['sets'];
+                        }
+
+                        if (isset($c['reps'])) {
+                            $reps = $c['reps'];
+                        }
+
                         $wpdb->update(
                             'workout_exercises_tbl',
                             array(
-                                'exer_sets' => $c['sets'],
-
+                                'exer_sets' => $sets . '',
+                                'exer_rep' => $reps  . ''
                             ),
-                            array('exer_workout_ID' => $workOutId)
+                            array('hash' => $exercise['hash'])
                         );
+
                     }
+
                 }
             }
         }
@@ -1189,18 +1203,28 @@ function workOutUpdate($data)
             {
                 foreach ($d['circuits'] as $c)
                 {
+                    foreach ($c['exercises'] as $exercise)
+                    {
+                        $sets = '';
+                        $reps = '';
 
-                    foreach ($c['exercises'] as $exercise) {
                         if (isset($c['exer_sets'])) {
-                            $wpdb->update(
-                                'workout_exercises_tbl',
-                                array(
-                                    'exer_sets' => $c['exer_sets'],
-
-                                ),
-                                array('exer_ID' => $exercise['exer_ID'])
-                            );
+                            $sets = $c['exer_sets'];
                         }
+
+                        if (isset($c['exer_rep'])) {
+                            $reps = $c['exer_rep'];
+                        }
+
+                        $wpdb->update(
+                            'workout_exercises_tbl',
+                            array(
+                                'exer_sets' => $sets . '',
+                                'exer_rep' => $reps  . ''
+                            ),
+                            array('hash' => $exercise['hash'])
+                        );
+
                     }
 
                 }
