@@ -148,8 +148,8 @@
                           </li>
                       </ul>
                       <div class="circuit-attr" ng-if="circuit.group_by_letter.length > 0">
-                          <div><span>{{ circuit.group_by_letter }}: </span></div>
-                          <div>
+                          <div class="d-inline-block"><span>{{ circuit.group_by_letter }}: </span></div>
+                          <div class="d-inline-block">
                               <select ng-model="circuit.sets">
                                   <option value="">SETS</option>
                                   <option value="1">1</option>
@@ -164,7 +164,7 @@
                                   <option value="10">10</option>
                               </select>
                           </div>
-                          <div>
+                          <div class="d-inline-block">
                               <input type="text" ng-model="circuit.reps" placeholder="reps">
                           </div>
                       </div>

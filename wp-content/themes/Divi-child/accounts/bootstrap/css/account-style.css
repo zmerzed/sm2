@@ -1132,6 +1132,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
   color: #1c1a1b;
 }
 
+.circuit-attr input[type="text"],
 .workout-day-name input{
     border: 0px;
     padding: 3px 25px;
@@ -1960,7 +1961,10 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 .mobile-nav-program select{
 	font-size:14px;
 	padding:10px;
+	width:100%;
 }
+.circuit-attr{padding-top:5px;}
+.circuit-attr input[type="text"]{padding:0 5px;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
