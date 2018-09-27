@@ -1087,6 +1087,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
   float: left;
 }
 
+.mobile-nav-program select,
 .circuit-attr select,
 .program-selected-clients,
 .workout-exercise-options tr td select{
@@ -1952,6 +1953,10 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	display:block;
 	text-align:left;
 	font-size:12px;
+}
+.mobile-nav-program select{
+	font-size:25px;
+	padding:10px;
 }
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}

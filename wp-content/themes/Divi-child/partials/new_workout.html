@@ -26,8 +26,19 @@
           </div>
       </div>
   </div>
-    
-  <nav>
+<div class="mobile-nav-program">
+	<script>
+		function update(a){
+			var val = $(a).val();
+			val--;
+			$('a.nav-item:eq('+val+')').click();
+		}
+	</script>
+	<select onchange="update(this);" class="mb-3 d-none d-sm-block d-md-none">
+		<option ng-repeat="day in workout.days" ng-selected="isActive(day)" value="{{day.seq}}" >Workout {{day.seq}} - {{day.name}}</option>
+	</select>
+</div>
+  <nav class="d-none d-sm-none d-md-block">
       <div class="nav nav-tabs" id="message-nav-tab" role="tablist">
           <a class="nav-item nav-link"
              id="nav-home-tab"
