@@ -117,12 +117,7 @@
                                           <!--<option value="">Sets</option>-->
                                       <!--</select>-->
                                   <!--</td>-->
-                                  <!--<td>-->
-									<!--<label>Reps</label>-->
-                                      <!--<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">-->
-                                          <!--<option value="">Reps</option>-->
-                                      <!--</select>-->
-                                  <!--</td>-->
+PM-->
                                   <td>
 									<label>Tempo</label>
                                       <select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">
@@ -222,7 +217,7 @@
                                   <input placeholder="YY-MM-DD" type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
                                 </div>
                                 <div class="col-lg-8 col-md-8 assign-workout select-date-workout">
-                                  <div uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
+                                  <div show-meridian="false" uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
                                 </div>
                               </div>
                               <div class="row">

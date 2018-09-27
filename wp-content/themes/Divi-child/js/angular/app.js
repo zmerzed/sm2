@@ -180,7 +180,6 @@ app.directive("datepicker", function () {
         restrict: "A",
         link: function (scope, el, attr) {
             var dateToday = new Date();
-            console.log(el);
             el.datepicker({
                 minDate: dateToday,
                 dateFormat: 'yy-mm-dd',

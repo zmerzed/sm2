@@ -598,7 +598,7 @@ function workOutAdd($data)
                         $scheduleDate = new \Carbon\Carbon($client['date_availability']);
 
                         $newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
-                        $newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:m:s');
+                        $newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d H:m:s');
                     }
 
                     $wpdb->insert('workout_day_clients_tbl', $newClientDay);
@@ -954,7 +954,7 @@ function workOutUpdate($data)
 
                                 $scheduleDate = new \Carbon\Carbon($client['date_availability']);
                                 $newMClient['workout_day_availability'] = $scheduleDate->dayOfWeek;
-                                $newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d h:i:s');
+                                $newMClient['workout_client_schedule'] = $scheduleDate->format('Y-m-d H:i:s');
                             }
                             // insert the new client id
                             $wpdb->insert('workout_day_clients_tbl', $newMClient);
@@ -976,7 +976,7 @@ function workOutUpdate($data)
 
                                 $mUpdate = array(
                                     'workout_day_availability' => $scheduleDate->dayOfWeek,
-                                    'workout_client_schedule' => $scheduleDate->format('Y-m-d h:i:s')
+                                    'workout_client_schedule' => $scheduleDate->format('Y-m-d H:i:s')
                                 );
                             }
 
