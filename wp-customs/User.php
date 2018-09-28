@@ -399,11 +399,12 @@ class User
     //    dd($ids);
         if (getMembershipLevel($this) != 'gym') {
             $parent = getParent($this);
-            $ids[] = $parent['gym'];
+			if($parent)
+				$ids[] = $parent['gym'];
         }
 
         $ids = implode(",", $ids);
-        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN($ids)";
+        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN({$ids})";
 
         // trainer
         if (getMembershipLevel($this) != 'gym') {
