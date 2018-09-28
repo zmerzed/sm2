@@ -193,7 +193,7 @@
                         <div class="circuit-attr" ng-show="circuit.group_by_letter != 'undefined'">
                             <div class="d-inline-block"><span>{{ circuit.group_by_letter }}: </span> </div>
                             <div class="d-inline-block">
-                                <select ng-model="circuit.exer_sets">
+                                <select ng-model="circuit.exer_sets" ng-change="onChangeCircuitSet()">
                                     <option value="">SETS</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -292,8 +292,11 @@
                                                                     <th>Weight</th>
                                                                 </tr>
                                                                 <tr ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
-                                                                    <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ ex.group_by }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
+                                                                    <td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ ex.group_by }}</label></span><input class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>
                                                                 </tr>
+                                                                <!--<tr ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">-->
+                                                                    <!--<td class = "position-relative"><span class="position-absolute set-style-exercise-number exercise-number d-block d-lg-none d-xl-none"><label>{{ ex.group_by }}</label></span><input ng-disabled="clientExerciseSets[$index] <=  numSet" class="set-val" type="text" ng-model="ex.assignment_sets[numSet].weight"></td>-->
+                                                                <!--</tr>-->
                                                             </table>
                                                         </div>
                                                     </div>

@@ -591,17 +591,17 @@ angular.module('smApp')
                 $scope.clientExerciseSets[i] = exercise.selectedSQ.selectedSet;
             }
 
-            if (typeof $scope.workoutMaxSet == 'undefined') 
-            {
-                $scope.workoutMaxSet = 0;
-
-                if(noSet >= $scope.workoutMaxSet) {
-                    $scope.workoutMaxSet = noSet;
-                }
-
-            } else if(noSet >= $scope.workoutMaxSet) {
-                $scope.workoutMaxSet = noSet;
-            }
+            // if (typeof $scope.workoutMaxSet == 'undefined')
+            // {
+            //     $scope.workoutMaxSet = 0;
+            //
+            //     if(noSet >= $scope.workoutMaxSet) {
+            //         $scope.workoutMaxSet = noSet;
+            //     }
+            //
+            // } else if(noSet >= $scope.workoutMaxSet) {
+            //     $scope.workoutMaxSet = noSet;
+            // }
 
 
         }
