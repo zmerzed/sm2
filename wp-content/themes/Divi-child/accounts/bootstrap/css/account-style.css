@@ -973,6 +973,7 @@ table.dataTable thead .sorting_asc:after{
 .trainer-profile img{
   display: block;
   max-width: 100%;
+  margin-bottom:10px;
 }
 
 .trainer-profile-name{
@@ -2006,8 +2007,11 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	.trainer-per-day-schedule-box li{
 		border:1px solid #d5d5d5;
 	}
+	.workout-list-item .workout-wrapper .sm-workout-icon{display:none;}
+	.vid-img img{margin-bottom:1em;}
 }
 @media(max-width:767px){
+	.title-welcome-section h2{font-weight:32px;}
 	.title-welcome-section{margin-top:0;}
 	
 	ul.workout-exercise-lists li.workout-exercise-item{
@@ -2016,6 +2020,7 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	.btn-add-workout button{
 		width:100%;
 		margin-top:10px;
+		padding:10px;
 	}
 	.trainer-header-section{
 		margin-bottom:10px;

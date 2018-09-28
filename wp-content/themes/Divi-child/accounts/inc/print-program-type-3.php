@@ -67,10 +67,10 @@
 						?>
 					</td>
 					<td>
-						<?php echo ($eSet) ? $eRest : $n; ?>
+						<?php echo ($eSet) ? $eSet : $n; ?>
 					</td>
 					<td>
-						<?php echo ($eRep) ? $eSet : $n; ?>
+						<?php echo ($eRep) ? $eRep : $n; ?>
 					</td>
 					<td>
 						<?php echo ($eRest) ? $eRest : $n; ?>
