@@ -2011,7 +2011,7 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	.vid-img img{margin-bottom:1em;}
 }
 @media(max-width:767px){
-	.title-welcome-section h2{font-weight:32px;}
+	.title-welcome-section h2{font-size:32px;}
 	.title-welcome-section{margin-top:0;}
 	
 	ul.workout-exercise-lists li.workout-exercise-item{

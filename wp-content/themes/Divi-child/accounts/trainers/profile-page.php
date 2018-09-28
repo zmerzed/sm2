@@ -39,7 +39,7 @@
 
 	<div class="container trainer-additional-box-info">
 		<div class="row">
-			<div class="col-lg-3 col-md-3">
+			<div class="col-12 mb-4">
 				<h3>education/certs.</h3>
 				<?php if($trainerInfo['uedu'] != ""): ?>
 					<!-- <p> Lorem ipsum dolor sit Consectetur adipiscing Sed do eiusmod tempo</p> -->
@@ -49,7 +49,7 @@
 				endif; ?>
 			</div>
 
-			<div class="col-lg-3 col-md-3">
+			<div class="col-12 mb-4">
 				<h3>specialties</h3>
 				<?php if($trainerInfo['uspe'] != ""): ?>
 					<!-- <p>Sport-Specific Training <br/>Conditioning <br/>Functional Training <br/>Core Strength <br/>Proprioception</p> -->
@@ -59,7 +59,7 @@
 				endif; ?>
 			</div>
 
-			<div class="col-lg-3 col-md-3">
+			<div class="col-12 mb-4">
 				<h3>availability</h3>
 				<?php if($trainerInfo['uava'] != ""): ?>
 					<!-- <p>Monday/Wednesday/Friday <br/>12:00 (Noon) – 8:00 p.m.</p>
@@ -70,7 +70,7 @@
 				endif; ?>
 			</div>
 
-			<div class="col-lg-3 col-md-3">
+			<div class="col-12 mb-4">
 				<h3>experience</h3>
 				<?php if($trainerInfo['uexp'] != ""): ?>
 					<!-- <p>18 Years - Personal Trainer <br/>3 Years - Bodybuilder</p> -->

@@ -403,7 +403,7 @@ class User
         }
 
         $ids = implode(",", $ids);
-        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN(107)";
+        $querystr = "SELECT * FROM workout_tbl WHERE workout_trainer_ID IN($ids)";
 
         // trainer
         if (getMembershipLevel($this) != 'gym') {
