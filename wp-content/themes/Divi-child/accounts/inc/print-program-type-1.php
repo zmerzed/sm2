@@ -36,7 +36,7 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<td>#</td>
+				<td style="text-center">Circuit</td>
 				<td width="20%">Pic</td>
 				<td width="30%">Exercise(Tempo)</td>
 				<td>Sets</td>
@@ -77,8 +77,8 @@
 							$vid = getVideoID($vid);
 			?>
 				<tr>
-					<td><?php echo $jctr; ?></td>
-					<td>
+					<td><?php echo $e->group_by; ?></td>
+					<td width="20%" class="text-center">
 						<?php
 							if($vid)
 								echo '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />';
@@ -88,7 +88,7 @@
 						?>
 					</td>
 					<?php	
-						echo '<td>';
+						echo '<td width="30%">';
 							if($exercise){
 								echo $exercise;
 								echo ($eTempo) ? ' ('.$eTempo.')' : '';

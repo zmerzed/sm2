@@ -17,7 +17,7 @@
 <table class="table-bordered table">
 	<thead>
 		<tr>
-			<td>#</td>
+			<td class="text-center">Circuit</td>
 			<td width="20%">Pic</td>
 			<td width="30%">Exercise (Tempo)</td>
 			<td>Sets</td>
@@ -55,13 +55,13 @@
 						$n = "None";
 		?>
 				<tr>
-					<td><?php echo $jctr; ?></td>
-					<td>
+					<td class="text-center"><?php echo $e->group_by; ?></td>
+					<td width="20%" class="text-center">
 						<?php
 							echo ($vid) ? '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />' : $n;
 						?>
 					</td>
-					<td>
+					<td width="30%">
 						<?php
 							echo ($exercise) ? (($eTempo) ? $exercise.' (<span style="text-transform:uppercase;">'.$eTempo.'</span>)' : $exercise)  : $n;
 						?>

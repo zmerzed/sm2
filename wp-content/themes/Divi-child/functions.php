@@ -2439,7 +2439,7 @@ function getAssignmentSets($exID,$uid){
 }
 function getWExercises($wid){ //Get Workout Exercises
 	global $wpdb;
-	$wExers = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid, OBJECT);
+	$wExers = $wpdb->get_results('SELECT * FROM workout_exercises_tbl WHERE exer_day_ID ='.$wid . ' ORDER BY group_by ASC', OBJECT);
 	
 	foreach($wExers as $wE){
 		$wE->exer_video = getExerciseVideo($wE->exer_body_part,$wE->exer_type);

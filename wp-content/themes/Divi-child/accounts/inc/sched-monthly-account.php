@@ -41,7 +41,7 @@ function toggleExercise(a,b,c){
 				var ctr = 0,
 				 ml = "<?php echo $_SERVER['REQUEST_URI']; ?>&print=1&workout_id=" +a+ "&client_id=" + c,
 				 scheds = '<div style="margin-top:10px;" class="table-responsive"><table class="table table-bordered"><tr style="font-weight:800">'
-							+'<td>#</td>'
+							+'<td>Circuit</td>'
 							+'<td>Exercise</td>'
 							+'<td>Var 1</td>'
 							+'<td>Var 2</td>'
@@ -50,7 +50,7 @@ function toggleExercise(a,b,c){
 				 res.result.forEach(function(elem){					 
 					 ctr++;
 					 scheds += "<tr>";
-					 scheds += "<td>"+ctr+"</td>";
+					 scheds += "<td>"+(elem.group_by != null ? elem.group_by : "--")+"</td>";
 					 scheds += "<td>"+(elem.exer_type != null ? elem.exer_type : "--")+"</td>";
 					 scheds += "<td>"+(elem.exer_exercise_1 != null ? elem.exer_exercise_1 : "--")+"</td>";
 					 scheds += "<td>"+(elem.exer_exercise_2 != null ? elem.exer_exercise_2 : "--")+"</td>";

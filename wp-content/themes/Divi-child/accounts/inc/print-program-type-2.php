@@ -45,7 +45,7 @@
 ?>
 			<table class="table table-bordered print-program-type-2">
 				<tr>
-					<th>#</th>
+					<th class="text-center">Circuit</th>
 					<th>Pic</th>
 					<th>Exercise(Tempo)</th>
 					<th>Sets</th>
@@ -64,9 +64,9 @@
 						if($e){
 				?>
 							<tr>
-								<td><?php echo ($exercise_counter); ?></td>
-								<td class="text-center"><?php echo (getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))) ? '<img src="https://i.ytimg.com/vi/' . getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))[0] .'/maxresdefault.jpg" class="img-fluid img-vid" style="max-height:112px;" />' : "--"; ?></td>
-								<td>
+								<td class="text-center"><?php echo $e->group_by; ?></td>
+								<td width="20%" class="text-center"><?php echo (getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))) ? '<img src="https://i.ytimg.com/vi/' . getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))[0] .'/maxresdefault.jpg" class="img-fluid img-vid" style="max-height:112px;" />' : "--"; ?></td>
+								<td width="30%">
 									<?php
 										echo ($e->exer_type) ? $e->exer_type : "--";
 										echo ($e->exer_tempo) ? " (" . $e->exer_tempo . ")" : "";
