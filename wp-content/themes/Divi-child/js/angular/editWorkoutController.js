@@ -217,6 +217,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         }
 
         $scope.selectedExercise.group_by = $scope.selectedExercise.group_by_letter + $scope.selectedExercise.group_by_number;
+		$scope.onLeaveDay();
     };
 
     $scope.onChangeDayName = function()
