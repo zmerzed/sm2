@@ -14,7 +14,7 @@ app.controller('logsController', function($scope, $http, $filter) {
 
     $scope.filtered = {};
 
-    $scope.perPage = 5;
+    $scope.perPage = 10;
     $scope.maxSize = 5;
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;
