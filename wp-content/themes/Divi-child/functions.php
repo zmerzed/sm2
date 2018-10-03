@@ -481,8 +481,9 @@ function workOutAdd($data)
     );
 
     $workOutId = (int) $wpdb->insert_id;
+    $program = Program::find($workOutId);
 
-    if ($workout['days'])
+    if ($workout['days'] && $program)
     {
         if (isset($workout['note_detail']))
         {
@@ -645,31 +646,34 @@ function workOutAdd($data)
             {
                 foreach ($d['circuits'] as $c)
                 {
+                    $circuitReps = '';
+
+                    if (!empty($c['reps'])) {
+                        $circuitReps = $c['reps'];
+                    }
+
+                    $program->addCircuit([
+                        'group_by_letter' => $c['group_by_letter'],
+                        'day_id' => $dayId,
+                        'reps' => $circuitReps
+                    ]);
 
                     foreach ($c['exercises'] as $exercise)
                     {
                         $sets = '';
-                        $reps = '';
 
                         if (isset($c['sets'])) {
                             $sets = $c['sets'];
-                        }
-
-                        if (isset($c['reps'])) {
-                            $reps = $c['reps'];
                         }
 
                         $wpdb->update(
                             'workout_exercises_tbl',
                             array(
                                 'exer_sets' => $sets . '',
-                                'exer_rep' => $reps  . ''
                             ),
                             array('hash' => $exercise['hash'])
                         );
-
                     }
-
                 }
             }
         }

@@ -38,6 +38,36 @@ class Program
         return NULL;
     }
 
+    public function addCircuit($data) {
+
+        global $wpdb;
+
+        $result = $wpdb->insert('workout_circuits',
+            array(
+                'circuit'      => $data['group_by_letter'],
+                'day_id'       => $data['day_id'],
+                'program_id'   => $this->id,
+                'reps'         => $data['reps']
+            )
+        );
+
+        return $result;
+    }
+
+    public function getCircuits() {
+
+        global $wpdb;
+
+        $circuits = $wpdb->get_results( "SELECT * FROM workout_circuits WHERE program_id={$this->id} ORDER BY id DESC", ARRAY_A);
+
+        if (count($circuits) > 0) {
+
+            return $circuits;
+        }
+
+        return [];
+    }
+
     /* remove workout as day */
     public function removeClientWorkout($clientId, $dayId, $clientDayId) {
         global $wpdb;
@@ -69,6 +99,7 @@ class Program
                 $program->{$key} = $programArr[$key];
             }
 
+            $program->circuits = $program->getCircuits();
             return $program;
         }
 

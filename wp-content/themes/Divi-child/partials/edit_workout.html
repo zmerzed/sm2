@@ -43,7 +43,7 @@
 	</div>
 </div>
 <hr class="clearfix">
-<form id="idForm" submit="sendForm" action="" method="POST">
+<form id="idForm" action="" method="POST">
     <div class="container trainer-header-section">
         <div class="row">
             <div class="col-lg-7 col-md-7">
@@ -155,11 +155,12 @@
 											<!--</select>-->
 										<!--</td>-->
 										<!--<td>-->
-											<!--<label>Reps</label>-->
-											<!--<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">-->
-												<!--<option value="">Reps</option>-->
-											<!--</select>-->
-										<!--</td>-->
+                                        <td> 
+											<label>Reps</label>
+											<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
+												<option value="">Reps</option>
+											</select>
+										</td>
 										<td>
 											<label>Tempo</label>
 											<select ng-model="exercise.selectedSQ.selectedTempo" ng-options="tempo as tempo for tempo in exercise.selectedSQ.options.tempo">

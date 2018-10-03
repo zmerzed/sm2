@@ -19,6 +19,9 @@ $program = Program::find((int) $_GET['workout']);
 	var CLIENTS = <?php echo json_encode(workOutGetClients()) ?>;
 	var WORKOUT = <?php echo json_encode(workOutGet($_GET['workout'])) ?>;
 	var PROGRAM_NOTE = <?php echo json_encode($program->getNote()) ?>;
+	var CIRCUITS = <?php echo json_encode($program->getCircuits()) ?>;
+    console.log('circuits');
+    console.log(CIRCUITS);
 	var EXERCISE_OPTIONS = <?php echo json_encode(workOutExerciseOptions()) ?>;
 	var EXERCISE_SQ_OPTIONS = <?php echo json_encode(workOutExerciseStrengthQualitiesOptions()) ?>;
 
