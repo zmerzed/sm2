@@ -2490,3 +2490,8 @@ function getVideoID($v){
     }
     return $res;
 }
+function getCircuitReps($workout_id, $circuit){
+	global $wpdb;
+	
+	return $wpdb->get_results('SELECT * FROM workout_circuits WHERE day_id ='.$workout_id .' AND circuit = "'. $circuit .'"', OBJECT);
+}
