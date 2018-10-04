@@ -48,7 +48,7 @@ app.constant('global', {
         });
     },
 
-    circuits: function(arr, circuits=[])
+    circuits: function(arr, circuits=[], day_id=0)
     {
         var group_to_values = arr.reduce(function (obj, item) {
             obj[item.group_by_letter] = obj[item.group_by_letter] || [];
@@ -58,24 +58,24 @@ app.constant('global', {
 
         var groups = Object.keys(group_to_values).map(function (key) 
         {
+
             return {
-                group_by_letter: key, exercises: group_to_values[key], 
+                group_by_letter: key, 
+                exercises: group_to_values[key], 
                 exer_sets: group_to_values[key][0].exer_sets
             };
         });
 
-        if (circuits.length > 0) {
+        if (circuits.length > 0 && day_id > 0) {
 
             for(var i in groups) {
 
-                var group = groups[0];
+                var group = groups[i];
 
                 for (var x in circuits) {
 
-                    var circuit = circuits[0];
-
-                    if (circuit.circuit == group.group_by_letter) {
-                        console.log('gggggggggggaaaaaaaaaaaaaaaaaaaaaaaaafound');
+                    var circuit = circuits[x];
+                    if (circuit.circuit == group.group_by_letter && circuit.day_id == day_id) {
                         group.rep = angular.copy(circuit.reps)
                     }
                 }
@@ -83,7 +83,6 @@ app.constant('global', {
 
 
         }
-
         return groups;
     },
 

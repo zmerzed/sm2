@@ -848,10 +848,11 @@ app.controller('editWorkoutController', function($scope, $http, global) {
             var exercise = angular.copy($scope.workout.selectedDay.exercises[i]);
         }
 
-        $scope.workout.selectedDay.circuits = global.circuits($scope.workout.selectedDay.exercises, CIRCUITS);
-
-        console.log('iiiiiiiiiiiiiiiiiiiiiiii');
-        console.log($scope.workout.selectedDay.circuits);
+        $scope.workout.selectedDay.circuits = global.circuits(
+            $scope.workout.selectedDay.exercises, 
+            CIRCUITS, 
+            $scope.workout.selectedDay.wday_ID
+        );
 
         var noSet  = 0;
         $scope.workoutMaxSet = 0;

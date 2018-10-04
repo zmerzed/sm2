@@ -649,8 +649,8 @@ function workOutAdd($data)
                 {
                     $circuitReps = '';
 
-                    if (!empty($c['reps'])) {
-                        $circuitReps = $c['reps'];
+                    if (!empty($c['rep'])) {
+                        $circuitReps = $c['rep'];
                     }
 
                     $program->addCircuit([
@@ -1210,10 +1210,6 @@ function workOutUpdate($data)
                             $sets = $c['exer_sets'];
                         }
 
-                        if (isset($c['exer_rep'])) {
-                            $reps = $c['exer_rep'];
-                        }
-
                         $wpdb->update(
                             'workout_exercises_tbl',
                             array(
@@ -1223,6 +1219,15 @@ function workOutUpdate($data)
                         );
 
                     }
+
+                    /* update the circuit reps */
+                     $wpdb->update(
+                            'workout_circuits',
+                            array(
+                                'circuit' => $sets . ''
+                            ),
+                            array('hash' => $exercise['hash'])
+                        );
 
                 }
             }
