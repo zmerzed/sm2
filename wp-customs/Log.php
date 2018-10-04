@@ -152,9 +152,24 @@ class Log
             case 'TRAINER_UPDATE_PROGRAM': {
 
                 $workout = $type['workout'];
+                if (is_object($user)) {
+                   
+                    $name = $user->user_nicename;
+                } else {
+                    $name = $user['user_nicename'];
+                }
+
+                if (is_object($workout)) {
+                   
+                    $programName = $workout->workout_name;
+                } else {
+                    $programName = $workout['workout_name'];
+                }
+
+            
                 $logDescription = str_replace(
                     ["{-trainerName}", "{-programName}"],
-                    [$user->user_nicename, $workout->workout_name],
+                    [$name, $programName],
                     self::getContent($type['type'])
                 );
 

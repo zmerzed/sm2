@@ -48,7 +48,7 @@ app.constant('global', {
         });
     },
 
-    circuits: function(arr)
+    circuits: function(arr, circuits=[])
     {
         var group_to_values = arr.reduce(function (obj, item) {
             obj[item.group_by_letter] = obj[item.group_by_letter] || [];
@@ -56,10 +56,33 @@ app.constant('global', {
             return obj;
         }, {});
 
-        var groups = Object.keys(group_to_values).map(function (key) {
-
-            return {group_by_letter: key, exercises: group_to_values[key], exer_sets: group_to_values[key][0].exer_sets, exer_rep: group_to_values[key][0].exer_rep};
+        var groups = Object.keys(group_to_values).map(function (key) 
+        {
+            return {
+                group_by_letter: key, exercises: group_to_values[key], 
+                exer_sets: group_to_values[key][0].exer_sets
+            };
         });
+
+        if (circuits.length > 0) {
+
+            for(var i in groups) {
+
+                var group = groups[0];
+
+                for (var x in circuits) {
+
+                    var circuit = circuits[0];
+
+                    if (circuit.circuit == group.group_by_letter) {
+                        console.log('gggggggggggaaaaaaaaaaaaaaaaaaaaaaaaafound');
+                        group.rep = angular.copy(circuit.reps)
+                    }
+                }
+            }
+
+
+        }
 
         return groups;
     },
