@@ -1,6 +1,6 @@
 angular.module('smApp')
 
-.controller('NewWorkoutController', function($scope, $http, global) {
+.controller('NewWorkoutController', function($scope, $http, global, $localStorage) {
 
     $scope.clients = CLIENTS;
     $scope.clientsBackUp = angular.copy(CLIENTS);
@@ -12,8 +12,10 @@ angular.module('smApp')
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/new_workout.html';
     $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
+    $localStorage.nCircuits = [];
+
     var urlApiClient = ROOT_URL + '/wp-json/v1';
-    
+     
     init();
 
     function init()
@@ -26,7 +28,7 @@ angular.module('smApp')
         $http.get(urlApiClient + '/hash').then(function(res)
         {
             $scope.workout = {
-                days: [{name:'', seq:1, exercises:[generateNewExercise(res.data.hash)], clients:[]}]
+                days: [{name:'', seq:1, exercises:[generateNewExercise(res.data.hash)], clients:[], hash: Date.now() + ''}]
             };
 
             selectDay($scope.workout.days[0]);
@@ -41,10 +43,11 @@ angular.module('smApp')
         $http.get(urlApiClient + '/hash').then(function(res) {
 
             var count = $scope.workout.days.length + 1;
-            $scope.workout.days.push({seq:count, exercises:[generateNewExercise(res.data.hash)] , clients:[]});
+            $scope.workout.days.push({seq:count, exercises:[generateNewExercise(res.data.hash)] , clients:[], hash: Date.now() + ''});
 
             var countDays = $scope.workout.days.length;
             $scope.workout.selectedDay = $scope.workout.days[countDays - 1];
+            $scope.workout.selectedDay.hash = res.data.hash;
             $scope.selectedClient = "Add Client";
             selectDay($scope.workout.days[countDays - 1])
         });
@@ -67,6 +70,7 @@ angular.module('smApp')
         {
             $scope.workout.selectedDay.exercises.push(generateNewExercise(res.data.hash));
             optimizeClientExercises();
+            optimizeCircuits();
         });
     };
 
@@ -298,6 +302,7 @@ angular.module('smApp')
         return true;
     };
 
+
     $scope.$watch('reader.selectedClient', function(val)
     {
         console.log('selectedClient');
@@ -456,7 +461,6 @@ angular.module('smApp')
     {
         /* get the max set */
         $scope.workoutMaxSet = 0;
-        console.log('mmmmmmmm');
         for (var i in $scope.workout.selectedDay.exercises)
         {
             var mExercise = $scope.workout.selectedDay.exercises[i];
@@ -590,24 +594,45 @@ angular.module('smApp')
                 noSet = exercise.selectedSQ.selectedSet;
                 $scope.clientExerciseSets[i] = exercise.selectedSQ.selectedSet;
             }
-
-            // if (typeof $scope.workoutMaxSet == 'undefined')
-            // {
-            //     $scope.workoutMaxSet = 0;
-            //
-            //     if(noSet >= $scope.workoutMaxSet) {
-            //         $scope.workoutMaxSet = noSet;
-            //     }
-            //
-            // } else if(noSet >= $scope.workoutMaxSet) {
-            //     $scope.workoutMaxSet = noSet;
-            // }
-
-
         }
 
-        $scope.workout.selectedDay.circuits = global.circuits($scope.workout.selectedDay.exercises);
+        $scope.workout.selectedDay.circuits = global.circuits(
+            $scope.workout.selectedDay.exercises, 
+            $scope.workout.selectedDay.hash,
+            $localStorage.nCircuits
+        );
 
+        console.log('rrrrrrrrrrrrrrrrrrr');
+        console.log($scope.workout.selectedDay.circuits);
+    }
+
+    function optimizeCircuits() {
+
+        $scope.workout.selectedDay.circuits.forEach(function(circuit) 
+        {
+            console.log('cccccccccccccccccccccccccccc');
+            console.log(circuit);
+            var isFound = false;
+            for (var i in $localStorage.nCircuits) 
+            {
+                var localCircuit = $localStorage.nCircuits[i];
+
+                if (localCircuit.hash == circuit.hash && localCircuit.group_by_letter == circuit.group_by_letter) {
+                    $localStorage.nCircuits[i].sets = circuit.sets;
+                    $localStorage.nCircuits[i].rep = circuit.rep;
+
+                    isFound = true;
+                    break;
+                } 
+            }
+
+            if (!isFound) {
+                $localStorage.nCircuits.push(circuit);
+            }
+        })
+
+        console.log('dddddddddddddd');
+        console.log($localStorage);
     }
 
     $scope.onChangeCircuitSet = function() {
@@ -627,6 +652,8 @@ angular.module('smApp')
                 $scope.workoutMaxSet = noSet;
             }
         }
+
+        optimizeCircuits();
     };
 
     setTimeout(function() {

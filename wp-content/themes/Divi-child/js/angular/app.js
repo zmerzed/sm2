@@ -1,7 +1,7 @@
 /**
  * Created by remz on 7/10/2018.
  */
-var app = angular.module("smApp", ['cgBusy', 'ui.bootstrap']);
+var app = angular.module("smApp", ['cgBusy', 'ui.bootstrap', 'ngStorage']);
 app.run(function() {
    console.log('sm app run....')
 });
@@ -48,7 +48,7 @@ app.constant('global', {
         });
     },
 
-    circuits: function(arr, circuits=[], day_id=0)
+    circuits: function(arr, hash='', storageCircuits=[])
     {
         var group_to_values = arr.reduce(function (obj, item) {
             obj[item.group_by_letter] = obj[item.group_by_letter] || [];
@@ -58,31 +58,32 @@ app.constant('global', {
 
         var groups = Object.keys(group_to_values).map(function (key) 
         {
-
             return {
                 group_by_letter: key, 
                 exercises: group_to_values[key], 
-                exer_sets: group_to_values[key][0].exer_sets
+                exer_sets: group_to_values[key][0].exer_sets,
+                hash: hash
             };
-        });
+        }); 
 
-        if (circuits.length > 0 && day_id > 0) {
+        console.log('wwwwwwwwwwwwwwwwwwwwwww');
+        console.log(storageCircuits);
 
-            for(var i in groups) {
+        groups.forEach(function(g) 
+        {
 
-                var group = groups[i];
+            for (var i in storageCircuits) {
 
-                for (var x in circuits) {
+                var sCircuit = storageCircuits[i];
 
-                    var circuit = circuits[x];
-                    if (circuit.circuit == group.group_by_letter && circuit.day_id == day_id) {
-                        group.rep = angular.copy(circuit.reps)
-                    }
+                if (sCircuit.hash == g.hash && sCircuit.group_by_letter == g.group_by_letter) {
+                    g.sets = angular.copy(sCircuit.sets);
+                    g.rep = angular.copy(sCircuit.rep);
+                    break;
                 }
             }
+        });
 
-
-        }
         return groups;
     },
 
@@ -151,6 +152,7 @@ app.constant('global', {
 
         return arr;
     },
+
     isObject : function isObject(val) {
         if (val === null) { return false;}
         return ( (typeof val === 'function') || (typeof val === 'object') );
