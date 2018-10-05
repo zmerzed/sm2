@@ -21,7 +21,7 @@
 						$wnote = getNote($ws['wid']);
 				?>
 					<div class="workout-wrapper">
-						<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
+						<span class="sm-icons sm-workout-icon"><!--img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"--></span>
 						<label><?php echo $ws['wname']; ?></label>
 						<div class="workout-controls">
 							<a href="javascript:void(0)" onclick="showNote(this)"><span class="sm-note-icon sm-icons"></span></a>

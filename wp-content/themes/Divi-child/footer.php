@@ -49,6 +49,16 @@ if ( ! is_page_template( 'page-template-blank.php' ) ) : ?>
 
 	<?php wp_footer(); ?>
 	<script>
+		function toggleSub(a){
+			var target = jQuery(a).closest('li').find('.sub-menu');
+			if(jQuery(target).is(":visible"))
+				jQuery(a).removeClass('up');
+			else
+				jQuery(a).addClass('up');
+			jQuery(target).slideToggle();
+		}
+		
+		jQuery('.has-sub-drop').append('<span class="after" onclick="toggleSub(this)"></span>');
 		function smMenuToggle(){
 			jQuery('#menu').css({marginRight: 0});
 		}

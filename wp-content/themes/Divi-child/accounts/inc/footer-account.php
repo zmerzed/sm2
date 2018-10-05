@@ -40,6 +40,14 @@
    
 
   <script type="text/javascript">
+	function toggleSub(a){
+		var target = $(a).closest('li').find('.sub-menu');
+		if($(target).is(":visible"))
+			$(a).removeClass('up');
+		else
+			$(a).addClass('up');
+		$(target).slideToggle();
+	}
 	function smMenuToggle(){
 		$('#menu').css({marginRight: 0});
 	}
@@ -107,7 +115,8 @@
 			$("#myModal").on('hidden.bs.modal', function (e) {
 				$("#myModal iframe").attr("src", "");
 			});
-		} 
+		}
+		$('.has-sub-drop').append('<span class="after" onclick="toggleSub(this)"></span>');
 	});
 	
 	<?php

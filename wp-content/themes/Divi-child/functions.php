@@ -26,6 +26,13 @@ function strength_mextrix_login_scripts(){
     wp_enqueue_style( 'strength_mextrix_login', get_stylesheet_directory_uri() . '/css/strength_mextrix_login.css', array(  ) );    
 }
 
+add_action('after_setup_theme', 'remove_admin_bar');
+ 
+function remove_admin_bar() {
+if (!current_user_can('administrator') && !is_admin()) {
+  show_admin_bar(false);
+}
+}
 
 /*
 *

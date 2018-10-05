@@ -20,28 +20,18 @@
 		<h3>Menu</h3>
 		<ul>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>" menu-item="dashboard" class="<?php echo($r_uri == '/'.$urole.'/') ? "active" : ""; ?>">Dashboard</a></li>
-			<li>
-				<a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule" menu-item="schedule">Schedule</a>
-				<?php
-				$data_request = "";	
-				if(isset($_GET['data']))
-					$data_request = $_GET['data'];
-			
-				if($data_request == "schedule"):				
-				?>
-					<ul>
-						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
-						<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
-					</ul>
-				<?php endif; ?>
+			<li class="has-sub-drop">
+				<a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule" menu-item="schedule">Schedule</a>				
+				<ul class="sub-menu" style="display:none;">
+					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=weekly" menu-item="weekly">Weekly</a></li>
+					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
+				</ul>
 			</li>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>
-			<?php if($op_client && $data_request == "profile"): ?>			
-				<ul>
+			<li class="has-sub-drop"><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>					
+				<ul class="sub-menu" style="display:none;">
 					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
 					<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
-				</ul>				
-			<?php endif; ?>			
+				</ul>	
 			</li>			
 			<li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>

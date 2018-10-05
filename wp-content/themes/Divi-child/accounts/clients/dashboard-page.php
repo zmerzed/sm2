@@ -65,16 +65,16 @@ if ($currentUser) {
 		<li>
 			<h4 class="workout-date"><?php echo helperGetCurrentDate()->format('l, Y-m-d'); ?> </h4>
 			<div class="workout-wrapper">
-				<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>
+				<span class="sm-icons sm-workout-icon"><!--img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"--></span>
 				<?php if ((int) $workout->workout_isDone) { ?>
 					<span style="color:white">Completed</span>
 				<?php } ?>
 				<label><?php echo $workout->workout->workout_name . " - " . $workout->day->wday_name; ?></label>
 				<div class="workout-controls">
 					<?php if($wnote): ?>
-						<span><a href="javascript:void(0);" onclick="showNote(this);"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+						<a href="javascript:void(0);" onclick="showNote(this);"><span class="sm-icons sm-note-icon"></span><!--img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"--></a>
 					<?php endif; ?>
-					<span><a href="<?php echo home_url(); ?>/client/?data=workout&dayId=<?php echo $workout->workout_client_dayID?>&workoutId=<?php echo $workout->	workout_client_workout_ID?>"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span>
+					<a href="<?php echo home_url(); ?>/client/?data=workout&dayId=<?php echo $workout->workout_client_dayID?>&workoutId=<?php echo $workout->	workout_client_workout_ID?>"><span class="sm-icons sm-play-icon"></span><!--img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"--></a>
 				</div>
 			</div>
 			<div class="wnote" style="display:none;"><?php echo $wnote; ?></div>
@@ -94,7 +94,7 @@ if ($currentUser) {
 		<?php
 		if(!empty($clientWorkouts['upcomingWorkouts'])){
 			foreach ($clientWorkouts['upcomingWorkouts'] as $workout) {
-				if($workout->workout):
+				if(!empty($workout->workout) && !empty($workout->day)):
 					$wID = $workout->workout->workout_ID;
 					$wnote = "";
 					if(!empty(getNote($wID)))
@@ -102,11 +102,11 @@ if ($currentUser) {
 		?>
 			<li>
 				<div class="workout-wrapper">
-					<span><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>"></span>					
+					<span class="sm-icons sm-workout-icon"><!-- img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout.png'; ?>" --></span>					
 					<label><?php echo $workout->workout->workout_name . " - " . $workout->day->wday_name ?></label>
 					<div class="workout-controls">
 						<?php if($wnote): ?>
-							<span><a href="javascript:void(0);" onclick="showNote(this);"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"></a></span>
+							<a href="javascript:void(0);" onclick="showNote(this);"><span class="sm-icons sm-note-icon"></span><!--img src="<?php //echo get_stylesheet_directory_uri() .'/accounts/images/workout-note.png'; ?>"--></a>
 						<?php endif; ?>
 						<!--span><a href="<?php echo home_url(); ?>/client/?data=workout"><img src="<?php echo get_stylesheet_directory_uri() .'/accounts/images/workout-play.png'; ?>"></a></span-->
 					</div>

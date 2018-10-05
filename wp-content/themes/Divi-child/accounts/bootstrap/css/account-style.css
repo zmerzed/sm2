@@ -1970,6 +1970,34 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 .prog-option,
 .prog-option .fa.fa-gear{font-size:14px;}
 .prog-option .fa{font-size:12px;line-height:normal;}
+.has-sub-drop{
+	position:relative;
+}
+.mobile-menu .has-sub-drop span.after{
+	line-height:30px;
+}
+.has-sub-drop span.after:after{
+	content:"\f107";
+	display:block;
+	font-family: "FontAwesome";
+}
+.has-sub-drop span.after.up:after{
+	content:"\f106";
+}
+.has-sub-drop span.after{
+	position:absolute;
+	top:0;
+	right:5px;
+	display:inline-block;
+	color:#fff;
+	cursor:pointer;
+	z-index:1;
+	width:30px;
+	line-height:20px;
+	text-align:center;
+	
+}
+#menu .mobile-menu ul.sub-menu{padding-left:10px;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
