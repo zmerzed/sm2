@@ -1,5 +1,6 @@
+<link rel="stylesheet" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print-media.css" />
+<!-- Print Type 1 -->
 <?php 
-		echo "<!-- Print Type 1 -->";
 		$pid = 0;
 		$wid = 0;
 		$cid = 0;
@@ -18,7 +19,7 @@
 		if(!empty($pDet)){
 			foreach($pDet as $pd=>$v){
 				if($pd == "program_name"):
-					echo "<h2>".$v."</h2>";
+					echo "<h3>".$v."</h3>";
 				else:
 					$wd = $v['workout_detail'][0]; //Workout Details
 					$ed = $v['exercises']; //Exercise Details
@@ -36,23 +37,44 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<td style="text-center">Circuit</td>
-				<td width="20%">Pic</td>
-				<td width="30%">Exercise(Tempo)</td>
-				<td>Sets</td>
-				<td width="62">Reps</td>
-				<td width="60">Rest</td>
-				<td>Start Weight</td>
+				<th style="text-center">Circuit</th>
+				<th width="20%">Pic</th>
+				<th width="30%">Exercise(Tempo)</th>
+				<!--td>Sets</td-->
+				<th width="62">Reps</th>
+				<th width="60">Rest</th>
+				<th>Circuit Reps</th>
+				<th>Circuit Set</th>
+				<th>Start Weight</th>
 				<?php
 					for ($x = 1; $x <= $maxSet; $x++)
-						echo "<td>Set {$x}</td>";
+						echo "<th>Set {$x}</th>";
 				?>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 				$jctr = 0;
+				$group_letter_arr = [];			
+				$group_letter_ctr = [];
+				$n = "None";
+				
+				foreach($ed as $e){
+					$gname = "";
+					
+					if($e->group_by != "")
+						$gname = substr($e->group_by, 0, 1);
+					else
+						$gname = "null";
+					
+					if(!isset($group_letter_ctr[$gname]))
+						$group_letter_ctr[$gname] = 1;
+					else
+						$group_letter_ctr[$gname]++;
+				}
+				
 				foreach($ed as $e):
+					$group_chk = 0;
 					$jctr++;
 					if(!empty($e)){
 						$exercise = $e->exer_type;
@@ -73,11 +95,22 @@
 								$exer = $v;
 						}
 						$vid = getExerciseVideo($ePart, $exer);
+						
+						if($e->group_by != "")							
+							$gname = substr($e->group_by, 0, 1);
+						else
+							$gname = "null";
+						
+						if(!in_array($gname, $group_letter_arr)){
+							$group_letter_arr[] = $gname;
+							$group_chk = 1;
+						}
+						
 						if($vid != "")
 							$vid = getVideoID($vid);
 			?>
 				<tr>
-					<td><?php echo $e->group_by; ?></td>
+					<td class="text-center"><?php echo $e->group_by; ?></td>
 					<td width="20%" class="text-center">
 						<?php
 							if($vid)
@@ -97,13 +130,13 @@
 							}
 						echo '</td>';
 
-						echo '<td>';
+						/* echo '<td>';
 							if($eSet)
 								echo $eSet;
 							else {
 								echo 'None';
 							}
-						echo '</td>';
+						echo '</td>'; */
 						
 						echo '<td>';
 							if($eRep)
@@ -120,6 +153,19 @@
 								echo 'None';
 							}
 						echo '</td>';
+						
+					?>
+					
+					<?php if($group_chk == 1): ?>
+						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
+							<?php echo (getCircuitReps($wid, $gname)) ?  getCircuitReps($wid, $gname)[0]->reps : $n; ?>
+						</td>
+						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
+							<?php echo ($eSet) ? $eSet : $n; ?>
+						</td>						
+					<?php endif; ?>
+					
+					<?php
 
 						echo '<td>';
 								echo "";
@@ -130,8 +176,8 @@
 								for ($x = 0; $x < $maxSet; $x++) {
 						?>
 							<td width="64" style="padding:0">
-								<table class="tabl table-borderless">
-									<tr>
+								<table class="tabl table-borderless" border="0">
+									<tr style="background-color:transparent;">
 						<?php
 									echo '<td style="border:0;border-bottom:1pxsolid #ccc;height:60px;"><strong>WGT</strong> ';
 										if(!empty($v[$x]))

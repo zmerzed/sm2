@@ -1,0 +1,6 @@
+.table-bordered tr > td, .table-bordered tr > th{border-color:#bcbcbc}
+.tabl,
+.tabl th,
+.tabl td{border:0!important}
+.tabl tbody tr:first-child td{border-bottom:1px solid #ccc!important}
+table td[bgcolor="#fefefe"]{background:#e0e0e0!important;}
