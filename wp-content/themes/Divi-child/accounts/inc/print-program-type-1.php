@@ -32,6 +32,8 @@
 								$maxSet = $eset;							
 						}						
 					}
+				/* if(!empty(getWorkoutMaxSet($wid)))
+					$maxSet = getWorkoutMaxSet($wid)[0]->max_sets; */
 ?>
 	<h4><?php echo $wd->wday_name; ?></h4>
 	<table class="table table-bordered">
@@ -108,6 +110,8 @@
 						
 						if($vid != "")
 							$vid = getVideoID($vid);
+						
+						$ciruitDetails = getCircuitDetails($wid, $gname);
 			?>
 				<tr>
 					<td class="text-center"><?php echo $e->group_by; ?></td>
@@ -116,33 +120,25 @@
 							if($vid)
 								echo '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />';
 							else {
-								echo "None";
+								echo $n;
 							}
 						?>
 					</td>
 					<?php	
-						echo '<td width="30%">';
+						echo '<td width="30%" style="min-width:200px;">';
 							if($exercise){
 								echo $exercise;
 								echo ($eTempo) ? ' ('.$eTempo.')' : '';
 							}else {
-								echo "None";
+								echo $n;
 							}
 						echo '</td>';
-
-						/* echo '<td>';
-							if($eSet)
-								echo $eSet;
-							else {
-								echo 'None';
-							}
-						echo '</td>'; */
 						
 						echo '<td>';
 							if($eRep)
 								echo $eRep;
 							else {
-								echo 'None';
+								echo $n;
 							}
 						echo '</td>';
 
@@ -150,7 +146,7 @@
 							if($eRest)
 								echo $eRest;
 							else {
-								echo 'None';
+								echo $n;
 							}
 						echo '</td>';
 						
@@ -158,10 +154,10 @@
 					
 					<?php if($group_chk == 1): ?>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo (getCircuitReps($wid, $gname)) ?  getCircuitReps($wid, $gname)[0]->reps : $n; ?>
+							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->reps : $n; ?>
 						</td>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($eSet) ? $eSet : $n; ?>
+							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->sets : $n; ?>
 						</td>						
 					<?php endif; ?>
 					

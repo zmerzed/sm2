@@ -2499,8 +2499,13 @@ function getVideoID($v){
     }
     return $res;
 }
-function getCircuitReps($workout_id, $circuit){
+function getWorkoutMaxSet($workout_id){
 	global $wpdb;
 	
-	return $wpdb->get_results('SELECT * FROM workout_circuits WHERE day_id ='.$workout_id .' AND circuit = "'. $circuit .'"', OBJECT);
+	return $wpdb->get_results('SELECT MAX(sets) AS max_sets FROM workout_circuits WHERE day_id ='.$workout_id, OBJECT);
+}
+function getCircuitDetails($workout_id, $circuit){
+	global $wpdb;
+	
+	return $wpdb->get_results('SELECT * FROM workout_circuits WHERE day_id ='.$workout_id .' AND group_by_letter = "'. $circuit .'"', OBJECT);
 }

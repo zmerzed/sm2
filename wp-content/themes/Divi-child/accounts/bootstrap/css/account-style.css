@@ -1998,6 +1998,9 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	
 }
 #menu .mobile-menu ul.sub-menu{padding-left:10px;}
+body div.row::before,
+body div.row::after,
+body div.row:before, body div.row:after {display:none!important;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

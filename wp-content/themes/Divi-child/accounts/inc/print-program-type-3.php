@@ -14,6 +14,8 @@
 				$maxSet = $eset;							
 		}						
 	}
+	/* if(!empty(getWorkoutMaxSet($workout_id)))
+		$maxSet = getWorkoutMaxSet($workout_id)[0]->max_sets; */
 ?>
 
 <table class="table-bordered table">
@@ -86,6 +88,7 @@
 							$group_letter_arr[] = $gname;
 							$group_chk = 1;
 						}
+						$ciruitDetails = getCircuitDetails($workout_id, $gname);
 		?>
 				<tr>
 					<td class="text-center"><?php echo $e->group_by; ?></td>
@@ -94,14 +97,9 @@
 							echo ($vid) ? '<img src="https://i.ytimg.com/vi/'.$vid[0].'/maxresdefault.jpg" class="img-responsive img-vid" style="min-width:200px;" />' : $n;
 						?>
 					</td>
-					<td width="30%">
-						<?php
-							echo ($exercise) ? (($eTempo) ? $exercise.' (<span style="text-transform:uppercase;">'.$eTempo.'</span>)' : $exercise)  : $n;
-						?>
+					<td width="30%" style="min-width:200px;">
+						<?php echo ($exercise) ? (($eTempo) ? $exercise.' ('.$eTempo.')' : $exercise)  : $n; ?>
 					</td>
-					<!--td>
-						<?php //echo ($eSet) ? $eSet : $n; ?>
-					</td-->
 					<td>
 						<?php echo ($eRep) ? $eRep : $n; ?>
 					</td>
@@ -110,10 +108,10 @@
 					</td>					
 					<?php if($group_chk == 1): ?>
 						<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-							<?php echo (getCircuitReps($workout_id, $gname)) ?  getCircuitReps($workout_id, $gname)[0]->reps : $n; ?>
+							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->reps : $n; ?>
 						</td>
 						<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-							<?php echo ($eSet) ? $eSet : $n; ?>
+							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->sets : $n; ?>
 						</td>						
 					<?php endif; ?>
 					<td></td>
