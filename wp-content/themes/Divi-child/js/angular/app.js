@@ -61,13 +61,9 @@ app.constant('global', {
             return {
                 group_by_letter: key, 
                 exercises: group_to_values[key], 
-                exer_sets: group_to_values[key][0].exer_sets,
                 hash: hash
             };
         }); 
-
-        console.log('wwwwwwwwwwwwwwwwwwwwwww');
-        console.log(storageCircuits);
 
         groups.forEach(function(g) 
         {
@@ -78,12 +74,14 @@ app.constant('global', {
 
                 if (sCircuit.hash == g.hash && sCircuit.group_by_letter == g.group_by_letter) {
                     g.sets = angular.copy(sCircuit.sets);
-                    g.rep = angular.copy(sCircuit.rep);
+                    g.reps = angular.copy(sCircuit.reps);
                     break;
                 }
             }
         });
 
+         console.log('wwwwwwwwwwwwwwwwwwwwwww');
+        console.log(groups);
         return groups;
     },
 

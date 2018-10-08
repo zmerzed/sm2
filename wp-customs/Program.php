@@ -44,10 +44,11 @@ class Program
 
         $result = $wpdb->insert('workout_circuits',
             array(
-                'circuit'      => $data['group_by_letter'],
+                'group_by_letter'      => $data['group_by_letter'],
                 'day_id'       => $data['day_id'],
                 'program_id'   => $this->id,
-                'reps'         => $data['reps']
+                'reps'         => $data['reps'],
+                'sets'         => $data['sets']
             )
         );
 

@@ -1,4 +1,4 @@
-app.controller('editWorkoutController', function($scope, $http, global) {
+app.controller('editWorkoutController', function($scope, $http, global, $localStorage) {
 
     $scope.currentUser = CURRENT_USER;
     $scope.clients = CLIENTS;
@@ -11,6 +11,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
     $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
+    $localStorage.nCircuits = [];
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
 
@@ -20,9 +21,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     {
         console.log('______________CURRENT USER_____________');
         console.log($scope.workout);
-        console.log($scope.currentUser);
-        console.log(EXERCISE_OPTIONS);
-        console.log(EXERCISE_SQ_OPTIONS)
+
         $scope.workout.note = PROGRAM_NOTE;
 
         for(var i in $scope.workout.days)
@@ -149,7 +148,8 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                 }
             }
 
-            for (var y in day.clients) {
+            for (var y in day.clients) 
+            {
                 var client = day.clients[y];
 
                 if (client.date_availability && client.time_availability) {
@@ -181,7 +181,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
             var newEx = generateNewExercise(res.data.hash);
 
-            $scope.workout.days.push({exercises:[newEx], clients:[]});
+            $scope.workout.days.push({exercises:[newEx], clients:[], hash: res.data.hash});
 
             optimizeDays();
             var countDays = $scope.workout.days.length;
@@ -195,7 +195,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     $scope.onNamingExercise = function(exercise) {
         $('#idSortExerciseModal').modal('show');
-        console.log(exercise);
         $scope.selectedExercise = exercise;
     };
 
@@ -318,9 +317,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     $scope.$watch('reader.selectedClient', function(val)
     {
-        console.log('selectedClient');
-        console.log(val);
-
         if (val)
         {
             var found = false;
@@ -358,8 +354,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
     $scope.$watch('workout.selectedDay.selectedClient', function(val)
     {
-        console.log('selectedClient');
-        console.log(val);
 
         if (val)
         {
@@ -403,7 +397,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     }, function(newValue, oldValue){
 
         if (!angular.equals(oldValue, newValue)) {
-            console.log('--------------------------');
             optimizeClientExercises();
             findTheLargestSet();
         }
@@ -428,8 +421,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
         setTimeout(function() {
 
-            console.log('xxxxxxxxxxxxxxxxxxxxxxxx');
-
             for (var i=$scope.workout.days.length - 1; i>=0; --i)
             {
                 var day = $scope.workout.days[i];
@@ -451,23 +442,26 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         findTheLargestSet();
     };
 
-    $scope.onChangeCircuitSet = function() {
+    $scope.onChangeCircuitSet = function() 
+    {
 
         var noSet  = 0;
         $scope.workoutMaxSet = 0;
-        console.log('mmmmmmmm');
+
         for (var i in $scope.workout.selectedDay.circuits) {
 
             var circuit = $scope.workout.selectedDay.circuits[i];
 
-            if (circuit.exer_sets) {
-                noSet = parseInt(circuit.exer_sets);
+            if (circuit.sets) {
+                noSet = parseInt(circuit.sets);
             }
 
             if (noSet >= $scope.workoutMaxSet) {
                 $scope.workoutMaxSet = noSet;
             }
         }
+
+        optimizeCircuits();
     };
 
     $scope.onCopy = function()
@@ -623,6 +617,33 @@ app.controller('editWorkoutController', function($scope, $http, global) {
         return n > 9 ? "" + n: "0" + n;
     }
 
+    function optimizeCircuits() 
+    {
+
+        console.log('optimizeCircuits');    
+        $scope.workout.selectedDay.circuits.forEach(function(circuit) 
+        {
+
+            var isFound = false;
+            for (var i in $localStorage.nCircuits) 
+            {
+                var localCircuit = $localStorage.nCircuits[i];
+
+                if (localCircuit.hash == circuit.hash && localCircuit.group_by_letter == circuit.group_by_letter) {
+                    $localStorage.nCircuits[i].sets = circuit.sets;
+                    $localStorage.nCircuits[i].rep = circuit.rep;
+
+                    isFound = true;
+                    break;
+                } 
+            }
+
+            if (!isFound) {
+                $localStorage.nCircuits.push(circuit);
+            }
+        })
+    }
+
     function optimizeSelectedClients()
     {
         $scope.clients = angular.copy($scope.clientsBackup);       
@@ -637,9 +658,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     function findTheLargestSet()
     {
         /* get the max set */
-     //   $scope.workoutMaxSet = 0;
-        console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGG');
-        console.log($scope.workout.selectedDay);
 
         for (var i in $scope.workout.selectedDay.exercises)
         {
@@ -650,8 +668,6 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
             if (mExercise.selectedPart && mExercise.selectedPart.selectedType) 
             {
-                console.log('check for selected part and implementation');
-
 
                 if (mExercise.selectedPart.selectedType.implementation_options.indexOf(mExercise.exer_impl1) < 0 
                     && !mExercise.selectedPart.selectedType.selectedImplementation1 && mExercise.exer_impl1)
@@ -687,7 +703,7 @@ app.controller('editWorkoutController', function($scope, $http, global) {
                         mExercise.selectedPart.selectedType.selectedImplementation1 = mImpCustom;
                     } else {
                         delete mExercise.selectedPart.selectedType.selectedImplementation1  ; 
-                        console.log('uuuuuuuuuuuuuuuuuuuuu')
+
                     }
                 }      
             }
@@ -850,38 +866,27 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
         $scope.workout.selectedDay.circuits = global.circuits(
             $scope.workout.selectedDay.exercises, 
-            CIRCUITS, 
-            $scope.workout.selectedDay.wday_ID
+            $scope.workout.selectedDay.hash,
+            $localStorage.nCircuits
         );
 
-        var noSet  = 0;
-        $scope.workoutMaxSet = 0;
-        for (var i in $scope.workout.selectedDay.circuits) {
 
-            var circuit = $scope.workout.selectedDay.circuits[i];
-
-            if (circuit.exer_sets) {
-                noSet = parseInt(circuit.exer_sets);
-            }
-
-            if (noSet >= $scope.workoutMaxSet) {
-                $scope.workoutMaxSet = noSet;
-            }
-        }
-
-        setTimeout(function()
+        setTimeout(function() 
         {
+            console.log('KKKKKKKKKKKKKKKKKK');
+
             if ($scope.workout.selectedDay.exercises.length > 0)  {
-                console.log( global.circuits($scope.workout.selectedDay.exercises));
                 $scope.workout.selectedDay.exercises[0].test = 'test';
             }
-        }, 200);
 
-        if($scope.$root.$$phase != '$apply' &&
-            $scope.$root.$$phase != '$digest'
-        ) {
-            $scope.$apply();
-        }
+            if($scope.$root.$$phase != '$apply' &&
+                $scope.$root.$$phase != '$digest'
+            ) {
+                $scope.$apply();
+            }
+        }, 500);
+        
+      
     }
 
     function generateNewExercise(hash)
@@ -899,7 +904,9 @@ app.controller('editWorkoutController', function($scope, $http, global) {
     function selectDay(day)
     {
         $scope.workout.selectedDay = angular.copy(day);
+
         $scope.workout.selectedDay.circuits = [];
+
         if ($scope.workout.selectedDay.clients)
         {
             $scope.workout.selectedDay.selectedClient = $scope.workout.selectedDay.clients[0];
@@ -910,26 +917,18 @@ app.controller('editWorkoutController', function($scope, $http, global) {
 
         }
 
-        setTimeout(function(){
-            console.log('uuuuuuuuuuuuuuuuuuu');
+        CIRCUITS.forEach(function(circuit) {
 
-            findTheLargestSet();
-            var noSet  = 0;
-            $scope.workoutMaxSet = 0;
-            for (var i in $scope.workout.selectedDay.circuits) {
+            if (circuit.day_id == day.wday_ID) {
 
-                var circuit = $scope.workout.selectedDay.circuits[i];
-
-                if (circuit.exer_sets) {
-                    noSet = parseInt(circuit.exer_sets);
-                }
-
-                if (noSet >= $scope.workoutMaxSet) {
-                    $scope.workoutMaxSet = noSet;
-                }
+                circuit.hash = day.hash;
+                $scope.workout.selectedDay.circuits.push(circuit);
             }
-            }, 500)
-    
+        });
+
+        optimizeCircuits();
+        findTheLargestSet();
+
     }
 
     function optimizeSelectedDay()

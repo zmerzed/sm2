@@ -602,24 +602,23 @@ angular.module('smApp')
             $localStorage.nCircuits
         );
 
-        console.log('rrrrrrrrrrrrrrrrrrr');
-        console.log($scope.workout.selectedDay.circuits);
     }
 
-    function optimizeCircuits() {
+    function optimizeCircuits() 
+    {
 
         $scope.workout.selectedDay.circuits.forEach(function(circuit) 
         {
-            console.log('cccccccccccccccccccccccccccc');
-            console.log(circuit);
+
             var isFound = false;
+            
             for (var i in $localStorage.nCircuits) 
             {
                 var localCircuit = $localStorage.nCircuits[i];
 
                 if (localCircuit.hash == circuit.hash && localCircuit.group_by_letter == circuit.group_by_letter) {
                     $localStorage.nCircuits[i].sets = circuit.sets;
-                    $localStorage.nCircuits[i].rep = circuit.rep;
+                    $localStorage.nCircuits[i].reps = circuit.reps;
 
                     isFound = true;
                     break;
@@ -630,9 +629,6 @@ angular.module('smApp')
                 $localStorage.nCircuits.push(circuit);
             }
         })
-
-        console.log('dddddddddddddd');
-        console.log($localStorage);
     }
 
     $scope.onChangeCircuitSet = function() {

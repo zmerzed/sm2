@@ -194,7 +194,7 @@
                         <div class="circuit-attr" ng-show="circuit.group_by_letter != 'undefined'">
                             <div class="d-inline-block"><span>{{ circuit.group_by_letter }}: </span> </div>
                             <div class="d-inline-block">
-                                <select ng-model="circuit.exer_sets" ng-change="onChangeCircuitSet()">
+                                <select ng-model="circuit.sets" ng-change="onChangeCircuitSet()">
                                     <option value="">SETS</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -209,7 +209,7 @@
                                 </select>
                             </div>
                             <div class="d-inline-block">
-                                <input type="text" ng-model="circuit.rep" placeholder="reps">
+                                <input type="text" ng-model="circuit.reps" placeholder="reps" ng-change="onChangeCircuitSet()">
                             </div>
                         </div>
                     </div>

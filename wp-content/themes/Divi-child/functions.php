@@ -510,7 +510,8 @@ function workOutAdd($data)
                 array(
                     'wday_workout_ID' => $workOutId,
                     'wday_name' => $d['name'],
-                    'wday_order' => (int) $d['seq']
+                    'wday_order' => (int) $d['seq'],
+                    'hash' => $d['hash']
                 )
             );
 
@@ -656,14 +657,15 @@ function workOutAdd($data)
                 {
                     $circuitReps = '';
 
-                    if (!empty($c['rep'])) {
-                        $circuitReps = $c['rep'];
+                    if (!empty($c['reps'])) {
+                        $circuitReps = $c['reps'];
                     }
 
                     $program->addCircuit([
                         'group_by_letter' => $c['group_by_letter'],
                         'day_id' => $dayId,
-                        'reps' => $circuitReps
+                        'reps' => $circuitReps,
+                        'sets' => $c['sets']
                     ]);
 
                     foreach ($c['exercises'] as $exercise)
