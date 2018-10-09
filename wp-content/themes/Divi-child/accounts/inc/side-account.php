@@ -37,9 +37,9 @@
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
 			<?php if(checkSubscribed($uinfo)): ?>
-				<li><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a>
-					<?php if($temp_slug == "page-member-templates.php"): ?>
-						<ul class="children">
+				<li class="has-sub-drop"><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a>
+					<?php //if($temp_slug == "page-member-templates.php"): ?>
+						<ul class="children sub-menu" style="display:none;">
 							<li><a href="<?php echo home_url();  ?>/membership-account/membership-account/">Member Account</a></li>
 							<li><a href="<?php echo home_url();  ?>/membership-account/membership-billing/">Member Billing</a></li>
 							<li><a href="<?php echo home_url();  ?>/membership-account/membership-cancel/">Member Cancel</a></li>
@@ -48,7 +48,7 @@
 							<li><a href="<?php echo home_url();  ?>/membership-account/membership-invoice/">Member Invoice</a></li>
 							<!-- <li><a href="<?php echo home_url();  ?>/membership-account/membership-levels/">Member Levels</a></li> -->
 						</ul>
-					<?php endif; ?>
+					<?php //endif; ?>
 				</li>					
 			<?php endif; ?>
 		</ul>		

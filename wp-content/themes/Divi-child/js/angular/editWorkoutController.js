@@ -519,6 +519,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.onCopyExercise = function(exercise)
     {
+		$('body').addClass('loading');
         console.log(exercise);
         var newExercise = angular.copy(exercise);
 
@@ -528,6 +529,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             newExercise.hash = res.data.hash;
             $scope.workout.selectedDay.exercises.push(newExercise);
             optimizeClientExercises();
+			console.log('test---------------');
+			$('body').removeClass('loading');
         });
 
     };
