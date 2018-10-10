@@ -77,6 +77,22 @@ angular.module('smApp')
     $scope.onSelectDay = function(day)
     {
         selectDay(day);
+
+        var noSet  = 0;
+        $scope.workoutMaxSet = 0;
+
+        for (var i in $scope.workout.selectedDay.circuits) {
+
+            var circuit = $scope.workout.selectedDay.circuits[i];
+
+            if (circuit.sets) {
+                noSet = parseInt(circuit.sets);
+            }
+
+            if (noSet >= $scope.workoutMaxSet) {
+                $scope.workoutMaxSet = noSet;
+            }
+        }
     };
 
     $scope.onCopy = function()
@@ -390,8 +406,6 @@ angular.module('smApp')
     function selectDay(day)
     {
         $scope.workout.selectedDay = angular.copy(day);
-        $scope.workoutMaxSet = 0;
-        //$scope.workout.selectedDay = day;
         optimizeSelectedClients();
 
     }
