@@ -75,13 +75,20 @@ app.constant('global', {
                 if (sCircuit.hash == g.hash && sCircuit.group_by_letter == g.group_by_letter) {
                     g.sets = angular.copy(sCircuit.sets);
                     g.reps = angular.copy(sCircuit.reps);
+
+                    if (sCircuit.day_id) {
+                        g.day_id = sCircuit.day_id;
+                    }
+
+                    if (sCircuit.id) {
+                        g.id = sCircuit.id;
+                    }
+
                     break;
                 }
             }
         });
 
-         console.log('wwwwwwwwwwwwwwwwwwwwwww');
-        console.log(groups);
         return groups;
     },
 

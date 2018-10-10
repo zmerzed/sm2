@@ -3,7 +3,6 @@
 ?>
 <script>
 	var CURRENT_USER = <?php echo json_encode($currentUser); ?>;
-	var CLIENTS = <?php echo json_encode($currentUser->getClients()) ?>;
 	var EXERCISE_OPTIONS = <?php echo json_encode(workOutExerciseOptions()) ?>;
 	var EXERCISE_SQ_OPTIONS = <?php echo json_encode(workOutExerciseStrengthQualitiesOptions()) ?>;
 	var CURRENT_USER_ID = '<?php echo $currentUser->id ?>';

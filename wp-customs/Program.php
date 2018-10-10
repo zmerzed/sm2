@@ -59,12 +59,13 @@ class Program
 
         global $wpdb;
 
-        $circuits = $wpdb->get_results( "SELECT * FROM workout_circuits WHERE program_id={$this->id} ORDER BY id DESC", ARRAY_A);
-
-        if (count($circuits) > 0) {
-
-            return $circuits;
-        }
+//        $circuits = $wpdb->get_results( "SELECT workout_circuits.id, workout_circuits.group_by_letter, workout_circuits.program_id, workout_circuits.reps,
+//workout_circuits.sets, workout_circuits.day_id, workout_days_tbl.hash from workout_circuits LEFT JOIN workout_days_tbl ON workout_circuits.day_id = workout_days_tbl.wday_ID WHERE workout_circuits.program_id={$this->id} ORDER BY id DESC", ARRAY_A);
+//
+//        if (count($circuits) > 0) {
+//
+//            return $circuits;
+//        }
 
         return [];
     }

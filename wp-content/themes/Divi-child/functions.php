@@ -705,6 +705,7 @@ function workOutUpdate($data)
     $workout = stripslashes($workout);
     $workout = json_decode($workout, true);
 
+  //  dd($workout);
     $mWorkoutId = (int) $workout['workout_ID'];
     $weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
@@ -773,6 +774,8 @@ function workOutUpdate($data)
             // existing day
             else if (isset($d['wday_ID']))
             {
+                $mDayId = (int) $d['wday_ID'];
+
                 $wpdb->update(
                     'workout_days_tbl',
                     array(
@@ -1074,7 +1077,7 @@ function workOutUpdate($data)
                 );
 
                 $dayId = $wpdb->insert_id;
-
+                $mDayId = (int) $dayId;
                 if ($d['exercises'])
                 {
                     foreach($d['exercises'] as $ex)
@@ -1210,34 +1213,69 @@ function workOutUpdate($data)
             {
                 foreach ($d['circuits'] as $c)
                 {
-                    foreach ($c['exercises'] as $exercise)
-                    {
-                        $sets = '';
-                        $reps = '';
 
-                        if (isset($c['exer_sets'])) {
-                            $sets = $c['exer_sets'];
-                        }
+                    // check if the circuit exists by pointing day_id and not empty group_by_letter
+                    // then update if exist
+
+                    if (isset($c['id']) && !empty($c['group_by_letter'])) {
+                        // update
+                        /* update the circuit reps */
 
                         $wpdb->update(
-                            'workout_exercises_tbl',
-                            array(
-                                'exer_sets' => $sets . ''
-                            ),
-                            array('hash' => $exercise['hash'])
-                        );
-
-                    }
-
-                    /* update the circuit reps */
-                     $wpdb->update(
                             'workout_circuits',
                             array(
-                                'circuit' => $sets . ''
+                                'sets' => $c['sets'],
+                                'reps' => $c['reps'],
                             ),
-                            array('hash' => $exercise['hash'])
+                            array('id' => $c['id'])
                         );
 
+                    } else if (!empty($c['group_by_letter'])) {  // else create new circuit by not empty group_by_letter
+
+                        $sets = '';
+
+                        if (isset($c['$sets'])) {
+                            $sets = $c['$sets'];
+                        }
+
+                        $reps = '';
+                        if (isset($c['reps'])) {
+                            $reps = $c['reps'];
+                        }
+
+
+                        $wpdb->insert('workout_circuits',
+                            array(
+                                'group_by_letter'  => $c['group_by_letter'],
+                                'day_id'       => $mDayId,
+                                'program_id'   => $workout['workout_ID'],
+                                'reps'         => $sets,
+                                'sets'         => $reps
+                            )
+                        );
+                    }
+
+
+                    if (isset($c['exercises']) && !empty($c['group_by_letter'])) {
+
+                        foreach ($c['exercises'] as $exercise)
+                        {
+                            $sets = '';
+
+                            if (isset($c['sets'])) {
+                                $sets = $c['sets'];
+                            }
+
+                            $wpdb->update(
+                                'workout_exercises_tbl',
+                                array(
+                                    'exer_sets' => $sets . ''
+                                ),
+                                array('hash' => $exercise['hash'])
+                            );
+
+                        }
+                    }
                 }
             }
         }
@@ -1388,6 +1426,7 @@ function workOutGet($workoutId)
     if(count($result) >= 1)
     {
         $workout = $result[0];
+        //$program = Program::find($workout['workout_ID']);
 
         // get workout days
         $querystr = "SELECT * FROM workout_days_tbl WHERE wday_workout_ID=".$workout['workout_ID'];
@@ -1398,6 +1437,11 @@ function workOutGet($workoutId)
             // get workout exercises
             $exercisesQuery = "SELECT * FROM workout_exercises_tbl WHERE exer_day_ID=".$d['wday_ID'];
             $exercises = $wpdb->get_results($exercisesQuery, ARRAY_A);
+
+            $circuitsQuery = "SELECT workout_circuits.id, workout_circuits.group_by_letter, workout_circuits.program_id, workout_circuits.reps, 
+workout_circuits.sets, workout_circuits.day_id, workout_days_tbl.hash from workout_circuits 
+LEFT JOIN workout_days_tbl ON workout_circuits.day_id WHERE workout_days_tbl.wday_ID={$d['wday_ID']} AND workout_circuits.day_id={$d['wday_ID']}";
+            $circuits = $wpdb->get_results($circuitsQuery, ARRAY_A);
 
             // get workout assigned clients
             $clientsQuery = "SELECT * FROM workout_day_clients_tbl WHERE workout_client_dayID=".$d['wday_ID'];
@@ -1442,10 +1486,15 @@ function workOutGet($workoutId)
 
             $days[$key]['clients'] = $userClients;
             $days[$key]['exercises'] = $exercises;
+            $days[$key]['circuits'] = $circuits;
         }
 
         $workout['days'] = $days;
 
+        $circuitsQuery = "SELECT workout_circuits.id, workout_circuits.group_by_letter, workout_circuits.program_id, workout_circuits.reps, workout_circuits.sets, workout_circuits.day_id, workout_days_tbl.hash from workout_circuits INNER JOIN workout_days_tbl ON workout_circuits.day_id = workout_days_tbl.wday_ID WHERE workout_circuits.program_id={$workout['workout_ID']} group by workout_circuits.id";
+        $circuitsResult = $wpdb->get_results($circuitsQuery, ARRAY_A);
+
+        $workout['circuits'] = $circuitsResult;
         return $workout;
     }
 
