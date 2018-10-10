@@ -82,6 +82,7 @@ angular.module('smApp')
     $scope.onCopy = function()
     {
         $scope.onLeaveDay();
+
         setTimeout(function()
         {
             $scope.$apply(function() {
@@ -389,6 +390,7 @@ angular.module('smApp')
     function selectDay(day)
     {
         $scope.workout.selectedDay = angular.copy(day);
+        $scope.workoutMaxSet = 0;
         //$scope.workout.selectedDay = day;
         optimizeSelectedClients();
 
@@ -460,7 +462,7 @@ angular.module('smApp')
     function findTheLargestSet()
     {
         /* get the max set */
-        $scope.workoutMaxSet = 0;
+
         for (var i in $scope.workout.selectedDay.exercises)
         {
             var mExercise = $scope.workout.selectedDay.exercises[i];
