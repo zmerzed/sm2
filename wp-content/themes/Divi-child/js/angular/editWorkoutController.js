@@ -406,14 +406,12 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     },true);
 
     $scope.onChangeClientTime = function() {
-        setTimeout(function()
-        {
-            if($scope.$root.$$phase != '$apply' &&
-                $scope.$root.$$phase != '$digest'
-            ) {
-                $scope.$apply();
-            }
-        }, 100);
+
+        if($scope.$root.$$phase != '$apply' &&
+            $scope.$root.$$phase != '$digest'
+        ) {
+            $scope.$apply();
+        }
     }
 
     $scope.removeDay = function(day)
