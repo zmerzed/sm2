@@ -981,15 +981,11 @@ function workOutUpdate($data)
 
                             if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
                             {
-                                try {
-                                    if (isset($client['time_availability'])) {
-                                        $dateAvailability = $client['date_availability'] . " " . $client['time_availability'];
-                                    }
-                                    $scheduleDate = new \Carbon\Carbon($dateAvailability);
-                                } catch (\Exception $e) {
-                                    
-                                    $scheduleDate = new \Carbon\Carbon($client['date_availability']);
+
+                                if (isset($client['time_availability'])) {
+                                    $dateAvailability = $client['date_availability'] . " " . $client['time_availability'];
                                 }
+                                $scheduleDate = new \Carbon\Carbon($dateAvailability);
 
                                 $mUpdate = array(
                                     'workout_day_availability' => $scheduleDate->dayOfWeek,
