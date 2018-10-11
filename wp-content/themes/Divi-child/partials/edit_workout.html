@@ -260,7 +260,7 @@
                                                 <input placeholder="YY-MM-DD" type="text" class = "mx-auto mx-lg-0" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
                                             </div>
                                             <div class="col-12 col-lg-8 col-xl-9 assign-workout select-date-workout">
-                                                <div uib-timepicker class = "mx-auto mx-lg-0 " ng-model="workout.selectedDay.selectedClient.time_availability_temp" show-meridian="false"></div>
+                                                <div uib-timepicker class = "mx-auto mx-lg-0 " ng-model="workout.selectedDay.selectedClient.time_availability_temp" show-meridian="false" ng-change="onChangeClientTime()"></div>
                                             </div>
                                         </div>
                                         <div class="row">

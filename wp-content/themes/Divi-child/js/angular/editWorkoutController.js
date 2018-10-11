@@ -316,6 +316,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.$watch('reader.selectedClient', function(val)
     {
+        console.log('reader.selectedClient');
         if (val)
         {
             var found = false;
@@ -351,47 +352,50 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }, true);
 
 
-    $scope.$watch('workout.selectedDay.selectedClient', function(val)
-    {
-
-        if (val)
-        {
-            var found = false;
-            for (var i in $scope.clients)
-            {
-                var client = $scope.clients[i];
-
-                if (client.ID == val)
-                {
-
-                    for (var x in $scope.workout.selectedDay.clients)
-                    {
-                        var xClient = $scope.workout.selectedDay.clients[x];
-
-                        if(xClient.ID == val)
-                        {
-                            found = true;
-                        }
-                    }
-
-                    if (!found) {
-                        $scope.workout.selectedDay.clients.push(client);
-                       
-                        $scope.selectClient(client);
-                    }
-
-                    break;
-                }
-            }
-            optimizeClientExercises();
-            optimizeSelectedClients();
-        }
-
-    }, true);
+    // $scope.$watch('workout.selectedDay.selectedClient', function(val)
+    // {
+    //     console.log('------------workout.selectedDay.selectedClient-------------------');
+    //     console.log(val);
+    //     console.log($scope.clients);
+    //     if (val)
+    //     {
+    //         var found = false;
+    //         for (var i in $scope.clients)
+    //         {
+    //             var client = $scope.clients[i];
+    //
+    //             if (client.ID == val.ID)
+    //             {
+    //
+    //                 for (var x in $scope.workout.selectedDay.clients)
+    //                 {
+    //                     var xClient = $scope.workout.selectedDay.clients[x];
+    //
+    //                     if(xClient.ID == val.ID)
+    //                     {
+    //                         found = true;
+    //                     }
+    //                 }
+    //
+    //                 if (!found) {
+    //                     $scope.workout.selectedDay.clients.push(client);
+    //
+    //                     $scope.selectClient(client);
+    //                 }
+    //
+    //                 break;
+    //             }
+    //         }
+    //         optimizeClientExercises();
+    //         optimizeSelectedClients();
+    //     }
+    //
+    // }, true);
 
     $scope.$watch(function() {
         console.log('/* get the largest set in a selected day */');
         $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
+
         return $scope.workout.selectedDay.exercises;
     }, function(newValue, oldValue){
 
@@ -400,6 +404,17 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             findTheLargestSet();
         }
     },true);
+
+    $scope.onChangeClientTime = function() {
+        setTimeout(function()
+        {
+            if($scope.$root.$$phase != '$apply' &&
+                $scope.$root.$$phase != '$digest'
+            ) {
+                $scope.$apply();
+            }
+        }, 100);
+    }
 
     $scope.removeDay = function(day)
     {
@@ -577,6 +592,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
                         var mSec = nFormat(client.time_availability_temp.getSeconds());
 
                         client.time_availability = mHour + ":" + mMin + ":" + mSec;
+                        console.log('ttttttttttttttttttttttttttt');
+                        console.log(client.time_availability);
                     }
 
                     for (var m in client.exercises)
