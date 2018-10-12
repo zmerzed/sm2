@@ -212,13 +212,13 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 		$scope.onLeaveDay();
     };
 
-    $scope.onChangeDayName = function()
-    {
+    $scope.onChangeDayName = function() {
+
         $scope.onLeaveDay();
     };
 
-    $scope.onRemoveSelectedClient = function(client) 
-    {
+    $scope.onRemoveSelectedClient = function(client) {
+
         var idx = $scope.workout.selectedDay.clients.indexOf(client);
 
         $scope.clients.push(angular.copy(client));
@@ -243,14 +243,13 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         ).then(function(res) {});
     };
 
-    $scope.onSelectDay = function(day)
-    {
+    $scope.onSelectDay = function(day) {
         optimizeSelectedDay();
         selectDay(day);
     };
 
-    $scope.onLeaveDay = function()
-    {
+    $scope.onLeaveDay = function() {
+
         for (var i in $scope.workout.days)
         {
             var day = $scope.workout.days[i];
@@ -275,8 +274,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         }
     };
 
-    $scope.isActive = function(day)
-    {
+    $scope.isActive = function(day) {
+
         if ($scope.workout.selectedDay.wday_order == day.wday_order) {
             return true;
         }
@@ -284,8 +283,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         return false;
     };
 
-    $scope.isClientActive = function(client)
-    {
+    $scope.isClientActive = function(client) {
 
         if ($scope.workout.selectedDay.selectedClient && $scope.workout.selectedDay.selectedClient.ID == client.ID) {
             return true;
@@ -294,8 +292,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         return false;
     };
 
-    $scope.newExercise = function()
-    {
+    $scope.newExercise = function() {
 
         $http.get(urlApiClient + '/hash').then(function(res) {
 
@@ -308,8 +305,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     };
 
-    $scope.selectClient = function(client)
-    {
+    $scope.selectClient = function(client) {
+
         $scope.workout.selectedDay.selectedClient = client;
         optimizeClientExercises();
     };
@@ -393,10 +390,12 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     // }, true);
 
     $scope.$watch(function() {
+
         console.log('/* get the largest set in a selected day */');
         $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
 
         return $scope.workout.selectedDay.exercises;
+
     }, function(newValue, oldValue){
 
         if (!angular.equals(oldValue, newValue)) {
@@ -412,10 +411,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         ) {
             $scope.$apply();
         }
-    }
+    };
 
-    $scope.removeDay = function(day)
-    {
+    $scope.removeDay = function(day) {
         day.isDelete = true;
 
         delete day.selectedClient;
@@ -446,16 +444,14 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         }, 200)
     };
 
-    $scope.removeExercise = function(exercise)
-    {
+    $scope.removeExercise = function(exercise) {
         exercise.isDelete = true;
         optimizeSelectedDay();
         optimizeClientExercises();
         findTheLargestSet();
     };
 
-    $scope.onChangeCircuitSet = function() 
-    {
+    $scope.onChangeCircuitSet = function() {
 
         var noSet  = 0;
         $scope.workoutMaxSet = 0;
@@ -496,6 +492,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
                     var setOfHashes = res.data.set_of_hash;
 
+                    newCopy.hash = setOfHashes[0];
+                    
                     newCopy.exercises.forEach(function(ex, i){
                         delete ex.exer_ID;
                         ex.hash = setOfHashes[i];

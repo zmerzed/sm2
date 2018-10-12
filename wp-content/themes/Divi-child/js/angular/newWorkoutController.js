@@ -102,6 +102,7 @@ angular.module('smApp')
         setTimeout(function()
         {
             $scope.$apply(function() {
+
                 var newCopy = angular.copy($scope.workout.selectedDay);
 
                 console.log('copying workout day');
@@ -112,6 +113,8 @@ angular.module('smApp')
                 {
 
                     var setOfHashes = res.data.set_of_hash;
+
+                    newCopy.hash = setOfHashes[0];
 
                     newCopy.exercises.forEach(function(ex, i){
                         ex.hash = setOfHashes[i];
@@ -312,10 +315,11 @@ angular.module('smApp')
                 }
             }
         }
+
         toSend.user_id = CURRENT_USER_ID;
         console.log(toSend);
         $('#idWorkoutForm').val(JSON.stringify(toSend));
-        //return false;
+
         return true;
     };
 
