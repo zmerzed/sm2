@@ -18,11 +18,12 @@ angular.module('smApp')
      
     init();
 
-    function init()
-    {
+    function init() {
+
         console.log('-----------INIT NewWorkoutController--------------');
         console.log($scope.exerciseSQoptions);
         console.log($scope.exerciseOptions);
+
         /* add others for exercise options tempo */
         $scope.timeData = global.time;
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -35,11 +36,10 @@ angular.module('smApp')
         });
 
         console.log('-----------END INIT--------------');
-
     }
 
-    $scope.newWorkOutDay = function ()
-    {
+    $scope.newWorkOutDay = function () {
+
         $http.get(urlApiClient + '/hash').then(function(res) {
 
             var count = $scope.workout.days.length + 1;
@@ -55,11 +55,13 @@ angular.module('smApp')
     };
 
     $scope.onNamingExercise = function(exercise) {
+
         $('#idSortExerciseModal').modal('show');
         $scope.selectedExercise = exercise;
     };
 
     $scope.updateExerciseGroupBy = function() {
+
         console.log($scope.selectedExercise);
         $scope.selectedExercise.group_by = $scope.selectedExercise.group_by_letter + $scope.selectedExercise.group_by_number;
     };
@@ -74,8 +76,7 @@ angular.module('smApp')
         });
     };
 
-    $scope.onSelectDay = function(day)
-    {
+    $scope.onSelectDay = function(day) {
         selectDay(day);
 
         var noSet  = 0;
@@ -95,8 +96,17 @@ angular.module('smApp')
         }
     };
 
-    $scope.onCopy = function()
-    {
+    $scope.onChangeClientTime = function() {
+        console.log('llf');
+        if($scope.$root.$$phase != '$apply' &&
+            $scope.$root.$$phase != '$digest'
+        ) {
+            $scope.$apply();
+        }
+    };
+
+    $scope.onCopy = function() {
+
         $scope.onLeaveDay();
 
         setTimeout(function()
@@ -149,8 +159,8 @@ angular.module('smApp')
 
     };
 
-    $scope.onDelete = function(day)
-    {
+    $scope.onDelete = function(day) {
+
         if ($scope.workout.days.length > 1)
         {
             var idx = $scope.workout.days.indexOf(day);
@@ -161,8 +171,7 @@ angular.module('smApp')
         }
     };
 
-    $scope.onLeaveDay = function()
-    {
+    $scope.onLeaveDay = function() {
 
         for (var i in $scope.workout.days)
         {
@@ -189,8 +198,8 @@ angular.module('smApp')
 
     };
 
-    $scope.onCopyExercise = function(exercise)
-    {
+    $scope.onCopyExercise = function(exercise) {
+
         var newExercise = angular.copy(exercise);
 
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -202,19 +211,17 @@ angular.module('smApp')
 
     };
 
-    $scope.onRemoveExercise = function(exercise)
-    {
+    $scope.onRemoveExercise = function(exercise) {
 
         if ($scope.workout.selectedDay.exercises.length > 1)
         {
             var idx = $scope.workout.selectedDay.exercises.indexOf(exercise);
             $scope.workout.selectedDay.exercises.splice(idx,1);
         }
-
     };
 
-    $scope.onRemoveSelectedClient = function(client) 
-    {
+    $scope.onRemoveSelectedClient = function(client) {
+
        var idx = $scope.workout.selectedDay.clients.indexOf(client);
 
        $scope.clients.push(angular.copy(client));
@@ -229,19 +236,12 @@ angular.module('smApp')
         optimizeSelectedClients();
     };
 
-    $scope.testWorkout = function()
-    {
-        console.log($scope.workout);
-
-    };
-
     $scope.selectClient = function(client) {
-        console.log(client);
+
         $scope.workout.selectedDay.selectedClient = client;
     };
 
-    $scope.isActive = function(day)
-    {
+    $scope.isActive = function(day) {
 
         if ($scope.workout.selectedDay.seq == day.seq) {
             return true;
@@ -250,8 +250,7 @@ angular.module('smApp')
         return false;
     };
 
-    $scope.isClientActive = function(client)
-    {
+    $scope.isClientActive = function(client) {
 
         if ($scope.workout.selectedDay.selectedClient && $scope.workout.selectedDay.selectedClient.ID == client.ID) {
             return true;
@@ -260,17 +259,18 @@ angular.module('smApp')
         return false;
     };
 
-    $scope.onChangeDayName = function()
-    {
+    $scope.onChangeDayName = function() {
+
         $scope.onLeaveDay();
     };
 
-    $scope.sendForm = function()
-    {
+    $scope.sendForm = function() {
 
         if ($scope.currentUser.isGym) {
+
             var formUrl = '/gym/?data=workouts';
         } else {
+
             var formUrl = '/trainer/?data=workouts';
         }
 
@@ -322,7 +322,6 @@ angular.module('smApp')
 
         return true;
     };
-
 
     $scope.$watch('reader.selectedClient', function(val)
     {

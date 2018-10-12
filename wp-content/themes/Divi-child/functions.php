@@ -608,7 +608,7 @@ function workOutAdd($data)
                         $scheduleDate = new \Carbon\Carbon($client['date_availability']);
 
                         $newClientDay['workout_day_availability'] = $scheduleDate->dayOfWeek;
-                        $newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d H:m:s');
+                        $newClientDay['workout_client_schedule'] = $scheduleDate->format('Y-m-d H:i:s');
                     }
 
                     $wpdb->insert('workout_day_clients_tbl', $newClientDay);

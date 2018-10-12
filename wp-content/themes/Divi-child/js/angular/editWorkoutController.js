@@ -493,7 +493,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
                     var setOfHashes = res.data.set_of_hash;
 
                     newCopy.hash = setOfHashes[0];
-                    
+
                     newCopy.exercises.forEach(function(ex, i){
                         delete ex.exer_ID;
                         ex.hash = setOfHashes[i];

@@ -225,7 +225,7 @@
                                   <input placeholder="YY-MM-DD" type="text" datepicker ng-model="workout.selectedDay.selectedClient.date_availability"/>
                                 </div>
                                 <div class="col-lg-8 col-md-8 assign-workout select-date-workout">
-                                  <div show-meridian="false" uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp"></div>
+                                  <div show-meridian="false" uib-timepicker ng-model="workout.selectedDay.selectedClient.time_availability_temp" ng-change="onChangeClientTime()"></div>
                                 </div>
                               </div>
                               <div class="row">
