@@ -35,22 +35,22 @@
 				/* if(!empty(getWorkoutMaxSet($wid)))
 					$maxSet = getWorkoutMaxSet($wid)[0]->max_sets; */
 ?>
-	<h4><?php echo $wd->wday_name; ?></h4>
+	<h4 class="text-center"><?php echo $wd->wday_name; ?></h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th style="text-center">Circuit</th>
-				<th width="20%">Pic</th>
+				<th class="text-center">Order</th>
+				<th class="text-center" width="20%">Clip</th>
 				<th width="30%">Exercise(Tempo)</th>
 				<!--td>Sets</td-->
 				<th width="62">Reps</th>
-				<th width="60">Rest</th>
-				<th>Circuit Reps</th>
+				<th width="60">Rest Int</th>
 				<th>Circuit Set</th>
+				<th>Circuit Reps</th>				
 				<th>Start Weight</th>
 				<?php
 					for ($x = 1; $x <= $maxSet; $x++)
-						echo "<th>Set {$x}</th>";
+						echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 				?>
 			</tr>
 		</thead>
@@ -134,7 +134,7 @@
 							}
 						echo '</td>';
 						
-						echo '<td>';
+						echo '<td class="text-center">';
 							if($eRep)
 								echo $eRep;
 							else {
@@ -142,7 +142,7 @@
 							}
 						echo '</td>';
 
-						echo '<td>';
+						echo '<td class="text-center">';
 							if($eRest)
 								echo $eRest;
 							else {
@@ -154,18 +154,21 @@
 					
 					<?php if($group_chk == 1): ?>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->reps : $n; ?>
+							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->sets : $n; ?>
 						</td>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($ciruitDetails) ? $ciruitDetails[0]->sets : $n; ?>
-						</td>						
+							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
+						</td>												
 					<?php endif; ?>
-					
+					<td class="text-center">
+						<?php
+							$eset = "";
+							if(count($e->sets) > 0)
+								$eset = $e->sets[0]->weight;
+							echo ($eset != "") ? $e->sets[0]->weight : $n;
+						?>
+					</td>
 					<?php
-
-						echo '<td>';
-								echo "";
-						echo '</td>';
 
 						foreach($e as $k=>$v){
 							if(is_array($v)){								
@@ -173,19 +176,11 @@
 						?>
 							<td width="64" style="padding:0">
 								<table class="tabl table-borderless" border="0">
-									<tr style="background-color:transparent;">
-						<?php
-									echo '<td style="border:0;border-bottom:1pxsolid #ccc;height:60px;"><strong>WGT</strong> ';
-										if(!empty($v[$x]))
-											$eW = $v[$x]->weight;
-									echo "</td>";
-						?>
-
+									<tr style="background-color:transparent;">									
+										<td class="text-center" style="border:0;height:60px;"><?php echo ($x==0) ? '<strong>WGT</strong>' : ''; ?></td>
 									</tr>
 									<tr>
-										<td style="border:0;border-top:1px solid #ccc;height:60px;">
-											<strong>REPS</strong>
-										</td>
+										<td class="text-center" style="border:0;border-top:1px solid #ccc;height:60px;"><?php echo ($x==0) ? '<strong>REPS</strong>' : ''; ?></td>
 									</tr>
 								</table>
 							</td>

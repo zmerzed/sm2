@@ -476,6 +476,7 @@ body div[ng-controller="exercisesController"] div[src="workoutTemplate"],
 body div[ng-controller="notesController"] div[src="workoutTemplate"],
 body div[ng-controller="logsController"] div[src="workoutTemplate"]{padding:20px;}
 
+.gym-page .list-table,
 body.gym-page div[ng-controller="notesController"] div[src="workoutTemplate"],
 .gym-page div[ng-controller="exercisesController"] div[src="workoutTemplate"],
 .gym-page div[ng-controller="logsController"] div[src="workoutTemplate"],

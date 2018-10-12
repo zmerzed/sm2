@@ -20,8 +20,10 @@
 	
 	echo '<h3>' .$program_name . '</h3>';	
 	
-	if($program_workout_clients){		
+	if($program_workout_clients){
+		$workout_ctr = 0;
 		foreach($program_workout_clients as $workout){
+			$workout_ctr++;
 			$workout_id = $workout->workout_client_dayID;
 			$program_details = [];
 			if(getProgramDeatils($program_id,$workout_id,$client_id))
@@ -40,28 +42,25 @@
 					if($eset > $set_counter)
 						$set_counter = $eset;							
 				}						
-			}
-			/* if(!empty(getWorkoutMaxSet($workout_id)))
-				$set_counter = getWorkoutMaxSet($workout_id)[0]->max_sets; */
-			
+			}			
 			if(!empty($workout_details)){
-				echo '<h4>'.$workout_details->wday_name.'</h4>';
+				echo '<h4 class="text-center mt-4">Workout '.$workout_ctr.' - '.$workout_details->wday_name.'</h4>';
 ?>
 			<table class="table table-bordered print-program-type-2">
 				<thead>
 					<tr>
-						<th class="text-center">Circuit</th>
-						<th>Pic</th>
+						<th class="text-center">Order</th>
+						<th class="text-center">Clip</th>
 						<th>Exercise(Tempo)</th>
 						<!--th>Sets</th-->
 						<th>Reps</th>
-						<th width="70">Rest</th>
-						<th>Circuit Reps</th>
+						<th width="70">Rest Int</th>
 						<th>Circuit Set</th>
+						<th>Circuit Reps</th>						
 						<th>Start Weight</th>
 						<?php
 							for ($x = 1; $x <= $set_counter; $x++)
-								echo "<th>Set {$x}</th>";
+								echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 						?>
 					</tr>
 				</thead>
@@ -111,31 +110,38 @@
 									?>
 								</td>
 								<!--td><?php //echo ($e->exer_sets) ? $e->exer_sets : "--";  ?></td-->
-								<td><?php echo ($e->exer_rep) ? $e->exer_rep : $n; ?></td>
-								<td><?php echo ($e->exer_rest) ? $e->exer_rest : $n; ?></td>
+								<td class="text-center"><?php echo ($e->exer_rep) ? $e->exer_rep : $n; ?></td>
+								<td class="text-center"><?php echo ($e->exer_rest) ? $e->exer_rest : $n; ?></td>
 								
 								<?php if($group_chk == 1): ?>
 									<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-										<?php echo ($ciruitDetails) ? $ciruitDetails[0]->reps : $n; ?>
-									</td>
+										<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->sets : $n; ?>
+									</td>	
 									<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-										<?php echo ($ciruitDetails) ? $ciruitDetails[0]->sets : $n; ?>
-									</td>						
+										<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
+									</td>			
 								<?php endif; ?>
 								
-								<td><?php //echo (count($e->sets) > 0) ? $e->sets[0]->weight : ""; ?></td>								
+								<td class="text-center">
+									<?php
+										$eset = "";
+										if(count($e->sets) > 0)
+											$eset = $e->sets[0]->weight;
+										echo ($eset != "") ? $e->sets[0]->weight : $n;
+									?>
+								</td>								
 								<?php for ($x = 1; $x <= $set_counter; $x++){ ?>
 									<td style="padding:0;">
 										<table class="tabl table-borderless">
 											<tr>
-												<td style="border:0;border-bottom:1px solid #ccc;height:60px;"><strong>WGT</strong></td>
+												<td class="text-center" style="border:0;border-bottom:1px solid #ccc;height:60px;"><?php echo ($x==1) ? '<strong>WGT</strong>' : ''; ?></td>
 											</tr>
 											<tr>
-												<td style="border:0;border-top:1px solid #ccc;height:60px;"><strong>REPS</strong></td>
+												<td class="text-center" style="border:0;border-top:1px solid #ccc;height:60px;"><?php echo ($x==1) ? '<strong>REPS</strong>' : ''; ?></td>
 											</tr>
 										</table>
 									</td>
-								<?php } ?>								
+								<?php } ?>
 							</tr>
 				<?php
 						}else{
