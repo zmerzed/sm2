@@ -39,6 +39,10 @@ angular.module('smApp')
     }
 
     $scope.newWorkOutDay = function () {
+		
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res) {
 
@@ -49,7 +53,8 @@ angular.module('smApp')
             $scope.workout.selectedDay = $scope.workout.days[countDays - 1];
             $scope.workout.selectedDay.hash = res.data.hash;
             $scope.selectedClient = "Add Client";
-            selectDay($scope.workout.days[countDays - 1])
+            selectDay($scope.workout.days[countDays - 1]);
+			$(loadTrgt).removeClass('loading');
         });
 
     };
@@ -67,12 +72,17 @@ angular.module('smApp')
     };
 
     $scope.newExercise = function() {
+		
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res)
         {
             $scope.workout.selectedDay.exercises.push(generateNewExercise(res.data.hash));
             optimizeClientExercises();
             optimizeCircuits();
+			$(loadTrgt).removeClass('loading');
         });
     };
 
@@ -106,6 +116,9 @@ angular.module('smApp')
     };
 
     $scope.onCopy = function() {
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         $scope.onLeaveDay();
 
@@ -151,7 +164,9 @@ angular.module('smApp')
 
                     var countDays = $scope.workout.days.length;
                     optimizeDays();
-                    selectDay($scope.workout.days[countDays - 1])
+                    selectDay($scope.workout.days[countDays - 1]);
+					
+					$(loadTrgt).removeClass('loading');
 
                 });
             });
@@ -199,6 +214,10 @@ angular.module('smApp')
     };
 
     $scope.onCopyExercise = function(exercise) {
+		
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         var newExercise = angular.copy(exercise);
 
@@ -207,6 +226,7 @@ angular.module('smApp')
             newExercise.hash = res.data.hash;
             $scope.workout.selectedDay.exercises.push(newExercise);
             optimizeClientExercises();
+			$(loadTrgt).removeClass('loading');
         });
 
     };
@@ -265,6 +285,10 @@ angular.module('smApp')
     };
 
     $scope.sendForm = function() {
+		
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         if ($scope.currentUser.isGym) {
 

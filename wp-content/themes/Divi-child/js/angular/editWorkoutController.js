@@ -559,6 +559,10 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.sendForm = function()
     {
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
+		
         console.log('xxxxxxxxxxxxxxxxxx');
 
         if ($scope.currentUser.isGym) {
