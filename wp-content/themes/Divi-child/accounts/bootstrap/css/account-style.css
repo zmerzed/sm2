@@ -2002,9 +2002,10 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 body div.row::before,
 body div.row::after,
 body div.row:before, body div.row:after {display:none!important;}
+.gympage .loader{border-top: 16px solid #6db6e5;}
 .loader{
-	border: 16px solid #fff; /* Light grey */
-    border-top: 16px solid #ae1f23; /* Blue */
+	border: 16px solid #fff;
+    border-top: 16px solid #ae1f23;
     border-radius: 50%;
     width: 120px;
     height: 120px;

@@ -15,12 +15,21 @@
 			$wid = $_GET['dayId'];
 
 		$pDet = getProgramDeatils($pid,$wid,$cid);	//Program Details
+?>
+
+<div class="text-center btn-con">
+	<button class="btn red-btn" onclick="printBtn();">Print</button>
+</div>
+
+<?php
 
 		if(!empty($pDet)){
-			foreach($pDet as $pd=>$v){
+			$ctr__ = 0;
+			foreach($pDet as $pd=>$v){				
 				if($pd == "program_name"):
 					echo "<h3>".$v."</h3>";
 				else:
+					$ctr__++;
 					$wd = $v['workout_detail'][0]; //Workout Details
 					$ed = $v['exercises']; //Exercise Details
 
@@ -35,7 +44,7 @@
 				/* if(!empty(getWorkoutMaxSet($wid)))
 					$maxSet = getWorkoutMaxSet($wid)[0]->max_sets; */
 ?>
-	<h4 class="text-center"><?php echo $wd->wday_name; ?></h4>
+	<h4 class="text-center">Workout <?php echo $ctr__  .' - '. $wd->wday_name; ?></h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -111,7 +120,7 @@
 						if($vid != "")
 							$vid = getVideoID($vid);
 						
-						$ciruitDetails = getCircuitDetails($wid, $gname);
+						$ciruitDetails = getCircuitDetails($wd->wday_ID, $gname);
 			?>
 				<tr class="main-tr">
 					<td class="text-center"><?php echo $e->group_by; ?></td>
@@ -179,12 +188,12 @@
 								<table class="tabl table-borderless" border="0">
 									<tr border="0" style="background-color:transparent;">
 										<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
-											<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
+											<?php echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
 										</td>
 									</tr>
 									<tr border="0">
 										<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
-											<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
+											<?php echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
 										</td>
 									</tr>
 								</table>
@@ -201,9 +210,6 @@
 			endforeach; ?>
 		</tbody>
 	</table>
-	<div class="text-center btn-con">
-		<button class="btn red-btn" onclick="printBtn();">Print</button>
-	</div>
 	<script>
 		function printBtn(){
 			/* $('.btn-con').hide(); */

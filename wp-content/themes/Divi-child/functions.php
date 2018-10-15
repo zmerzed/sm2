@@ -2425,6 +2425,8 @@ function printCss($a,$b,$c){
         echo '{color:#'.$c.';}';
     elseif($b==5)
         echo '{border-color:#'.$c.'!important;}';
+    elseif($b==6)
+        echo '{border-top-color:#'.$c.'!important;}';
 }
 /*Get Note*/
 function getNote($uid){

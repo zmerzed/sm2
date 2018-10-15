@@ -10,9 +10,11 @@
 	if($pm_lvl == "gym" && $gcolor != ""){
 		$rgba = 'rgba('.hexdec(substr($gcolor, 0, 2)).','.hexdec(substr($gcolor, 2, 2)).','.hexdec(substr($gcolor, 4, 2)).', 0.8)';
 		$jrgb = [ // background-color rgba
-		'.trainer-per-day-schedule-box.today li'
+		'.trainer-per-day-schedule-box.today li',
 		];
-		$jbgcolor = [ // background-color		
+		$jbgcolor = [ // background-color
+		'.fep-button-active',
+		'.fep-button',
 		'.gray-btn.add-exercise',
 		'.red-btn, form input[type="submit"], .trainer-add-workout a',
 		'.list-table',
@@ -45,6 +47,8 @@
 		'.pagination>.active>span:hover'
 		];
 		$jgcolor = [ // color
+		'.memberships-details a',
+		'#fep-table a',
 		'#menu .mobile-menu>ul>li>a.active',
 		'.pagination>li>a',
 		'.pagination>li>span',
@@ -62,11 +66,16 @@
 		'.title-welcome-section .container',
 		'.trainer-dashboard tr td:nth-child(1)'
 		];		
+		$borderColorTop = [ //border-color
+		'.loader'
+		];		
 		echo "<style>";
 		printCss($jrgb, 1, $rgba);
 		printCss($jbgcolor, 2, $gcolor);
 		printCss($jbbcolor, 3, $gcolor);
 		printCss($jgcolor, 4, $gcolor);
 		printCss($jbcolor, 5, $gcolor);
+		printCss($borderColorTop, 6, $gcolor);
+		echo "@media(max-width:991px){.gym-page .trainer-day-label{background-color:#{$gcolor};color:#fff!important;}";
 		echo "</style>";
 	}
