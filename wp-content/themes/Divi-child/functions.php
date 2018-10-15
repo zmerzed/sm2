@@ -705,7 +705,7 @@ function workOutUpdate($data)
     $workout = stripslashes($workout);
     $workout = json_decode($workout, true);
 
-  //  dd($workout);
+   // dd($workout);
     $mWorkoutId = (int) $workout['workout_ID'];
     $weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
@@ -1068,7 +1068,8 @@ function workOutUpdate($data)
                     array(
                         'wday_workout_ID' => $workout['workout_ID'],
                         'wday_name' => $d['wday_name'],
-                        'wday_order' => (int) $d['wday_order']
+                        'wday_order' => (int) $d['wday_order'],
+                        'hash' => $d['hash']
                     )
                 );
 
@@ -1214,7 +1215,7 @@ function workOutUpdate($data)
                     // then update if exist
 
                     if (isset($c['id']) && !empty($c['group_by_letter'])) {
-                        // update
+
                         /* update the circuit reps */
 
                         $wpdb->update(
@@ -1230,8 +1231,8 @@ function workOutUpdate($data)
 
                         $sets = '';
 
-                        if (isset($c['$sets'])) {
-                            $sets = $c['$sets'];
+                        if (isset($c['sets'])) {
+                            $sets = $c['sets'];
                         }
 
                         $reps = '';
@@ -1245,8 +1246,8 @@ function workOutUpdate($data)
                                 'group_by_letter'  => $c['group_by_letter'],
                                 'day_id'       => $mDayId,
                                 'program_id'   => $workout['workout_ID'],
-                                'reps'         => $sets,
-                                'sets'         => $reps
+                                'reps'         => $reps,
+                                'sets'         => $sets
                             )
                         );
                     }
