@@ -174,7 +174,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.newWorkOutDay = function ()
     {
-
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
         $http.get(urlApiClient + '/hash').then(function(res)
         {
 
@@ -188,7 +190,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             $scope.selectedClient = "Add Client";
             $scope.clients = angular.copy($scope.clientsBackup);
 
-            selectDay($scope.workout.days[countDays - 1])
+            selectDay($scope.workout.days[countDays - 1]);
+			$(loadTrgt).removeClass('loading');
         });
     };
 
@@ -293,6 +296,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.newExercise = function() {
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res) {
 
@@ -301,6 +307,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             $scope.workout.selectedDay.exercises.push(newEx);
             optimizeSelectedDay();
             optimizeDays();
+			$(loadTrgt).removeClass('loading');
         });
 
     };
@@ -474,6 +481,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.onCopy = function()
     {
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
         var newCopy = angular.copy($scope.workout.selectedDay);
 
         $scope.onLeaveDay();
@@ -520,8 +530,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
                     var countDays = $scope.workout.days.length;
                     optimizeDays();
-                    selectDay($scope.workout.days[countDays - 1])
-
+                    selectDay($scope.workout.days[countDays - 1]);
+					$(loadTrgt).removeClass('loading');
                 });
             });
         }, 500)
@@ -529,7 +539,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.onCopyExercise = function(exercise)
     {
-		$('body').addClass('loading');
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+		$(loadTrgt).addClass('loading');
         console.log(exercise);
         var newExercise = angular.copy(exercise);
 
@@ -540,7 +552,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             $scope.workout.selectedDay.exercises.push(newExercise);
             optimizeClientExercises();
 			console.log('test---------------');
-			$('body').removeClass('loading');
+			$(loadTrgt).removeClass('loading');
         });
 
     };

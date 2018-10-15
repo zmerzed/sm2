@@ -1,4 +1,3 @@
-<script>window.print();</script>
 <link rel="stylesheet" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print-media.css" />
 <!-- Print Type 3 -->
 <?php
@@ -8,16 +7,16 @@
 	if(getWExercises($workout_id))
 		$exercises = getWExercises($workout_id);
 	$maxSet = 0;
-	foreach($exercises as $e){
+	/* foreach($exercises as $e){
 		if($e){
 			$eset = $e->exer_sets;
 			if($eset > $maxSet)
 				$maxSet = $eset;							
 		}						
-	}
+	} */
 	
-	/* if(!empty(getWorkoutMaxSet($workout_id)))
-		$maxSet = getWorkoutMaxSet($workout_id)[0]->max_sets; */
+	if(!empty(getWorkoutMaxSet($workout_id)))
+		$maxSet = getWorkoutMaxSet($workout_id)[0]->max_sets;
 ?>
 	<h4 class="text-center"><?php echo getWorkoutDayName($workout_id); ?></h4>
 <table class="table-bordered table">
@@ -28,7 +27,7 @@
 			<th width="30%">Exercise (Tempo)</th>
 			<!-- <td>Sets</td> -->
 			<th class="text-center" width="62">Reps</th>
-			<th class="text-center" width="60">Rest Int</th>
+			<th class="text-center" width="75">Rest Int</th>
 			<th class="text-center">Circuit Set</th>
 			<th class="text-center">Circuit Reps</th>			
 			<th class="text-center">Start Weight</th>	
@@ -90,9 +89,10 @@
 							$group_letter_arr[] = $gname;
 							$group_chk = 1;
 						}
-						$ciruitDetails = getCircuitDetails($workout_id, $gname);				
+						$ciruitDetails = getCircuitDetails($workout_id, $gname);
+					
 		?>
-				<tr>
+				<tr class="main-tr">
 					<td class="text-center"><?php echo $e->group_by; ?></td>
 					<td width="20%" class="text-center">
 						<?php
@@ -110,26 +110,31 @@
 					</td>					
 					<?php if($group_chk == 1): ?>
 						<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
+							<?php echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n; ?>
 						</td>
 						<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->sets : $n; ?>
+							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
 						</td>						
 					<?php endif; ?>
 					<td class="text-center">
 						<?php
-							$weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;
-							echo ($weight) ? $weight : $n;
+							/* $weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;
+							echo ($weight) ? $weight : $n; */
 						?>
+						<input type="text" class="inputprint" />
 					</td>
 					<?php for ($x = 0; $x < $maxSet; $x++) { ?>
-						<td width="64" style="padding:0">
+						<td style="padding:0" class="set-options">
 							<table class="tabl table-borderless" border="0">
 								<tr border="0" style="background-color:transparent;">
-									<td class="text-center" style="border:0;border-bottom:1px solid #ccc;height:60px;"><?php echo ($x==0) ? '<strong>WGT</strong>' : ''; ?></td>
+									<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
+										<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
+									</td>
 								</tr>
 								<tr border="0">
-									<td class="text-center" style="border:0;border-top:1px solid #ccc;height:60px;"><?php echo ($x==0) ? '<strong>REPS</strong>' : ''; ?></td>
+									<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
+										<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -141,4 +146,29 @@
 		?>
 	</tbody>
 </table>
-	
+
+<div class="text-center btn-con">
+	<button class="btn red-btn" onclick="printBtn();">Print</button>
+</div>
+
+<script>
+function printBtn(){
+	/* $('.btn-con').hide(); */
+	window.print();
+}
+$(window).ready(function(){
+	$('.main-tr').each(function(){
+		var trheight = $(this).height() / 2;
+		$(this).find('.set-options tr td').height(trheight);
+		$(this).find('.set-options tr td input').height(trheight);
+	});
+	$('.inputprint').focus(function(){
+		$(this).addClass('focused');
+	}).focusout(function(){
+		$(this).removeClass('focused');
+	}).each(function(){
+		$(this).height($(this).closest('td').height());
+	});
+});
+
+</script>	

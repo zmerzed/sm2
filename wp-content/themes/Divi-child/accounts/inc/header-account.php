@@ -44,11 +44,6 @@
 		<?php require_once( get_stylesheet_directory() . '/accounts/inc/gym-color.php' ); ?>
 		<title>My Account - <?php echo $userdata->user_login; ?></title>
 	</head>
-	<body class="<?php echo (getMembershipLevel($userdata) == "gym") ? 'gym-page' : ''; ?>">
-	<div class="loader-container" style="display:none;">
-		<div class="loader-inner">
-			<div class="loader" style=""></div>
-		</div>
-	</div>
+	<body class="<?php echo (getMembershipLevel($userdata) == "gym") ? 'gym-page' : ''; ?>">	
 	<?php require_once( get_stylesheet_directory() . '/accounts/inc/mobile-menu.php' ); ?>
 	<?php require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account.php' ); ?>

@@ -113,7 +113,7 @@
 						
 						$ciruitDetails = getCircuitDetails($wid, $gname);
 			?>
-				<tr>
+				<tr class="main-tr">
 					<td class="text-center"><?php echo $e->group_by; ?></td>
 					<td width="20%" class="text-center">
 						<?php
@@ -154,7 +154,7 @@
 					
 					<?php if($group_chk == 1): ?>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->sets : $n; ?>
+							<?php echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n; ?>
 						</td>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
 							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
@@ -162,11 +162,12 @@
 					<?php endif; ?>
 					<td class="text-center">
 						<?php
-							$eset = "";
+							/* $eset = "";
 							if(count($e->sets) > 0)
 								$eset = $e->sets[0]->weight;
-							echo ($eset != "") ? $e->sets[0]->weight : $n;
+							echo ($eset != "") ? $e->sets[0]->weight : $n; */
 						?>
+						<input type="text" class="inputprint" />
 					</td>
 					<?php
 
@@ -174,13 +175,17 @@
 							if(is_array($v)){								
 								for ($x = 0; $x < $maxSet; $x++) {
 						?>
-							<td width="64" style="padding:0">
+							<td style="padding:0" class="set-options">
 								<table class="tabl table-borderless" border="0">
-									<tr style="background-color:transparent;">									
-										<td class="text-center" style="border:0;height:60px;"><?php echo ($x==0) ? '<strong>WGT</strong>' : ''; ?></td>
+									<tr border="0" style="background-color:transparent;">
+										<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
+											<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
+										</td>
 									</tr>
-									<tr>
-										<td class="text-center" style="border:0;border-top:1px solid #ccc;height:60px;"><?php echo ($x==0) ? '<strong>REPS</strong>' : ''; ?></td>
+									<tr border="0">
+										<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
+											<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -196,7 +201,29 @@
 			endforeach; ?>
 		</tbody>
 	</table>
-	<script>window.print();</script>	
+	<div class="text-center btn-con">
+		<button class="btn red-btn" onclick="printBtn();">Print</button>
+	</div>
+	<script>
+		function printBtn(){
+			/* $('.btn-con').hide(); */
+			window.print();
+		}
+		$(window).ready(function(){
+			$('.main-tr').each(function(){
+				var trheight = $(this).height() / 2;
+				$(this).find('.set-options tr td').height(trheight);
+				$(this).find('.set-options tr td input').height(trheight);
+			});
+			$('.inputprint').focus(function(){
+				$(this).addClass('focused');
+			}).focusout(function(){
+				$(this).removeClass('focused');
+			}).each(function(){
+				$(this).height($(this).closest('td').height());
+			});
+		});
+	</script>		
 <?php
 				endif;
 			}

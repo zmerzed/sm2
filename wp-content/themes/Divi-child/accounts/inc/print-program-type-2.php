@@ -54,7 +54,7 @@
 						<th>Exercise(Tempo)</th>
 						<!--th>Sets</th-->
 						<th>Reps</th>
-						<th width="70">Rest Int</th>
+						<th width="75">Rest Int</th>
 						<th>Circuit Set</th>
 						<th>Circuit Reps</th>						
 						<th>Start Weight</th>
@@ -100,7 +100,7 @@
 							
 							$ciruitDetails = getCircuitDetails($workout_id, $gname);
 				?>
-							<tr>
+							<tr class="main-tr">
 								<td class="text-center"><?php echo $e->group_by; ?></td>
 								<td width="20%" class="text-center"><?php echo (getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))) ? '<img src="https://i.ytimg.com/vi/' . getVideoID(getExerciseVideo($e->exer_body_part, $e->exer_type))[0] .'/maxresdefault.jpg" class="img-fluid img-vid" style="max-height:112px;min-width:200px;" />' : $n; ?></td>
 								<td width="30%" style="min-width:200px;">
@@ -115,7 +115,7 @@
 								
 								<?php if($group_chk == 1): ?>
 									<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
-										<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->sets : $n; ?>
+										<?php echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n; ?>
 									</td>	
 									<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
 										<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
@@ -124,20 +124,25 @@
 								
 								<td class="text-center">
 									<?php
-										$eset = "";
+										/* $eset = "";
 										if(count($e->sets) > 0)
 											$eset = $e->sets[0]->weight;
-										echo ($eset != "") ? $e->sets[0]->weight : $n;
+										echo ($eset != "") ? $e->sets[0]->weight : $n; */
 									?>
+									<input type="text" class="inputprint" />
 								</td>								
 								<?php for ($x = 1; $x <= $set_counter; $x++){ ?>
-									<td style="padding:0;">
+									<td style="padding:0;" class="set-options">
 										<table class="tabl table-borderless">
-											<tr>
-												<td class="text-center" style="border:0;border-bottom:1px solid #ccc;height:60px;"><?php echo ($x==1) ? '<strong>WGT</strong>' : ''; ?></td>
+											<tr border="0" style="background-color:transparent;">
+												<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
+													<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
+												</td>
 											</tr>
-											<tr>
-												<td class="text-center" style="border:0;border-top:1px solid #ccc;height:60px;"><?php echo ($x==1) ? '<strong>REPS</strong>' : ''; ?></td>
+											<tr border="0">
+												<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
+													<?php echo ($x <= $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
+												</td>
 											</tr>
 										</table>
 									</td>
@@ -154,10 +159,35 @@
 					}
 				?>
 			</table>
-			<script>window.print();</script>
+			
 	<?php
 			}
 		}
+	?>
+		<div class="text-center btn-con">
+			<button class="btn red-btn" onclick="printBtn();">Print</button>
+		</div>
+		<script>
+			function printBtn(){
+				/* $('.btn-con').hide(); */
+				window.print();
+			}
+			$(window).ready(function(){
+				$('.main-tr').each(function(){
+					var trheight = $(this).height() / 2;
+					$(this).find('.set-options tr td').height(trheight);
+					$(this).find('.set-options tr td input').height(trheight);
+				});
+				$('.inputprint').focus(function(){
+					$(this).addClass('focused');
+				}).focusout(function(){
+					$(this).removeClass('focused');
+				}).each(function(){
+					$(this).height($(this).closest('td').height());
+				});
+			});
+		</script>	
+	<?php
 	}else
 		echo "No Workouts";
 	/*End if &data=add-workouts*/

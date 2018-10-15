@@ -116,7 +116,17 @@
 				$("#myModal iframe").attr("src", "");
 			});
 		}
-		$('.has-sub-drop').append('<span class="after" onclick="toggleSub(this)"></span>');
+		$('.has-sub-drop').append('<span class="after" onclick="toggleSub(this)"></span>');		
+		$('.main-content').prepend('<div class="loader-container" style="display:none;"><div class="loader-inner"><div class="loader" style=""></div></div></div>');
+		getSizeLoader($('.main-content').height(),$('.main-content').width());
+	});
+	
+	function getSizeLoader(a,b){
+		$('.loader-inner').height(a).width(b);
+	}
+	
+	$(window).resize(function(){
+		getSizeLoader($('.main-content').height(),$('.main-content').width());
 	});
 	
 	<?php

@@ -460,7 +460,7 @@ ul.workout-exercise-lists {
 .main-navigation,
 .col-12.col-md-4.col-lg-3.col-xl-3.mb-5,
 .browse-client-workout {
-    display: none;
+    display: none!important;
 }
 
 .container.assign-client-to-workout .col-lg-2.col-md-2 a.nav-link.ng-binding.active {
@@ -484,3 +484,23 @@ h4,
 h3{text-transform:uppercase;}
 .container{max-width:100%;}
 .tabl{width:100%;}
+.inputprint.focused{
+	border:1px solid #ccc;
+}
+.inputprint{
+	height:60px;
+	border:0;
+	text-align:center;
+	line-height:30px;
+}
+.set-options strong{
+	padding-top:5px;
+	display:inline-block;
+	font-size:10px;
+}
+.set-input{
+	text-align:center;
+	border:0;
+	background-color:transparent;
+	max-width:100px;
+}
