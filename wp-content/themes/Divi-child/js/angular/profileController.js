@@ -86,6 +86,10 @@ angular.module('smApp')
 
         $scope.uploadFile = function()
         {
+			var loadTrgt = $('.main-content');
+			getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+			$(loadTrgt).addClass('loading');
+			
             var file = $scope.myFile;
             var fd = new FormData();
             fd.append('myFile', file);
@@ -94,7 +98,8 @@ angular.module('smApp')
             $http.post(
                 apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
             ).then(function() {
-                location.reload();
+				$(loadTrgt).removeClass('loading');
+                location.reload();				
             });
         };
         
