@@ -177,6 +177,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 		var loadTrgt = $('.main-content');
 		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
 		$(loadTrgt).addClass('loading');
+
         $http.get(urlApiClient + '/hash').then(function(res)
         {
 
@@ -247,6 +248,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.onSelectDay = function(day) {
+
         optimizeSelectedDay();
         selectDay(day);
     };
@@ -296,6 +298,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.newExercise = function() {
+
 		var loadTrgt = $('.main-content');
 		getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
 		$(loadTrgt).addClass('loading');
@@ -315,6 +318,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.selectClient = function(client) {
 
         $scope.workout.selectedDay.selectedClient = client;
+
         optimizeClientExercises();
     };
 
@@ -421,6 +425,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.removeDay = function(day) {
+
         day.isDelete = true;
 
         delete day.selectedClient;
@@ -452,6 +457,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.removeExercise = function(exercise) {
+
         exercise.isDelete = true;
         optimizeSelectedDay();
         optimizeClientExercises();
@@ -459,22 +465,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
     $scope.onChangeCircuitSet = function() {
-
-        var noSet  = 0;
-        $scope.workoutMaxSet = 0;
-
-        for (var i in $scope.workout.selectedDay.circuits) {
-
-            var circuit = $scope.workout.selectedDay.circuits[i];
-
-            if (circuit.sets) {
-                noSet = parseInt(circuit.sets);
-            }
-
-            if (noSet >= $scope.workoutMaxSet) {
-                $scope.workoutMaxSet = noSet;
-            }
-        }
 
         optimizeCircuits();
     };
@@ -487,9 +477,11 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         var newCopy = angular.copy($scope.workout.selectedDay);
 
         $scope.onLeaveDay();
+
         setTimeout(function()
         {
             $scope.$apply(function() {
+
                 var newCopy = angular.copy($scope.workout.selectedDay);
                 delete newCopy.wday_ID;
 
@@ -648,12 +640,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         return n > 9 ? "" + n: "0" + n;
     }
 
-    function optimizeCircuits() 
-    {
+    function optimizeCircuits() {
 
-        console.log('optimizeCircuits');
-        console.log($scope.workout.selectedDay.circuits);
-        console.log($localStorage.nCircuits);
         $scope.workout.selectedDay.circuits.forEach(function(circuit) 
         {
 
@@ -673,7 +661,25 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             if (!isFound) {
                 $localStorage.nCircuits.push(circuit);
             }
-        })
+        });
+
+
+        var noSet  = 0;
+
+        $scope.workoutMaxSet = 0;
+
+        for (var i in $scope.workout.selectedDay.circuits) {
+
+            var circuit = $scope.workout.selectedDay.circuits[i];
+
+            if (circuit.sets) {
+                noSet = parseInt(circuit.sets);
+            }
+
+            if (noSet >= $scope.workoutMaxSet) {
+                $scope.workoutMaxSet = noSet;
+            }
+        }
     }
 
     function optimizeSelectedClients()
@@ -934,6 +940,10 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     function selectDay(day)
     {
+        var loadTrgt = $('.main-content');
+        getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+        $(loadTrgt).addClass('loading');
+
         $scope.workout.selectedDay = angular.copy(day);
 
         $scope.workout.selectedDay.circuits = [];
@@ -945,10 +955,16 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             optimizeSelectedClients();
             optimizeClientExercises();
             optimizeSelectedDay();
-        }
 
-        optimizeCircuits();
-        findTheLargestSet();
+        }
+        setTimeout(function() {
+
+            optimizeCircuits();
+            findTheLargestSet();
+
+            $(loadTrgt).removeClass('loading');
+        }, 2000)
+
 
     }
 
