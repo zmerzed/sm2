@@ -87,7 +87,7 @@ angular.module('smApp')
         $scope.uploadFile = function()
         {
 			var loadTrgt = $('.main-content');
-			getSizeLoader($(loadTrgt).height(),$(loadTrgt).width());
+			getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 			$(loadTrgt).addClass('loading');
 			
             var file = $scope.myFile;
@@ -165,6 +165,10 @@ angular.module('smApp')
         };
 
         $scope.trainerUploadPhoto = function() {
+			
+			var loadTrgt = $('.main-content');
+			getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
+			$(loadTrgt).addClass('loading');
 
             var fd = new FormData();
             fd.append('myFile', $('#idTrainerProfile')[0].files[0]);
@@ -173,8 +177,10 @@ angular.module('smApp')
             $scope.promise = $http.post(
                 apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
             ).then(function(res) {
-                
-            });
+                $(loadTrgt).removeClass('loading');
+            },function(res){
+				$(loadTrgt).removeClass('loading');
+			});
         };
 
         $scope.removePhotoClient = function(photo) {

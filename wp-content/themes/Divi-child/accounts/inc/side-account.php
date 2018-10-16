@@ -27,8 +27,8 @@
 					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
 				</ul>
 			</li>
-			<li class="<?php echo ($op_client && $data_request == "profile") ? 'has-sub-drop' : ''; ?>"><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>					
-				<?php if($op_client && $data_request == "profile"): ?>			
+			<li class="<?php echo ($op_client) ? 'has-sub-drop' : ''; ?>"><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>					
+				<?php if($op_client): ?>			
 					<ul class="sub-menu" style="display:none;">
 						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=personal-info" menu-item="personal-info">Personal Info</a></li>
 						<li><a href="<?php echo home_url(); ?>/<?php echo $urole; ?>/?data=profile&by=progress-goals" menu-item="progress-goals">Progress/Goals</a></li>
