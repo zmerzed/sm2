@@ -126,7 +126,7 @@
 	}
 	
 	$(window).resize(function(){
-		getSizeLoader($('.main-content').height(),$('.main-content').width());
+		getSizeLoader($('.main-content').height(),$('.main-content').outerWidth());
 	});
 	
 	<?php
