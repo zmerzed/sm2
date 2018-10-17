@@ -87,23 +87,9 @@ angular.module('smApp')
     };
 
     $scope.onSelectDay = function(day) {
+
         selectDay(day);
 
-        var noSet  = 0;
-        $scope.workoutMaxSet = 0;
-
-        for (var i in $scope.workout.selectedDay.circuits) {
-
-            var circuit = $scope.workout.selectedDay.circuits[i];
-
-            if (circuit.sets) {
-                noSet = parseInt(circuit.sets);
-            }
-
-            if (noSet >= $scope.workoutMaxSet) {
-                $scope.workoutMaxSet = noSet;
-            }
-        }
     };
 
     $scope.onChangeClientTime = function() {
@@ -116,6 +102,7 @@ angular.module('smApp')
     };
 
     $scope.onCopy = function() {
+
 		var loadTrgt = $('.main-content');
 		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
@@ -430,11 +417,13 @@ angular.module('smApp')
         };
     }
 
-    function selectDay(day)
-    {
+    function selectDay(day) {
+
         $scope.workout.selectedDay = angular.copy(day);
         optimizeSelectedClients();
 
+        findTheLargestSet();
+        optimizeCircuits();
     }
 
     function optimizeDays()
@@ -672,9 +661,6 @@ angular.module('smApp')
                 $localStorage.nCircuits.push(circuit);
             }
         })
-    }
-
-    $scope.onChangeCircuitSet = function() {
 
         var noSet  = 0;
         $scope.workoutMaxSet = 0;
@@ -691,6 +677,9 @@ angular.module('smApp')
                 $scope.workoutMaxSet = noSet;
             }
         }
+    }
+
+    $scope.onChangeCircuitSet = function() {
 
         optimizeCircuits();
     };
