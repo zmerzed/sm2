@@ -41,7 +41,6 @@ angular.module('smApp')
     $scope.newWorkOutDay = function () {
 		
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res) {
@@ -74,7 +73,6 @@ angular.module('smApp')
     $scope.newExercise = function() {
 		
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -104,7 +102,6 @@ angular.module('smApp')
     $scope.onCopy = function() {
 
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         $scope.onLeaveDay();
@@ -203,7 +200,6 @@ angular.module('smApp')
     $scope.onCopyExercise = function(exercise) {
 		
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         var newExercise = angular.copy(exercise);
@@ -274,7 +270,6 @@ angular.module('smApp')
     $scope.sendForm = function() {
 		
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         if ($scope.currentUser.isGym) {
@@ -388,6 +383,11 @@ angular.module('smApp')
         }
 
     }, true);
+	
+	$scope.$watch(function(){
+		var loadTrgt = $('.main-content');
+		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
+	}, true);
 
     function nFormat(n){
         return n > 9 ? "" + n: "0" + n;

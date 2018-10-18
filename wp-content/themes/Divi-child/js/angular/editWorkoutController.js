@@ -175,7 +175,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.newWorkOutDay = function ()
     {
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res)
@@ -300,7 +299,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.newExercise = function() {
 
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res) {
@@ -401,6 +399,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     // }, true);
 
     $scope.$watch(function() {
+		
+		var loadTrgt = $('.main-content');
+        getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 
         console.log('/* get the largest set in a selected day */');
         $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
@@ -472,7 +473,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.onCopy = function()
     {
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
         var newCopy = angular.copy($scope.workout.selectedDay);
 
@@ -532,7 +532,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.onCopyExercise = function(exercise)
     {
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
         console.log(exercise);
         var newExercise = angular.copy(exercise);
@@ -543,7 +542,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             newExercise.hash = res.data.hash;
             $scope.workout.selectedDay.exercises.push(newExercise);
             optimizeClientExercises();
-			console.log('test---------------');
 			$(loadTrgt).removeClass('loading');
         });
 
@@ -552,7 +550,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.sendForm = function()
     {
 		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 		$(loadTrgt).addClass('loading');
 		
         console.log('xxxxxxxxxxxxxxxxxx');
@@ -941,7 +938,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     function selectDay(day)
     {
         var loadTrgt = $('.main-content');
-        getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
         $(loadTrgt).addClass('loading');
 
         $scope.workout.selectedDay = angular.copy(day);
