@@ -1,7 +1,7 @@
 /**
  * Created by remz on 7/10/2018.
  */
-var app = angular.module("smApp", ['cgBusy', 'ui.bootstrap', 'ngStorage']);
+var app = angular.module("smApp", ['cgBusy', 'ui.bootstrap', 'ngStorage', 'ngSanitize']);
 app.run(function() {
    console.log('sm app run....')
 });
@@ -90,6 +90,72 @@ app.constant('global', {
         });
 
         return groups;
+    },
+
+    validatePrograms: function(form, isEdit=false) {
+
+        console.log(form);
+        var validations = [];
+        var fieldName = 'name';
+        var fieldDayName = 'name';
+        var fieldSeq = 'seq';
+
+        if (isEdit) {
+            console.log('xxxxxxxxxxxxxxxxxx');
+            fieldDayName = 'wday_name';
+            fieldName = 'workout_name';
+            fieldSeq = 'wday_order';
+        }
+
+        console.log(fieldSeq);
+        if (!form[fieldName]) {
+
+            validations.push({
+                mixMessage: 'is required.',
+                first: 'Program Name'
+            });
+        }
+
+        form.days.forEach(function (day) {
+
+            console.log('fffffffffff');
+            console.log(day);
+            if (!day[fieldDayName]) {
+
+                console.log(day);
+
+                validations.push({
+                    mixMessage: 'name is required.',
+                    first: 'Workout ' + day[fieldSeq],
+                    firstLink: true,
+                    day: day
+                });
+
+            }
+
+            day.clients.forEach(function(client) {
+
+                if (!client.date_availability || client.date_availability.length <= 0 ) {
+                    validations.push({
+                        mixMessage: ' schedule is required at workout ' + day[fieldSeq],
+                        first: 'Client ' + client.display_name,
+                        firstLink: true,
+                        day: day
+                    });
+                }
+
+                if (!client.time_availability || client.time_availability.length <= 0 ) {
+                    validations.push({
+                        mixMessage: ' schedule time is required at workout ' + day[fieldSeq],
+                        first: 'Client ' + client.display_name,
+                        firstLink: true,
+                        day: day
+                    });
+                }
+            });
+        });
+
+        return validations;
     },
 
     customSort: function(arr)
@@ -249,4 +315,22 @@ app.directive("datepicker", function () {
             });
         }
     }
-}]);
+}])
+.directive('compile', ['$compile', function ($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                element.html(value);
+                $compile(element.contents())(scope);
+            }
+        )};
+}]).controller('MyCtrl', function($scope) {
+    var str = 'hello http://www.cnn.com';
+    var urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
+    result = str.replace(urlRegEx, "<a ng-click=\"GotoLink('$1',\'_system\')\">$1</a>");
+    $scope.GotoLink = function() { alert(); }
+    $scope.name = result;
+});

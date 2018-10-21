@@ -1,0 +1,9 @@
+<div class="alert alert-danger">
+    <ul>
+        <li ng-repeat="error in validations">
+            <div ng-if="error.firstLink"><strong><a href="javascript:void(0)" ng-click="reader.selectDay(error.day.hash)">{{ error.first }}</a></strong> {{ error.mixMessage }}</div>
+            <div ng-if="!error.firstLink"><strong>{{ error.first }}</strong> {{ error.mixMessage }}</div>
+        </li>
+    </ul>
+</div>
+

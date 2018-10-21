@@ -12,6 +12,10 @@ angular.module('smApp')
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/new_workout.html';
     $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
+    $scope.validationsHtml = ROOT_URL + '/wp-content/themes/Divi-child/partials/program_validations.html';
+    $scope.testHtml = {test: "<strong>test</strong>"};
+    $scope.validations = [];
+
     $localStorage.nCircuits = [];
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
@@ -70,6 +74,20 @@ angular.module('smApp')
         $scope.selectedExercise.group_by = $scope.selectedExercise.group_by_letter + $scope.selectedExercise.group_by_number;
     };
 
+    $scope.reader.selectDay = function(hashId) {
+
+
+        $scope.workout.days.forEach(function(day) {
+
+            if (day.hash == hashId) {
+
+                selectDay(day);
+
+            }
+        });
+
+    };
+
     $scope.newExercise = function() {
 		
 		var loadTrgt = $('.main-content');
@@ -91,7 +109,8 @@ angular.module('smApp')
     };
 
     $scope.onChangeClientTime = function() {
-        console.log('llf');
+
+
         if($scope.$root.$$phase != '$apply' &&
             $scope.$root.$$phase != '$digest'
         ) {
@@ -268,7 +287,8 @@ angular.module('smApp')
     };
 
     $scope.sendForm = function() {
-		
+
+
 		var loadTrgt = $('.main-content');
 		$(loadTrgt).addClass('loading');
 
@@ -323,10 +343,32 @@ angular.module('smApp')
         }
 
         toSend.user_id = CURRENT_USER_ID;
-        console.log(toSend);
+
         $('#idWorkoutForm').val(JSON.stringify(toSend));
 
-        return true;
+        $scope.validations = angular.copy(global.validatePrograms(toSend));
+
+        console.log($scope.validations);
+
+        if ($scope.validations.length <= 0) {
+
+            return true;
+        }
+
+        $(loadTrgt).removeClass('loading');
+
+        if($scope.$root.$$phase != '$apply' &&
+            $scope.$root.$$phase != '$digest'
+        ) {
+            $scope.$apply();
+        }
+        return false;
+
+    };
+
+    $scope.onChangeCircuitSet = function() {
+
+        optimizeCircuits();
     };
 
     $scope.$watch('reader.selectedClient', function(val)
@@ -393,8 +435,8 @@ angular.module('smApp')
         return n > 9 ? "" + n: "0" + n;
     }
 
-    function optimizeSelectedClients()
-    {
+    function optimizeSelectedClients() {
+
         $scope.clients = angular.copy($scope.clientsBackUp);
         for (var i = 0; i < $scope.workout.selectedDay.clients.length; i++) {
 			$scope.clients.forEach((v,index)=>{			
@@ -404,8 +446,8 @@ angular.module('smApp')
         }
     }
 
-    function generateNewExercise(hash)
-    {
+    function generateNewExercise(hash) {
+
         return {
             hash:hash,
             exerciseOptions: angular.copy($scope.exerciseOptions),
@@ -426,8 +468,7 @@ angular.module('smApp')
         optimizeCircuits();
     }
 
-    function optimizeDays()
-    {
+    function optimizeDays() {
         var count = 1;
 
         for(var i in $scope.workout.days)
@@ -439,8 +480,7 @@ angular.module('smApp')
         }
     }
 
-    function optimizeClientExercises()
-    {
+    function optimizeClientExercises() {
 
         for (var i in $scope.workout.selectedDay.exercises)
         {
@@ -489,8 +529,8 @@ angular.module('smApp')
         }
     }
 
-    function findTheLargestSet()
-    {
+    function findTheLargestSet() {
+
         /* get the max set */
 
         for (var i in $scope.workout.selectedDay.exercises)
@@ -636,8 +676,7 @@ angular.module('smApp')
 
     }
 
-    function optimizeCircuits() 
-    {
+    function optimizeCircuits() {
 
         $scope.workout.selectedDay.circuits.forEach(function(circuit) 
         {
@@ -679,56 +718,21 @@ angular.module('smApp')
         }
     }
 
-    $scope.onChangeCircuitSet = function() {
-
-        optimizeCircuits();
-    };
-
     setTimeout(function() {
+
         $("#idSelectClient").change(function() {
             console.log($this.val());
         });
+
     }, 500);
 
-
-    $("#idForm").submit(function (e)
-    {
+    $("#idForm").submit(function (e) {
 
         e.preventDefault();
 
-        delete $scope.workout.selectedDay;
-
-        for(var i in $scope.workout.days)
-        {
-            var day = $scope.workout.days[i];
-
-            delete day.selectedClient;
-            for(var e in day.exercises)
-            {
-                var ex = day.exercises[e];
-                delete ex.exerciseOptions;
-                delete ex.exerciseSQoptions;
-            }
-
-            for (var x in day.clients)
-            {
-                var client  = day.clients[x];
-
-                for (var m in client.exercises)
-                {
-                    var clientExercise = client.exercises[m];
-                    delete clientExercise.exerciseOptions;
-                    delete clientExercise.exerciseSQoptions;
-                    delete clientExercise.selectedPart;
-                    delete clientExercise.selectedSQ;
-                }
-            }
-        }
-
-        console.log($scope.workout);
-        $scope.workout.user_id = CURRENT_USER_ID;
-        $('#idWorkoutForm').val(JSON.stringify($scope.workout));
-        return true;
+        return false;
 
     });
+
+
 });

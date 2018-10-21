@@ -10,7 +10,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     $scope.reader = {selectedClient:false};
     $scope.workoutTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/edit_workout.html';
     $scope.workoutSortExerTemplate = ROOT_URL + '/wp-content/themes/Divi-child/partials/modal.sorting_exercise.html';
+    $scope.validationsHtml = ROOT_URL + '/wp-content/themes/Divi-child/partials/program_validations.html';
     $localStorage.nCircuits = angular.copy($scope.workout.circuits);
+    $scope.validations = [];
 
     var urlApiClient = ROOT_URL + '/wp-json/v1';
 
@@ -250,6 +252,20 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
         optimizeSelectedDay();
         selectDay(day);
+    };
+
+    $scope.reader.selectDay = function(hashId) {
+
+
+        $scope.workout.days.forEach(function(day) {
+
+            if (day.hash == hashId) {
+
+                selectDay(day);
+
+            }
+        });
+
     };
 
     $scope.onLeaveDay = function() {
@@ -549,10 +565,9 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.sendForm = function()
     {
+
 		var loadTrgt = $('.main-content');
 		$(loadTrgt).addClass('loading');
-		
-        console.log('xxxxxxxxxxxxxxxxxx');
 
         if ($scope.currentUser.isGym) {
             var formUrl = '/gym/?data=edit-workout&workout=' + $scope.workout.workout_ID;
@@ -593,8 +608,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
                         var mSec = nFormat(client.time_availability_temp.getSeconds());
 
                         client.time_availability = mHour + ":" + mMin + ":" + mSec;
-                        console.log('ttttttttttttttttttttttttttt');
-                        console.log(client.time_availability);
+
                     }
 
                     for (var m in client.exercises)
@@ -609,7 +623,22 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             }
 
             $('#idWorkoutForm').val(JSON.stringify(toSend));
-            console.log(toSend);
+
+
+            $scope.validations = angular.copy(global.validatePrograms(toSend, true));
+
+            if($scope.$root.$$phase != '$apply' &&
+                $scope.$root.$$phase != '$digest'
+            ) {
+                $scope.$apply();
+            }
+
+            if ($scope.validations.length > 0) {
+                
+                $(loadTrgt).removeClass('loading');
+                return false;
+            }
+
             return true;
         }
         catch(err) {
