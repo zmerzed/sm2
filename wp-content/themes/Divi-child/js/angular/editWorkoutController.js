@@ -636,6 +636,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             if ($scope.validations.length > 0) {
                 
                 $(loadTrgt).removeClass('loading');
+				$("html, body").stop().animate({scrollTop:0}, 500, 'swing');
                 return false;
             }
 

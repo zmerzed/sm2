@@ -356,6 +356,7 @@ angular.module('smApp')
         }
 
         $(loadTrgt).removeClass('loading');
+		$("html, body").stop().animate({scrollTop:0}, 500, 'swing');
 
         if($scope.$root.$$phase != '$apply' &&
             $scope.$root.$$phase != '$digest'
