@@ -55,8 +55,9 @@
 				<th width="62">Reps</th>
 				<th width="60">Rest Int</th>
 				<th>Circuit Set</th>
-				<th>Circuit Reps</th>				
+				<!--th>Circuit Reps</th-->				
 				<th>Start Weight</th>
+				<th>&nbsp;</th>
 				<?php
 					for ($x = 1; $x <= $maxSet; $x++)
 						echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
@@ -163,11 +164,16 @@
 					
 					<?php if($group_chk == 1): ?>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n; ?>
+							<?php
+								if($ciruitDetails)
+									echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n;
+								else
+									echo $n;
+							?>
 						</td>
-						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
-							<?php echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
-						</td>												
+						<!--td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
+							<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
+						</td-->												
 					<?php endif; ?>
 					<td class="text-center">
 						<?php
@@ -177,6 +183,20 @@
 							echo ($eset != "") ? $e->sets[0]->weight : $n; */
 						?>
 						<input type="text" class="inputprint" />
+					</td>
+					<td style="padding:0" class="set-options">
+						<table class="tabl table-borderless" border="0">
+							<tr border="0" style="background-color:transparent;">
+								<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
+									WGT
+								</td>
+							</tr>
+							<tr border="0">
+								<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
+									REPS
+								</td>
+							</tr>
+						</table>
 					</td>
 					<?php
 
@@ -188,12 +208,23 @@
 								<table class="tabl table-borderless" border="0">
 									<tr border="0" style="background-color:transparent;">
 										<td class="text-center" style="vertical-align:middle;border:0;border-bottom:1px solid #ccc;padding:0;">
-											<?php echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="WGT" type="text" class="set-input" />' : '--'; ?>
+											<?php
+												if($ciruitDetails)
+													echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input type="text" class="set-input" />' : '--';
+												else
+													echo "--";
+											?>
+											
 										</td>
 									</tr>
 									<tr border="0">
 										<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
-											<?php echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input placeholder="REPS" type="text" class="set-input" />' : '--'; ?>
+											<?php
+												if($ciruitDetails)
+													echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input type="text" class="set-input" />' : '--';
+												else
+													echo "--";
+											?>
 										</td>
 									</tr>
 								</table>
