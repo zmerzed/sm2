@@ -49,6 +49,27 @@ angular.module('smApp')
 
         $('#inputFileToLoad').change(encodeImageFileAsURL(function(base64Img){
             CAMERA_DATA_URL = base64Img;
+
+            var loadTrgt = $('.main-content');
+            getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
+            $(loadTrgt).addClass('loading');
+
+            var blob = $filter('dataURLtoBlob')(base64Img);
+            var fd = new FormData();
+            fd.append("myFile", blob, "thumb.jpg");
+            fd.append('userId', $scope.currentUser.id);
+
+            $scope.promise = $http.post(
+                apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
+            ).then(function(res) {
+                console.log(res);
+                if (res.data.data.errors.length <= 0) {
+                    $scope.currentUser.photos.push({file:res.data.data.uploadedFile});
+                }
+
+                $(loadTrgt).removeClass('loading');
+            });
+
             $('.output')
                 .find('textarea')
                 .val(base64Img)
@@ -59,6 +80,8 @@ angular.module('smApp')
                 .end()
                 .find('img')
                 .attr('src', base64Img);
+
+
         }));
 
         $scope.takeNew = function() {
@@ -99,7 +122,7 @@ angular.module('smApp')
                 apiUrl, fd, {headers: {'Content-Type': undefined, 'Process-Data':false}}
             ).then(function() {
 				$(loadTrgt).removeClass('loading');
-                location.reload();				
+                location.reload();
             });
         };
         
@@ -146,6 +169,34 @@ angular.module('smApp')
             $('#idTrainerProfilePhotoResult').attr('src', base64Img);
 
         }));
+
+
+        $('#idClientPhoto').each(function(){ // selecting all image element on the page
+
+            console.log(this);
+            // var img = new Image($(this)); // creating image element
+            //
+            // img.onload = function() { // trigger if the image was loaded
+            //     console.log($(this).attr('src') + ' - done!');
+            // }
+            //
+            // img.onerror = function() { // trigger if the image wasn't loaded
+            //     console.log($(this).attr('src') + ' - error!');
+            // }
+            //
+            // img.onAbort = function() { // trigger if the image load was abort
+            //     console.log($(this).attr('src') + ' - abort!');
+            // }
+            //
+            // img.src = $(this).attr('src'); // pass src to image object
+            //
+            // // log image attributes
+            // console.log(img.src);
+            // console.log(img.width);
+            // console.log(img.height);
+            // console.log(img.complete);
+
+        });
 
         $scope.gymRemoveLogo = function()
         {
