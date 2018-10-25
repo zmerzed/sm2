@@ -475,7 +475,9 @@ function workOutAdd($data)
     $workout = stripslashes($workout);
     $workout = json_decode($workout, true);
 
-   // dd($workout);
+    $currentUser = User::find(wp_get_current_user()->ID);
+    $gym = getParent($currentUser);
+
     $wpdb->insert('workout_tbl',
         array(
             'workout_name' => $workout['name'],
@@ -612,6 +614,34 @@ function workOutAdd($data)
                     }
 
                     $wpdb->insert('workout_day_clients_tbl', $newClientDay);
+
+
+                    //getParent
+
+                    $levelName = getMembershipLevel(get_userdata($currentUser->id));
+            
+                    if ($levelName == 'trainer') {
+
+                        if ($gym && $currentUser) {
+
+                            $programName = $workout['name'];
+                            $workoutName = $d['name'];
+                            $gymId = $gym['gym'];
+                            $trainerId = $currentUser->id;
+
+
+                            Log::insert([
+                                'type' => 'TRAINER_ASSIGN_WORKOUT',
+                                'clientName' => $client['user_nicename'],
+                                'trainerName' => $currentUser->user_nicename,
+                                'clientId' => $client['ID'],
+                                'gymId' => $gymId,
+                                'programName' => $workout['name'],
+                                'workoutName' => $d['name']
+                            ], $currentUser);
+                        }       
+                    }
+                    
 
                     foreach ($client['exercises'] as $ex)
                     {

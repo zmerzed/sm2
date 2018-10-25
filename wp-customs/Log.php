@@ -47,6 +47,7 @@ class Log
             "TRAINER_UPDATE_PROGRAM" => "{-trainerName} updated a program ({-programName}).",
             "TRAINER_DELETE_PROGRAM" => "{-trainerName} deleted a program ({-programName}).",
             "TRAINER_UPDATE_NOTE"    => "{-trainerName} updated the program ({-programName}) note -{-noteDetail}.",
+            "TRAINER_ASSIGN_WORKOUT" => "{-trainerName} assign a workout ({-workoutName}) to {-clientName} from program {-programName}",
 
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
@@ -205,12 +206,25 @@ class Log
 
                 } break;
 
+            case 'TRAINER_ASSIGN_WORKOUT' : {
+
+                $logDescription = str_replace(
+                    ["{-trainerName}", "{-clientName}", "{-workoutName}", "{-programName}"],
+                    [$type['trainerName'], $type['clientName'], $type['workoutName'], $type['programName']],
+                    self::getContent($type['type'])
+                );
+
+                $mGymId = $type['gymId'];
+                $clientId = $type['clientId'];
+
+                } break;
+
             case 'CLIENT_UPLOAD_DOCUMENT': {
 
                 $fileName = $type['file'];
 
                 $logDescription = str_replace(
-                    ["{-clientName}", "{-fileName}"],
+                    ["{-clientName}", "{-trainerName}"],
                     [$user->user_nicename, $fileName],
                     self::getContent($type['type'])
                 );
@@ -267,6 +281,13 @@ class Log
         if (empty($logDescription)) return false;
 
         $gymId = NULL;
+
+        if (isset($mGymId)) {
+
+            $gymId = $mGymId;
+      
+        }
+       
         $trainerId = NULL;
         $clientId = NULL;
         
