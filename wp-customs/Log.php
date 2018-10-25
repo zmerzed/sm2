@@ -54,7 +54,7 @@ class Log
             "TRAINER_UPDATE_PROGRAM" => "{-trainerName} updated a program ({-programName}).",
             "TRAINER_DELETE_PROGRAM" => "{-trainerName} deleted a program ({-programName}).",
             "TRAINER_UPDATE_NOTE"    => "{-trainerName} updated the program ({-programName}) note -{-noteDetail}.",
-            "TRAINER_ASSIGN_WORKOUT" => "{-trainerName} assign a workout ({-workoutName}) to {-clientName} from program {-programName}",
+            "TRAINER_ASSIGN_WORKOUT" => "{-trainerName} assigned a workout ({-workoutName}) to {-clientName} from program {-programName}",
 
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
