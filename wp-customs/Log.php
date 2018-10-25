@@ -24,10 +24,17 @@ class Log
             $logs = $wpdb->get_results("SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id IN({$idsStr}) ORDER BY id DESC", ARRAY_A);
 
             return $logs;
+
+        } elseif (getMembershipLevel($user) == '') { //client
+
+            $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.client_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} OR client_id={$userId} ORDER BY id DESC", ARRAY_A);
+     
+            return $logs;
         }
         
-        $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
+        $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.client_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} ORDER BY id DESC", ARRAY_A);
 
+       
         return $logs;
     }
 
@@ -215,7 +222,7 @@ class Log
                 );
 
                 $mGymId = $type['gymId'];
-                $clientId = $type['clientId'];
+                $mClientId = $type['clientId'];
 
                 } break;
 
@@ -281,15 +288,21 @@ class Log
         if (empty($logDescription)) return false;
 
         $gymId = NULL;
+        $clientId = NULL;
 
         if (isset($mGymId)) {
 
             $gymId = $mGymId;
       
         }
-       
+        
+        if (isset($mClientId)) {
+
+            $clientId = $mClientId;
+        }
+
         $trainerId = NULL;
-        $clientId = NULL;
+        
         
         switch (getMembershipLevel(get_userdata($user->id)))
         {
