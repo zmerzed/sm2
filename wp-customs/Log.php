@@ -16,7 +16,7 @@ class Log
 
         $user = User::find($userId);
 
-        if (getMembershipLevel($user) == 'gym') {
+        if (getMembershipLevel(wp_get_current_user()) == 'gym') {
 
             $trainersIds = $user->getTrainersById();
             $trainersIds[] = $user->id; // include gym id
@@ -25,7 +25,13 @@ class Log
 
             return $logs;
 
-        } elseif (getMembershipLevel($user) == '') { //client
+        } elseif (getMembershipLevel(wp_get_current_user()) == 'trainer') {
+
+            $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.client_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} OR trainer_id={$userId} ORDER BY id DESC", ARRAY_A);
+            
+            return $logs;
+        
+        } elseif (getMembershipLevel(wp_get_current_user()) == '') { //client
 
             $logs = $wpdb->get_results( "SELECT workout_activity_logs.id, workout_activity_logs.user_id, workout_activity_logs.client_id, workout_activity_logs.log_type, workout_activity_logs.log_description, workout_activity_logs.gym_id, workout_activity_logs.created_at, wp_users.user_nicename FROM workout_activity_logs LEFT JOIN wp_users ON workout_activity_logs.user_id = wp_users.ID WHERE user_id={$userId} OR client_id={$userId} ORDER BY id DESC", ARRAY_A);
      
@@ -56,6 +62,7 @@ class Log
             "TRAINER_UPDATE_NOTE"    => "{-trainerName} updated the program ({-programName}) note -{-noteDetail}.",
             "TRAINER_ASSIGN_WORKOUT" => "{-trainerName} assigned a workout ({-workoutName}) to {-clientName} from program {-programName}",
 
+            "TRAINER_CLIENT_DONE_WORKOUT" => "{-clientName} has finish the workout {-workoutName} from {-programName}.",
             "CLIENT_UPLOAD_DOCUMENT" => "{-clientName} uploaded health document {-fileName}.",
             "CLIENT_UPDATE_PROGRESS" => "{-clientName} updated his / her personal goals.",
             "CLIENT_DONE_WORKOUT" => "{-clientName} has finish the workout {-workoutName}.",
@@ -154,6 +161,18 @@ class Log
                     [$user->user_nicename, $workout['workout_name']],
                     self::getContent($type['type'])
                 );
+
+                } break;
+
+            case 'TRAINER_CLIENT_DONE_WORKOUT': {
+
+                $logDescription = str_replace(
+                    ["{-clientName}", "{-workoutName}", "{-programName}"],
+                    [$type['clientName'], $type['workoutName'], $type['programName']],
+                    self::getContent($type['type'])
+                );
+
+                $mTrainerId = $type['trainerId'];
 
                 } break;
 
@@ -289,6 +308,7 @@ class Log
 
         $gymId = NULL;
         $clientId = NULL;
+        $trainerId = NULL;
 
         if (isset($mGymId)) {
 
@@ -301,7 +321,11 @@ class Log
             $clientId = $mClientId;
         }
 
-        $trainerId = NULL;
+
+        if (isset($mTrainerId)) {
+
+            $trainerId = $mTrainerId;
+        }
         
         
         switch (getMembershipLevel(get_userdata($user->id)))

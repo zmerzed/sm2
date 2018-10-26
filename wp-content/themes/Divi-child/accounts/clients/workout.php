@@ -4,13 +4,26 @@
 		<?php require_once(get_stylesheet_directory() . '/accounts/inc/print-program-account.php'); ?>
 	</div>
 <?php else: ?>
+
 <a href="<?php echo $_SERVER['REQUEST_URI']; ?>&print=1" class="btn red-btn" style="float:right;font-size:12px;margin-bottom:10px;" target="_blank">Print</a>
+
+<?php 
+	$trainer = getParent(wp_get_current_user());
+	$trainerId = false;
+
+	if ($trainer) {
+
+		$trainerId = $trainer['trainer'];
+	}
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
 
 	var clientWorkout = <?php echo json_encode(workoutClientWorkoutWithDay($_GET['dayId'], $_GET['workoutId'], wp_get_current_user()->ID)); ?>;
 	var rootUrl = '<?php echo get_site_url(); ?>';
 	var currentUserId = '<?php echo wp_get_current_user()->ID ?>';
+
+	var TRAINER_ID = '<?php echo $trainerId; ?>';
 	var app = angular.module('app', []);
 
 	app.controller('Controller', function($scope, $http)
@@ -211,6 +224,12 @@
 					alert('Workout Done!');
 					$scope.pointers.exercise = 0;
 					$scope.pointers.set = 0;
+					
+					if (TRAINER_ID >= 0) {
+
+						$scope.currentExercise.trainer_id = TRAINER_ID;
+					}
+
 					$http.post(urlApiClient+'/process', $scope.currentExercise).then(function() {
 						//$scope.currentExercise.isDone = true;
 						window.location = rootUrl + '/client';

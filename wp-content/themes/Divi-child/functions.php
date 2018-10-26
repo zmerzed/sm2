@@ -735,7 +735,6 @@ function workOutUpdate($data)
     $workout = stripslashes($workout);
     $workout = json_decode($workout, true);
 
-   // dd($workout);
     $mWorkoutId = (int) $workout['workout_ID'];
     $weekDays = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
@@ -1008,7 +1007,7 @@ function workOutUpdate($data)
                         } else {
 
                             $mUpdate = [];
-
+                            
                             if (isset($client['date_availability']) && (int) $client['date_availability'] > 0)
                             {
 
@@ -1031,6 +1030,7 @@ function workOutUpdate($data)
                                     'workout_client_workout_ID' => (int) $workout['workout_ID'],
                                 )
                             );
+
                         }
 
                         // insert assignment exercises and sets
@@ -1989,6 +1989,7 @@ function workoutCreateClientExerciseLog()
             } else {
                 // log insert exercise log into workout_client_exercises_logs
 
+
                 /* insert set logs */
                 $wpdb->insert('workout_client_set_logs',
                     array(
@@ -2028,8 +2029,29 @@ function workoutCreateClientExerciseLog()
 
         if ($user->checkIfFinishWorkout($data['exer_day_ID'])) {
             Log::insert(['workout' => $workout, 'type' => 'CLIENT_DONE_WORKOUT'], $user);
-        }
 
+            // log the client trainer
+         
+            $program = Program::find($workout['wday_workout_ID']);
+    
+            if ($data['trainer_id'] && $program) {
+
+                $trainerUser = User::find($data['trainer_id']);
+
+                if ($trainerUser) {
+
+                    Log::insert([
+                        'type' => 'TRAINER_CLIENT_DONE_WORKOUT',
+                        'clientName' => $user->user_nicename,
+                        'trainerName' => $trainerUser->user_nicename,
+                        'clientId' => $user->id,
+                        'trainerId' => $data['trainer_id'],
+                        'programName' => $program->workout_name,
+                        'workoutName' => $workout['wday_name']
+                    ], $user);
+                }
+            }              
+        }
     }
 }
 
@@ -2349,6 +2371,7 @@ function checkPG($uid){
 function getParent($u){
     $uid = $u->ID;
     $pl = getMembershipLevel($u);
+
     //dd($pl);
     if($pl == "gym")
         return null;
