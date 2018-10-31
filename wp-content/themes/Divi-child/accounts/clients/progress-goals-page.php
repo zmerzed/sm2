@@ -180,10 +180,18 @@
 							<div class="container">
 								<div class="app">
 									<a href="#" id="start-camera" class="visible">Touch here to start the app.</a>
-									<video id="camera-stream"></video>
-									<img id="snap">
+					<!-- 				<video id="camera-stream"></video> -->
+									
+									<div class="row">
+										<video id="video" width="160" height="120"></video>
+										<div id="div"></div>
+									</div>
 
-									<p id="error-message"></p>									
+									<div class="row">
+										<img id="snap" style="max-width: 80px;">
+									</div>
+
+									<p id="error-message" style="display:none"></p>									
 									<!-- Hidden canvas element. Used for taking snapshot of video. -->
 									<canvas></canvas>
 								</div>
@@ -205,7 +213,7 @@
 </div>
 <script>
 	// References to all the element we will need.
-	var video = document.querySelector('#camera-stream'),
+	var video2 = document.querySelector('#camera-stream'),
 		image = document.querySelector('#snap'),
 		start_camera = document.querySelector('#start-camera'),
 		controls = document.querySelector('.controls'),
@@ -345,13 +353,14 @@
 		snap.classList.remove("visible");
 		error_message.classList.remove("visible");
 	}
+
 	var localStream;
 
 	setTimeout(function(){
 		$('#myModal').on('hidden.bs.modal', function (e) {
 			console.log('close camera...');
-			video.pause();
-			video.src = "";
+			//video.pause();
+			//video.src = "";
 			console.log(localStream)
 			localStream.getTracks()[0].stop();
 			CAMERA_DATA_URL = '';
@@ -361,29 +370,37 @@
 		$('#myModal').on('show.bs.modal', function (e) {
 			console.log('open camera...');
 			// Request the camera.
-			navigator.getMedia(
-				{
-					video: true
-				},
-				// Success Callback
-				function(stream){
+			// navigator.mediaDevices.getUserMedia(
+			// 	{
+			// 		video: true
+			// 	},
+			// 	// Success Callback
+			// 	function(stream){
 
-					// Create an object URL for the video stream and
-					// set it as src of our HTLM video element.
-					video.src = window.URL.createObjectURL(stream);
-					localStream = stream;
-					// Play the video element to start the stream.
-					video.play();
-					video.onplay = function() {
-						showVideo();
-					};
+			// 		// Create an object URL for the video stream and
+			// 		// set it as src of our HTLM video element.
+			// 		//video.src = window.URL.createObjectURL(stream);
+			// 		//localStream = stream;
+			// 		video.srcObject = stream
+			// 		// Play the video element to start the stream.
+			// 		// video.play();
+			// 		// video.onplay = function() {
+			// 		// 	showVideo();
+			// 		// };
 
-				},
-				// Error Callback
-				function(err){
-					displayErrorMessage("There was an error with accessing the camera stream: " + err.name, err);
-				}
-			);
+			// 	},
+			// 	// Error Callback
+			// 	function(err){
+			// 		displayErrorMessage("There was an error with accessing the camera stream: " + err.name, err);
+			// 	}
+			// );
+
+			navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+  			.then(function(stream) {
+  					video.srcObject = stream;
+  					video.play();
+  				}
+  			)
 		});
 
 	}, 500);
