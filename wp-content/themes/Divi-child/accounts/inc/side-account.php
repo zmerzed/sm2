@@ -27,6 +27,12 @@
 					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=schedule&by=monthly" menu-item="monthly">Monthly</a></li>
 				</ul>
 			</li>
+			<?php if($op_train || $op_gym): ?>
+				<?php if($op_gym): ?>
+					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
+				<?php endif; ?>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
+			<?php endif; ?>
 			<li class="<?php echo ($op_client) ? 'has-sub-drop' : ''; ?>"><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>					
 				<?php if($op_client): ?>			
 					<ul class="sub-menu" style="display:none;">
@@ -61,9 +67,9 @@
 				<li><a class="<?php echo (strpos($r_uri, 'workouts')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
 				<?php if($op_gym): ?>
-					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
+					<!--li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li-->
 				<?php endif; ?>
-				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
+				<!--li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li-->
 			</ul>		
 		<?php endif; ?>
 	</div>

@@ -2048,6 +2048,7 @@ div.loading:after{
 	z-index:1;	
 }
 .main-content{position:relative;}
+select[ng-model="exercise.selectedPart.selectedType.selectedImplementation1"]{min-width:100px;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

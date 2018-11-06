@@ -113,7 +113,13 @@
 										  <select ng-model="exercise.selectedPart.selectedType.selectedExercise2" ng-options="ex as ex for ex in exercise.selectedPart.selectedType.exercise_2">
 											  <!-- <option value="">Variation 2</option> -->
 										  </select>
-									  </td>
+									  </td>									  
+									  <td>
+										<label>IMPL</label>
+										  <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
+											  <!-- <option value="">IMPL 1</option> -->
+										  </select>
+									  </td>		
 									  <td>
 										<label>SQ</label>
 										  <select ng-model="exercise.selectedSQ" ng-options="sqOption.name for sqOption in exercise.exerciseSQoptions">
@@ -142,13 +148,7 @@
 										  <select ng-model="exercise.selectedSQ.selectedRest" ng-options="rest as rest for rest in exercise.selectedSQ.options.rest">
 											  <!-- <option value="">Rest</option> -->
 										  </select>
-									  </td>
-									  <td>
-										<label>IMPL</label>
-										  <select ng-model="exercise.selectedPart.selectedType.selectedImplementation1" ng-options="imp1 as imp1 for imp1 in exercise.selectedPart.selectedType.implementation_options">
-											  <!-- <option value="">IMPL 1</option> -->
-										  </select>
-									  </td>									 
+									  </td>							 
 								  </table>
 							 </div>
 							  <div style="width:10%;float:left;" class="exer-right exercise-details pt-0  text-center exercise-actions">

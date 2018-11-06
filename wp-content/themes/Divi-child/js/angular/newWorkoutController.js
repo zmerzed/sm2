@@ -43,9 +43,9 @@ angular.module('smApp')
     }
 
     $scope.newWorkOutDay = function () {
-		
-		var loadTrgt = $('.main-content');
-		$(loadTrgt).addClass('loading');
+        
+        var loadTrgt = $('.main-content');
+        $(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res) {
 
@@ -57,7 +57,7 @@ angular.module('smApp')
             $scope.workout.selectedDay.hash = res.data.hash;
             $scope.selectedClient = "Add Client";
             selectDay($scope.workout.days[countDays - 1]);
-			$(loadTrgt).removeClass('loading');
+            $(loadTrgt).removeClass('loading');
         });
 
     };
@@ -89,16 +89,16 @@ angular.module('smApp')
     };
 
     $scope.newExercise = function() {
-		
-		var loadTrgt = $('.main-content');
-		$(loadTrgt).addClass('loading');
+        
+        var loadTrgt = $('.main-content');
+        $(loadTrgt).addClass('loading');
 
         $http.get(urlApiClient + '/hash').then(function(res)
         {
             $scope.workout.selectedDay.exercises.push(generateNewExercise(res.data.hash));
             optimizeClientExercises();
             optimizeCircuits();
-			$(loadTrgt).removeClass('loading');
+            $(loadTrgt).removeClass('loading');
         });
     };
 
@@ -120,8 +120,8 @@ angular.module('smApp')
 
     $scope.onCopy = function() {
 
-		var loadTrgt = $('.main-content');
-		$(loadTrgt).addClass('loading');
+        var loadTrgt = $('.main-content');
+        $(loadTrgt).addClass('loading');
 
         $scope.onLeaveDay();
 
@@ -138,19 +138,24 @@ angular.module('smApp')
                 $http.get(urlApiClient + '/hash?sets=' + nOfExs).then(function(res)
                 {
 
+                    let r = Math.random().toString(36).substring(7);
+
                     var setOfHashes = res.data.set_of_hash;
 
-                    newCopy.hash = setOfHashes[0];
+                    newCopy.hash = setOfHashes[0] + r;
 
                     newCopy.exercises.forEach(function(ex, i){
-                        ex.hash = setOfHashes[i];
+                        let r = Math.random().toString(36).substring(7);
+                        ex.hash = setOfHashes[i] + r;
                     });
 
                     newCopy.clients.forEach(function(client)
                     {
                         client.exercises.forEach(function(exercise, i)
                         {
-                            exercise.hash = setOfHashes[i];
+                            let r = Math.random().toString(36).substring(7);
+                            exercise.hash = setOfHashes[i] + r;
+
                             exercise.assignment_sets.forEach(function(set)
                             {
                                 set.weight = angular.copy("");
@@ -168,8 +173,8 @@ angular.module('smApp')
                     var countDays = $scope.workout.days.length;
                     optimizeDays();
                     selectDay($scope.workout.days[countDays - 1]);
-					
-					$(loadTrgt).removeClass('loading');
+                    
+                    $(loadTrgt).removeClass('loading');
 
                 });
             });
@@ -217,9 +222,9 @@ angular.module('smApp')
     };
 
     $scope.onCopyExercise = function(exercise) {
-		
-		var loadTrgt = $('.main-content');
-		$(loadTrgt).addClass('loading');
+        
+        var loadTrgt = $('.main-content');
+        $(loadTrgt).addClass('loading');
 
         var newExercise = angular.copy(exercise);
 
@@ -228,7 +233,7 @@ angular.module('smApp')
             newExercise.hash = res.data.hash;
             $scope.workout.selectedDay.exercises.push(newExercise);
             optimizeClientExercises();
-			$(loadTrgt).removeClass('loading');
+            $(loadTrgt).removeClass('loading');
         });
 
     };
@@ -289,8 +294,8 @@ angular.module('smApp')
     $scope.sendForm = function() {
 
 
-		var loadTrgt = $('.main-content');
-		$(loadTrgt).addClass('loading');
+        var loadTrgt = $('.main-content');
+        $(loadTrgt).addClass('loading');
 
         if ($scope.currentUser.isGym) {
 
@@ -356,7 +361,7 @@ angular.module('smApp')
         }
 
         $(loadTrgt).removeClass('loading');
-		$("html, body").stop().animate({scrollTop:0}, 500, 'swing');
+        $("html, body").stop().animate({scrollTop:0}, 500, 'swing');
 
         if($scope.$root.$$phase != '$apply' &&
             $scope.$root.$$phase != '$digest'
@@ -426,11 +431,11 @@ angular.module('smApp')
         }
 
     }, true);
-	
-	$scope.$watch(function(){
-		var loadTrgt = $('.main-content');
-		getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
-	}, true);
+    
+    $scope.$watch(function(){
+        var loadTrgt = $('.main-content');
+        getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
+    }, true);
 
     function nFormat(n){
         return n > 9 ? "" + n: "0" + n;
@@ -440,10 +445,10 @@ angular.module('smApp')
 
         $scope.clients = angular.copy($scope.clientsBackUp);
         for (var i = 0; i < $scope.workout.selectedDay.clients.length; i++) {
-			$scope.clients.forEach((v,index)=>{			
-				if(v.ID == $scope.workout.selectedDay.clients[i].ID)
-					$scope.clients.splice(index, 1);
-			});
+            $scope.clients.forEach((v,index)=>{         
+                if(v.ID == $scope.workout.selectedDay.clients[i].ID)
+                    $scope.clients.splice(index, 1);
+            });
         }
     }
 
