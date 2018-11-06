@@ -29,12 +29,18 @@ else: ?>
 					<?php
 						$clients = get_user_meta(wp_get_current_user()->ID, 'clients_of_trainer', true);
 						if(!empty($clients)):
-							foreach($clients as $client):
+							foreach($clients as $key=>$client):
 								$user = User::find($client);
 								$currentUser = [
 									'stats' => $user->getStats(),
-									'photos' => $user->getPhotos()
-								];		
+									'photos' => $user->getPhotos(),
+									'logs' => $user->getLogs()
+								];								
+								
+								$last_day_activity = strtotime($currentUser['logs'][0]['created_at']);								
+								$now = time();							
+								$day_difference = $now - $last_day_activity;								
+								$number_of_days_difference = round($day_difference / (60 * 60 * 24));
 								
 								$eachBPStats = getGoalPerc($currentUser['stats']); //Bodypart %s
 								$bppavg = getBPPercAvg($eachBPStats); //Bodypart %s Average
@@ -52,29 +58,36 @@ else: ?>
 								}			
 								if($user_info):
 					?>
-										<tr>
-											<td>
-												<?php
-													if($userPhoto)
-														echo '<img src="'.$userPhoto.'"  class="img-responsive" style="max-width:50px;" />';
-													else
-														echo '<img src="'.get_stylesheet_directory_uri().'/accounts/images/client-1.png" />';
-												?>
-											</td>
-											<td><?php echo $user_info->first_name . ' ' . $user_info->last_name;  ?></td>
-											<td> <?php echo ($purpose) ? $purpose : "--"; ?> </td>
-											<td>-- Days Ago</td>
-											<td class = "w-50">
-												<div class="progress client-goals-percentage">
-													<div class="progress-bar" style="width: <?php echo $bppavg; ?>%;">
-														<span class="indicator"><small><?php echo $bppavg; ?>%</small></span>
-													</div>
-												</div>
-											</td>
-											<td>
-												<a href="<?php echo home_url(); ?>/trainer/?data=clients&edit=<?php echo $user_info->ID; ?>">Edit Progress</a>
-											</td>
-										</tr>
+						<tr>
+							<td>
+								<?php
+									if($userPhoto)
+										echo '<img src="'.$userPhoto.'"  class="img-responsive" style="max-width:50px;" />';
+									else
+										echo '<img src="'.get_stylesheet_directory_uri().'/accounts/images/client-1.png" />';
+								?>
+							</td>
+							<td><?php echo $user_info->first_name . ' ' . $user_info->last_name;  ?></td>
+							<td class="w-25"> <?php echo ($purpose) ? $purpose : "--"; ?> </td>
+							<td><?php echo $number_of_days_difference; ?> Days Ago</td>
+							<td class="w-50">
+								<div class="progress client-goals-percentage">
+									<div class="progress-bar" style="width: <?php echo $bppavg; ?>%;">
+										<span class="indicator"><small><?php echo $bppavg; ?>%</small></span>
+									</div>
+								</div>
+							</td>
+							<td>
+								<a href="javascript:void(0);" onclick="openDetails(<?php echo $key; ?>);" class="btn red-btn"><span class="fa fa-gear pr-1"></span></a>
+							</td>
+						</tr>
+						<tr class="client-details" style="display:none;" detail-number="<?php echo $key; ?>">
+							<td colspan="6">												
+								<a href="<?php echo home_url(); ?>/messages/?fepaction=newmessage&msgto=<?php echo $user_info->ID; ?>">Message</a><br>
+								<a href="<?php echo home_url(); ?>/trainer/?data=notes&notesof=<?php echo $user_info->ID; ?>">Notes</a><br>
+								<a href="<?php echo home_url(); ?>/trainer/?data=clients&edit=<?php echo $user_info->ID; ?>">Edit Progress</a>												
+							</td>
+						</tr>
 				<?php					
 							endif;
 						endforeach;
@@ -83,5 +96,16 @@ else: ?>
 	    </tbody>
 		</table>
 	</div>
+	<script>
+		function openDetails(a){
+			$('.client-details').each(function(){
+				if($(this).attr('detail-number') == a){
+					$(this).slideToggle();
+				}else{
+					$(this).hide();
+				}
+			});
+		}
+	</script>
 <?php endif; ?>
 </div>

@@ -2049,6 +2049,7 @@ div.loading:after{
 }
 .main-content{position:relative;}
 select[ng-model="exercise.selectedPart.selectedType.selectedImplementation1"]{min-width:100px;}
+.client-details td{text-align:center;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

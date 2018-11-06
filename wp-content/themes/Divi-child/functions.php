@@ -1392,6 +1392,9 @@ function workoutGetClientWorkouts($clientId)
     $todayQuery = "SELECT DISTINCT(workout_client_workout_ID), workout_client_dayID, workout_isDone FROM workout_day_clients_tbl WHERE DATE(`workout_client_schedule`) = CURDATE() AND workout_clientID={$clientId}";
     $todayClientWorkouts = $wpdb->get_results($todayQuery, OBJECT);
     $upcomingWorkouts = [];
+	
+	$allQuery = "SELECT DISTINCT(workout_client_workout_ID), workout_client_dayID, workout_isDone FROM workout_day_clients_tbl WHERE workout_clientID={$clientId}";
+	$allClientWorkouts = $wpdb->get_results($allQuery, OBJECT);
 
     foreach ($todayClientWorkouts as $k => $w)
     {
@@ -1436,7 +1439,8 @@ function workoutGetClientWorkouts($clientId)
 
     $output = [
         'todayWorkouts' => $todayClientWorkouts,
-        'upcomingWorkouts' => $nextClientWorkouts
+        'upcomingWorkouts' => $nextClientWorkouts,
+		'allWorkouts' => $allClientWorkouts
     ];
 
 //  dd($output);

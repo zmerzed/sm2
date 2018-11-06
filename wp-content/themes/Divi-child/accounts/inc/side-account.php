@@ -32,6 +32,8 @@
 					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
 				<?php endif; ?>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
+				<li><a class="<?php echo (strpos($r_uri, 'workouts')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>				
 			<?php endif; ?>
 			<li class="<?php echo ($op_client) ? 'has-sub-drop' : ''; ?>"><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=profile" menu-item="profile">Profile</a>					
 				<?php if($op_client): ?>			
@@ -41,8 +43,8 @@
 					</ul>				
 				<?php endif; ?>		
 			</li>			
-			<li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
-			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li>
+			<!--li><a class="<?php echo (strpos($r_uri, 'messages')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/messages" menu-item="message">Messages</a></li>
+			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=notes" menu-item="notes">Notes</a></li-->
 			<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=logs" menu-item="logs">Logs</a></li>
 			<?php if(checkSubscribed($uinfo)): ?>
 				<li class="has-sub-drop"><a href="<?php echo  home_url(); ?>/membership-account/" menu-item="member">Member Subscription</a>
@@ -61,16 +63,16 @@
 			<?php endif; ?>
 		</ul>		
 		<?php if($op_train || $op_gym): ?>
-			<div class="menu-divider"></div>
+			<!--div class="menu-divider"></div>
 
 			<ul>
 				<li><a class="<?php echo (strpos($r_uri, 'workouts')) ? "active" : ""; ?>" href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=workouts" menu-item="workouts">Programs</a></li>
 				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=exercises" menu-item="exercises">Exercises</a></li>
 				<?php if($op_gym): ?>
-					<!--li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li-->
+					<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=trainers" menu-item="trainers">Trainers</a></li>
 				<?php endif; ?>
-				<!--li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li-->
-			</ul>		
+				<li><a href="<?php echo  home_url(); ?>/<?php echo $urole; ?>/?data=clients" menu-item="clients">Clients</a></li>
+			</ul-->		
 		<?php endif; ?>
 	</div>
 </div>

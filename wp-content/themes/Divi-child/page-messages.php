@@ -53,12 +53,23 @@ require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account
 	</div>
 <?php	
 	$recipient = getRecipients($uinfo);
+	$sp_msg = "";
+	if(isset($_GET['msgto']))
+		$sp_msg	= $_GET['msgto'];
+	
+	$sp_user = get_user_by('id',$sp_msg)->data->user_login;
 	if(empty($recipient))
 		$recipient = array();
 
 	$selopt = '<option value="">Select recipient</option>';
-	foreach($recipient as $v=>$k)
-		$selopt .= '<option value="'.$v.'">'.$v.' ('.$k.')</option>';
+	foreach($recipient as $v=>$k){
+		$sel_ = "";
+		if($sp_user == $v){
+			$sel_ = 'selected="selected"';
+		}
+		$selopt .= '<option '.$sel_.' value="'.$v.'">'.$v.' ('.$k.')</option>';
+	}
+		
 ?>
 </div>
 <script>
@@ -67,6 +78,7 @@ require_once( get_stylesheet_directory() . '/accounts/inc/header-section-account
 			if($('#fep-message-top').length != 0){
 				$('#fep-message-top').hide().after('<select onchange="selectRecipient(this)"><?php echo $selopt; ?></select>');
 			}
+			$('#fep-message-top').attr('value', "<?php echo $sp_user; ?>");
 		});
 		
 		var uArr = [], ctr = 0;
