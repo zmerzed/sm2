@@ -1415,6 +1415,28 @@ function workoutGetClientWorkouts($clientId)
         }
     }
 
+    $prevQuery = "SELECT DISTINCT(workout_client_workout_ID), workout_client_dayID FROM workout_day_clients_tbl WHERE DATE(`workout_client_schedule`) < CURDATE() AND workout_clientID={$clientId}";
+    $prevClientWorkouts = $wpdb->get_results($prevQuery, OBJECT);
+	
+	foreach ($prevClientWorkouts as $k => $w)
+    {
+        $workoutQuery = "SELECT * FROM workout_tbl WHERE workout_ID=".$w->workout_client_workout_ID." LIMIT 1";
+        $result = $wpdb->get_results($workoutQuery, OBJECT);
+
+        if (count($result) > 0)
+        {
+            $prevClientWorkouts[$k]->workout = $result[0];
+        }
+
+        $dayQuery = "SELECT * FROM workout_days_tbl WHERE wday_ID=".$w->workout_client_dayID." LIMIT 1";
+        $result = $wpdb->get_results($dayQuery, OBJECT);
+
+        if (count($result) > 0)
+        {
+            $prevClientWorkouts[$k]->day = $result[0];
+        }
+    }
+	
     $nextQuery = "SELECT DISTINCT(workout_client_workout_ID), workout_client_dayID FROM workout_day_clients_tbl WHERE DATE(`workout_client_schedule`) > CURDATE() AND workout_clientID={$clientId}";
     $nextClientWorkouts = $wpdb->get_results($nextQuery, OBJECT);
 
@@ -1440,6 +1462,7 @@ function workoutGetClientWorkouts($clientId)
     $output = [
         'todayWorkouts' => $todayClientWorkouts,
         'upcomingWorkouts' => $nextClientWorkouts,
+        'previousWorkouts' => $prevClientWorkouts,
 		'allWorkouts' => $allClientWorkouts
     ];
 
@@ -2440,6 +2463,29 @@ function getUserPhoto($u){
     return $rimg;
 }
 /*WP AJAX*/
+add_action('wp_ajax_open_workouts', 'open_workouts');
+add_action('wp_ajax_nopriv_open_workouts', 'open_workouts');
+
+function open_workouts(){
+    $client_id = $_POST['client_id'];
+    
+	$clientWorkout = workoutGetClientWorkouts($client_id);
+	$tempArr = [];
+	
+	global $wpdb;	
+	
+	if(!empty($clientWorkout['allWorkouts'])){
+		foreach($clientWorkout['allWorkouts'] as $k=>$aw){
+			$clientWorkouts = 'SELECT * FROM workout_day_clients_tbl WHERE workout_clientID = ' . $client_id . ' AND workout_client_dayID = '. $aw->workout_client_dayID; 
+			$programWorkouts = $wpdb->get_results($clientWorkouts, ARRAY_A);
+			$tempArr[$aw->workout_client_dayID] = $programWorkouts;
+		}
+	}
+	
+    echo json_encode(array('result' => $clientWorkout, 'allWorkouts' => $tempArr));
+    wp_die();
+}
+
 add_action('wp_ajax_get_message_user_image', 'get_message_user_image');
 add_action('wp_ajax_nopriv_get_message_user_image', 'get_message_user_image');
 

@@ -1,6 +1,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<?php	
-$user = User::find(get_current_user_id());
+<?php
+
+$userID = get_current_user_id();
+$dataPage = $_GET['data'];
+
+if($dataPage == "clients" && isset($_GET['profile']))
+	$userID = $_GET['profile'];
+
+$user = User::find($userID);
 $currentUser = [
 	'id' => $user->id,
 	'files' => $user->getPhotos(),
@@ -71,7 +78,6 @@ $userGoal = $currentUser['stats']['goal'];
 			</div>
 		</div>
 	</div>
-	<pre>
 	<?php
 		$results = [];
 		$not_inc = ['id', 'type', 'client_id', 'updated_by', 'created_by', 'target_date','created_at', 'updated_at'];
@@ -97,7 +103,6 @@ $userGoal = $currentUser['stats']['goal'];
 		$resCount = count($resPercs);
 		$tctr = 0;
 	?>
-	</pre>
 </div>
 <!-- <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/js/jquery.canvasjs.min.js"></script>  -->
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/js/canvasjs.min.js"></script> 
