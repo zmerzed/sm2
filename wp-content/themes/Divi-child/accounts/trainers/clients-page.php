@@ -5,6 +5,12 @@
 			<?php get_template_part( 'accounts/inc/edit-progress', 'page' ); ?>
 		</div>
 	</div>
+<?php elseif(isset($_GET['profileview'])): ?>
+	<div class="current-status">
+		<div class="row">
+			<?php get_template_part( 'accounts/clients/personal-info', 'page' ); ?>
+		</div>
+	</div>
 <?php elseif(isset($_GET['profile'])): ?>
 	<div class="current-status">
 		<div class="row">
@@ -95,11 +101,11 @@ else: ?>
 						<tr class="client-details" style="display:none;" detail-number="<?php echo $key; ?>">
 							<td colspan="6">
 								<a href="javascript:void(0)" onclick="openWorkouts(<?php echo $user_info->ID; ?>)">Assigned Workouts</a><br>
-								<a href="javascript:void(0)" onclick="openWorkouts(<?php echo $user_info->ID; ?>)">Profile</a><br>
-								<a target="_blank" href="<?php echo home_url(); ?>/messages/?fepaction=newmessage&msgto=<?php echo $user_info->ID; ?>">Message</a><br>
-								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=notes&notesof=<?php echo $user_info->ID; ?>">Notes</a><br>
+								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=clients&profileview=<?php echo $user_info->ID; ?>">Profile</a><br>
 								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=clients&edit=<?php echo $user_info->ID; ?>">Edit Progress</a><br>									
-								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=clients&profile=<?php echo $user_info->ID; ?>">Current Status</a>							
+								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=clients&profile=<?php echo $user_info->ID; ?>">Current Status</a><br>
+								<a target="_blank" href="<?php echo home_url(); ?>/messages/?fepaction=newmessage&msgto=<?php echo $user_info->ID; ?>">Message</a><br>
+								<a target="_blank" href="<?php echo home_url(); ?>/trainer/?data=notes&notesof=<?php echo $user_info->ID; ?>">Notes</a>
 							</td>
 						</tr>
 				<?php					
@@ -126,28 +132,23 @@ else: ?>
 					$(this).slideToggle(function(){
 						if($(this).is(':hidden'))						
 							$(a).find('i').attr('class','fa fa-chevron-down');
-						else{
+						else
 							$(a).find('i').attr('class','fa fa-chevron-up');
-							console.log(0);
-						}
 					});
-					$('.modal-body li i').attr('class','fa fa-chevron-down');
-					
+					$('.modal-body li i').attr('class','fa fa-chevron-down');					
 				}else
-					$(this).hide();
-				
+					$(this).hide();				
 			});
 		}
 		function openWorkouts(a){
 			var loadTrgt = $('.main-content'),
+			jdata = {action: 'open_workouts',client_id: a},
 			openWorkoutItem = '<li class="workout-items" style="display:none;"><table class="table table-bordered"><thead><tr><th>Program</th><th>Workout</th><th>Time</th><th>&nbsp;</th><tr></thead><tbody>',
-			closeWorkoutItem = '</tbody></table></li>';
+			closeWorkoutItem = '</tbody></table></li>',
+			noWorkout = '<li class="workout-items" style="display:none;">No Workout</li>';
+			
 			$(loadTrgt).addClass('loading'); 
-			$('#workoutModal .modal-title').html('Assigned Workouts');
-			var jdata = {
-				action: 'open_workouts',
-				client_id: a
-			};
+			$('#workoutModal .modal-title').html('Assigned Workouts');						
 			$.ajax({
 				url:  '<?php echo home_url(); ?>/wp-admin/admin-ajax.php',
 				method:'POST',
@@ -159,35 +160,35 @@ else: ?>
 					upcomingWorkouts = res.result.upcomingWorkouts,
 					workoutContent = '<ul style="list-style:none;padding-left:0;">';
 					
-					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Previous <i class="fa fa-chevron-down"></i></span></h3></li>';
-					workoutContent += openWorkoutItem;					
-					if(previousWorkouts.length != 0){						
+					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Previous <i class="fa fa-chevron-down"></i></span></h3></li>';									
+					if(previousWorkouts.length != 0){
+						workoutContent += openWorkoutItem;	
 						previousWorkouts.forEach(function(e){							
-								workoutContent += pullWorkouts(res,e);
+							workoutContent += pullWorkouts(res,e);
 						});
 						workoutContent += closeWorkoutItem;
 					}else
-						workoutContent += "<li>No Workout</li>";
+						workoutContent += noWorkout;
 					
-					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Today <i class="fa fa-chevron-down"></i></h3></li>';
-					workoutContent += openWorkoutItem;
-					if(todayWorkouts.length != 0){						
+					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Today <i class="fa fa-chevron-down"></i></h3></li>';					
+					if(todayWorkouts.length != 0){
+						workoutContent += openWorkoutItem;
 						todayWorkouts.forEach(function(e){
 							workoutContent += pullWorkouts(res,e);
 						});
 						workoutContent += closeWorkoutItem;
 					}else
-						workoutContent += "<li>No Workout</li>";
+						workoutContent += noWorkout;
 					
-					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Upcoming <i class="fa fa-chevron-down"></i></h3></li>';
-					workoutContent += openWorkoutItem;
-					if(upcomingWorkouts.length != 0){						
+					workoutContent += '<li><h3 onclick="toggleThis(this)" class="mb-4">Upcoming <i class="fa fa-chevron-down"></i></h3></li>';					
+					if(upcomingWorkouts.length != 0){	
+						workoutContent += openWorkoutItem;
 						upcomingWorkouts.forEach(function(e){
 							workoutContent += pullWorkouts(res,e);
 						});
 						workoutContent += closeWorkoutItem;
 					}else
-						workoutContent += "<li>No Workout</li>";
+						workoutContent += noWorkout;
 					
 					workoutContent += "</ul>";
 					

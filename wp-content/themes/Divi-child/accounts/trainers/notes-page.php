@@ -23,7 +23,8 @@ if($selectedClient != 0 && !empty($clientAllWorkouts)){
 			$clientNotes[] = $note;		
 	}
 	$currentUser->notes = $clientNotes;
-}
+}else
+	$currentUser->notes = [];
 
 ?>
 <script>

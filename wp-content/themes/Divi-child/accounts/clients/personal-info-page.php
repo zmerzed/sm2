@@ -2,10 +2,19 @@
 
 	require_once getcwd() . '/wp-customs/User.php';
 	global $current_user;
+	$userBool = isset($_GET['profileview']);
 
 	/* $userdata = get_currentuserinfo(); */
-	$uinfo = wp_get_current_user();
-	$user = User::find(get_current_user_id());
+	/* $user = User::find(get_current_user_id()); */
+	
+	if($userBool)
+		$uinfo = get_user_by('id',$_GET['profileview']);
+	else
+		$uinfo = wp_get_current_user();
+	
+	
+	$user = User::find($uinfo->ID);
+	
 	$currentUser = [
 		'id' => $user->id,
 		'files' => $user->getFiles()		
@@ -50,7 +59,7 @@
 									<h2 class = "mt-0"><?php echo $displayname; ?></h2>	
 								</div>
 								<div class = "mb-3 mb-lg-0 mb-xl-0 order-1 order-lg-2 order-xl-2 col-12 col-lg-4 col-xl-4 text-right">
-									<a href="<?php echo home_url(); ?>/client/?data=profile&by=personal-info&edit=1" class = "btn btn-secondary">edit</a>
+									<?php echo (!$userBool) ? '<a href="'.home_url().'/client/?data=profile&by=personal-info&edit=1" class = "btn btn-secondary">edit</a>' : ""; ?>
 								</div>
 							</div>													
 						</div>
@@ -92,12 +101,14 @@
 					<ul>
 						<li ng-repeat="file in currentUser.files"><a href="<?php echo home_url(); ?>/sm-files/{{ file.user_id +'/'+ file.file }}" download><span><img ng-src="{{ file.file.indexOf('doc') != 0 && '<?php echo get_stylesheet_directory_uri() .'/accounts/images/doc.png'; ?>' }}"></span>{{ file.file }}</a></li>
 					</ul>
+					<?php if(!$userBool): ?>
 					<div class="upload-btn-wrapper position-relative">
 						<label for="myFile" class="btn btn-primary" onclick="clickFile(this);">Browse...</label>
 						<small style="display:none;"></small>
 						<input type="file" name="myFile" file-model="myFile" />						
 						<button ng-click="uploadFile()" class="btn">Upload File</button>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
