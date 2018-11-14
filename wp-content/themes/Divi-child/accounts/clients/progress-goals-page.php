@@ -64,7 +64,7 @@
 									</tr>
 									<tr>
 										<td><label>Body Fat (%)</label></td>
-										<td><input type="text" ng-model="stats.start.body_fat"></td>
+										<td><input type="text" ng-model="stats.start.body_fat" onclick="inputSevenSkinFolds(this);" bfp="start"></td>
 										<td><input type="text" ng-model="stats.goal.body_fat"></td>
 									</tr>
 									<tr>
@@ -211,6 +211,77 @@
 		</div>
 	</div>
 </div>
+<div class="sevenfolds" style="display:none;">
+	<div>
+		<h4>Gender</h4>
+		<label>
+			<input type="radio" name="gender" value="M" /> Male
+		</label>
+		<label>
+			<input type="radio" name="gender" value="F" /> Female
+		</label>
+		<input type="hidden" value="" name="hgender" />
+		<hr>
+		<input type="number" class="form-control" placeholder="Age" name="age" />
+		<br>
+		<input type="number" class="form-control" placeholder="Chest skinfold(mm)" name="chest" />
+		<br>
+		<input type="number" class="form-control" placeholder="Abdominal skinfold(mm)" name="abdominal" />
+		<br>
+		<input type="number" class="form-control" placeholder="Thigh skinfold(mm)" name="thigh" />
+		<br>
+		<input type="number" class="form-control" placeholder="Tricep skinfold(mm)" name="tricep" />
+		<br>
+		<input type="number" class="form-control" placeholder="Subscalar [back] skinfold(mm)" name="subscapular" />
+		<br>
+		<input type="number" class="form-control" placeholder="Suprailiac [side belly] skinfold(mm)" name="suprailiac" />
+		<br>
+		<input type="number" class="form-control" placeholder="Midaxillary (side torso) skinfold in mm" name="midaxillary" />
+	</div>
+</div>
+<style>#workoutModal .modal-body{max-height:300px!important;overflow-y:scroll!important;}</style>
+
+<script>
+$(window).ready(function () {
+	$('.sevenfolds div').appendTo($('#workoutModal .modal-body'));
+	$('input[name="gender"]').change(function(){
+		$('input[name="hgender"]').val($(this).val());
+	});
+});
+
+function calcSevenFolds(a) {
+	var bf = 0,
+		age = parseInt($('input[name="age"]').val()),
+		gender = $('input[name="hgender"]').val(),
+		chest = parseInt($('input[name="chest"]').val()),
+		abdominal = parseInt($('input[name="abdominal"]').val()),
+		thigh = parseInt($('input[name="thigh"]').val()),
+		tricep = parseInt($('input[name="tricep"]').val()),
+		subscapular = parseInt($('input[name="subscapular"]').val()),
+		suprailiac = parseInt($('input[name="suprailiac"]').val()),
+		midaxillary = parseInt($('input[name="midaxillary"]').val());
+	chest = chest ? chest : 0;
+	abdominal = abdominal ? abdominal : 0;
+	thigh = thigh ? thigh : 0;
+	tricep = tricep ? tricep : 0;
+	subscapular = subscapular ? subscapular : 0;
+	suprailiac = suprailiac ? suprailiac : 0;
+	midaxillary = midaxillary ? midaxillary : 0;
+	s = chest + abdominal + thigh + tricep + subscapular + suprailiac + midaxillary;
+	if (gender == "M"){bf = 495 / (1.112 - (0.00043499 * s) + (0.00000055 * s * s) - (0.00028826 * age)) - 450;
+	}else if (gender == "F"){ bf = 495 / (1.097 - (0.00046971 * s) + (0.00000056 * s * s) - (0.00012828 * age)) - 450;}
+	$('input[bfp="' + a + '"]').val(bf.toFixed(6)).trigger('change').trigger('input');
+}
+
+function inputSevenSkinFolds(a) {
+	var thisBFP = $(a).attr('bfp');
+	$('input[name="abdominal"]').focus();
+	$('#workoutModal').modal();
+	$('#workoutModal .modal-title').html('Calculate Body Fat Percentage');
+	$('#workoutModal .modal-footer').html('<button data-dismiss="modal"  onclick=\'calcSevenFolds("' + thisBFP + '");\'>Calculate</button>');
+}
+</script>
+
 <script>
 	// References to all the element we will need.
 	var video2 = document.querySelector('#camera-stream'),
