@@ -63,60 +63,60 @@
 										<td><input type="text" ng-model="stats.goal.weight"></td>
 									</tr>
 									<tr>
+										<td><label>height (in)</label></td>
+										<td><input type="text" ng-model="stats.start.height"></td>
+										<td><input type="text" ng-model="stats.goal.height"></td>
+									</tr>
+									<tr>
 										<td><label>Body Fat (%)</label></td>
 										<td><input type="text" ng-model="stats.start.body_fat" onclick="inputSevenSkinFolds(this);" bfp="start"></td>
 										<td><input type="text" ng-model="stats.goal.body_fat"></td>
 									</tr>
 									<tr>
-										<td><label>Waist (cm)</label></td>
+										<td><label>Waist (in)</label></td>
 										<td><input type="text" ng-model="stats.start.waist"></td>
 										<td><input type="text" ng-model="stats.goal.waist"></td>
 									</tr>
 									<tr>
-										<td><label>chest (cm)</label></td>
+										<td><label>chest (in)</label></td>
 										<td><input type="text" ng-model="stats.start.chest"></td>
 										<td><input type="text" ng-model="stats.goal.chest"></td>
 									</tr>
 									<tr>
-										<td><label>arms (cm)</label></td>
+										<td><label>arms (in)</label></td>
 										<td><input type="text"ng-model="stats.start.arms"></td>
 										<td><input type="text"ng-model="stats.goal.arms"></td>
 									</tr>
 									<tr>
-										<td><label>forearms (cm)</label></td>
+										<td><label>forearms (in)</label></td>
 										<td><input type="text" ng-model="stats.start.forearms"></td>
 										<td><input type="text" ng-model="stats.goal.forearms"></td>
 									</tr>
 									<tr>
-										<td><label>shoulders (cm)</label></td>
+										<td><label>shoulders (in)</label></td>
 										<td><input type="text" ng-model="stats.start.shoulders"></td>
 										<td><input type="text" ng-model="stats.goal.shoulders"></td>
 									</tr>
 									<tr>
-										<td><label>hips (cm)</label></td>
+										<td><label>hips (in)</label></td>
 										<td><input type="text" ng-model="stats.start.hips"></td>
 										<td><input type="text" ng-model="stats.goal.hips"></td>
 									</tr>
 									<tr>
-										<td><label>thighs (cm)</label></td>
+										<td><label>thighs (in)</label></td>
 										<td><input type="text" ng-model="stats.start.thighs"></td>
 										<td><input type="text" ng-model="stats.goal.thighs"></td>
 									</tr>
 									<tr>
-										<td><label>calves (cm)</label></td>
+										<td><label>calves (in)</label></td>
 										<td><input type="text" ng-model="stats.start.calves"></td>
 										<td><input type="text" ng-model="stats.goal.calves"></td>
 									</tr>
 									<tr>
-										<td><label>neck (cm)</label></td>
+										<td><label>neck (in)</label></td>
 										<td><input type="text" ng-model="stats.start.neck"></td>
 										<td><input type="text" ng-model="stats.goal.neck"></td>
-									</tr>
-									<tr>
-										<td><label>height (cm)</label></td>
-										<td><input type="text" ng-model="stats.start.height"></td>
-										<td><input type="text" ng-model="stats.goal.height"></td>
-									</tr>
+									</tr>									
 								</tbody>
 							</table>
 						</div>

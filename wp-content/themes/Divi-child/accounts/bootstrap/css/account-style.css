@@ -2050,6 +2050,28 @@ div.loading:after{
 .main-content{position:relative;}
 select[ng-model="exercise.selectedPart.selectedType.selectedImplementation1"]{min-width:100px;}
 .client-details td{text-align:center;}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.table thead th,
+.tabl.table-borderless td,
+.table-bordered td, .table-bordered th{border-color:#0a0a0a!important;}
+.print-program-type-1 *,
+.print-program-type-2 *,
+.print-program-type-3 *{font-size:16px;}
+.tabl.table-borderless td{font-size:14px;}
+.hasHistory a{
+	padding: 6px 8px;
+    display: inline-block;
+	max-width:20%;
+	float:right;
+	border-radius:5px;
+}
+.hasHistory input{max-width:80%;float:left;}
+.trainerStatsController > div{margin-bottom:1em;}
+.trainerStatsController{width:100%;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }

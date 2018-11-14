@@ -5,3 +5,6 @@
 .tabl tbody tr:first-child td{border-bottom:1px solid #ccc!important}
 table td[bgcolor="#fefefe"]{background:#e0e0e0!important;}
 .btn-con{display:none;}
+.table thead th,
+.tabl.table-borderless td,
+.table-bordered td, .table-bordered th{border-color:#0a0a0a!important;}
