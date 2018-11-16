@@ -57,7 +57,7 @@
 						<th width="75">Rest Int</th>
 						<th>Circuit Set</th>
 						<!--th>Circuit Reps</th-->						
-						<th>Start Weight</th>
+						<th style="max-width:100px;">Start Weight</th>
 						<th>&nbsp;</th>
 						<?php
 							for ($x = 1; $x <= $set_counter; $x++)
@@ -135,7 +135,7 @@
 											$eset = $e->sets[0]->weight;
 										echo ($eset != "") ? $e->sets[0]->weight : $n; */
 									?>
-									<input type="text" class="inputprint" />
+									<input type="text" class="inputprint" style="max-width:100px;" />
 								</td>	
 								<td style="padding:0;" class="set-options">
 									<table class="tabl table-borderless">

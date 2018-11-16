@@ -30,7 +30,7 @@
 			<th class="text-center" width="75">Rest Int</th>
 			<th class="text-center">Circuit Set</th>
 			<!--th class="text-center">Circuit Reps</th-->			
-			<th class="text-center">Start Weight</th>	
+			<th class="text-center" style="max-width:100px;">Start Weight</th>	
 			<th class="text-center">&nbsp;</th>	
 			<?php
 				for ($x = 1; $x <= $maxSet; $x++)
@@ -122,7 +122,7 @@
 							/* $weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;
 							echo ($weight) ? $weight : $n; */
 						?>
-						<input type="text" class="inputprint" />
+						<input type="text" class="inputprint" style="max-width:100px;" />
 					</td>
 					<td style="padding:0" class="set-options">
 						<table class="tabl table-borderless" border="0">
