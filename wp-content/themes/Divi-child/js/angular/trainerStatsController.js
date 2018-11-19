@@ -26,6 +26,16 @@ angular.module('smApp')
         {
             $scope.stats = angular.copy($scope.client.stats);
         }
+		
+		$scope.currentDate = formatDate(new Date(CURRENT_DATE));
+		/* $scope.updatedDate = formatDate(new Date($scope.stats.result.updated_at));
+		
+		if($scope.updatedDate == $scope.currentDate){
+			$('.currentinput').each(function(){			
+				$(this).closest('td').find('input:hidden').show();
+				$(this).hide();
+			});
+		} */
     }
 
     $scope.update = function()
@@ -41,5 +51,13 @@ angular.module('smApp')
         return true;
 
     });
+	
+	function formatDate(date) {
+	  var day = date.getDate();
+	  var monthIndex = date.getMonth();
+	  var year = date.getFullYear();
+
+	  return (monthIndex+1) + '/' + day + '/' + year;
+	}
 
 });

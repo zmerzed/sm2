@@ -2076,6 +2076,25 @@ input[type=number]::-webkit-outer-spin-button {
 .hasHistory input{max-width:80%;float:left;}
 .trainerStatsController > div{margin-bottom:1em;}
 .trainerStatsController{width:100%;}
+body input.bf_start,
+body input.bf_result,
+body input.bf_goal{
+	background-color:#dfdfdf!important;
+	border-color:#dfdfdf!important;
+}
+.bodyFatContainer{
+	background-color:#ccc;
+	padding:10px;
+	border-radius:10px;
+}
+#idStatsForm h3{min-height:34px;}
+#idStatsForm .red-btn{width:100%;}
+#idStatsForm label{
+	font-size:11px;
+	min-width:115px;
+	width:100%;
+	display:inline-block;
+}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
