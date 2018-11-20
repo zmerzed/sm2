@@ -2436,6 +2436,11 @@ function getGoalResults($u){
     $stats = $wpdb->get_results($statQ, OBJECT);
     return $stats;
 }
+/*ReArrange elements in Array*/
+function moveElement(&$array, $a, $b) {
+    $out = array_splice($array, $a, 1);
+    array_splice($array, $b, 0, $out);
+}
 /*Get Client Latest Photo || Get Gym Logo*/
 function getUserPhoto($u){
     global $wpdb;

@@ -662,7 +662,7 @@ table.dataTable thead .sorting_asc:after{
     text-align: center;
   /* margin-bottom:2em; */
 }
-
+.measurement-history h3,
 .current-goal h3{
   font-size: 16px;
   border: 0;
@@ -2082,6 +2082,10 @@ body input.bf_goal{
 	background-color:#dfdfdf!important;
 	border-color:#dfdfdf!important;
 }
+.bodyMeasures{
+	padding:10px;
+	background-color:#a3a3a3;
+}
 .bodyFatContainer{
 	background-color:#ccc;
 	padding:10px;
@@ -2095,6 +2099,29 @@ body input.bf_goal{
 	width:100%;
 	display:inline-block;
 }
+.measurement-history .table-responsive{overflow-x:auto!important;}
+.measurement-history .history-progress table td{padding:3px 5px;}
+.measurement-history .history-progress table{
+	background-color:#d5d5d5;
+}
+.measurement-history{
+	width:100%;
+	background-color:#979797;
+	border-radius:10px;
+	margin-top:1em;
+}
+.freezed th{background-color:#fff!important;}
+.freezed td{background-color:transparent!important;}
+.measurement-history .table-striped tr th:nth-child(odd),
+.measurement-history .table-striped tr td:nth-child(odd){
+	background-color:rgba(170,167,167,0.5);
+}
+
+.measurement-history td{border:0!important}
+.history-dates th{font-size:10px;color:#ae1f23;line-height:20px!important;}
+.measurement-history .table-responsive table{margin-bottom:0;}
+.measurement-history .table-responsive{margin-bottom:1em;}
+.measurement-history h3{width:100%;text-align:center;}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
