@@ -89,8 +89,8 @@
 				<table style="width: 100%;">
 					<tbody><tr>
 						<th></th>
-						<th>Start #s</th>
-						<th>Goal #s</th>
+						<th class="text-center">Start #s</th>
+						<th class="text-center">Goal #s</th>
 					</tr>					
 					<tr>
 						<td><label>Height (in)</label></td>
@@ -193,45 +193,45 @@
 					<thead>
 						<tr>
 							<th>&nbsp;</th>
-							<th>Skinfolds(mm)</th>
-							<th>Skinfolds(mm)</th>
+							<th class="text-center">Skinfolds(mm)</th>
+							<th class="text-center">Skinfolds(mm)</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><label>Chest</label></td>
-							<td><input name="start_chest_skinfold" ng-model="stats.start.chest_skinfold" type="text" class="form-control" /></td>
-							<td><input name="goal_chest_skinfold" ng-model="stats.goal.chest_skinfold" type="text" class="form-control" /></td>
+							<td><input name="start_chest_skinfold" ng-model="stats.start.chest_skinfold" type="text" /></td>
+							<td><input name="goal_chest_skinfold" ng-model="stats.goal.chest_skinfold" type="text" /></td>
 						</tr>
 						<tr>
 							<td><label>Abdominal</label></td>
-							<td><input name="start_abdominal" ng-model="stats.start.abdominal" type="text" class="form-control" /></td>
-							<td><input name="goal_abdominal" ng-model="stats.goal.abdominal" type="text" class="form-control" /></td>
+							<td><input name="start_abdominal" ng-model="stats.start.abdominal" type="text" /></td>
+							<td><input name="goal_abdominal" ng-model="stats.goal.abdominal" type="text" /></td>
 						</tr>
 						<tr>
 							<td><label>Thigh</label></td>
-							<td><input name="start_thigh_skinfold" ng-model="stats.start.thigh_skinfold" type="text" class="form-control" /></td>
-							<td><input name="goal_thigh_skinfold" ng-model="stats.goal.thigh_skinfold" type="text" class="form-control" /></td>
+							<td><input name="start_thigh_skinfold" ng-model="stats.start.thigh_skinfold" type="text" /></td>
+							<td><input name="goal_thigh_skinfold" ng-model="stats.goal.thigh_skinfold" type="text" /></td>
 						</tr>	
 						<tr>
 							<td><label>Tricep</label></td>
-							<td><input name="start_tricep" ng-model="stats.start.tricep" type="text" class="form-control" /></td>
-							<td><input name="goal_tricep" ng-model="stats.goal.tricep" type="text" class="form-control" /></td>
+							<td><input name="start_tricep" ng-model="stats.start.tricep" type="text" /></td>
+							<td><input name="goal_tricep" ng-model="stats.goal.tricep" type="text" /></td>
 						</tr>	
 						<tr>
-							<td><label>Subscalar</label></td>
-							<td><input name="start_subscapular" ng-model="stats.start.subscalar" type="text" class="form-control" /></td>
-							<td><input name="goal_subscapular" ng-model="stats.goal.subscalar" type="text" class="form-control"  /></td>
+							<td><label>Subscapular</label></td>
+							<td><input name="start_subscapular" ng-model="stats.start.subscalar" type="text" /></td>
+							<td><input name="goal_subscapular" ng-model="stats.goal.subscalar" type="text" /></td>
 						</tr>	
 						<tr>
 							<td><label>Suprailiac</label></td>
-							<td><input name="start_suprailiac" ng-model="stats.start.suprailiac" type="text" class="form-control" /></td>
-							<td><input name="goal_suprailiac" ng-model="stats.goal.suprailiac" type="text" class="form-control" /></td>
+							<td><input name="start_suprailiac" ng-model="stats.start.suprailiac" type="text" /></td>
+							<td><input name="goal_suprailiac" ng-model="stats.goal.suprailiac" type="text" /></td>
 						</tr>
 						<tr>
 							<td><label>Midaxillary</label></td>
-							<td><input name="start_midaxillary" ng-model="stats.start.midaxillary" type="text" class="form-control" /></td>
-							<td><input name="goal_midaxillary" ng-model="stats.goal.midaxillary" type="text" class="form-control" /></td>
+							<td><input name="start_midaxillary" ng-model="stats.start.midaxillary" type="text" /></td>
+							<td><input name="goal_midaxillary" ng-model="stats.goal.midaxillary" type="text" /></td>
 						</tr>	
 					</tbody>
 				</table>
@@ -330,50 +330,50 @@
 					<table class="skifoldTable">
 						<thead>
 							<tr>
-								<th>Skinfolds(mm)</th>
+								<th class="text-center">Skinfolds(mm)</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_chest_skinfold" ng-model="stats.result.chest_skinfold" type="text" class="form-control" />
+									<input style="display:none;" name="result_chest_skinfold" ng-model="stats.result.chest_skinfold" type="text" />
 								</td>
 							</tr>	
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_abdominal" ng-model="stats.result.abdominal" type="text" class="form-control" />
+									<input style="display:none;" name="result_abdominal" ng-model="stats.result.abdominal" type="text" />
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_thigh_skinfold" ng-model="stats.result.thigh_skinfold" type="text" class="form-control" />
+									<input style="display:none;" name="result_thigh_skinfold" ng-model="stats.result.thigh_skinfold" type="text" />
 								</td>
 							</tr>	
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_tricep" ng-model="stats.result.tricep" type="text" class="form-control" />
+									<input style="display:none;" name="result_tricep" ng-model="stats.result.tricep" type="text" />
 								</td>
 							</tr>	
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_subscapular" ng-model="stats.result.subscalar" type="text" class="form-control" />
+									<input style="display:none;" name="result_subscapular" ng-model="stats.result.subscalar" type="text" />
 								</td>
 							</tr>	
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_suprailiac" ng-model="stats.result.suprailiac" type="text" class="form-control"/>
+									<input style="display:none;" name="result_suprailiac" ng-model="stats.result.suprailiac" type="text" />
 								</td>
 							</tr>	
 							<tr>
 								<td>
 									<input class="currentinput" type="text">
-									<input style="display:none;" name="result_midaxillary" ng-model="stats.result.midaxillary" type="text" class="form-control" />
+									<input style="display:none;" name="result_midaxillary" ng-model="stats.result.midaxillary" type="text" />
 								</td>
 							</tr>	
 						</tbody>
@@ -435,7 +435,7 @@ $results = getGoalResults($client_);
 							<tbody>
 								<tr>
 									<?php foreach($results as $res){ ?>
-										<th><?php echo date_format(date_create($res->updated_at), 'm/d/Y'); ?></th>
+										<th class="text-center"><?php echo date_format(date_create($res->updated_at), 'm/d/Y'); ?></th>
 									<?php } ?>
 								</tr>
 								<?php foreach($keyArr as $ka){ ?>
