@@ -390,10 +390,10 @@
 </div>
 <?php
 $results = getGoalResults($client_);
-//printVar(getGoalPerc($results));
+//printVar(calcBodyPartProgress('height', $_GET['edit']));
 ?>
 <div class="measurement-history">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h3>Measurment History</h3></div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h3>Measurement History</h3></div>
 	<?php if(empty($results)): ?>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><p>No Results</p></div>
 	<?php else: ?>
@@ -419,9 +419,22 @@ $results = getGoalResults($client_);
 							<tr>
 								<th>&nbsp;</th>
 							</tr>
-							<?php foreach($keyArr as $ka){ ?>
+							<?php foreach($keyArr as $ka){
+									$unit = " (in)";
+									$sfArr = ['midaxillary','suprailiac','suprailiac','subscalar','tricep','thigh_skinfold','abdominal','chest_skinfold'];
+									if($ka == "body_fat"){
+										$unit = " (%)";
+										$ka = "body fat";
+									}elseif($ka == "weight")
+										$unit = " (lbs)";
+									elseif(in_array($ka,$sfArr)){
+										$unit = " (mm)";
+										if($ka == "subscalar")
+											$ka = "subscapular";
+									}										
+							?>
 								<tr>
-									<td align="right"><?php echo str_replace('_skinfold','',$ka); ?></td>
+									<td align="right"><?php echo str_replace('_skinfold','',$ka) . $unit; ?></td>
 								</tr>
 							<?php } ?>
 						</tbody>
@@ -435,17 +448,27 @@ $results = getGoalResults($client_);
 							<tbody>
 								<tr>
 									<?php foreach($results as $res){ ?>
-										<th class="text-center"><?php echo date_format(date_create($res->updated_at), 'm/d/Y'); ?></th>
+										<th class="text-center history-dates-header"><?php echo date_format(date_create($res->updated_at), 'm/d/Y'); ?></th>
 									<?php } ?>
 								</tr>
-								<?php foreach($keyArr as $ka){ ?>
+								<?php
+								$sfCtr = 0;
+								foreach($keyArr as $ka){ ?>
 									<tr>
 										<?php
+											$tempCtr = 0;
+											
+											$sfClass = "";
 											foreach($results as $res2){
-												if($ka != "body_fat")
-													echo ($res2->$ka != "") ? '<td align="center">' . $res2->$ka . '</td>' : '<td align="center">0</td>';
-												else
-													echo '<td align="center">0%</td>';
+												if($ka != "body_fat"){
+													if($sfCtr != 0)
+														$sfClass = $tempCtr;
+													echo ($res2->$ka != "") ? '<td class="sf'.$sfClass.'" align="center">' . $res2->$ka . '</td>' : '<td class="sf'.$sfClass.'" align="center">0</td>';
+												}else{
+													echo '<td class="bfs bf-'.$tempCtr.'" align="center">0%</td>';
+													$sfCtr++;
+												}												
+												$tempCtr++;
 											}								
 										?>
 									</tr>
@@ -461,12 +484,19 @@ $results = getGoalResults($client_);
 				<tr>
 					<th class="text-center">Progress</th>
 				</tr>
-				<?php foreach($keyArr as $ka){ ?>
-					<tr>
+				<?php foreach($keyArr as $ka){
+					$perc = calcBodyPartProgress($ka, $_GET['edit']);
+					$decimals = 4;
+					$expo = pow(10,$decimals);
+					$perc = intval($perc*$expo)/$expo;
+					if($ka == "body_fat")
+						$perc = 0;
+				?>
+					<tr class="<?php echo ($ka == "body_fat") ? "bfprogress" : ""; ?>">
 						<td>
 							<div class="progress client-goals-percentage">
-								<div class="progress-bar" style="width: 50%;">
-									<span class="indicator"><small>50%</small></span>
+								<div class="progress-bar" style="width: <?php echo $perc; ?>%;">
+									<span class="indicator"><small><?php echo $perc; ?>%</small></span>
 								</div>
 							</div>
 						</td>
@@ -490,6 +520,7 @@ $results = getGoalResults($client_);
 
 <script>
 $(window).ready(function () {
+	var dateLength = $('.history-dates-header').length;
 	$('.sevenfolds div').appendTo($('#workoutModal .modal-body'));
 	$('input[name="gender"]').change(function(){
 		$(this).closest('.fatcalc').find('input[name="hgender"]').val($(this).val());
@@ -505,8 +536,58 @@ $(window).ready(function () {
 		$(this).closest('td').find('input:hidden').trigger('change').trigger('input');
 	});
 	
+	getBFDatailInHistory(dateLength);
 	updateSkinfold();
+	calcBFProgress(dateLength);
 });
+function calcBFProgress(dl){
+	var _data = {
+		action: 'calcBFProgress',
+		start: $('.bf_start').val().replace('%', ''),
+		goal: $('.bf_goal').val().replace('%', ''),
+		current: $('.bf-'+(dl-1)).html().replace('%', '')
+	};
+	$.ajax({
+		url:  '<?php echo home_url(); ?>' + '/wp-admin/admin-ajax.php',
+		method:'POST',
+		data: _data,
+		dataType: 'json',
+		success: function(res){
+			$('.bfprogress .progress-bar').width(res.progress + '%');
+			$('.bfprogress small').html(res.progress.toFixed(4) + '%');
+		},
+		error: function(r,xhr, result){
+			console.log(r + ' ' + xhr + ' ' + result);
+		}
+	});
+}
+
+function getBFDatailInHistory(dateLength){
+	var i=0,
+	age = $('input[name="skinfold_age"]').val(),
+	gender = $('input[name="skinfold_gender"]').val();
+	
+	while(i<dateLength){
+		var sfTotal = 0;
+		$('.sf'+i).each(function(){
+			sfTotal += parseInt($(this).html());
+		});
+		$('.bf-'+i).html(calcBFInHistory(sfTotal,gender,age).toFixed(4)+"%");		
+		i++;
+	}
+}
+function calcBFInHistory(s,gender,age){
+	if(s == 0)
+		return 0;	
+	else{
+		if (gender == "male")
+			return 495 / (1.112 - (0.00043499 * s) + (0.00000055 * s * s) - (0.00028826 * age)) - 450;
+		else if (gender == "female")
+			return 495 / (1.097 - (0.00046971 * s) + (0.00000056 * s * s) - (0.00012828 * age)) - 450;
+		else
+			return 0;
+	}
+}
 
 function updateSkinfold(){
 	var bf_start = 0,

@@ -2429,6 +2429,21 @@ function checkSubscribed($u){
     else
         return false;
 }
+/*Calculate Body Part Progress*/
+function calcBodyPartProgress($bp,$uid){ //needed body_part and user id
+	global $wpdb;
+	$resultQ = 'SELECT * FROM workout_client_stats WHERE type="result" AND client_id = '. $uid . ' ORDER BY updated_at DESC';
+	$startQ = 'SELECT * FROM workout_client_stats WHERE type="start" AND client_id = '. $uid;
+	$goalQ = 'SELECT * FROM workout_client_stats WHERE type="goal" AND client_id = '. $uid;
+	$stats = array();
+	if($bp && $uid){		
+		$result = $wpdb->get_results($resultQ, OBJECT)[0]->$bp;
+		$start = $wpdb->get_results($startQ, OBJECT)[0]->$bp;
+		$goal = $wpdb->get_results($goalQ, OBJECT)[0]->$bp;
+	}
+	
+    return abs(calcppbp($goal,$start,$result)); //gsc
+}
 /*Get all Goal results*/
 function getGoalResults($u){
     global $wpdb;
@@ -2468,6 +2483,18 @@ function getUserPhoto($u){
     return $rimg;
 }
 /*WP AJAX*/
+add_action('wp_ajax_calcBFProgress', 'calcBFProgress');
+add_action('wp_ajax_nopriv_calcBFProgress', 'calcBFProgress');
+
+function calcBFProgress(){
+    $start = $_POST['start'];
+    $goal = $_POST['goal'];
+    $current = $_POST['current'];
+	
+    echo json_encode( array('progress' => abs(calcppbp( $goal,$start,$current))) );
+    wp_die();
+}
+
 add_action('wp_ajax_open_workouts', 'open_workouts');
 add_action('wp_ajax_nopriv_open_workouts', 'open_workouts');
 
