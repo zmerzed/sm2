@@ -54,9 +54,9 @@
             </div>
             <div class="col-lg-5 col-md-5 text-right">
 				 <div class="btn-add-workout pb-3">
-					<button type="button" ng-click="newWorkOutDay()">+ new workout</button>			
+					<button type="button" ng-click="newWorkOutDay()">+ new workout</button>
 				</div>
-            </div>            
+            </div>
         </div>
 
         <!-- validations -->
@@ -76,7 +76,7 @@
 			<select onchange="update(this);" class="mb-3 d-sm-block d-md-none">
 				<option ng-repeat="day in workout.days" ng-show="!day.isDelete" ng-disabled="day.isDelete" ng-selected="isActive(day)" value="{{day.wday_order}}" >Workout {{day.wday_order}} - {{day.wday_name}}</option>
 			</select>
-		
+
 	</div>
     <nav class="d-none d-sm-none d-md-block">
         <div class="nav nav-tabs" ng-class = "{ 'fourth-rows-detected' : workout.days.length >= 4, 'multple-rows-detected' : workout.days.length >= 8 }" id="message-nav-tab" role="tablist">
@@ -122,7 +122,7 @@
 									<span ng-click="onNamingExercise(exercise)" class="exercise-number d-flex"><label class="w-100 my-auto" title="Click to group">{{ exercise.group_by }}</label></span>
 								</div>
 								<div class="exer-center exercise-details float-left pt-0" style="width:80%;">
-									<table class="workout-exercise-options">                                   
+									<table class="workout-exercise-options">
 										<td>
 											<label>Body Part</label>
 											<select ng-model="exercise.selectedPart" ng-options="opt.part for opt in exercise.exerciseOptions">
@@ -166,7 +166,7 @@
 											<!--</select>-->
 										<!--</td>-->
 										<!--<td>-->
-                                        <td> 
+                                        <td>
 											<label>Reps</label>
 											<select ng-model="exercise.selectedSQ.selectedRep" ng-options="rep as rep for rep in exercise.selectedSQ.options.rep_options">
 												<!--option value="">Reps</option-->
@@ -269,17 +269,17 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-12 col-lg-6 col-xl-5 mb-3 mb-lg-0 workout-assign-clients">
+                                            <div class="col-12 col-lg-8 col-xl-8 mb-3 mb-lg-0 workout-assign-clients">
                                                 <ul class="workout-exercise-lists">
                                                     <li class="workout-exercise-item" ng-repeat="ex in workout.selectedDay.selectedClient.exercises track by $index">
                                                         <table class="workout-exercise-options">
                                                             <td><span class="exercise-number d-flex"><label class = "w-100">{{ ex.group_by }}</label></span></td>
-                                                            <td class = "w-35">
+                                                            <td>
                                                                 <select>
                                                                     <option>{{ ex.exer_body_part }}</option>
                                                                 </select>
                                                             </td>
-                                                            <td class = "w-50">
+                                                            <td>
                                                                 <select>
                                                                     <option>{{ ex.exer_type }}</option>
                                                                 </select>
@@ -288,10 +288,10 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-12 col-lg-6 col-xl-7 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
+                                            <div class="col-12 col-lg-4 col-xl-4 assign-workout assign-workout-sets" ng-class="{'more-sets': workoutMaxSet > 3}">
                                                 <div class="row m-0">
                                                     <div class="col-4 p-0" ng-repeat="numSet in []|range:1">
-                                                        <p>SET {{ numSet + 1}}</p>
+                                                        <p>Start</p>
                                                         <div class="assign-sets-wrapper">
                                                             <table class="last-sets" style="width: 100% !important;">
                                                                 <tr>

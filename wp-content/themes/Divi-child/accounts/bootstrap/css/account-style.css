@@ -1563,6 +1563,7 @@ ul.workout-lists li .exercise-set-item .rep-navigation label{
 .assign-client-to-workout ul.workout-exercise-lists li.workout-exercise-item{
   margin-bottom:0;
   padding-top:0;
+  padding-bottom:0
 }
 .assign-client-to-workout .assign-sets-wrapper .set-val{margin-bottom: 3px;}
 .assign-client-to-workout .assign-focus,
@@ -1996,7 +1997,7 @@ body .sm-input{text-align:left;padding:5px!important;margin-bottom:10px;}
 	width:30px;
 	line-height:20px;
 	text-align:center;
-	
+
 }
 #menu .mobile-menu ul.sub-menu{padding-left:10px;}
 body div.row::before,
@@ -2045,15 +2046,15 @@ div.loading:after{
 	position:absolute;
 	top:0;
 	left:0;
-	z-index:1;	
+	z-index:1;
 }
 .main-content{position:relative;}
 select[ng-model="exercise.selectedPart.selectedType.selectedImplementation1"]{min-width:100px;}
 .client-details td{text-align:center;}
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .print-program-type-1 td,
@@ -2122,6 +2123,12 @@ body input.bf_goal{
 .measurement-history .table-responsive table{margin-bottom:0;}
 .measurement-history .table-responsive{margin-bottom:1em;}
 .measurement-history h3{width:100%;text-align:center;}
+.assign-client-tab-content .workout-assign-clients .workout-exercise-options{display:table;}
+.assign-client-tab-content .workout-assign-clients .workout-exercise-options tr td{display:table-cell;}
+.assign-client-tab-content .workout-assign-clients .workout-exercise-options tr{width:100%;}
+.assign-client-tab-content .workout-assign-clients .workout-exercise-options tr td select{
+  min-width: 100px;
+}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
@@ -2145,7 +2152,7 @@ body input.bf_goal{
 @media(max-width:991px){
 	.trainer-weekly-schedule-wrapper .trainer-per-day-schedule{width:100%;margin-bottom:1em;}
 	.trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:20%;display:inline-block;float:left;}
-  
+
 	.trainer-day-label{
 		cursor:pointer;
 		padding:5px;
@@ -2170,7 +2177,7 @@ body input.bf_goal{
 	}
 	.title-welcome-section h2{font-size:32px;}
 	.title-welcome-section{margin-top:0;}
-	
+
 	ul.workout-exercise-lists li.workout-exercise-item{
 		padding:5px;
 	}
@@ -2205,7 +2212,7 @@ body input.bf_goal{
 		border-top-left-radius:0;
 		border-top-right-radius:0;
 		border-radius:10px!important;
-		padding-right:40px;		
+		padding-right:40px;
 		margin-right:2px;
 		background-color:#808181;
 	}
@@ -2258,7 +2265,7 @@ body input.bf_goal{
 		width:100%;
 		z-index:1;
 		border-radius:10px;
-	}	
+	}
 }
 @media(max-width:480px){
   .trainer-weekly-schedule-wrapper .trainer-per-day-schedule .trainer-per-day-schedule-box li{width:50%;}
