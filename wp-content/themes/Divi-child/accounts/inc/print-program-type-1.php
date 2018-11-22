@@ -1,6 +1,6 @@
 <link rel="stylesheet" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print-media.css" />
 <!-- Print Type 1 -->
-<?php 
+<?php
 		$pid = 0;
 		$wid = 0;
 		$cid = 0;
@@ -25,7 +25,7 @@
 
 		if(!empty($pDet)){
 			$ctr__ = 0;
-			foreach($pDet as $pd=>$v){				
+			foreach($pDet as $pd=>$v){
 				if($pd == "program_name"):
 					echo "<h3>".$v."</h3>";
 				else:
@@ -38,8 +38,8 @@
 						if($e){
 							$eset = $e->exer_sets;
 							if($eset > $maxSet)
-								$maxSet = $eset;							
-						}						
+								$maxSet = $eset;
+						}
 					}
 				/* if(!empty(getWorkoutMaxSet($wid)))
 					$maxSet = getWorkoutMaxSet($wid)[0]->max_sets; */
@@ -55,7 +55,7 @@
 				<th width="62">Reps</th>
 				<th width="60">Rest Int</th>
 				<th>Circuit Set</th>
-				<!--th>Circuit Reps</th-->				
+				<!--th>Circuit Reps</th-->
 				<th style="max-width:100px;">Start Weight</th>
 				<th>&nbsp;</th>
 				<?php
@@ -67,24 +67,24 @@
 		<tbody>
 			<?php
 				$jctr = 0;
-				$group_letter_arr = [];			
+				$group_letter_arr = [];
 				$group_letter_ctr = [];
 				$n = "None";
-				
+
 				foreach($ed as $e){
 					$gname = "";
-					
+
 					if($e->group_by != "")
 						$gname = substr($e->group_by, 0, 1);
 					else
 						$gname = "null";
-					
+
 					if(!isset($group_letter_ctr[$gname]))
 						$group_letter_ctr[$gname] = 1;
 					else
 						$group_letter_ctr[$gname]++;
 				}
-				
+
 				foreach($ed as $e):
 					$group_chk = 0;
 					$jctr++;
@@ -107,20 +107,20 @@
 								$exer = $v;
 						}
 						$vid = getExerciseVideo($ePart, $exer);
-						
-						if($e->group_by != "")							
+
+						if($e->group_by != "")
 							$gname = substr($e->group_by, 0, 1);
 						else
 							$gname = "null";
-						
+
 						if(!in_array($gname, $group_letter_arr)){
 							$group_letter_arr[] = $gname;
 							$group_chk = 1;
 						}
-						
+
 						if($vid != "")
 							$vid = getVideoID($vid);
-						
+
 						$ciruitDetails = getCircuitDetails($wd->wday_ID, $gname);
 			?>
 				<tr class="main-tr">
@@ -134,7 +134,7 @@
 							}
 						?>
 					</td>
-					<?php	
+					<?php
 						echo '<td width="30%" style="min-width:200px;">';
 							if($exercise){
 								echo $exercise;
@@ -143,7 +143,7 @@
 								echo $n;
 							}
 						echo '</td>';
-						
+
 						echo '<td class="text-center">';
 							if($eRep)
 								echo $eRep;
@@ -159,9 +159,9 @@
 								echo $n;
 							}
 						echo '</td>';
-						
+
 					?>
-					
+
 					<?php if($group_chk == 1): ?>
 						<td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
 							<?php
@@ -173,16 +173,16 @@
 						</td>
 						<!--td rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center">
 							<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
-						</td-->												
+						</td-->
 					<?php endif; ?>
-					<td class="text-center">
+					<td class="text-center align-middle">
 						<?php
-							/* $eset = "";
+							$eset = "";
 							if(count($e->sets) > 0)
 								$eset = $e->sets[0]->weight;
-							echo ($eset != "") ? $e->sets[0]->weight : $n; */
+							echo ($eset != "") ? $e->sets[0]->weight : $n;
 						?>
-						<input type="text" class="inputprint" style="max-width:100px;" />
+						<!--input type="text" class="inputprint" style="max-width:100px;" /-->
 					</td>
 					<td style="padding:0" class="set-options">
 						<table class="tabl table-borderless" border="0">
@@ -201,7 +201,7 @@
 					<?php
 
 						foreach($e as $k=>$v){
-							if(is_array($v)){								
+							if(is_array($v)){
 								for ($x = 0; $x < $maxSet; $x++) {
 						?>
 							<td style="padding:0" class="set-options">
@@ -214,7 +214,7 @@
 												else
 													echo "--";
 											?>
-											
+
 										</td>
 									</tr>
 									<tr border="0">
@@ -230,7 +230,7 @@
 								</table>
 							</td>
 					<?php
-								}									
+								}
 							}
 						}
 					?>
@@ -260,7 +260,7 @@
 				$(this).height($(this).closest('td').height());
 			});
 		});
-	</script>		
+	</script>
 <?php
 				endif;
 			}

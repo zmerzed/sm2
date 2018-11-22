@@ -7,19 +7,19 @@
 	$client_id = 0;
 	if(isset($_GET['workout_client_id']))
 		$client_id = $_GET['workout_client_id'];
-	
+
 	global $wpdb;
-	$program_workout_clients_query = 'SELECT * FROM  workout_day_clients_tbl WHERE workout_clientID = '. $client_id. ' AND workout_client_workout_ID = '. $program_id . ' ORDER BY workout_client_dayID ASC';	
-	$program_workout_clients = $wpdb->get_results($program_workout_clients_query, OBJECT);	
+	$program_workout_clients_query = 'SELECT * FROM  workout_day_clients_tbl WHERE workout_clientID = '. $client_id. ' AND workout_client_workout_ID = '. $program_id . ' ORDER BY workout_client_dayID ASC';
+	$program_workout_clients = $wpdb->get_results($program_workout_clients_query, OBJECT);
 	$program_query = 'SELECT * FROM workout_tbl WHERE workout_ID = '. $program_id;
 	$program = $wpdb->get_results($program_query, OBJECT);
-	
+
 	$program_name = "";
 	if($program)
 		$program_name = $program[0]->workout_name;
-	
-	echo '<h3>' .$program_name . '</h3>';	
-	
+
+	echo '<h3>' .$program_name . '</h3>';
+
 	if($program_workout_clients){
 		$workout_ctr = 0;
 		foreach($program_workout_clients as $workout){
@@ -34,15 +34,15 @@
 			$exercises = [];
 			if(!empty($program_details[$workout_id]))
 				$exercises = $program_details[$workout_id]['exercises'];
-			
-			$set_counter = 0;				
+
+			$set_counter = 0;
 			foreach($exercises as $e){
 				if(!empty($e)){
 					$eset = $e->exer_sets;
 					if($eset > $set_counter)
-						$set_counter = $eset;							
-				}						
-			}			
+						$set_counter = $eset;
+				}
+			}
 			if(!empty($workout_details)){
 				echo '<h4 class="text-center mt-4">Workout '.$workout_ctr.' - '.$workout_details->wday_name.'</h4>';
 ?>
@@ -56,7 +56,7 @@
 						<th>Reps</th>
 						<th width="75">Rest Int</th>
 						<th>Circuit Set</th>
-						<!--th>Circuit Reps</th-->						
+						<!--th>Circuit Reps</th-->
 						<th style="max-width:100px;">Start Weight</th>
 						<th>&nbsp;</th>
 						<?php
@@ -67,18 +67,18 @@
 				</thead>
 				<?php
 					$exercise_counter = 0;
-					$group_letter_arr = [];			
+					$group_letter_arr = [];
 					$group_letter_ctr = [];
 					$gname = "";
 					$n = "None";
-					
-					foreach($exercises as $e){						
-						
+
+					foreach($exercises as $e){
+
 						if($e->group_by != "")
 							$gname = substr($e->group_by, 0, 1);
 						else
 							$gname = "null";
-						
+
 						if(!isset($group_letter_ctr[$gname]))
 							$group_letter_ctr[$gname] = 1;
 						else
@@ -86,19 +86,19 @@
 					}
 					foreach($exercises as $e){
 						$group_chk = 0;
-						$exercise_counter++;					
+						$exercise_counter++;
 						if($e){
 							$eSet = $e->exer_sets;
-							if($e->group_by != "")							
+							if($e->group_by != "")
 								$gname = substr($e->group_by, 0, 1);
 							else
 								$gname = "null";
-							
+
 							if(!in_array($gname, $group_letter_arr)){
 								$group_letter_arr[] = $gname;
 								$group_chk = 1;
 							}
-							
+
 							$ciruitDetails = getCircuitDetails($workout_id, $gname);
 				?>
 							<tr class="main-tr">
@@ -113,7 +113,7 @@
 								<!--td><?php //echo ($e->exer_sets) ? $e->exer_sets : "--";  ?></td-->
 								<td class="text-center"><?php echo ($e->exer_rep) ? $e->exer_rep : $n; ?></td>
 								<td class="text-center"><?php echo ($e->exer_rest) ? $e->exer_rest : $n; ?></td>
-								
+
 								<?php if($group_chk == 1): ?>
 									<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
 										<?php
@@ -122,21 +122,21 @@
 											else
 												echo $n;
 										?>
-									</td>	
+									</td>
 									<!--td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
 										<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
-									</td-->			
+									</td-->
 								<?php endif; ?>
-								
-								<td class="text-center">
+
+								<td class="text-center align-middle">
 									<?php
-										/* $eset = "";
+										$eset = "";
 										if(count($e->sets) > 0)
 											$eset = $e->sets[0]->weight;
-										echo ($eset != "") ? $e->sets[0]->weight : $n; */
+										echo ($eset != "") ? $e->sets[0]->weight : $n;
 									?>
-									<input type="text" class="inputprint" style="max-width:100px;" />
-								</td>	
+									<!--input type="text" class="inputprint" style="max-width:100px;" /-->
+								</td>
 								<td style="padding:0;" class="set-options">
 									<table class="tabl table-borderless">
 										<tr border="0" style="background-color:transparent;">
@@ -150,8 +150,8 @@
 											</td>
 										</tr>
 									</table>
-								</td>							
-								
+								</td>
+
 								<?php for ($x = 1; $x <= $set_counter; $x++){ ?>
 									<td style="padding:0;" class="set-options">
 										<table class="tabl table-borderless">
@@ -180,7 +180,7 @@
 					}
 				?>
 			</table>
-			
+
 	<?php
 			}
 		}
@@ -207,7 +207,7 @@
 					$(this).height($(this).closest('td').height());
 				});
 			});
-		</script>	
+		</script>
 	<?php
 	}else
 		echo "No Workouts";

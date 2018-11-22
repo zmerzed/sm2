@@ -11,10 +11,10 @@
 		if($e){
 			$eset = $e->exer_sets;
 			if($eset > $maxSet)
-				$maxSet = $eset;							
-		}						
+				$maxSet = $eset;
+		}
 	} */
-	
+
 	if(!empty(getWorkoutMaxSet($workout_id)))
 		$maxSet = getWorkoutMaxSet($workout_id)[0]->max_sets;
 ?>
@@ -29,36 +29,36 @@
 			<th class="text-center" width="62">Reps</th>
 			<th class="text-center" width="75">Rest Int</th>
 			<th class="text-center">Circuit Set</th>
-			<!--th class="text-center">Circuit Reps</th-->			
-			<th class="text-center" style="max-width:100px;">Start Weight</th>	
-			<th class="text-center">&nbsp;</th>	
+			<!--th class="text-center">Circuit Reps</th-->
+			<th class="text-center" style="max-width:100px;">Start Weight</th>
+			<th class="text-center">&nbsp;</th>
 			<?php
 				for ($x = 1; $x <= $maxSet; $x++)
 					echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 			?>
 		</tr>
 	</thead>
-	<tbody>		
+	<tbody>
 		<?php
 			$jctr = 0;
-			$group_letter_arr = [];			
+			$group_letter_arr = [];
 			$group_letter_ctr = [];
 			$gname = "";
-			
-			foreach($exercises as $e){	
+
+			foreach($exercises as $e){
 				if($e->group_by != "")
 					$gname = substr($e->group_by, 0, 1);
 				else
 					$gname = "null";
-				
+
 				if(!isset($group_letter_ctr[$gname]))
 					$group_letter_ctr[$gname] = 1;
 				else
 					$group_letter_ctr[$gname]++;
 			}
-			
-			
-			
+
+
+
 			foreach($exercises as $e){
 				$group_chk = 0;
 				$jctr++;
@@ -80,18 +80,18 @@
 						if($vid != "")
 							$vid = getVideoID($vid);
 						$n = "None";
-						
-						if($e->group_by != "")							
+
+						if($e->group_by != "")
 							$gname = substr($e->group_by, 0, 1);
 						else
 							$gname = "null";
-						
+
 						if(!in_array($gname, $group_letter_arr)){
 							$group_letter_arr[] = $gname;
 							$group_chk = 1;
 						}
 						$ciruitDetails = getCircuitDetails($workout_id, $gname);
-					
+
 		?>
 				<tr class="main-tr">
 					<td class="text-center"><?php echo $e->group_by; ?></td>
@@ -108,21 +108,21 @@
 					</td>
 					<td>
 						<?php echo ($eRest) ? $eRest : $n; ?>
-					</td>					
+					</td>
 					<?php if($group_chk == 1): ?>
 						<td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
 							<?php echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n; ?>
 						</td>
 						<!--td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
 							<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
-						</td-->						
+						</td-->
 					<?php endif; ?>
-					<td class="text-center">
+					<td class="text-center align-middle">
 						<?php
-							/* $weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;
-							echo ($weight) ? $weight : $n; */
+							$weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;
+							echo ($weight) ? $weight : $n;
 						?>
-						<input type="text" class="inputprint" style="max-width:100px;" />
+						<!--input type="text" class="inputprint" style="max-width:100px;" /-->
 					</td>
 					<td style="padding:0" class="set-options">
 						<table class="tabl table-borderless" border="0">
@@ -148,12 +148,12 @@
 											echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input type="text" class="set-input" />' : '--';
 										else
 											echo "--";
-										?>										
+										?>
 									</td>
 								</tr>
 								<tr border="0">
 									<td class="text-center" style="vertical-align:middle;border:0;padding:0;">
-										<?php 
+										<?php
 										if($ciruitDetails)
 											echo ($x < $ciruitDetails[0]->sets && $ciruitDetails[0]->sets > 0) ? '<input type="text" class="set-input" />' : '--';
 										else
@@ -163,7 +163,7 @@
 								</tr>
 							</table>
 						</td>
-					<?php }	?>			
+					<?php }	?>
 				</tr>
 		<?php
 				}
@@ -196,4 +196,4 @@ $(window).ready(function(){
 	});
 });
 
-</script>	
+</script>
