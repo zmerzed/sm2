@@ -65,6 +65,9 @@ app.constant('global', {
             };
         }); 
 
+        var emptyGroups = [];
+        var notEmptyGroups = [];
+
         groups.forEach(function(g) 
         {
 
@@ -87,9 +90,17 @@ app.constant('global', {
                     break;
                 }
             }
-        });
 
-        return groups;
+            if (g.group_by_letter.length <= 0) {
+
+                emptyGroups.push(g);
+
+            } else {
+                notEmptyGroups.push(g)
+            }
+        });
+        
+        return notEmptyGroups.concat(emptyGroups);
     },
 
     validatePrograms: function(form, isEdit=false) {
@@ -101,7 +112,6 @@ app.constant('global', {
         var fieldSeq = 'seq';
 
         if (isEdit) {
-            console.log('xxxxxxxxxxxxxxxxxx');
             fieldDayName = 'wday_name';
             fieldName = 'workout_name';
             fieldSeq = 'wday_order';
@@ -118,8 +128,6 @@ app.constant('global', {
 
         form.days.forEach(function (day) {
 
-            console.log('fffffffffff');
-            console.log(day);
             if (!day[fieldDayName]) {
 
                 console.log(day);
