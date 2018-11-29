@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col-lg-6 col-md-6">
 			<select onchange="selectClient(this.value)" class="float-left program-selected-clients">
-				<option value="{{ client.ID }}" ng-repeat="client in clientsBackup">
+				<option value="{{ client.ID }}" ng-repeat="client in workout.selectedDay.clients">
 					{{ client.user_nicename }}
 				</option>
 			</select>
