@@ -424,7 +424,7 @@ angular.module('smApp')
         if (val) {
             findTheLargestSet();
             optimizeClientExercises();
-            global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
+         //   global.sortByKey($scope.workout.selectedDay.exercises, 'group_by');
 
             $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
             /* check the exercises as the last to take the rest */
@@ -547,7 +547,7 @@ angular.module('smApp')
 
             if (mExercise.selectedPart && mExercise.selectedPart.selectedType) 
             {
-                console.log('check for selected part and implementation');
+
                 if (mExercise.selectedPart.selectedType.selectedImplementation1 == 'custom') 
                 {
                     mImpCustom = prompt("Please add a custom implementation");
@@ -577,6 +577,70 @@ angular.module('smApp')
                 }      
             }
 
+            /* selected part exercise 1 or variation 1 */
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType)
+            {
+
+                if (mExercise.selectedPart.selectedType.selectedExercise1 == 'custom')
+                {
+                    var mVariation1 = prompt("Please add a custom variation 1");
+
+                    while (mVariation1 == 'custom') {
+                        mVariation1 = prompt("Please add a custom variation 1");
+                    }
+
+                    var mVars = [];
+
+                    for (var mV in mExercise.selectedPart.selectedType.exercise_1)
+                    {
+                        var variation = mExercise.selectedPart.selectedType.exercise_1[mV];
+
+                        if (variation == 'custom') {
+                            variation = angular.copy(mVariation1);
+                        }
+
+                        if (variation) {
+                            mVars.push(variation);
+                        }
+                    }
+
+                    mVars.push('custom');
+                    mExercise.selectedPart.selectedType.exercise_1 = mVars;
+                    mExercise.selectedPart.selectedType.selectedExercise1 = mVariation1;
+                }
+            }
+
+            /* selected part exercise 1 or variation 2 */
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType)
+            {
+                if (mExercise.selectedPart.selectedType.selectedExercise2 == 'custom')
+                {
+                    var mVariation2 = prompt("Please add a custom variation 2");
+
+                    while (mVariation2 == 'custom') {
+                        mVariation2 = prompt("Please add a custom variation 2");
+                    }
+
+                    var mVars = [];
+
+                    for (var mV in mExercise.selectedPart.selectedType.exercise_2)
+                    {
+                        var variation = mExercise.selectedPart.selectedType.exercise_2[mV];
+
+                        if (variation == 'custom') {
+                            variation = angular.copy(mVariation2);
+                        }
+
+                        if (variation) {
+                            mVars.push(variation);
+                        }
+                    }
+
+                    mVars.push('custom');
+                    mExercise.selectedPart.selectedType.exercise_2 = mVars;
+                    mExercise.selectedPart.selectedType.selectedExercise2 = mVariation2;
+                }
+            }
 
             /* check if others is selected for Tempo */
             if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRep == 'custom') 
@@ -680,6 +744,8 @@ angular.module('smApp')
             $localStorage.nCircuits
         );
 
+        console.log('fffffffffffffffff');
+        console.log($scope.workout.selectedDay.circuits);
     }
 
     function optimizeCircuits() {

@@ -1673,6 +1673,14 @@ function workOutExerciseOptions()
         foreach ($options[$key]['options'] as $option) 
         {
             $option->implementation_options[] = 'custom';
+
+            if (isset($option->exercise_1)) {
+                $option->exercise_1[] = 'custom';
+            }
+
+            if (isset($option->exercise_2)) {
+                $option->exercise_2[] = 'custom';
+            }
         }
     }
 
