@@ -1,8 +1,18 @@
 <script>
 	function selectClient(a){
 		var curVal = $('.print-btn').attr('href');
-		curVal = curVal.split('&workout_client_id=');
+		curVal = curVal.split('&workout_client_id=')[0];
+		curVal = curVal.split('&print_workout_option=')[0];
+		curVal += '&print_workout_option=' + $('.print-option').val();
 		curVal += '&workout_client_id=' + a;
+		$('.print-btn').attr('href', curVal);
+	}
+	function selectPrintWorkout(a){
+		var curVal = $('.print-btn').attr('href');
+		curVal = curVal.split('&workout_client_id=')[0];
+		curVal = curVal.split('&print_workout_option=')[0];
+		curVal += '&print_workout_option=' + a;
+		curVal += '&workout_client_id=' + $('.program-selected-clients').val();
 		$('.print-btn').attr('href', curVal);
 	}
 	function togTopOpt(a){
@@ -22,12 +32,16 @@
 <div class="container top-options pt-4" style="display:none;">
 	<div class="row">
 		<div class="col-lg-6 col-md-6">
-			<select onchange="selectClient(this.value)" class="float-left program-selected-clients">
+			<select onchange="selectClient(this.value)" class="program-selected-clients">
 				<option value="{{ client.ID }}" ng-repeat="client in workout.selectedDay.clients">
 					{{ client.user_nicename }}
 				</option>
 			</select>
-			<a href="{{printUrl}}&amp;workout_client_id={{clientsBackup[0].ID}}" class="print-btn btn red-btn float-left" style="font-size:11px;margin-bottom:10px;" target="_blank">Print</a>
+			<select onchange="selectPrintWorkout(this.value)" class="print-option">
+				<option value="0">All Workouts</option>
+				<option value="{{workout.selectedDay.wday_ID}}">Selected Workout</option>
+			</select>
+			<a href="{{printUrl}}&print_workout_option=0&workout_client_id={{workout.selectedDay.clients[0].ID}}" class="print-btn btn red-btn" style="font-size:11px;" target="_blank">Print</a>
 		</div>
 		<div class="col-lg-6 col-md-6 text-right">
 			<div ng-if="!workout.note">

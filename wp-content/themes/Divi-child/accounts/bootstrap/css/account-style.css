@@ -1091,6 +1091,7 @@ ul.workout-exercise-lists li.workout-exercise-item{
 
 .mobile-nav-program select,
 .circuit-attr select,
+select.print-option,
 .program-selected-clients,
 .workout-exercise-options tr td select{
     border: 0px;
