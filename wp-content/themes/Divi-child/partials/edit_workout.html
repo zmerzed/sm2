@@ -23,6 +23,10 @@
 			$(a).find('.down').attr('class', 'down fa fa-chevron-down');
 		$(targ).slideToggle();
 	}
+	$('.program-selected-clients').bind("DOMSubtreeModified",function(){
+		selectPrintWorkout($('.print-option'));
+		selectClient($('.program-selected-clients').val());
+	});
 </script>
 <div class="text-right pr-3">
 	<a href="javascript:void(0)" class="prog-option red-btn" style="font-size:11px;" onclick="togTopOpt(this)">

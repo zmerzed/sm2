@@ -1,7 +1,13 @@
 <link rel="stylesheet" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print-media.css" />
 <!-- Print Type 2 -->
-<?php 
+<?php
+	$print_opt = 0;
 	$program_id = 0;
+	if(isset($_GET['print_workout_option'])){
+		if($_GET['print_workout_option'] != 0)
+			$print_opt = $_GET['print_workout_option'];
+	}
+		
 	if(isset($_GET['workout']))
 		$program_id = $_GET['workout'];
 	$client_id = 0;
@@ -13,7 +19,9 @@
 	$program_workout_clients = $wpdb->get_results($program_workout_clients_query, OBJECT);
 	$program_query = 'SELECT * FROM workout_tbl WHERE workout_ID = '. $program_id;
 	$program = $wpdb->get_results($program_query, OBJECT);
-
+	
+	
+	
 	$program_name = "";
 	if($program)
 		$program_name = $program[0]->workout_name;
@@ -23,28 +31,29 @@
 	if($program_workout_clients){
 		$workout_ctr = 0;
 		foreach($program_workout_clients as $workout){
-			$workout_ctr++;
-			$workout_id = $workout->workout_client_dayID;
-			$program_details = [];
-			if(getProgramDeatils($program_id,$workout_id,$client_id))
-				$program_details = getProgramDeatils($program_id,$workout_id,$client_id);
-			$workout_details = [];
-			if(!empty($program_details[$workout_id]))
-				$workout_details = $program_details[$workout_id]['workout_detail'][0];
-			$exercises = [];
-			if(!empty($program_details[$workout_id]))
-				$exercises = $program_details[$workout_id]['exercises'];
+			if($print_opt == 0 || $workout->workout_client_dayID == $print_opt){
+				$workout_ctr++;
+				$workout_id = $workout->workout_client_dayID;
+				$program_details = [];
+				if(getProgramDeatils($program_id,$workout_id,$client_id))
+					$program_details = getProgramDeatils($program_id,$workout_id,$client_id);
+				$workout_details = [];
+				if(!empty($program_details[$workout_id]))
+					$workout_details = $program_details[$workout_id]['workout_detail'][0];
+				$exercises = [];
+				if(!empty($program_details[$workout_id]))
+					$exercises = $program_details[$workout_id]['exercises'];
 
-			$set_counter = 0;
-			foreach($exercises as $e){
-				if(!empty($e)){
-					$eset = $e->exer_sets;
-					if($eset > $set_counter)
-						$set_counter = $eset;
+				$set_counter = 0;
+				foreach($exercises as $e){
+					if(!empty($e)){
+						$eset = $e->exer_sets;
+						if($eset > $set_counter)
+							$set_counter = $eset;
+					}
 				}
-			}
-			if(!empty($workout_details)){
-				echo '<h4 class="text-center mt-4">Workout '.$workout_ctr.' - '.$workout_details->wday_name.'</h4>';
+				if(!empty($workout_details)){
+					echo '<h4 class="text-center mt-4">Workout '.$workout_ctr.' - '.$workout_details->wday_name.'</h4>';
 ?>
 			<table class="table table-bordered print-program-type-2">
 				<thead>
@@ -182,6 +191,7 @@
 			</table>
 
 	<?php
+				}
 			}
 		}
 	?>
