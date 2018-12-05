@@ -1,6 +1,6 @@
 <link rel="stylesheet" media="print" href="<?php echo get_stylesheet_directory_uri(); ?>/accounts/assets/css/print-media.css" />
 <!-- Print Type 2 -->
-<?php
+<?php 
 	$program_id = 0;
 	if(isset($_GET['workout']))
 		$program_id = $_GET['workout'];
