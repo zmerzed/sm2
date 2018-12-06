@@ -610,7 +610,7 @@ angular.module('smApp')
                 }
             }
 
-            /* selected part exercise 1 or variation 2 */
+            /* selected part exercise 2 or variation 2 */
             if (mExercise.selectedPart && mExercise.selectedPart.selectedType)
             {
                 if (mExercise.selectedPart.selectedType.selectedExercise2 == 'custom')

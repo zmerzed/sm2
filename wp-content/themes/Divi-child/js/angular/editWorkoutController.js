@@ -1,7 +1,6 @@
 app.controller('editWorkoutController', function($scope, $http, global, $localStorage) {
 
 
-
     $scope.currentUser = CURRENT_USER;
 
     $scope.clientsBackup = angular.copy(CLIENTS);
@@ -28,212 +27,132 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     $scope.validations = [];
 
-
-
     var urlApiClient = ROOT_URL + '/wp-json/v1';
-
 
 
     init();
 
-
-
     function init()
-
     {
-
         console.log('______________CURRENT USER_____________');
-
         console.log($scope.workout);
-
-
 
         $scope.workout.note = PROGRAM_NOTE;
 
-
-
         for(var i in $scope.workout.days)
-
         {
 
             var day = $scope.workout.days[i];
 
-
-
             for(var x in day.exercises)
-
             {
 
                 var exercise = day.exercises[x];
 
                 exercise.exerciseOptions = angular.copy($scope.exerciseOptions);
-
                 exercise.exerciseSQoptions = angular.copy($scope.exerciseSQoptions);
 
-
-
                 for(var y in exercise.exerciseOptions)
-
                 {
 
                     var part = exercise.exerciseOptions[y];
 
-
-
                     if (part.part == exercise.exer_body_part)
-
                     {
 
                         exercise.selectedPart = part;
 
-
-
                         for(var t in part.options)
-
                         {
 
                             var option = part.options[t];
 
-
-
                             if (option['type'] == exercise.exer_type)
-
                             {
 
                                 exercise.selectedPart.selectedType = option;
 
-
-
                                 for (var o in option['exercise_1'])
-
                                 {
-
                                     var ex1 = option['exercise_1'][o];
 
-
-
-                                    if(exercise.exer_exercise_1 == ex1)
-
-                                    {
+                                    if(exercise.exer_exercise_1 == ex1) {
 
                                         exercise.selectedPart.selectedType.selectedExercise1 = ex1;
-
                                         break;
-
                                     }
-
                                 }
 
 
-
                                 for (var o in option['exercise_2'])
-
                                 {
 
                                     var ex2 = option['exercise_2'][o];
 
-
-
-                                    if(exercise.exer_exercise_2 == ex2)
-
-                                    {
+                                    if(exercise.exer_exercise_2 == ex2) {
 
                                         exercise.selectedPart.selectedType.selectedExercise2 = ex2;
-
                                         break;
-
                                     }
 
                                 }
 
 
-
                                 for (var o in option['implementation_options'])
-
                                 {
 
                                     var imp1 = option['implementation_options'][o];
 
-
-
                                     if(exercise.exer_impl1 == imp1)
-
                                     {
 
                                         exercise.selectedPart.selectedType.selectedImplementation1 = imp1;
-
                                         break;
-
                                     }
 
                                 }
 
-
-
                                 break;
-
                             }
-
                         }
 
                         break;
-
                     }
-
                 }
 
 
-
                 for(var z in exercise.exerciseSQoptions)
-
                 {
 
                     var sq = exercise.exerciseSQoptions[z];
 
-
-
                     if(exercise.exer_sq == sq.name)
-
                     {
 
                         exercise.selectedSQ = sq;
 
 
-
                         for(var o in sq.options.set_options)
-
                         {
 
                             var set = sq.options.set_options[o];
 
-
-
                             if(exercise.exer_sets == set)
-
                             {
 
                                 exercise.selectedSQ.selectedSet = set;
-
                                 break;
-
                             }
 
                         }
 
 
-
-
-
                         for(var o in sq.options.rep_options)
-
                         {
 
                             var rep = sq.options.rep_options[o];
 
-
-
                             if(exercise.exer_rep == rep)
-
                             {
 
                                 exercise.selectedSQ.selectedRep = rep;
@@ -333,9 +252,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         }
 
 
-
         if ($scope.workout.days.length > 0)
-
         {
 
             optimizeDays();
@@ -344,11 +261,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
         }
 
-
-
     }
-
-
 
     $scope.newWorkOutDay = function ()
 
@@ -395,7 +308,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onNamingExercise = function(exercise) {
 
         $('#idSortExerciseModal').modal('show');
@@ -403,7 +315,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         $scope.selectedExercise = exercise;
 
     };
-
 
 
     $scope.updateExerciseGroupBy = function() {
@@ -435,7 +346,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onChangeDayName = function() {
 
 
@@ -443,7 +353,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         $scope.onLeaveDay();
 
     };
-
 
 
     $scope.onRemoveSelectedClient = function(client) {
@@ -497,7 +406,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onSelectDay = function(day) {
 
 
@@ -507,7 +415,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         selectDay(day);
 
     };
-
 
 
     $scope.reader.selectDay = function(hashId) {
@@ -535,7 +442,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
 
     };
-
 
 
     $scope.onLeaveDay = function() {
@@ -589,7 +495,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.isActive = function(day) {
 
 
@@ -607,7 +512,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.isClientActive = function(client) {
 
 
@@ -623,7 +527,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         return false;
 
     };
-
 
 
     $scope.newExercise = function() {
@@ -659,7 +562,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.selectClient = function(client) {
 
 
@@ -671,7 +573,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         optimizeClientExercises();
 
     };
-
 
 
     $scope.$watch('reader.selectedClient', function(val)
@@ -747,89 +648,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }, true);
 
 
-
-
-
-    // $scope.$watch('workout.selectedDay.selectedClient', function(val)
-
-    // {
-
-    //     console.log('------------workout.selectedDay.selectedClient-------------------');
-
-    //     console.log(val);
-
-    //     console.log($scope.clients);
-
-    //     if (val)
-
-    //     {
-
-    //         var found = false;
-
-    //         for (var i in $scope.clients)
-
-    //         {
-
-    //             var client = $scope.clients[i];
-
-    //
-
-    //             if (client.ID == val.ID)
-
-    //             {
-
-    //
-
-    //                 for (var x in $scope.workout.selectedDay.clients)
-
-    //                 {
-
-    //                     var xClient = $scope.workout.selectedDay.clients[x];
-
-    //
-
-    //                     if(xClient.ID == val.ID)
-
-    //                     {
-
-    //                         found = true;
-
-    //                     }
-
-    //                 }
-
-    //
-
-    //                 if (!found) {
-
-    //                     $scope.workout.selectedDay.clients.push(client);
-
-    //
-
-    //                     $scope.selectClient(client);
-
-    //                 }
-
-    //
-
-    //                 break;
-
-    //             }
-
-    //         }
-
-    //         optimizeClientExercises();
-
-    //         optimizeSelectedClients();
-
-    //     }
-
-    //
-
-    // }, true);
-
-
-
     $scope.$watch(function() {
 
 		
@@ -865,7 +683,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     },true);
 
 
-
     $scope.onChangeClientTime = function() {
 
 
@@ -881,7 +698,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         }
 
     };
-
 
 
     $scope.removeDay = function(day) {
@@ -947,7 +763,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.removeExercise = function(exercise) {
 
 
@@ -963,7 +778,6 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onChangeCircuitSet = function() {
 
 
@@ -973,9 +787,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onCopy = function()
-
     {
 
 		var loadTrgt = $('.main-content');
@@ -1093,9 +905,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.onCopyExercise = function(exercise)
-
     {
 
 		var loadTrgt = $('.main-content');
@@ -1129,9 +939,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     $scope.sendForm = function()
-
     {
 
 
@@ -1300,10 +1108,8 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
     };
 
-    
 
     $scope.updateNote = function()
-
     {
 
         var fd = new FormData();
@@ -1327,13 +1133,11 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     };
 
 
-
     function nFormat(n){
 
         return n > 9 ? "" + n: "0" + n;
 
     }
-
 
 
     function optimizeCircuits() {
@@ -1419,9 +1223,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function optimizeSelectedClients()
-
     {
 
         $scope.clients = angular.copy($scope.clientsBackup);       
@@ -1441,9 +1243,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function findTheLargestSet()
-
     {
 
         /* get the max set */
@@ -1454,40 +1254,28 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
         {
 
-
-
             var mExercise = $scope.workout.selectedDay.exercises[i];
 
 
-
-                 /* check for selected part and implementation */
-
+            /* check for selected part and implementation */
 
 
             if (mExercise.selectedPart && mExercise.selectedPart.selectedType) 
 
             {
 
-
-
                 if (mExercise.selectedPart.selectedType.implementation_options.indexOf(mExercise.exer_impl1) < 0 
 
                     && !mExercise.selectedPart.selectedType.selectedImplementation1 && mExercise.exer_impl1)
-
                 {
 
-
-
                     mExercise.selectedPart.selectedType.implementation_options.push(mExercise.exer_impl1);
-
                     mExercise.selectedPart.selectedType.selectedImplementation1 = mExercise.exer_impl1;
 
                 }
 
 
-
-                if (mExercise.selectedPart.selectedType.selectedImplementation1 == 'custom') 
-
+                if (mExercise.selectedPart.selectedType.selectedImplementation1 == 'custom')
                 {
 
                     mImpCustom = prompt("Please add a custom implementation");
@@ -1547,22 +1335,97 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
             }
 
 
+            /* selected part exercise 1 or variation 1 */
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType)
+            {
 
+                if (mExercise.selectedPart.selectedType.exercise_1.indexOf(mExercise.exer_exercise_1) < 0
+                    && !mExercise.selectedPart.selectedType.selectedExercise1 && mExercise.exer_exercise_1)
+                {
+
+                    mExercise.selectedPart.selectedType.exercise_1.push(mExercise.exer_exercise_1);
+                    mExercise.selectedPart.selectedType.selectedExercise1 = mExercise.exer_exercise_1;
+
+                }
+
+                if (mExercise.selectedPart.selectedType.selectedExercise1 == 'custom')
+                {
+                    var mVariation1 = prompt("Please add a custom variation 1");
+
+                    while (mVariation1 == 'custom') {
+                        mVariation1 = prompt("Please add a custom variation 1");
+                    }
+
+                    var mVars = [];
+
+                    for (var mV in mExercise.selectedPart.selectedType.exercise_1)
+                    {
+                        var variation = mExercise.selectedPart.selectedType.exercise_1[mV];
+
+                        if (variation == 'custom') {
+                            variation = angular.copy(mVariation1);
+                        }
+
+                        if (variation) {
+                            mVars.push(variation);
+                        }
+                    }
+
+                    mVars.push('custom');
+                    mExercise.selectedPart.selectedType.exercise_1 = mVars;
+                    mExercise.selectedPart.selectedType.selectedExercise1 = mVariation1;
+                }
+            }
+
+            /* selected part exercise 2 or variation 2 */
+            if (mExercise.selectedPart && mExercise.selectedPart.selectedType)
+            {
+
+                if (mExercise.selectedPart.selectedType.exercise_2.indexOf(mExercise.exer_exercise_2) < 0
+                    && !mExercise.selectedPart.selectedType.selectedExercise2 && mExercise.exer_exercise_2)
+                {
+
+                    mExercise.selectedPart.selectedType.exercise_2.push(mExercise.exer_exercise_2);
+                    mExercise.selectedPart.selectedType.selectedExercise2 = mExercise.exer_exercise_2;
+
+                }
+
+                if (mExercise.selectedPart.selectedType.selectedExercise2 == 'custom')
+                {
+                    var mVariation2 = prompt("Please add a custom variation 2");
+
+                    while (mVariation2 == 'custom') {
+                        mVariation2 = prompt("Please add a custom variation 2");
+                    }
+
+                    var mVars = [];
+
+                    for (var mV in mExercise.selectedPart.selectedType.exercise_2)
+                    {
+                        var variation = mExercise.selectedPart.selectedType.exercise_2[mV];
+
+                        if (variation == 'custom') {
+                            variation = angular.copy(mVariation2);
+                        }
+
+                        if (variation) {
+                            mVars.push(variation);
+                        }
+                    }
+
+                    mVars.push('custom');
+                    mExercise.selectedPart.selectedType.exercise_2 = mVars;
+                    mExercise.selectedPart.selectedType.selectedExercise2 = mVariation2;
+                }
+            }
 
 
             /* SQ selectedRep */
 
-
-
-            if (mExercise.selectedSQ) 
-
+            if (mExercise.selectedSQ)
             {
 
-
-
                 /* check if custom is selected for rep */
-
-
 
                 if (mExercise.selectedSQ.options.rep_options.indexOf(mExercise.exer_rep) < 0 
 
@@ -1570,49 +1433,30 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
                 {
 
-
-
                     mExercise.selectedSQ.options.rep_options.push(mExercise.exer_rep);
-
                     mExercise.selectedSQ.selectedRep = mExercise.exer_rep;
-
                 }
-
 
 
                 /* check if others is selected for rep */
 
-                if (mExercise.selectedSQ.selectedRep == 'custom') 
-
+                if (mExercise.selectedSQ.selectedRep == 'custom')
                 {
 
-
-
                     var mReps = [];
-
                     var mRep = prompt("Please add a custom reps");
 
-
-
-                    if (mRep != 'custom'  && (mRep && mRep.length > 0)) 
-
+                    if (mRep != 'custom'  && (mRep && mRep.length > 0))
                     {
 
                         for (var mI in mExercise.selectedSQ.options.rep_options)
-
                         {
-
                             var rep = mExercise.selectedSQ.options.rep_options[mI];
-
-
 
                             if (rep == 'custom') {
 
                                 rep = angular.copy(mRep);
-
                             }
-
-
 
                             if (rep) {
 
@@ -1625,70 +1469,47 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
                         }
 
                         mReps.push('custom');
-
                         mExercise.selectedSQ.options.rep_options = mReps;
-
                         mExercise.selectedSQ.selectedRep = mRep;
 
                     } else {
 
-                        delete mExercise.selectedSQ.selectedRep; 
-
-
-
+                        delete mExercise.selectedSQ.selectedRep;
                     }
-
-                    
 
                     break;
 
                 }
-
-
-
             }
 
-           
 
             /* check if others is selected tempo */
 
-            if (mExercise.selectedSQ && mExercise.exer_tempo && !mExercise.selectedSQ.selectedTempo) {
+            if (mExercise.selectedSQ && mExercise.exer_tempo && !mExercise.selectedSQ.selectedTempo)
+            {
 
                 mExercise.selectedSQ.selectedTempo = mExercise.exer_tempo;
-
-
 
                 var mTempos = [];
 
 
-
                 for (var mI in mExercise.selectedSQ.options.tempo)
-
                 {
 
                     var tempo = mExercise.selectedSQ.options.tempo[mI];
 
-
-
                     if (tempo == 'custom') {
 
                         tempo = angular.copy(mExercise.exer_tempo);
-
                     }
-
 
 
                     if (tempo) {
 
                         mTempos.push(tempo);
-
                     }
 
-
-
                 }
-
-
 
                 mExercise.selectedSQ.options.tempo = mTempos;
 
@@ -1907,9 +1728,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function generateNewExercise(hash)
-
     {
 
         return {
@@ -1931,9 +1750,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function selectDay(day)
-
     {
 
         var loadTrgt = $('.main-content');
@@ -1989,9 +1806,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function optimizeSelectedDay()
-
     {
 
         var count = 1;
@@ -2023,9 +1838,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function optimizeClientExercises()
-
     {
 
 
@@ -2147,9 +1960,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }
 
 
-
     function optimizeDays()
-
     {
 
 
