@@ -686,16 +686,21 @@ function workOutAdd($data)
                 foreach ($d['circuits'] as $c)
                 {
                     $circuitReps = '';
+                    $circuitSets = '';
 
                     if (!empty($c['reps'])) {
                         $circuitReps = $c['reps'];
+                    }
+
+                    if (!empty($c['sets'])) {
+                        $circuitSets = $c['sets'];
                     }
 
                     $program->addCircuit([
                         'group_by_letter' => $c['group_by_letter'],
                         'day_id' => $dayId,
                         'reps' => $circuitReps,
-                        'sets' => $c['sets']
+                        'sets' => $circuitSets
                     ]);
 
                     foreach ($c['exercises'] as $exercise)
@@ -1252,11 +1257,23 @@ function workOutUpdate($data)
 
                         /* update the circuit reps */
 
+                        $sets = '';
+
+                        if (isset($c['sets'])) {
+                            $sets = $c['sets'];
+                        }
+
+                        $reps = '';
+
+                        if (isset($c['reps'])) {
+                            $reps = $c['reps'];
+                        }
+
                         $wpdb->update(
                             'workout_circuits',
                             array(
-                                'sets' => $c['sets'],
-                                'reps' => $c['reps'],
+                                'sets' => $sets,
+                                'reps' => $reps,
                             ),
                             array('id' => $c['id'])
                         );
