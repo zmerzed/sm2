@@ -62,6 +62,9 @@
 					for ($x = 1; $x <= $maxSet; $x++)
 						echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 				?>
+				<th>Var 1</th>
+				<th>Var 2</th>
+				<th>Impl</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -234,6 +237,9 @@
 							}
 						}
 					?>
+					<td><?php echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
+					<td><?php echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
+					<td><?php echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td>
 				</tr>
 			<?php
 				}else

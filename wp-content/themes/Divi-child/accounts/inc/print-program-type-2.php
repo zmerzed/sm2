@@ -7,7 +7,7 @@
 		if($_GET['print_workout_option'] != 0)
 			$print_opt = $_GET['print_workout_option'];
 	}
-		
+
 	if(isset($_GET['workout']))
 		$program_id = $_GET['workout'];
 	$client_id = 0;
@@ -19,9 +19,9 @@
 	$program_workout_clients = $wpdb->get_results($program_workout_clients_query, OBJECT);
 	$program_query = 'SELECT * FROM workout_tbl WHERE workout_ID = '. $program_id;
 	$program = $wpdb->get_results($program_query, OBJECT);
-	
-	
-	
+
+
+
 	$program_name = "";
 	if($program)
 		$program_name = $program[0]->workout_name;
@@ -72,6 +72,9 @@
 							for ($x = 1; $x <= $set_counter; $x++)
 								echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 						?>
+						<th>Var 1</th>
+						<th>Var 2</th>
+						<th>Impl</th>
 					</tr>
 				</thead>
 				<?php
@@ -177,6 +180,9 @@
 										</table>
 									</td>
 								<?php } ?>
+								<td><?php echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
+								<td><?php echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
+								<td><?php echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td>
 							</tr>
 				<?php
 						}else{
