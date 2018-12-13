@@ -50,7 +50,7 @@
 			<tr>
 				<th class="text-center">Order</th>
 				<th class="text-center" width="20%">Clip</th>
-				<th width="30%">Exercise(Tempo)</th>
+				<th width="30%">Exercise(Tempo), Variations, Impl</th>
 				<!--td>Sets</td-->
 				<th width="62">Reps</th>
 				<th width="60">Rest Int</th>
@@ -62,9 +62,9 @@
 					for ($x = 1; $x <= $maxSet; $x++)
 						echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 				?>
-				<th>Var 1</th>
+				<!--th>Var 1</th>
 				<th>Var 2</th>
-				<th>Impl</th>
+				<th>Impl</th-->
 			</tr>
 		</thead>
 		<tbody>
@@ -142,6 +142,9 @@
 							if($exercise){
 								echo $exercise;
 								echo ($eTempo) ? ' ('.$eTempo.')' : '';
+								echo ($e->exer_exercise_1 != "") ? ", ".$e->exer_exercise_1 : "";
+								echo ($e->exer_exercise_2 != "") ? ", ".$e->exer_exercise_2 : "";
+								echo ($e->exer_impl1 != "") ? ", ".$e->exer_impl1 : "";
 							}else {
 								echo $n;
 							}
@@ -237,9 +240,9 @@
 							}
 						}
 					?>
-					<td><?php echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
-					<td><?php echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
-					<td><?php echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td>
+					<!--td><?php //echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
+					<td><?php //echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
+					<td><?php //echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td-->
 				</tr>
 			<?php
 				}else

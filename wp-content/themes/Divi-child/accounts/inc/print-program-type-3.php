@@ -24,7 +24,7 @@
 		<tr>
 			<th class="text-center">Order</th>
 			<th class="text-center" width="20%">Clip</th>
-			<th width="30%">Exercise (Tempo)</th>
+			<th width="30%">Exercise (Tempo), Variations, Impl</th>
 			<!-- <td>Sets</td> -->
 			<th class="text-center" width="62">Reps</th>
 			<th class="text-center" width="75">Rest Int</th>
@@ -36,9 +36,9 @@
 				for ($x = 1; $x <= $maxSet; $x++)
 					echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 			?>
-			<th>Var 1</th>
+			<!--th>Var 1</th>
 			<th>Var 2</th>
-			<th>Impl</th>
+			<th>Impl</th-->
 		</tr>
 	</thead>
 	<tbody>
@@ -104,7 +104,12 @@
 						?>
 					</td>
 					<td width="30%" style="min-width:200px;">
-						<?php echo ($exercise) ? (($eTempo) ? $exercise.' ('.$eTempo.')' : $exercise)  : $n; ?>
+						<?php
+							echo ($exercise) ? (($eTempo) ? $exercise.' ('.$eTempo.')' : $exercise)  : $n;
+							echo ($e->exer_exercise_1 != "") ? ", ".$e->exer_exercise_1 : "";
+							echo ($e->exer_exercise_2 != "") ? ", ".$e->exer_exercise_2 : "";
+							echo ($e->exer_impl1 != "") ? ", ".$e->exer_impl1 : "";
+						?>
 					</td>
 					<td class="text-center">
 						<?php echo ($eRep) ? $eRep : $n; ?>
@@ -118,7 +123,7 @@
 								if(!empty($ciruitDetails))
 									echo ($ciruitDetails[0]->sets != "") ? $ciruitDetails[0]->sets : $n;
 								else
-									echo $n;								
+									echo $n;
 							?>
 						</td>
 						<!--td bgcolor="#fefefe" rowspan="<?php echo $group_letter_ctr[$gname]; ?>" style="vertical-align:middle;" class="text-center circuits">
@@ -172,9 +177,9 @@
 							</table>
 						</td>
 					<?php }	?>
-					<td><?php echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
-					<td><?php echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
-					<td><?php echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td>
+					<!--td><?php //echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
+					<td><?php //echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
+					<td><?php //echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td-->
 				</tr>
 		<?php
 				}

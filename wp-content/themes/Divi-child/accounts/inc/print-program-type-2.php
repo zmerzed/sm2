@@ -60,7 +60,7 @@
 					<tr>
 						<th class="text-center">Order</th>
 						<th class="text-center">Clip</th>
-						<th>Exercise(Tempo)</th>
+						<th>Exercise(Tempo), Variations, Impl</th>
 						<!--th>Sets</th-->
 						<th>Reps</th>
 						<th width="75">Rest Int</th>
@@ -72,9 +72,9 @@
 							for ($x = 1; $x <= $set_counter; $x++)
 								echo '<th class="text-center">'.($x==1 ? 'Set' : ''). ' ' .$x.'</th>';
 						?>
-						<th>Var 1</th>
+						<!--th>Var 1</th>
 						<th>Var 2</th>
-						<th>Impl</th>
+						<th>Impl</th-->
 					</tr>
 				</thead>
 				<?php
@@ -120,6 +120,9 @@
 									<?php
 										echo ($e->exer_type) ? $e->exer_type : "--";
 										echo ($e->exer_tempo) ? " (" . $e->exer_tempo . ")" : "";
+										echo ($e->exer_exercise_1 != "") ? ", ".$e->exer_exercise_1 : "";
+										echo ($e->exer_exercise_2 != "") ? ", ".$e->exer_exercise_2 : "";
+										echo ($e->exer_impl1 != "") ? ", ".$e->exer_impl1 : "";
 									?>
 								</td>
 								<!--td><?php //echo ($e->exer_sets) ? $e->exer_sets : "--";  ?></td-->
@@ -180,9 +183,9 @@
 										</table>
 									</td>
 								<?php } ?>
-								<td><?php echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
-								<td><?php echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
-								<td><?php echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td>
+								<!--td><?php //echo ($e->exer_exercise_1 != "") ? $e->exer_exercise_1 : "--"; ?></td>
+								<td><?php //echo ($e->exer_exercise_2 != "") ? $e->exer_exercise_2 : "--"; ?></td>
+								<td><?php //echo ($e->exer_impl1 != "") ? $e->exer_impl1 : "--"; ?></td-->
 							</tr>
 				<?php
 						}else{
