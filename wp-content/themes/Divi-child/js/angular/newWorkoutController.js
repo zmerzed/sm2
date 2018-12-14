@@ -688,8 +688,13 @@ angular.module('smApp')
                         tempo = angular.copy(mOtherName);
                     }
 
-                    mTempos.push(tempo);
+                    if (tempo) {
+
+                        mTempos.push(tempo);
+                    }
                 }
+
+                mTempos.push('custom');
 
                 mExercise.selectedSQ.options.tempo = mTempos;
                 mExercise.selectedSQ.selectedTempo = mOtherName;
@@ -701,6 +706,7 @@ angular.module('smApp')
                 var mOtherName = prompt("Rest");
 
                 while (mOtherName == 'custom') {
+
                     mOtherName = prompt("Rest");
                 }
 
@@ -708,17 +714,25 @@ angular.module('smApp')
 
                 for (var mI in mExercise.selectedSQ.options.rest)
                 {
+
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
                     if (rest == 'custom') {
+
                         rest = angular.copy(mOtherName);
                     }
 
-                    mRests.push(rest);
+                    if (rest) {
+
+                        mRests.push(rest);
+                    }
                 }
+
+                mRests.push('custom');
 
                 mExercise.selectedSQ.options.rest = mRests;
                 mExercise.selectedSQ.selectedRest = mOtherName;
+
             }
 
             var exercise = angular.copy($scope.workout.selectedDay.exercises[i]);
@@ -744,8 +758,6 @@ angular.module('smApp')
             $localStorage.nCircuits
         );
 
-        console.log('fffffffffffffffff');
-        console.log($scope.workout.selectedDay.circuits);
     }
 
     function optimizeCircuits() {
@@ -771,7 +783,7 @@ angular.module('smApp')
             if (!isFound) {
                 $localStorage.nCircuits.push(circuit);
             }
-        })
+        });
 
         var noSet  = 0;
         $scope.workoutMaxSet = 0;
