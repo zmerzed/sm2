@@ -541,10 +541,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
         $http.get(urlApiClient + '/hash').then(function(res) {
 
-
-
             var newEx = generateNewExercise(res.data.hash);
-
 
 
             $scope.workout.selectedDay.exercises.push(newEx);
@@ -648,7 +645,7 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
     }, true);
 
 
-    $scope.$watch(function() {
+    $scope.$watch('workout', function() {
 
 		
 
@@ -657,15 +654,11 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
         getSizeLoader($(loadTrgt).height(),$(loadTrgt).outerWidth());
 
 
-
         console.log('/* get the largest set in a selected day */');
 
         $scope.workout.selectedDay.exercises = global.customSort($scope.workout.selectedDay.exercises);
 
-
-
         return $scope.workout.selectedDay.exercises;
-
 
 
     }, function(newValue, oldValue){
@@ -1106,6 +1099,12 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
         return false;
 
+    };
+
+    $scope.runSelect = function() {
+
+        console.log('run select');
+        findTheLargestSet();
     };
 
 
@@ -1573,59 +1572,39 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
 
             /* check if others is selected rest */
 
-            if (mExercise.selectedSQ && mExercise.exer_rest && !mExercise.selectedSQ.exer_rest)
-
+            if (mExercise.selectedSQ && mExercise.exer_rest && !mExercise.selectedSQ.selectedRest)
             {
 
                 mExercise.selectedSQ.selectedRest = mExercise.exer_rest;
-
-
-
+                mExercise.selectedSQ.options.rest.push(mExercise.exer_rest);
+                //
                 var mRests = [];
 
-
-
                 for (var mI in mExercise.selectedSQ.options.rest)
-
                 {
 
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
 
-
-                    if (rest == 'custom') {
-
-                        rest = angular.copy(mExercise.exer_rest);
-
-                    }
-
-
-
-                    if (rest) {
+                    if (rest != 'custom') {
 
                         mRests.push(rest);
-
                     }
-
-
 
                 }
 
-
-
+                mRests.push('custom');
                 mExercise.selectedSQ.options.rest = mRests;
 
             }
 
-
-
+            console.log('fffffffffffff');
+            console.log(mExercise);
             if (mExercise.selectedSQ && mExercise.selectedSQ.selectedRest == 'custom')
-
             {
 
                 var mOtherName = prompt("Rest");
-
-
+                var mRests = [];
 
                 while (mOtherName == 'custom') {
 
@@ -1634,42 +1613,67 @@ app.controller('editWorkoutController', function($scope, $http, global, $localSt
                 }
 
 
-
-                var mRests = [];
-
-
-
                 for (var mI in mExercise.selectedSQ.options.rest)
-
                 {
 
                     var rest = mExercise.selectedSQ.options.rest[mI];
 
-
-
-                    if (rest == 'custom') {
-
-                        rest = angular.copy(mOtherName);
-
-                    }
-
-
-
-                    if (rest) {
+                    if (rest != 'custom') {
 
                         mRests.push(rest);
 
                     }
-
-
-
                 }
 
+                if (mOtherName) {
 
+                    mRests.push(mOtherName);
+                }
 
-                mExercise.selectedSQ.options.rest = mRests;
-
+                mRests.push('custom');
                 mExercise.selectedSQ.selectedRest = mOtherName;
+                mExercise.selectedSQ.options.rest = mRests;
+                // while (mOtherName == 'custom') {
+                //
+                //     mOtherName = prompt("Rest");
+                //
+                // }
+                //
+                // var mRests = [];
+                //
+                //
+                //
+                // for (var mI in mExercise.selectedSQ.options.rest)
+                //
+                // {
+                //
+                //     var rest = mExercise.selectedSQ.options.rest[mI];
+                //
+                //
+                //
+                //     if (rest == 'custom') {
+                //
+                //         rest = angular.copy(mOtherName);
+                //
+                //     }
+                //
+                //
+                //
+                //     if (rest) {
+                //
+                //         mRests.push(rest);
+                //
+                //     }
+                //
+                //
+                //
+                // }
+                //
+                //
+                //
+                // mExercise.selectedSQ.options.rest = mRests;
+                //
+                // mExercise.selectedSQ.selectedRest = mOtherName;
 
             }
 
