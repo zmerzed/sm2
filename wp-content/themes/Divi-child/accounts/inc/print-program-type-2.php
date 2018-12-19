@@ -55,7 +55,7 @@
 				if(!empty($workout_details)){
 					echo '<h4 class="text-center mt-4">Workout '.$workout_ctr.' - '.$workout_details->wday_name.'</h4>';
 ?>
-			<table class="table table-bordered print-program-type-2">
+			<table class="table table-bordered print-program-type-2 print-table">
 				<thead>
 					<tr>
 						<th class="text-center">Order</th>
@@ -66,6 +66,7 @@
 						<th width="75">Rest Int</th>
 						<th>Circuit Set</th>
 						<!--th>Circuit Reps</th-->
+						<th>Date</th>
 						<th style="max-width:100px;">Start Weight</th>
 						<th>&nbsp;</th>
 						<?php
@@ -142,7 +143,7 @@
 										<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
 									</td-->
 								<?php endif; ?>
-
+								<td class="align-middle"><input type="text" class="print-dpicker" /></td>
 								<td class="text-center align-middle">
 									<?php
 										$eset = "";

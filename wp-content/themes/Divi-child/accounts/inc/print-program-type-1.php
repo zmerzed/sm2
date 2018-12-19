@@ -45,7 +45,7 @@
 					$maxSet = getWorkoutMaxSet($wid)[0]->max_sets; */
 ?>
 	<h4 class="text-center">Workout <?php echo $ctr__  .' - '. $wd->wday_name; ?></h4>
-	<table class="table table-bordered">
+	<table class="table table-bordered print-table">
 		<thead>
 			<tr>
 				<th class="text-center">Order</th>
@@ -56,6 +56,7 @@
 				<th width="60">Rest Int</th>
 				<th>Circuit Set</th>
 				<!--th>Circuit Reps</th-->
+				<th>Date</th>
 				<th style="max-width:100px;">Start Weight</th>
 				<th>&nbsp;</th>
 				<?php
@@ -181,6 +182,7 @@
 							<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
 						</td-->
 					<?php endif; ?>
+					<td class="align-middle"><input type="text" class="print-dpicker" /></td>
 					<td class="text-center align-middle">
 						<?php
 							$eset = "";

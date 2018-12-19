@@ -19,7 +19,7 @@
 		$maxSet = getWorkoutMaxSet($workout_id)[0]->max_sets;
 ?>
 	<h4 class="text-center"><?php echo getWorkoutDayName($workout_id); ?></h4>
-<table class="table-bordered table">
+<table class="table-bordered table print-table">
 	<thead>
 		<tr>
 			<th class="text-center">Order</th>
@@ -30,6 +30,7 @@
 			<th class="text-center" width="75">Rest Int</th>
 			<th class="text-center">Circuit Set</th>
 			<!--th class="text-center">Circuit Reps</th-->
+			<th>Date</th>
 			<th class="text-center" style="max-width:100px;">Start Weight</th>
 			<th class="text-center">&nbsp;</th>
 			<?php
@@ -130,6 +131,7 @@
 							<?php //echo ($ciruitDetails[0]->reps != "") ? $ciruitDetails[0]->reps : $n; ?>
 						</td-->
 					<?php endif; ?>
+					<td class="align-middle"><input type="text" class="print-dpicker" /></td>
 					<td class="text-center align-middle">
 						<?php
 							$weight = getAssignmentSets($e->exer_ID,$client_id)[0]->weight;

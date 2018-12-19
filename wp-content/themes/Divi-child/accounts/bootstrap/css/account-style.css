@@ -2130,6 +2130,9 @@ body input.bf_goal{
 .assign-client-tab-content .workout-assign-clients .workout-exercise-options tr td select{
   min-width: 100px;
 }
+.print-table{
+  font-size:14px;
+}
 @media(min-width: 1000px){
 	.table-responsive{overflow-x:hidden;}
 }
